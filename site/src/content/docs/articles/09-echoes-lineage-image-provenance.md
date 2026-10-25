@@ -34,8 +34,6 @@ The repeated staging structure establishes a useful lineage, but it also shows w
 *Figure 1. Four retained ECHOES archive revisions. Final PowerShell payloads were unavailable; the retained history establishes staging lineage.*
 
 
-### Separating the artwork from the staging code
-
 Compare the archive in three layers: presentation (the project theme and decoy imagery), staging (launch and persistence logic), and retrieval configuration (the location of the next resource). A destination can change while the artwork and staging remain largely intact; the same artwork could also be reused with a different delivery mechanism.
 
 That is why complete revisions are more informative than a project name or poster. A shared account or repository is a distribution lead, not a substitute for the missing payload bytes. The history supports reuse and modification within this archive lineage, but does not establish that the final stage was the Go agent, JavaScript collector or Windows pipeline described earlier.
@@ -62,8 +60,6 @@ OpenAI / Sora signing-pipeline references
 The manifest history records creation, conversion and ingredient-opening actions across two manifests. Its embedded thumbnail was described as a lower-resolution version of the poster. These fields provide stronger evidence about the artwork's production pipeline than a visual judgment that it “looks AI-generated.”
 
 The original examination also reports successful signature validation. I report that historical result here; I did not freshly validate the image or certificate status. The provenance assertions concern the image. They do not identify who placed it in the lure or prove that the distributor generated it.
-
-### No prompt, no user identifier
 
 The recorded manifest inspection found no prompt or user identifier, and its redacted-assertions array was empty. An earlier interpretation treated the missing fields as if they had been stripped. The evidence does not support that: information may simply never have been included, and an empty redaction list is not a record of removal.
 

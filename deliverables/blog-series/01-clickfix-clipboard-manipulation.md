@@ -58,8 +58,6 @@ c.addEventListener(`copy`, e => {
 
 Although `R()` receives the phrase entered by the candidate, that value does not appear in the command text in this bundle. The handler also runs only when text inside the command box is selected. Following `R()` led to the installation logic. A clipboard API alone is a weak signal because legitimate applications use one too; the evidence of deception is the mismatch between the displayed verification text and the generated command.
 
-### One installer, two verification wrappers
-
 The generated command differs by platform. On macOS and Linux, it starts a background download-and-execution sequence, then prints a `VERIFY-` result. On Windows, the hidden installation logic is prepended to the prompt sequence, so the candidate sees an access-key prompt before the result. The recorded Windows branch explicitly enables the hidden installer; on Unix-like systems, backgrounding lets the visible verification wrapper finish while installation proceeds separately. Both wrappers are documented in the [clipboard-lure analysis](../preprint/evidence/E02.pdf).
 
 The verification result is part of the lure's feedback loop. A candidate who checks only for the expected prefix can miss the second behavior in the same command. The nonce and phrase may distinguish one verification exchange from another, but the frontend does not show what the backend accepts. A returned code therefore does not prove that installation succeeded.
@@ -76,8 +74,6 @@ check_3d_m/w      Design-challenge variants
 ```
 
 This design makes the frontend portable across lure domains: changing the page's origin also changes the first-stage retrieval location, without a hostname literal in the bundle. Searching only for known C2 domains will miss that URL. Later collection code obtains its destination through a separate mechanism, including the GitLab resolver examined in Part 6. The lure host and collection destination belong at different points in the chain.
-
-### Tracking the candidate through the flow
 
 The bundle references `/device-check`, `/verify`, `/complete` and `/track-activity`, plus challenge-specific routes. The `cmdline_copied` event shows that the client is designed to report when someone copies the command.
 

@@ -27,8 +27,6 @@ The acquisition followed only modules loaded by the application. It involved no 
 *Figure 1. What the recovered client makes visible. The backend, authenticated records and completed wallet transfers were not recovered.*
 
 
-### A monitor for delivery repositories
-
 One view tracks repositories by `clone_url`, displays availability labels and offers refresh controls through `/api/github-jobs-check/`. The feature fits the delivery history: repositories can disappear, move or be replaced, and a status view could help monitor locations used to distribute lures or payloads.
 
 The frontend shows the monitoring feature, not its effectiveness. It does not establish that a suspension generated an alert or prompted a later rotation; those claims would require backend records. The finding is that repository availability is explicitly represented in the administration software.
@@ -59,8 +57,6 @@ I also revised an early interpretation of the signup route. It initially suggest
 The strongest relationship is concrete: the collectors select wallet-related material, while the client includes corresponding mnemonic and ColdKey fields and actions intended to use imported wallet data. Repository availability is also represented directly in the application rather than inferred from infrastructure changes alone.
 
 The harvesting tools discussed in Part 7 were recovered separately. Their functions fit the wider operation, but the frontend does not demonstrate a complete integration between those SQLite pools, the mail views and the wallet workflow. Actual sends, populated backend tables, completed claim requests and confirmed transactions would answer different questions and require their own evidence.
-
-### A source recovery with a defined boundary
 
 The seventy modules made the client inspectable. They did not turn the investigation into an authenticated session or a database export. Source maps preserved comments and helped explain interface intent, but comments and route names are still statements in client code. The analysis rests on the recovered modules and their relationships, with backend implementation and outcomes left unresolved.
 

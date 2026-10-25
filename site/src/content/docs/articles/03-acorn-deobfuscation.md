@@ -68,8 +68,6 @@ The workflow never imported or evaluated the target, or ran the extension in a V
 *Figure 1. From obfuscated syntax to authenticated files. Parsing is not execution; the companion scanner does not implement full recovery.*
 
 
-### One readable string was not enough
-
 The string array had been rotated, so a valid-looking index could point to the wrong encoded element until the array order was resolved. An early search used one expected `crypt` anchor and produced five misleading candidates. The stronger approach compared each rotation against all resolved call sites.
 
 The recorded offsets were 391 for the extension and 261 for the bootstrap. The selected candidate produced printable decodes at 15 of 15 tested sites; the runner-up produced 3 of 15. That gap was useful, but printability remained a heuristic. The next checks were whether each string fit its call context and whether the key fragments could be reconstructed in source order. The encrypted payloads would provide a stronger validation.
@@ -109,8 +107,6 @@ In this case, the complete recovery depended on several checks working together:
 5. authenticated decryption of the payloads.
 
 It was that last step that proved most valuable, because instead of stopping at source that looked reasonable, the analysis had a cryptographic test of the recovered bytes.
-
-### Recovered-file hashes
 
 ```text
 detect_malware.py

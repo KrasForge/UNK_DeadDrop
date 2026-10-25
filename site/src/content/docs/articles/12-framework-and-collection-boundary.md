@@ -44,8 +44,6 @@ This is a reformatted selection from the retained extraction, not a new executio
 
 The [Go build-setting documentation](https://go.dev/pkg/runtime/debug/?m=old) defines `vcs.revision` as the revision associated with the checkout and `vcs.time` as its associated modification time. That is why the timestamp cannot be promoted into a certified compilation time, even when it falls close to a phishing message.
 
-### The upstream half has a preservation gap
-
 The July comparison inspected selected Overlord files, including the client module file and configuration examples. It recorded a shared module path, plugin support and generic transport configuration. However, the upstream files used for that comparison were not saved in the workspace, and the evidence does not provide a pinned baseline for their contents.
 
 That limits the strength of a negative comparison. A retained binary can be inspected again. A statement that a string was absent from an upstream file in July cannot be reproduced against an unspecified later version and called the same experiment. Looking at today's repository would establish a new comparison, not repair the missing historical snapshot.
@@ -87,15 +85,11 @@ Other parts of the case add deployment context: the phased JavaScript collection
 
 The table keeps the evidence types separate. A source selector, module dependency and symbol set have different relationships to runtime behavior. Combining them can strengthen an assessment only when their provenance remains visible.
 
-### The capture correction
-
 The original comparison inferred that the Linux implant lacked capture because certain expected upstream capture dependencies were missing. The later recheck found previous-frame, block-comparison and capture-loop symbols in the held binary. Those positive observations require withdrawing the categorical capture-free conclusion.
 
 They do not establish a working desktop stream on every Linux host. Reachability, platform implementation, display access and permissions remain separate questions. Part 5 examines the capture evidence in detail; the lesson here is methodological. A dependency inventory is evidence about recorded components, not an exhaustive proof that an implementation is absent.
 
 The same restraint applies to authorship. Finding an addition relative to selected public files does not identify who wrote it. Reused code, another fork or an unpublished component could explain the difference. The retained artifacts support the behaviour assessment more strongly than they support a personal attribution.
-
-### A missing commit is a question, not an answer
 
 The historical lookup did not find the embedded build revision in the public repository examined. The early note treated that as proof of a private fork. The revised evidence report allows other explanations, including unpublished work, removed history or metadata provenance that the corpus cannot resolve.
 

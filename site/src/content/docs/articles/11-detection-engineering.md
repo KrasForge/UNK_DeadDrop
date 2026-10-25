@@ -48,8 +48,6 @@ This is an excerpt, not a complete rule file. The conjunction is narrower than a
 
 The original tests compile the real rule and supply inert buffers. They check positive ASCII and wide cases, then remove enough context to produce framework-only, wallet-only and partial-marker negatives. A historical static spot check also matched the held Go implant. Neither exercise measures how many unrelated files in a developer fleet would match.
 
-### A harmless document can satisfy the rule
-
 The additional fixture contains research prose followed by the required framework, environment and two wallet strings. It has no executable instructions. It still matches, because the rule asks whether those bytes occur, not whether the containing file is an executable or whether its contents are reachable code.
 
 The paired negative replaces the required environment marker with a different label. That buffer no longer matches. Together the fixtures demonstrate both the usefulness and the fragility of the conjunction: it excludes incomplete marker sets, but it can include documentation and miss a renamed implementation.
@@ -63,8 +61,6 @@ The Linux rule selects either the exact system unit path `/etc/systemd/system/go
 The existing fixtures cover both paths, a similarly named nonmatching unit and a missing field. They establish that the small local evaluator handles the selectors as intended. The new test also shows that this evaluator folds case: an uppercase unit name in the field is accepted. That is a property of the matching implementation, not a claim that Linux filesystem paths are interchangeable across case.
 
 A service file event does not establish that the service was enabled, started or successfully ran the collector. Investigators still need the unit contents and supporting process or service activity. A renamed unit escapes this exact selector, while a security exercise using the recorded name can produce a legitimate match.
-
-### Windows: read the modifiers literally
 
 The Windows selector is:
 
@@ -96,8 +92,6 @@ The original detection suite has four tests: real YARA compilation and marker fi
 | AST tests | Supported parser-tool behaviour | Automatic recovery of the encrypted loader |
 
 The local Sigma evaluator is deliberately small; it is not a SIEM backend. Case handling, field mapping and event normalization still need validation in the intended platform. These tests check the implementation reproducibly, but they are not deployment sign-off.
-
-### Reproduce the inert detection checks
 
 The download bundle includes the [original detection tests](../../companion/tests/test_detections.py), [three boundary tests](../../companion/tests/test_blog_boundaries.py), [pinned Python requirements](../../companion/requirements-dev.txt), [YARA rule](../../companion/rules/yara/deaddrop_wallet_agent.yar), [Linux rule](../../companion/rules/sigma/linux_google_agent_persistence.yml) and [Windows rule](../../companion/rules/sigma/windows_capture_task.yml). Run from the extracted bundle root:
 

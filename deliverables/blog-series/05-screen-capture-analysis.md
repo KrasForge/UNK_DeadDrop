@@ -70,17 +70,11 @@ These observations are complementary, but their combination is not a runtime tra
 
 The distinction between Go and Windows evidence also matters. The symbol set belongs to the inspected native artifact; the dependency set comes from a separate Windows bundle. They support capture-related implementation in the examined material, not an assertion that every operating-system build takes the same path.
 
-### Framework lineage and build differences
-
 The public Overlord framework provides a software lineage, not an operator identity. The earlier upstream dependency comparison and the later binary examination answer different questions: what packages appear in selected source metadata, and what implementation-related names are present in the held binary. The positive symbol evidence prevents treating a missing expected dependency as proof of absence, while still leaving platform support and successful invocation unresolved.
-
-### Following up on an endpoint
 
 The recorded task name, `GoogleUpdateSupporterNode`, is a useful exact artifact, but finding it does not show that a screen stream was sent. Investigators would need to establish the installed bundle, the process and session context in which it ran, and associated network activity. Display availability and permissions are material conditions, especially when distinguishing a staged component from one that actually accessed a desktop.
 
 Screen capture also changes the exposure question. File selection concerns stored material; a functioning capture component could expose material displayed during its operation. The static record provides no duration or victim session from which to enumerate that material. Keeping that boundary explicit makes the finding usable without converting capability into an unsupported impact claim.
-
-### Artifact identifier
 
 ```text
 Go implant SHA-256:

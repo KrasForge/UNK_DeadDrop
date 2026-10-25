@@ -45,8 +45,6 @@ The primary file has five recorded revisions on 26 May, beginning with an initia
 
 The July change is associated with commit `c3c71d65`; it replaces the primary destination set left by the May revisions. The fallback file has a history of its own, so both files should be preserved rather than inferring the configuration from one URL. There are six listed commits to the primary file and one to the fallback. Repository-wide counts in other notes cover a different scope. In reconstructing this history, the queried file matters as much as the number of results.
 
-### What the resolver changes for response
-
 The configuration resource lets a destination change independently of the payload. It does not show how each client handles that change. A client may read the new value at startup; one using a cached address may keep trying the old destination. A failed connection could trigger a refresh, use a fallback or simply retry. Those are implementation and runtime questions beyond the fact that the file changed.
 
 The early case narrative called domain takedowns ineffective. That was too categorical: blocking a destination can interrupt traffic, while the configuration resource may supply another address to clients that consult it. Response should establish whether an affected client has a usable destination, how it obtains one and whether it connects.
@@ -72,8 +70,6 @@ The infrastructure and build histories show two close timestamps: a phishing mes
 The correlation is worth retaining with the field named correctly. As with domain registrations, configuration changes and archive timestamps, label each value by the event it actually records.
 
 Several of my infrastructure notes evolved in a similar way, moving from an early view centred on a single host towards additional addresses and later origin observations, and keeping their dates intact avoids collapsing a sequence of changing findings into one timeless network.
-
-### What to retain from a resolver investigation
 
 Preserve more than a list of domains: record the resource location, file-specific revisions, selected values, observation dates and client code that consumes them. For each origin association, note whether it came from resolution, a presented certificate or matching application content. That record stays useful after a destination disappears and lets another analyst test each relationship instead of inheriting an unexplained “C2” label.
 

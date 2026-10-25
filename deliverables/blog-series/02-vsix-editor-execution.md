@@ -38,8 +38,6 @@ After installation, the extension is no longer confined to the project. It decla
 *Figure 1. How the editor becomes an interpreter. Workspace trust, permissions and elevation outcomes were not reproduced.*
 
 
-### Inside Google Update Support
-
 The manifest I inspected contains the following fields:
 
 ```json
@@ -61,8 +59,6 @@ SHA-256
 ```
 
 The `onStartupFinished` declaration gives the extension an opportunity to activate after the original workspace is gone. It does not prove that every payload runs on every startup or platform.
-
-### The destination comes from configuration
 
 The extension exposes its settings under the `googleUpdateSupport` namespace:
 
@@ -87,8 +83,6 @@ Static deobfuscation recovered three readable components from the package:
 - `detect_malware.py` handles browser-related key and credential decryption.
 
 The Node source describes a Windows route that does not depend on a Go executable. A detector limited to native-agent hashes would miss this path. The Python component contains DPAPI and browser elevation-service logic, including App-Bound Encryption handling. The coordinator attempts to obtain the privileges and execution context this stage needs. Part 3 explains how I decrypted these files without running the loader.
-
-### The COM elevation attempt
 
 The recovered builder constructs a PowerShell script that requests an elevated COM object associated with CMSTPLUA and the ICMLuaUtil interface. The identifiers are assembled from numeric fields, so searching for a literal GUID is less useful than tracing how the script builds and calls them. It then creates a delegate at runtime to dispatch the shell-execution method.
 

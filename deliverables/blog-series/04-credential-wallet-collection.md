@@ -56,8 +56,6 @@ The search also runs within explicit budgets, which in the inspected source defa
 
 Several of these settings can be overridden through environment variables, and the skip list covers selected system locations, dependency trees, caches and cloud-storage directories, all of which makes the source considerably more specific than any generic claim that the malware "steals all files".
 
-### Skipping protected macOS directories
-
 A helper checks whether selected protected top-level directories are readable, and the walker skips any that fail the probe, caches the results, and has a timeout path. The control flow is effectively:
 
 ```text
@@ -96,8 +94,6 @@ The collection inventory needs to be read alongside the access conditions. A fil
 For response, the useful questions are which component ran, which phase it reached, and which files were accessible in that execution context. The source does not provide a victim-side inventory or a record of completed uploads. Its retry logic describes persistence in attempting a transfer, not proof of delivery.
 
 The next post examines a separate exposure path: screen capture. That finding rests on capture-related symbols and bundle components rather than the file selectors examined here.
-
-### Selected identifiers
 
 ```text
 Upload variants: main, pass, phase3

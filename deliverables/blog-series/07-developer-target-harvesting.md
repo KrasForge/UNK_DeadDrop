@@ -71,8 +71,6 @@ In this comparison, the stored address sets are disjoint but the repository sets
 
 The aggregate check applied no additional address canonicalization or person-level identity resolution beyond what the harvester had stored. I call these “address strings” because aliases and people with multiple addresses remain unresolved. The figure counts target data, not infected developers.
 
-### The mail-provider label was misleading
-
 The sender code uses `mail.privateemail.com`, although some variables carry a `ZOHO` prefix. Reading the variable names without checking their values would misidentify the provider. A recovered guide supports the Private Email configuration through its DNS examples; later received-message evidence contains Mailgun-related information.
 
 The mail path must therefore be tied to specific configurations and messages, not treated as one fixed provider for the operation. The guide also discusses a shared outbound relay. Its other tenants do not become campaign infrastructure just because they use the same service. Follow concrete values through the code: labels show how a developer named a setting, while endpoints and received headers show the route configured or observed.

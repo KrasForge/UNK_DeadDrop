@@ -34,8 +34,6 @@ The headers also contained a practical trap: an inbound forwarding service inser
 
 These three messages are evidence that their recipients received these lures. They are not a statistical sample of all targeting, and they do not show what happened after delivery. That narrow starting claim matters when the investigation later encounters a database containing over a hundred thousand address strings.
 
-### Follow the command builder, not just the page
-
 On the browser branch, the decisive pivot was the copy handler. The page displayed a verification step, but the handler supplied a different value to the clipboard. Following the argument to that write led to the command builder and its installation logic. The first-stage retrieval location was assembled from the page's origin, which explains why a search for one fixed payload hostname would have been incomplete.
 
 That relationship is supported by control flow: the handler calls the builder, and the builder constructs the command. It is stronger than two domains appearing in the same report. It also stops short of execution. The recovered frontend does not show that a candidate pasted the command, that the download succeeded or that the installer completed. Part 1 follows this distinction through the verification output and client telemetry.
@@ -86,8 +84,6 @@ The databases provided the largest number in the case: 142,365 distinct stored a
 The administration frontend supplied a different view. Its repository monitor and wallet interfaces show functions intended to maintain delivery locations and act on wallet material. Corresponding concepts in the collection code make that relationship technically meaningful. However, no recovered backend demonstrates that every harvested address, message and wallet record passed through one functioning pipeline.
 
 Keeping the components separate does not diminish their value. It lets a later analyst ask for the missing evidence precisely: send logs for delivery volume, service records for actual workflow use, and transaction evidence for financial outcomes.
-
-### End the trail where the artifacts end
 
 ECHOES preserves four archive revisions and a changing retrieval configuration. Its final PowerShell resources were unavailable through the unauthenticated routes examined. The retained staging can support a lineage analysis, but a shared account relationship cannot fill in the missing payload's implementation.
 
