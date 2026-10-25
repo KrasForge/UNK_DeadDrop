@@ -95,35 +95,3 @@ A process name or publisher check is incomplete here. A legitimate signature aut
 ## What to preserve on an endpoint
 
 Repository-only review can miss the installed extension; a hunt limited to native binaries can miss the JavaScript Windows branch. Preserve task definitions, workspace settings, extension metadata, script arguments, process ancestry and any resulting persistence. The extension identifier and package hash provide exact selectors. The editor-to-interpreter transition gives responders a behavior to investigate when names or builds change. Part 3 describes how the encrypted source was recovered.
-
-## Frequently asked questions
-
-### Does deleting the cloned repository remove the infection?
-
-Not necessarily. The extension declares `onStartupFinished` activation and the surrounding scripts clean up task and staging files, so an installed extension can remain on the endpoint after the repository is gone.
-
-### Is the COM elevation a silent UAC bypass?
-
-It is better described as an elevation attempt. The builder requests an elevated COM object associated with CMSTPLUA and ICMLuaUtil, but the VSIX pipeline can fall back to RunAs, which may show a consent prompt, and the outcome depends on the Windows version, privileges, policy and process context.
-
-### Why isn't the editor's signature reassuring here?
-
-Because a legitimate signature authenticates the editor executable, not every script passed to it. When `ELECTRON_RUN_AS_NODE` is set, the signed binary acts as a Node interpreter for collection code supplied by the chain.
-
-### What should responders preserve?
-
-Task definitions, workspace settings, installed-extension metadata, script arguments, process ancestry and any resulting persistence, together with the package itself, since the VSIX hash alone does not show where an installation was configured to send data.
-
-## Article details and evidence
-
-### About the author
-
-Ilja Krasnjanski is an independent researcher ([ORCID 0009-0007-1039-5930](https://orcid.org/0009-0007-1039-5930)) and the author of the [technical paper](../../downloads/UNK_DeadDrop-Preprint.pdf) on which this series is based. Every claim in the series rests on the evidence reports linked from each post, which are edited from restricted case material.
-
-### Evidence
-
-[VSIX package analysis](../../evidence/E03.pdf) · [Decrypted payloads](../../evidence/E04.pdf) · [Windows elevation and Electron analysis](../../evidence/E19.pdf) · [Technical paper](../../downloads/UNK_DeadDrop-Preprint.pdf)
-
-*Method: static package and source analysis. The extension was not installed or executed; historical evidence ends on 24 July 2026.*
-
-[Part 1](../01-clickfix-clipboard-manipulation/) · [Series index](/) · [Part 3](../03-acorn-deobfuscation/)

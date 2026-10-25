@@ -103,35 +103,3 @@ The historical lookup did not find the embedded build revision in the public rep
 A rigorous follow-up would preserve the exact upstream commit and relevant files, identify each sample by hash, and record the extraction commands and comparison output. That would make a future absence claim inspectable. It would still require care before translating a code difference into an operator identity.
 
 For detection, combine framework markers with collection context, as the experimental YARA rule in Part 11 does, and interpret each match in light of where the file was found. Framework ancestry starts the analysis; surrounding artifacts determine how far the conclusion can go.
-
-## Frequently asked questions
-
-### Is this a reproducible source diff against a pinned upstream commit?
-
-No. The held sample and extracted metadata are identified, but the historical upstream files were not retained as a pinned snapshot.
-
-### Does SQLite prove credential theft?
-
-No. It supplies database functionality. The browser and wallet markers and recovered collection logic provide the relevant context; successful collection remains unobserved.
-
-### Does the missing public revision prove a private fork?
-
-No. It is a recorded lookup result with several possible explanations.
-
-### Can framework markers identify the operator?
-
-Not alone. They identify software lineage shared by other users and deployments.
-
-## Article details and evidence
-
-### About the author
-
-Ilja Krasnjanski is an independent researcher ([ORCID 0009-0007-1039-5930](https://orcid.org/0009-0007-1039-5930)) and the author of the [technical paper](../preprint/UNK_DeadDrop-Preprint.pdf) on which this series is based. Every claim in the series rests on the evidence reports linked from each post, which are edited from restricted case material.
-
-### Evidence
-
-[Framework comparison and retained exhibits](../preprint/evidence/E18.pdf) · [Capability re-examination](../preprint/evidence/E05.pdf) · [Collection configuration](../preprint/evidence/E17.pdf) · [Windows execution](../preprint/evidence/E19.pdf) · [Build chronology](../preprint/evidence/E21.pdf)
-
-*This article reviews retained sample evidence and the bounded July comparison. No new upstream snapshot was acquired and no payload was executed. The absent historical upstream snapshot remains a reproducibility limitation.*
-
-[Part 11](11-detection-engineering.md) · [Series index](README.md)

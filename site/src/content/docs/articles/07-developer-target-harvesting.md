@@ -73,31 +73,3 @@ The code and configuration connect harvesting to message preparation. The databa
 The earlier total of 20,880 repository values was therefore a scope error, not evidence that the operation suddenly acquired thousands of new targets. Adding the second pool changed the corpus being counted. Recording the input files and the comparison method makes that correction inspectable without publishing individual addresses.
 
 The separate administration frontend is the subject of Part 8. Its mail and wallet views are relevant to the wider investigation, but they are not evidence that every address in these databases entered one integrated backend.
-
-## Frequently asked questions
-
-### Were 142,365 developers attacked?
-
-The result counts stored address strings. It establishes neither unique people nor delivered messages or infections.
-
-### Were addresses normalized?
-
-The harvester lowercased and trimmed addresses. The aggregate analysis compared stored values without further canonicalization or person-level identity resolution.
-
-### Why not add the repository counts?
-
-The repository sets overlap. UNION removes repeated values across both pools; adding the pool totals would count their overlap twice.
-
-## Article details and evidence
-
-### About the author
-
-Ilja Krasnjanski is an independent researcher ([ORCID 0009-0007-1039-5930](https://orcid.org/0009-0007-1039-5930)) and the author of the [technical paper](../../downloads/UNK_DeadDrop-Preprint.pdf) on which this series is based. Every claim in the series rests on the evidence reports linked from each post, which are edited from restricted case material.
-
-### Evidence
-
-[Target-acquisition analysis and SQL](../../evidence/E08.pdf) · [Mail guide and provider analysis](../../evidence/E09.pdf) · [Technical paper](../../downloads/UNK_DeadDrop-Preprint.pdf)
-
-*Raw contact rows and service credentials are excluded. Counts report the recorded read-only verification; no harvesting or sending was performed for this article.*
-
-[Part 6](../06-gitlab-dead-drop-infrastructure/) · [Series index](/) · [Part 8](../08-administration-platform/)

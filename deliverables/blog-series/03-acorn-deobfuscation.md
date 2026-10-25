@@ -128,35 +128,3 @@ e5b7d6411d0c95da047185d94fca98d454b73df2e7f46f2753e212af2ca45da5
 windows-js-pipeline.js
 bf820623e8deaa37092650c7fae594e56b8d81c27b541419006cca2d0536353b
 ```
-
-## Frequently asked questions
-
-### Why use Acorn instead of regular expressions?
-
-Because the wrappers are not uniform. A pattern that expects a wrapper to return a decoder call immediately misses one that declares an intermediate value first, while a syntax tree represents both statements.
-
-### Why did the correct blob layout seem to fail at first?
-
-The historical analysis records that `openssl enc` was used for what was a GCM authentication workflow. Switching to Node's cryptographic library let the stored authentication tag be checked correctly.
-
-### Does successful decryption show that the payloads ran?
-
-No. Authentication ties the plaintext to its encrypted input under the recovered parameters, but whether the payloads ran or their collection routines succeeded are runtime questions.
-
-### Can the companion scanner do this recovery automatically?
-
-No. It finds selected clipboard-write calls and campaign markers and folds a limited set of literal string expressions, but it does not reproduce the wrapper mapping or rotated-array recovery.
-
-## Article details and evidence
-
-### About the author
-
-Ilja Krasnjanski is an independent researcher ([ORCID 0009-0007-1039-5930](https://orcid.org/0009-0007-1039-5930)) and the author of the [technical paper](../preprint/UNK_DeadDrop-Preprint.pdf) on which this series is based. Every claim in the series rests on the evidence reports linked from each post, which are edited from restricted case material.
-
-### Evidence
-
-[Authenticated payload-decryption analysis](../preprint/evidence/E04.pdf) · [Companion tooling and validation](../preprint/evidence/E15.pdf) · [Technical paper](../preprint/UNK_DeadDrop-Preprint.pdf)
-
-*The wrapper counts, rotation offsets and tooling details come from the retained decryption record in the case notes; the linked decryption analysis records the authentication outcome, and the technical paper records the fifteen-of-fifteen comparison. The small Acorn example above is illustrative, not an excerpt from the original deobfuscator.*
-
-[Part 2](02-vsix-editor-execution.md) · [Series index](README.md) · [Part 4](04-credential-wallet-collection.md)

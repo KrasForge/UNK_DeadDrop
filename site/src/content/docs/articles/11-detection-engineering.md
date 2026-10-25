@@ -109,35 +109,3 @@ Those commands run the seven detection tests. The separate AST tests require the
 For a YARA hit, retain the file identity, acquisition context and matching offsets. For a Linux unit, inspect the unit definition and associated process activity. For a Windows task, recover the full command line, task action and relevant ancestry. Those follow-ups help separate a research artifact or simulation from an unexpected deployment.
 
 The next step is conversion and replay against representative telemetry from the intended environment, including clean developer workloads. That evaluation has not been performed, so the rules remain experimental. The present fixtures make its open questions visible instead of hiding them behind a passing test count.
-
-## Frequently asked questions
-
-### Do the tests demonstrate a low false-positive rate?
-
-No. They check defined inputs. No representative benign corpus or production alert stream was evaluated.
-
-### Did the new tests change the rules?
-
-No. They document boundary behaviour of the existing selectors and fixture evaluator.
-
-### Does a scheduled-task hit prove screen capture?
-
-No. It identifies a process event matching the selector. Successful registration, execution and capture require additional evidence.
-
-### Was the held implant scanned again for this post?
-
-No. The held-file match is the historical result recorded in the companion validation. The new checks use inert fixtures.
-
-## Article details and evidence
-
-### About the author
-
-Ilja Krasnjanski is an independent researcher ([ORCID 0009-0007-1039-5930](https://orcid.org/0009-0007-1039-5930)) and the author of the [technical paper](../../downloads/UNK_DeadDrop-Preprint.pdf) on which this series is based. Every claim in the series rests on the evidence reports linked from each post, which are edited from restricted case material.
-
-### Evidence
-
-[Companion detection validation](../../evidence/E15.pdf) · [Framework comparison](../../evidence/E18.pdf) · [Capture analysis](../../evidence/E05.pdf)
-
-*Rule review and inert tests prepared 25 October 2026. The historical sample observations remain dated July 2026; no production backend or endpoint execution was tested.*
-
-[Part 10](../10-investigation-connections/) · [Series index](/) · [Part 12](../12-framework-and-collection-boundary/)

@@ -99,35 +99,3 @@ On the static side, a later scan of a held lure bundle found two clipboard-write
 The companion scanner can locate those calls and report their arguments wherever they happen to be literal, but it cannot demonstrate the visual deception on its own, which still requires the comparison I described above between the rendered instruction and the generated command.
 
 In the next post I follow the repository branch, where a package calling itself Google Update Support installs its collection components through the code editor.
-
-## Frequently asked questions
-
-### What is ClickFix in this campaign?
-
-In this branch, ClickFix is a recruitment page that asks the candidate to copy a verification command, run it in a terminal and paste back a `VERIFY-` code, while a copy handler silently replaces the copied text with a command that also attempts to install a payload.
-
-### Does a returned `VERIFY-` code mean the malware was installed?
-
-No. The frontend shows how the nonce feeds into the command, but it does not reveal what the backend accepts, so a returned code is not proof that installation succeeded.
-
-### Why doesn't searching the JavaScript for C2 domains find the download server?
-
-The first-stage URL is assembled at runtime from `window.location.origin`, so it points at whichever site is serving the lure, and later collection code obtains its destination through a separate mechanism such as the GitLab resolver covered in Part 6.
-
-### How is this different from a legitimate copy-to-clipboard button?
-
-Legitimate pages write to the clipboard too, so the API call on its own is a weak signal. What marks this lure is the mismatch between the text displayed as the verification command and the value the handler actually places on the clipboard, which resolves to installation logic.
-
-## Article details and evidence
-
-### About the author
-
-Ilja Krasnjanski is an independent researcher ([ORCID 0009-0007-1039-5930](https://orcid.org/0009-0007-1039-5930)) and the author of the [technical paper](../preprint/UNK_DeadDrop-Preprint.pdf) on which this series is based. Every claim in the series rests on the evidence reports linked from each post, which are edited from restricted case material.
-
-### Evidence
-
-[Clipboard-lure analysis](../preprint/evidence/E02.pdf) · [Companion scanner validation](../preprint/evidence/E15.pdf) · [Technical paper](../preprint/UNK_DeadDrop-Preprint.pdf)
-
-*Method: static analysis of retained artifacts, with evidence through 24 July 2026. No lure or payload was executed for this series. Figures reconstruct code behavior; they are not captured victim sessions.*
-
-[Series index](README.md) · [Part 2](02-vsix-editor-execution.md)

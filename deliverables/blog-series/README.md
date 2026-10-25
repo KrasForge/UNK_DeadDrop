@@ -1,0 +1,70 @@
+# UNK_DeadDrop: a twelve-part technical series
+
+Twelve articles by Ilja Krasnjanski, updated 25 October 2026.
+Parts 10–12 add the investigative connections, detection engineering and framework
+comparison. Parts 4–5 and 7–8 are the split collection/capture and targeting/admin
+articles. The hosted edition is available at [krasforge.github.io/UNK_DeadDrop](https://krasforge.github.io/UNK_DeadDrop/).
+
+1. [Anatomy of a Developer Lure: ClickFix Clipboard Manipulation](01-clickfix-clipboard-manipulation.md)
+2. [How a Malicious VSIX Uses the Signed Editor Runtime](02-vsix-editor-execution.md)
+3. [Parsing Without Executing: JavaScript Deobfuscation with Acorn](03-acorn-deobfuscation.md)
+4. [Inside the Collector: Browser Credentials and Wallet Files](04-credential-wallet-collection.md)
+5. [Beyond Screenshot Strings: Reconstructing Screen Capture](05-screen-capture-analysis.md)
+6. [Following the GitLab Dead Drop: Configuration Changes and C2 History](06-gitlab-dead-drop-infrastructure.md)
+7. [From Commit Metadata to a Developer Target List](07-developer-target-harvesting.md)
+8. [Inside rms-platform: Delivery Monitoring and Wallet Administration](08-administration-platform.md)
+9. [Tracing the ECHOES Archive: Payload Lineage and Image Provenance](09-echoes-lineage-image-provenance.md)
+10. [From Three Phishing Emails to a Connected Investigation](10-investigation-connections.md)
+11. [Building and Testing Detections for UNK_DeadDrop](11-detection-engineering.md)
+12. [Where Overlord Ends and the Collection Toolchain Begins](12-framework-and-collection-boundary.md)
+
+[Download the series and linked supporting PDFs](UNK_DeadDrop-Blog-Series.zip).
+The archive preserves the relative links between articles, images and evidence.
+
+The numbered Markdown files and ZIP are the current twelve-part edition. Rendered
+HTML, PDF and viewport previews are in [`rendered/2026-10-25/`](rendered/2026-10-25/index.html);
+the older folders directly inside `rendered/` retain historical seven-part previews.
+The ZIP contains the Markdown edition and linked evidence, not the rendered previews.
+Canonical URLs remain example.com placeholders. The ZIP also includes the small
+rule/test bundle linked from Part 11.
+
+## Editorial approach
+
+The revised posts follow the broad structure of the technical paper's references:
+a concrete finding at the opening, an investigation organized around the relevant
+artifacts, code and configuration details, and implications tied to the analysis.
+They use original wording and the case's own evidence. Academic citation labels
+have been replaced with descriptive evidence links. Methodological qualifications
+remain beside the specific claims they limit, with a short method note at the end.
+
+References consulted for structure and pacing:
+
+- [Proofpoint: Don't Fear the Repo](https://www.proofpoint.com/us/blog/threat-insight/dont-fear-repo-unkdeaddrop-phishing-campaign-targets-developers-steal)
+- [Denys Vitali: developer malware investigation](https://blog.denv.it/posts/i-was-likely-targeted-by-dprk-in-a-sophisticated-developer-malware-campaign/)
+- [Jamf: Threat Actors Expand Abuse of Microsoft Visual Studio Code](https://www.jamf.com/blog/threat-actors-expand-abuse-of-visual-studio-code/)
+- [Microsoft: Contagious Interview](https://www.microsoft.com/en-us/security/blog/2026/03/11/contagious-interview-malware-delivered-through-fake-developer-job-interviews/)
+- [Unit 42: BeaverTail and InvisibleFerret variants](https://unit42.paloaltonetworks.com/north-korean-threat-actors-lure-tech-job-seekers-as-fake-recruiters/)
+- [Ben Hopkins: Foxtopia / UNK_DeadDrop reporting](https://brhopkins.uk/posts/foxtopia/)
+- [Edison Flores: later developer-lure follow-up](https://dev.to/edison_flores_6d2cd381b13/a-fake-recruiter-sent-me-a-job-offer-that-ended-in-my-terminal-the-trojan-is-still-live-2okf)
+
+The public references were checked through 25 October 2026 for this editorial
+revision. The novelty discussion distinguishes earlier direct reporting from
+later, non-independent follow-up coverage. Historical infrastructure was not
+contacted, and the case evidence cutoff remains 24 July 2026. The first-person passages describe the documented investigation;
+they do not invent a compromise, a successful payload execution or a personal
+interaction with an operator.
+
+## Publication files
+
+The numbered Markdown files are the articles. PNG diagrams and captions are
+included; the figures are analytical reconstructions, not victim screenshots.
+The hosted site preserves the relative links between articles, images, and
+supporting PDFs. No DOI or journal publication date is claimed.
+
+The supporting PDFs are edited reports derived from restricted evidence. They do
+not contain the raw databases or a complete forensic sample set. The ZIP includes
+the twelve articles, this index, validation notes, six diagrams, linked evidence
+PDFs, the preprint, the explicitly linked detection rules/tests and their license
+and requirements, and a checksum file.
+
+[Validation record](VALIDATION.md) · [Technical paper](../preprint/UNK_DeadDrop-Preprint.pdf)

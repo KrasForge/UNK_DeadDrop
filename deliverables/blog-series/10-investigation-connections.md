@@ -97,35 +97,3 @@ The public reporting now includes [a direct account of the UNK_DeadDrop campaign
 The strongest contribution here is narrower and case-specific: the retained artifacts let readers inspect how the clipboard builder works, how the VSIX configuration selects deployment settings, how targeting data and administration functions are represented, and how the resolver and ECHOES archives changed over time. The October follow-up describes similar implementation markers, but it traces back to the same reporter's account and does not independently verify a sample. It is a useful lead, not independent confirmation. On this evidence, the series supports a detailed technical contribution; it does not establish that these behaviors were first observed here.
 
 That boundary is useful to readers. Novelty can attach to the evidence recovered, the level of implementation detail, or a particular relationship between artifacts. It should not be stretched to cover a campaign category or technique already described elsewhere.
-
-## Frequently asked questions
-
-### Did all three messages deliver the same payload?
-
-The message count does not establish that. Delivery branches and recovered builds must be compared through their actual artifacts and configurations.
-
-### Is this a precise discovery diary?
-
-No. It reconstructs the analytical relationships in the retained case. Dates are attached to the events they describe rather than invented for every investigative step.
-
-### Does the targeting database measure victims?
-
-No. It measures stored contact data, with no person-level identity resolution or demonstrated delivery and infection outcomes.
-
-### Why keep the incomplete ECHOES strand?
-
-Its archive history is evidence in its own right. Keeping the final-stage gap explicit allows later recovery to be assessed against the correct revision.
-
-## Article details and evidence
-
-### About the author
-
-Ilja Krasnjanski is an independent researcher ([ORCID 0009-0007-1039-5930](https://orcid.org/0009-0007-1039-5930)) and the author of the [technical paper](../preprint/UNK_DeadDrop-Preprint.pdf) on which this series is based. Every claim in the series rests on the evidence reports linked from each post, which are edited from restricted case material.
-
-### Evidence
-
-[Case overview](../preprint/evidence/E01.pdf) · [Clipboard analysis](../preprint/evidence/E02.pdf) · [VSIX analysis](../preprint/evidence/E03.pdf) · [Resolver history](../preprint/evidence/E07.pdf) · [Targeting](../preprint/evidence/E08.pdf) · [Administration](../preprint/evidence/E06.pdf) · [ECHOES](../preprint/evidence/E11.pdf) · [Attribution retraction](../preprint/evidence/E16.pdf)
-
-*The underlying case evidence runs through 24 July 2026. This editorial update incorporates public reporting available through 25 October 2026; it adds no new message collection, infrastructure access or payload execution.*
-
-[Part 9](09-echoes-lineage-image-provenance.md) · [Series index](README.md) · [Part 11](11-detection-engineering.md)

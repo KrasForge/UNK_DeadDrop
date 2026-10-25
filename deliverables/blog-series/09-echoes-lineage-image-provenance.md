@@ -88,35 +88,3 @@ ECHOES adds a distinct delivery history: four preserved revisions, recurring sta
 The first nine posts connect recruitment lures to collection code, mutable configuration, target-acquisition data and administration interfaces. Some links rest on complete source or exact hashes; others stop at configuration, frontend behavior or historical observations. The technical value is in making each relationship inspectable and showing where the artifacts run out.
 
 The final three posts step back: Part 10 maps the relationships and reassesses novelty, Part 11 examines the companion detections, and Part 12 separates framework features from collection-specific evidence.
-
-## Frequently asked questions
-
-### Is ECHOES the same malware as the ClickFix and VSIX branches?
-
-That is not established. The archive history supports reuse within its own lineage, but without the final payload it does not show that the last stage was the Go agent, JavaScript collector or Windows pipeline.
-
-### Was the poster generated with AI?
-
-Its C2PA manifest carries recorded assertions associated with an AI image-generation pipeline, and the original examination reported a successful signature validation; no independent verifier output is retained, and the embedded ingredient-validation assertion does not establish verification of the complete image.
-
-### Does the provenance data identify who ran the campaign?
-
-No. The manifest contains no prompt or user identifier, and its assertions concern the image, not the person who later placed it in the lure.
-
-### Why weren't the embedded access tokens used to fetch the final payload?
-
-Retrieving it would have meant using recovered operator credentials, which was a boundary the investigation did not cross; the token values are also omitted from the article.
-
-## Article details and evidence
-
-### About the author
-
-Ilja Krasnjanski is an independent researcher ([ORCID 0009-0007-1039-5930](https://orcid.org/0009-0007-1039-5930)) and the author of the [technical paper](../preprint/UNK_DeadDrop-Preprint.pdf) on which this series is based. Every claim in the series rests on the evidence reports linked from each post, which are edited from restricted case material.
-
-### Evidence
-
-[Archive lineage and rotation](../preprint/evidence/E11.pdf) · [Provenance examination of the poster](../preprint/evidence/E14.pdf) · [Technical paper](../preprint/UNK_DeadDrop-Preprint.pdf)
-
-*The article uses retained evidence through 24 July 2026. No final-stage retrieval or new cryptographic image validation was performed for this series.*
-
-[Part 8](08-administration-platform.md) · [Series index](README.md) · [Part 10](10-investigation-connections.md)

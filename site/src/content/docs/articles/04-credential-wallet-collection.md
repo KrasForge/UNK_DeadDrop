@@ -94,31 +94,3 @@ Configuration: GUS_UPLOAD_CHUNK_SIZE, GUS_KEEP_AGENT_STATE
 Large JavaScript payload SHA-256:
 694626bed2df1f0d0026a3f7ead7692b44c7e73041cdd799b79a025335533cdc
 ```
-
-## Frequently asked questions
-
-### Can it read browser passwords?
-
-The source contains browser-decryption attempts and supporting elevation logic. A copied database is not automatically plaintext, and no endpoint telemetry established what those attempts yielded.
-
-### Does collecting a KeePass database expose its passwords immediately?
-
-No. The selector can collect the encrypted file; the examined material did not establish an unlock routine or master-password recovery.
-
-### Does it bypass macOS privacy protections?
-
-No bypass was established. The helper probes selected directories and skips failures; permissions already granted can change what it reaches.
-
-## Article details and evidence
-
-### About the author
-
-Ilja Krasnjanski is an independent researcher ([ORCID 0009-0007-1039-5930](https://orcid.org/0009-0007-1039-5930)) and the author of the [technical paper](../../downloads/UNK_DeadDrop-Preprint.pdf) on which this series is based. Every claim in the series rests on the evidence reports linked from each post, which are edited from restricted case material.
-
-### Evidence
-
-[Collection and configuration](../../evidence/E17.pdf) · [Capability re-examination](../../evidence/E05.pdf) · [Framework comparison](../../evidence/E18.pdf) · [Decrypted payloads](../../evidence/E04.pdf) · [Detection validation](../../evidence/E15.pdf)
-
-*Static analysis and recorded comparisons through 24 July 2026. No collection run was performed for this article.*
-
-[Part 3](../03-acorn-deobfuscation/) · [Series index](/) · [Part 5](../05-screen-capture-analysis/)

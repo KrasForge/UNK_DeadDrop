@@ -76,31 +76,3 @@ Go implant SHA-256:
 ef183bbb40f4c7c3f4b52994cdba3295f3eab2604fdad99eefa3b67b8d966e8d
 Capture task: GoogleUpdateSupporterNode
 ```
-
-## Frequently asked questions
-
-### Was keylogging found?
-
-Keylogging was not established. The examined keylog matches belonged to TLS internals, and the negative finding is bounded to the reviewed material.
-
-### Was a screen stream recorded?
-
-No. This is an implementation assessment from static artifacts, not a captured victim session.
-
-### Does every Overlord implant have this capability?
-
-The analysis does not establish that. Build contents and execution paths must be examined separately.
-
-## Article details and evidence
-
-### About the author
-
-Ilja Krasnjanski is an independent researcher ([ORCID 0009-0007-1039-5930](https://orcid.org/0009-0007-1039-5930)) and the author of the [technical paper](../../downloads/UNK_DeadDrop-Preprint.pdf) on which this series is based. Every claim in the series rests on the evidence reports linked from each post, which are edited from restricted case material.
-
-### Evidence
-
-[Capability re-examination](../../evidence/E05.pdf) · [VSIX package analysis](../../evidence/E03.pdf) · [Framework comparison](../../evidence/E18.pdf) · [Detection validation](../../evidence/E15.pdf)
-
-*Static source, symbols, dependencies and recorded comparisons through 24 July 2026. No new capture run or performance measurement was performed.*
-
-[Part 4](../04-credential-wallet-collection/) · [Series index](/) · [Part 6](../06-gitlab-dead-drop-infrastructure/)

@@ -64,31 +64,3 @@ The harvesting tools discussed in Part 7 were recovered separately. Their functi
 The seventy modules made the client inspectable. They did not turn the investigation into an authenticated session or a database export. Source maps preserved comments and helped explain interface intent, but comments and route names are still statements in client code. The analysis rests on the recovered modules and their relationships, with backend implementation and outcomes left unresolved.
 
 That boundary is useful for later investigation: it identifies which features are visible in source and which conclusions need service-side records. It also prevents a compelling interface from being mistaken for a record of successful theft.
-
-## Frequently asked questions
-
-### Was backend data accessed?
-
-No. Recovery followed frontend modules without logging in or calling the authenticated data API.
-
-### Does Claim All prove wallets were emptied?
-
-No. The interface exposes an intended action; no backend implementation or confirmed transfer was recovered alongside it.
-
-### Does the hardcoded mailbox identify the person in charge?
-
-No. The helper has multiple conditions and controls client-side access. Server authorization and real-world identity were not established.
-
-## Article details and evidence
-
-### About the author
-
-Ilja Krasnjanski is an independent researcher ([ORCID 0009-0007-1039-5930](https://orcid.org/0009-0007-1039-5930)) and the author of the [technical paper](../../downloads/UNK_DeadDrop-Preprint.pdf) on which this series is based. Every claim in the series rests on the evidence reports linked from each post, which are edited from restricted case material.
-
-### Evidence
-
-[Administration frontend](../../evidence/E06.pdf) · [Target-acquisition analysis](../../evidence/E08.pdf) · [Technical paper](../../downloads/UNK_DeadDrop-Preprint.pdf)
-
-*Recovered frontend source through 24 July 2026. No authenticated backend requests or wallet operations were performed for this article.*
-
-[Part 7](../07-developer-target-harvesting/) · [Series index](/) · [Part 9](../09-echoes-lineage-image-provenance/)

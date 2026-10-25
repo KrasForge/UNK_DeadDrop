@@ -77,35 +77,3 @@ Several of my infrastructure notes evolved in a similar way, moving from an earl
 Preserve more than a list of domains: record the resource location, file-specific revisions, selected values, observation dates and client code that consumes them. For each origin association, note whether it came from resolution, a presented certificate or matching application content. That record stays useful after a destination disappears and lets another analyst test each relationship instead of inheriting an unexplained “C2” label.
 
 Part 7 examines the target-acquisition tooling and its two SQLite pools. Part 8 follows the separately recovered administration frontend, including its delivery-repository monitor and wallet-management screens.
-
-## Frequently asked questions
-
-### Do domain takedowns work against this setup?
-
-They can interrupt traffic, so calling them ineffective was too categorical. What remains afterwards is the configuration resource, which can supply a different address to any client that consults it.
-
-### Does an edit to the configuration file prove that clients connected to the new servers?
-
-No. The dates identify recorded file changes. How a client reads, caches or refreshes the value, and whether it connects, are runtime questions.
-
-### Did the SSH host key identify other operator servers?
-
-No. The banner and handshake fingerprint matched broad populations, and the host key returned only the address already known, which is a negative search result rather than proof that no backup host existed.
-
-### What should a resolver investigation preserve?
-
-The resource location, file-specific revisions, values, observation dates and the client code that consumes them, plus, for each origin association, whether it came from resolution, a presented certificate or matching application content.
-
-## Article details and evidence
-
-### About the author
-
-Ilja Krasnjanski is an independent researcher ([ORCID 0009-0007-1039-5930](https://orcid.org/0009-0007-1039-5930)) and the author of the [technical paper](../../downloads/UNK_DeadDrop-Preprint.pdf) on which this series is based. Every claim in the series rests on the evidence reports linked from each post, which are edited from restricted case material.
-
-### Evidence
-
-[Configuration history](../../evidence/E07.pdf) · [Origin observations](../../evidence/E20.pdf) · [Build and hosting chronology](../../evidence/E21.pdf) · [Technical paper](../../downloads/UNK_DeadDrop-Preprint.pdf)
-
-*All domains and addresses are historical, defanged research indicators. This article reports evidence through 24 July 2026 and does not refresh service availability.*
-
-[Part 5](../05-screen-capture-analysis/) · [Series index](/) · [Part 7](../07-developer-target-harvesting/)
