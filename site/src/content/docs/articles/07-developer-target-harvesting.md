@@ -22,8 +22,8 @@ The harvester searches repositories by star range, walks their branches and extr
 
 ```text
 emails
-  email  — stored address
-  repo   — associated repository value
+  email: stored address
+  repo: associated repository value
 ```
 
 The sender configuration refers to both pools. Different intervals, cooldowns and warm-up settings control how the tools consume them. The labels `safe` and `antispam` come from the toolkit, not from the investigation.

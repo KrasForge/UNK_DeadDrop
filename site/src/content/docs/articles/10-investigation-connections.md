@@ -84,7 +84,7 @@ The same discipline applies to the rest of the case. Source can establish a coll
 
 For a follow-up investigation, I would preserve a compact record for every relationship: the two artifacts, their identities, the observation date, the source of the relationship and the strongest alternative explanation. That would make it possible to revise one conclusion without silently rewriting the rest of the case.
 
-## What the public record adds—and what remains distinctive
+## What the public record adds, and what remains distinctive
 
 The public reporting now includes [a direct account of the UNK_DeadDrop campaign](https://brhopkins.uk/posts/foxtopia/), as well as [later reporting on developer lures and overlapping implementation details](https://dev.to/edison_flores_6d2cd381b13/a-fake-recruiter-sent-me-a-job-offer-that-ended-in-my-terminal-the-trojan-is-still-live-2okf). These reports matter to the novelty assessment: developer phishing, malicious VS Code extensions, credential and wallet theft, and the broad Overlord lineage are not new claims of this investigation. The July article that surfaced in the refresh predates the original evidence cutoff; its later update does not make its initial reporting a post-cutoff discovery.
 

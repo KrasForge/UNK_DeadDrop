@@ -1,4 +1,4 @@
-# Twelve-part edition — 25 October 2026
+# Twelve-part edition, 25 October 2026
 
 Editorial update: Parts 1–12 received a series-wide prose and structure pass,
 including clearer openings, shorter paragraphs, stronger section progression,
@@ -11,7 +11,7 @@ case-specific technical detail rather than a first-ever claim. New sources and
 their independence limits are linked in the article and index. The case evidence
 cutoff remains 24 July 2026.
 
-## Rendered edition — 25 October 2026
+## Rendered edition, 25 October 2026
 
 Rendered all twelve Markdown sources with the public
 [claude-blog](https://github.com/AgriciDaniel/claude-blog) renderer at commit
@@ -55,7 +55,7 @@ updated previews of these twelve Markdown articles.
 
 ## Previous split validation
 
-# Nine-part split — 25 October 2026
+# Nine-part split, 25 October 2026
 
 The numbered Markdown sources now contain nine articles. Former Part 4 was split
 into collection and screen-capture articles; former Part 6 into targeting and
@@ -78,7 +78,7 @@ demonstration. The rebuilt ZIP passed member-integrity and SHA-256 checks.
 
 ## Historical validation record (seven-part edition)
 
-### Blog-series validation — 24 October 2026
+### Blog-series validation, 24 October 2026
 
 Seven complete articles, approximately 1,550–1,850 words of prose each before code,
 evidence links and method notes. Total prose under that counting method: 11,385 words.
