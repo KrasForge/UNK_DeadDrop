@@ -1,0 +1,86 @@
+[
+ {
+  "name": "Historical ECHOES archive, commit prefix 03f1795d",
+  "path": "incident-echoes-2026-07-22/historical-RARs-DO-NOT-RUN/rar-03f1795d.rar",
+  "bytes": 2292670,
+  "sha256": "4ff03731d2061ad2f50da9f63dc1481374908d5bc837c86d0c7574d23b23a37b",
+  "kind": "sample"
+ },
+ {
+  "name": "Historical ECHOES archive, commit prefix ded13153",
+  "path": "incident-echoes-2026-07-22/historical-RARs-DO-NOT-RUN/rar-ded13153.rar",
+  "bytes": 2292622,
+  "sha256": "2bd4cfd495fdcad6d7b2adaedc31614ca2984ea1246aed7608c339eaa82eb978",
+  "kind": "sample"
+ },
+ {
+  "name": "Historical ECHOES archive, commit prefix b209f365",
+  "path": "incident-echoes-2026-07-22/historical-RARs-DO-NOT-RUN/rar-b209f365.rar",
+  "bytes": 2294542,
+  "sha256": "11bf34ccce585fe051abaa8d01ba1b29e2d44727c070b56ab0dd84a9dc9f91b2",
+  "kind": "sample"
+ },
+ {
+  "name": "Current ECHOES archive (attributed to 4b6ea6b2)",
+  "path": "incident-echoes-2026-07-22/samples-DO-NOT-RUN/ECHOES_OF_THE_UNBORN_SUN.rar",
+  "bytes": 2294526,
+  "sha256": "7db6789c09e29305c728bf3d7b94c5ef1c3e13eef1b321ee52d3ae3997731f56",
+  "kind": "sample"
+ },
+ {
+  "name": "LNK launcher from 03f1795d",
+  "path": "incident-echoes-2026-07-22/historical-RARs-DO-NOT-RUN/lnk-03f1795d.lnk",
+  "bytes": 420736,
+  "sha256": "9c7b507eba958ecee653ff42f13cf4e084f49cd38985d3abfd77ab2bfa40b4e2",
+  "kind": "extracted"
+ },
+ {
+  "name": "LNK launcher from ded13153",
+  "path": "incident-echoes-2026-07-22/historical-RARs-DO-NOT-RUN/lnk-ded13153.lnk",
+  "bytes": 420512,
+  "sha256": "bbbeadae38bf1406f331c9e42ab49cbdd22f503cd9caecb6b390964bafa1b56f",
+  "kind": "extracted"
+ },
+ {
+  "name": "LNK launcher from b209f365",
+  "path": "incident-echoes-2026-07-22/historical-RARs-DO-NOT-RUN/lnk-b209f365.lnk",
+  "bytes": 429662,
+  "sha256": "b80028534a414f199992a49610f8d5ffa94f8098d5a820653f68b8a9eb51e3ca",
+  "kind": "extracted"
+ },
+ {
+  "name": "LNK launcher from current archive",
+  "path": "incident-echoes-2026-07-22/extracted-DO-NOT-RUN/ECHOES OF THE UNBORN SUN.pdf.lnk",
+  "bytes": 429728,
+  "sha256": "a44068e9758262a65861b91f2b00d0a3eca019d3b35543dd60c1c7f2e0ba1952",
+  "kind": "extracted"
+ },
+ {
+  "name": "Decoded stage two, 03f1795d",
+  "path": "incident-echoes-2026-07-22/historical-RARs-DO-NOT-RUN/stage2-03f1795d.decoded.ps1",
+  "bytes": 1629,
+  "sha256": "5e405ef279e7d33d375a7427361bce07936dd2258f02f3991441fb3e1c1cf2a2",
+  "kind": "extracted"
+ },
+ {
+  "name": "Decoded stage two, ded13153",
+  "path": "incident-echoes-2026-07-22/historical-RARs-DO-NOT-RUN/stage2-ded13153.decoded.ps1",
+  "bytes": 1603,
+  "sha256": "83c0b5f3db2e4ced741ee641a7a775fd949e769ed51ee8584229a862d268939e",
+  "kind": "extracted"
+ },
+ {
+  "name": "Decoded stage two, b209f365",
+  "path": "incident-echoes-2026-07-22/historical-RARs-DO-NOT-RUN/stage2-b209f365.decoded.ps1",
+  "bytes": 2943,
+  "sha256": "f5c729ce6f06d4c6f6d98cc1e23547c25f1b6207fdc347ed6cdbb60dad1203ae",
+  "kind": "extracted"
+ },
+ {
+  "name": "Decoded stage two, current archive",
+  "path": "incident-echoes-2026-07-22/extracted-DO-NOT-RUN/firefox_stage2.decoded.ps1",
+  "bytes": 2961,
+  "sha256": "70ee2f3ec1370960b225fd86cbe92a9477a788fc276567af2bd8c50e6744ae71",
+  "kind": "extracted"
+ }
+]

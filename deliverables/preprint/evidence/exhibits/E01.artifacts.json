@@ -1,0 +1,100 @@
+[
+  {
+    "name": "Lure email: Nodit recruitment message (rcvd 22 Jun 2026)",
+    "path": "00-genesis-lure-emails/Career Opportunity at Nodit.eml",
+    "bytes": 7185,
+    "sha256": "6c1835159c8da69aaf0743fce634c3345e6b4f16eb4a492cfda5cf893b98eb5b",
+    "kind": "email"
+  },
+  {
+    "name": "Lure email: D2S AI Trade recruitment message (rcvd 21 Jul 2026 UTC)",
+    "path": "00-genesis-lure-emails/Engineering role at D2S AI Trade (remote).eml",
+    "bytes": 9176,
+    "sha256": "3efb15d6cc89e3690bd1e19fbc96034110f55066d69ef25dc2d30ca057d2ee21",
+    "kind": "email"
+  },
+  {
+    "name": "Lure email: Category Labs recruitment message (rcvd 22 Jul 2026 UTC)",
+    "path": "00-genesis-lure-emails/Senior Software Engineer Opportunity at Category Labs.eml",
+    "bytes": 9462,
+    "sha256": "924db78f6fe47e7696c42d77d42d8f030c80e4a04965f7529731bfab4353d6ec",
+    "kind": "email"
+  },
+  {
+    "name": "ClickFix lure-page JavaScript bundle",
+    "path": "incident-2026-07-22/samples-DO-NOT-RUN/app.js",
+    "bytes": 73545,
+    "sha256": "5ee915bb8d0363bd92176cc595d7425fd7e7830508d8824d90b5285a3d2b11bd",
+    "kind": "sample"
+  },
+  {
+    "name": "Stage-three JavaScript collection payload",
+    "path": "incident-2026-07-22/samples-DO-NOT-RUN/stage3.js",
+    "bytes": 1140214,
+    "sha256": "694626bed2df1f0d0026a3f7ead7692b44c7e73041cdd799b79a025335533cdc",
+    "kind": "sample"
+  },
+  {
+    "name": "Overlord Go implant, Linux x86-64 ELF",
+    "path": "incident-2026-07-22/samples-DO-NOT-RUN/overlord_go_implant_linux-amd64.elf",
+    "bytes": 15790242,
+    "sha256": "ef183bbb40f4c7c3f4b52994cdba3295f3eab2604fdad99eefa3b67b8d966e8d",
+    "kind": "binary"
+  },
+  {
+    "name": "Windows Node agent archive (192 members)",
+    "path": "incident-2026-07-22/samples-DO-NOT-RUN/win_node_agent.zip",
+    "bytes": 603347,
+    "sha256": "be5859f23f0781242d854dc24c102c694dabfc14a159b56429e313f0521141b6",
+    "kind": "sample"
+  },
+  {
+    "name": "VSIX extension \"Google Update Support\"",
+    "path": "incident-predicttogether-2026-07-22/samples-DO-NOT-RUN/google-update-support.vsix",
+    "bytes": 17647582,
+    "sha256": "52886aab179f26421678ff23af1b0fabf0a17ffbb534369cdbbac8008cbed8e7",
+    "kind": "sample"
+  },
+  {
+    "name": "ECHOES archive (RAR v5)",
+    "path": "incident-echoes-2026-07-22/samples-DO-NOT-RUN/ECHOES_OF_THE_UNBORN_SUN.rar",
+    "bytes": 2294526,
+    "sha256": "7db6789c09e29305c728bf3d7b94c5ef1c3e13eef1b321ee52d3ae3997731f56",
+    "kind": "sample"
+  },
+  {
+    "name": "ECHOES poster Post.png (C2PA)",
+    "path": "incident-echoes-2026-07-22/extracted-DO-NOT-RUN/Post.png",
+    "bytes": 3698494,
+    "sha256": "d213b4184b93ccf59449237b071ac2e41ff71b83213b2e338917b26696a7b520",
+    "kind": "image"
+  },
+  {
+    "name": "GitLab dead-drop configuration repository (git bundle)",
+    "path": "incident-2026-07-22/deaddrop-repo.bundle",
+    "bytes": 4900,
+    "sha256": "804df377a0425d0aa7433ec2402d55ce8c913e1e4063d32565ddfda8ae807245",
+    "kind": "repository"
+  },
+  {
+    "name": "Administration frontend source, wallet-balances page",
+    "path": "incident-echoes-2026-07-22/dashboard-cklomino-source-DO-NOT-RUN/WalletBalancesPage.tsx",
+    "bytes": 109637,
+    "sha256": "f9b1b0c3e259d90ca35e827dc84cb137335b0a79420c532d4ffa0988bd994954",
+    "kind": "source"
+  },
+  {
+    "name": "Targeting database, safe pool (SQLite)",
+    "path": "incident-echoes-2026-07-22/github-fetch-tool-EVIDENCE-PII/results_safe.db",
+    "bytes": 6922240,
+    "sha256": "a84cee4ce20e0d40177b750a2692acd37ae6cd30a4e303790c6eb1ecf6348187",
+    "kind": "database"
+  },
+  {
+    "name": "Targeting database, antispam pool (SQLite)",
+    "path": "incident-echoes-2026-07-22/github-fetch-tool-EVIDENCE-PII/results_antispam.db",
+    "bytes": 5496832,
+    "sha256": "7eff7dac7119b6b4462e685855a3e81269ecf9ecb1f392fa4e51282825d4429c",
+    "kind": "database"
+  }
+]

@@ -1,0 +1,72 @@
+[
+  {
+    "name": "Companion validation record",
+    "path": "deliverables/public-repository/docs/validation.md",
+    "bytes": 1873,
+    "sha256": "2a252efae1075c45709f131ddf58c6068720f9450d85c25c3572c85ef2495caf",
+    "kind": "source"
+  },
+  {
+    "name": "Companion YARA rule",
+    "path": "deliverables/public-repository/rules/yara/deaddrop_wallet_agent.yar",
+    "bytes": 771,
+    "sha256": "4cc26ce2b70b19a1a18dc92ed05c5503d7ceaea76a1443126a9addd4c862419e",
+    "kind": "source"
+  },
+  {
+    "name": "Companion Linux Sigma rule",
+    "path": "deliverables/public-repository/rules/sigma/linux_google_agent_persistence.yml",
+    "bytes": 831,
+    "sha256": "34047a57d90536fd90d6829298ecb7bbc4e37e1039eae261121e572671394a23",
+    "kind": "source"
+  },
+  {
+    "name": "Companion Windows Sigma rule",
+    "path": "deliverables/public-repository/rules/sigma/windows_capture_task.yml",
+    "bytes": 796,
+    "sha256": "d6efe8045af6b031829ac881026b48e191e0d834a03d2ffff765084af8591cad",
+    "kind": "source"
+  },
+  {
+    "name": "Companion parse-only scanner",
+    "path": "deliverables/public-repository/src/inspect-js.mjs",
+    "bytes": 4841,
+    "sha256": "adc936d308f486ab522d5696069a52591d71099028b3cf2d3def7f5b9bffdf9b",
+    "kind": "source"
+  },
+  {
+    "name": "Companion AST test suite (rerun offline)",
+    "path": "deliverables/public-repository/test/inspect-js.test.mjs",
+    "bytes": 1956,
+    "sha256": "864bc2ea0f4814e7bf1370ea7a1cd7bcfd959fd2e0465f5db76eca5c073019c3",
+    "kind": "source"
+  },
+  {
+    "name": "Companion detection tests (not rerun)",
+    "path": "deliverables/public-repository/tests/test_detections.py",
+    "bytes": 3531,
+    "sha256": "1fbcb9f791fd6cb3c4e3dbfd7699a1ec0d88614aa7b0b15da8e358d395e56193",
+    "kind": "source"
+  },
+  {
+    "name": "Held lure JavaScript (hashed only)",
+    "path": "incident-2026-07-22/samples-DO-NOT-RUN/app.js",
+    "bytes": 73545,
+    "sha256": "5ee915bb8d0363bd92176cc595d7425fd7e7830508d8824d90b5285a3d2b11bd",
+    "kind": "sample"
+  },
+  {
+    "name": "Held stage-three JavaScript (hashed only)",
+    "path": "incident-2026-07-22/samples-DO-NOT-RUN/stage3.js",
+    "bytes": 1140214,
+    "sha256": "694626bed2df1f0d0026a3f7ead7692b44c7e73041cdd799b79a025335533cdc",
+    "kind": "sample"
+  },
+  {
+    "name": "Held Overlord Go implant ELF (hashed only)",
+    "path": "incident-2026-07-22/samples-DO-NOT-RUN/overlord_go_implant_linux-amd64.elf",
+    "bytes": 15790242,
+    "sha256": "ef183bbb40f4c7c3f4b52994cdba3295f3eab2604fdad99eefa3b67b8d966e8d",
+    "kind": "binary"
+  }
+]

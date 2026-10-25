@@ -1,0 +1,23 @@
+[
+  {
+    "name": "Investigation log as committed with the earlier-phase attribution",
+    "path": "UNK_DeadDrop-INVESTIGATION.md @ git 88dfe8f",
+    "bytes": 127990,
+    "sha256": "8a8c7891b260b5f8b54710149f4a30fbe12e26a5e4214c4414cb62644c0650ff",
+    "kind": "repository"
+  },
+  {
+    "name": "Retraction record as committed",
+    "path": "incident-echoes-2026-07-22/SEPT-2025-PHASE-retraction-2026-07-24.md @ git f259302",
+    "bytes": 9494,
+    "sha256": "75d9ea47cfe375a03598f29892e184229bbc2ac0417bd19ec420d036399cc10d",
+    "kind": "repository"
+  },
+  {
+    "name": "Retraction record (working copy, identical to f259302)",
+    "path": "incident-echoes-2026-07-22/SEPT-2025-PHASE-retraction-2026-07-24.md",
+    "bytes": 9494,
+    "sha256": "75d9ea47cfe375a03598f29892e184229bbc2ac0417bd19ec420d036399cc10d",
+    "kind": "other"
+  }
+]

@@ -1,0 +1,37 @@
+[
+  {
+    "name": "ECHOES poster Post.png",
+    "path": "incident-echoes-2026-07-22/extracted-DO-NOT-RUN/Post.png",
+    "bytes": 3698494,
+    "sha256": "d213b4184b93ccf59449237b071ac2e41ff71b83213b2e338917b26696a7b520",
+    "kind": "image"
+  },
+  {
+    "name": "Portrait Lyra.png",
+    "path": "incident-echoes-2026-07-22/extracted-DO-NOT-RUN/Lyra.png",
+    "bytes": 862883,
+    "sha256": "f7d17f0c0f035b67c96b8f37a4e55e27141df0c4d69b534a309191f398a66a47",
+    "kind": "image"
+  },
+  {
+    "name": "Portrait Solace.png",
+    "path": "incident-echoes-2026-07-22/extracted-DO-NOT-RUN/Solace.png",
+    "bytes": 605016,
+    "sha256": "6e5e8ecf4b38580ed494556e0cd12150790ce0bf790b3da8588df91298aeadce",
+    "kind": "image"
+  },
+  {
+    "name": "Portrait Kael.png",
+    "path": "incident-echoes-2026-07-22/extracted-DO-NOT-RUN/Kael.png",
+    "bytes": 816478,
+    "sha256": "8a0d38a6089e5c5d276820bb13089986798f5ca3e3136cd028a41e37da1892c0",
+    "kind": "image"
+  },
+  {
+    "name": "Previously extracted C2PA thumbnail (compared to embedded bidb payload)",
+    "path": "incident-echoes-2026-07-22/extracted-DO-NOT-RUN/c2pa_thumb_0.jpg",
+    "bytes": 73435,
+    "sha256": "fee5e557f82c8a500818b917f4861e781eee664315d27e0d99f1683957f13e57",
+    "kind": "extracted"
+  }
+]

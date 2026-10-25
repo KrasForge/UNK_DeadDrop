@@ -1,0 +1,5 @@
+[
+  {"name": "Dead-drop repository Git bundle (drop-indexing/tasks)", "path": "incident-2026-07-22/deaddrop-repo.bundle", "bytes": 4900, "sha256": "804df377a0425d0aa7433ec2402d55ce8c913e1e4063d32565ddfda8ae807245", "kind": "repository"},
+  {"name": "Decrypted stealer JavaScript (deepfake-guard chain)", "path": "incident-echoes-2026-07-22/deepfake-guard-DO-NOT-RUN/install_guard_d.stealer.decrypted.js", "bytes": 230621, "sha256": "70ea6e2eaab58bdb83b7b235dd6253ffbcaed5e7df0286cbefd72d7650c3f47a", "kind": "extracted"},
+  {"name": "Overlord Go implant, linux/amd64", "path": "incident-2026-07-22/samples-DO-NOT-RUN/overlord_go_implant_linux-amd64.elf", "bytes": 15790242, "sha256": "ef183bbb40f4c7c3f4b52994cdba3295f3eab2604fdad99eefa3b67b8d966e8d", "kind": "binary"}
+]

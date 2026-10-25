@@ -1,0 +1,20 @@
+[
+  {
+    "name": "Phishing message as received (.eml)",
+    "path": "incident-d2saitrade-2026-07-22/email/Engineering role at D2S AI Trade (remote).eml",
+    "bytes": 9176,
+    "sha256": "3efb15d6cc89e3690bd1e19fbc96034110f55066d69ef25dc2d30ca057d2ee21"
+  },
+  {
+    "name": "Go implant (linux-amd64)",
+    "path": "incident-2026-07-22/samples-DO-NOT-RUN/overlord_go_implant_linux-amd64.elf",
+    "bytes": 15790242,
+    "sha256": "ef183bbb40f4c7c3f4b52994cdba3295f3eab2604fdad99eefa3b67b8d966e8d"
+  },
+  {
+    "name": "Windows agent bundle (ZIP)",
+    "path": "incident-2026-07-22/samples-DO-NOT-RUN/win_node_agent.zip",
+    "bytes": 603347,
+    "sha256": "be5859f23f0781242d854dc24c102c694dabfc14a159b56429e313f0521141b6"
+  }
+]

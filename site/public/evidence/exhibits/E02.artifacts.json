@@ -1,0 +1,20 @@
+[
+ {
+  "name": "Recruitment-lure SPA bundle (held reference sample)",
+  "path": "incident-2026-07-22/samples-DO-NOT-RUN/app.js",
+  "bytes": 73545,
+  "sha256": "5ee915bb8d0363bd92176cc595d7425fd7e7830508d8824d90b5285a3d2b11bd"
+ },
+ {
+  "name": "Recruitment-lure SPA bundle, d2saitrade[.]ink build",
+  "path": "incident-d2saitrade-2026-07-22/site-assets/d2s_app.js",
+  "bytes": 101082,
+  "sha256": "775b939e40a2aeb56a741b2f4c1f93e77cac59a4484803af6bed25017d70c5c4"
+ },
+ {
+  "name": "SceneBox lure front-end script (unminified)",
+  "path": "incident-echoes-2026-07-22/scenebox-lure-DO-NOT-RUN/app.js",
+  "bytes": 22012,
+  "sha256": "ce7865ba3b511bba88c428439651c464d7f66a5a01b4c814883b62c9c6cc32fa"
+ }
+]

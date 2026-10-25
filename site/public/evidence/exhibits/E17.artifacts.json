@@ -1,0 +1,8 @@
+[
+ {
+  "name": "Large JavaScript stage-three payload (reference sample)",
+  "path": "incident-2026-07-22/samples-DO-NOT-RUN/stage3.js",
+  "bytes": 1140214,
+  "sha256": "694626bed2df1f0d0026a3f7ead7692b44c7e73041cdd799b79a025335533cdc"
+ }
+]

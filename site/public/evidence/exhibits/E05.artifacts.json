@@ -1,0 +1,38 @@
+[
+  {
+    "name": "stage-three payload",
+    "path": "incident-2026-07-22/samples-DO-NOT-RUN/stage3.js",
+    "bytes": 1140214,
+    "sha256": "694626bed2df1f0d0026a3f7ead7692b44c7e73041cdd799b79a025335533cdc"
+  },
+  {
+    "name": "Installer JavaScript",
+    "path": "incident-2026-07-22/samples-DO-NOT-RUN/install_guard.js",
+    "bytes": 1521039,
+    "sha256": "d24df1cacc01adee4e031b0f4d582448b7462f31975b57f553b7e0e86dddb184"
+  },
+  {
+    "name": "Decrypted deepfake-guard collector",
+    "path": "incident-echoes-2026-07-22/deepfake-guard-DO-NOT-RUN/install_guard_d.stealer.decrypted.js",
+    "bytes": 230621,
+    "sha256": "70ea6e2eaab58bdb83b7b235dd6253ffbcaed5e7df0286cbefd72d7650c3f47a"
+  },
+  {
+    "name": "Go implant",
+    "path": "incident-2026-07-22/samples-DO-NOT-RUN/overlord_go_implant_linux-amd64.elf",
+    "bytes": 15790242,
+    "sha256": "ef183bbb40f4c7c3f4b52994cdba3295f3eab2604fdad99eefa3b67b8d966e8d"
+  },
+  {
+    "name": "Windows agent bundle (ZIP)",
+    "path": "incident-2026-07-22/samples-DO-NOT-RUN/win_node_agent.zip",
+    "bytes": 603347,
+    "sha256": "be5859f23f0781242d854dc24c102c694dabfc14a159b56429e313f0521141b6"
+  },
+  {
+    "name": "second large payload",
+    "path": "incident-echoes-2026-07-22/aazdias-payload-DO-NOT-RUN/aazdias_stealer.decrypted.js",
+    "bytes": 1140214,
+    "sha256": "5498038886bab8a8db2159495c015f26e322708fc7a7f3ea698e7b7c06e3d148"
+  }
+]

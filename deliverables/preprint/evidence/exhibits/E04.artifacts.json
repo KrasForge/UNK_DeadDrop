@@ -1,0 +1,6 @@
+[
+  {"name": "extension/extension.js (obfuscated loader, key-assembly + blob layout)", "path": "incident-predicttogether-2026-07-22/extracted/extension/extension.js", "bytes": 606460, "sha256": "d5e9288693aa745dc89368deac677e7ea1ec81e663283af30838cdae189b7a7e", "kind": "extracted"},
+  {"name": "detect_malware.py (decrypted VSIX payload, Chrome ABE decryptor)", "path": "incident-predicttogether-2026-07-22/samples-DO-NOT-RUN/detect_malware.py", "bytes": 60054, "sha256": "4c3fdd86a59d52a0e29f472666cbf9472b6fd83c38ef2a4b547f31c72b8ee87e", "kind": "source"},
+  {"name": "windows-js-pipeline.js (decrypted VSIX payload, coordinator)", "path": "incident-predicttogether-2026-07-22/samples-DO-NOT-RUN/windows-js-pipeline.js", "bytes": 32324, "sha256": "bf820623e8deaa37092650c7fae594e56b8d81c27b541419006cca2d0536353b", "kind": "source"},
+  {"name": "windows-agent-node.js (decrypted VSIX payload, Windows collection agent)", "path": "incident-predicttogether-2026-07-22/samples-DO-NOT-RUN/windows-agent-node.js", "bytes": 56093, "sha256": "e5b7d6411d0c95da047185d94fca98d454b73df2e7f46f2753e212af2ca45da5", "kind": "source"}
+]

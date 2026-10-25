@@ -1,0 +1,8 @@
+[
+ {
+  "name": "Go implant (linux-amd64)",
+  "path": "incident-2026-07-22/samples-DO-NOT-RUN/overlord_go_implant_linux-amd64.elf",
+  "bytes": 15790242,
+  "sha256": "ef183bbb40f4c7c3f4b52994cdba3295f3eab2604fdad99eefa3b67b8d966e8d"
+ }
+]

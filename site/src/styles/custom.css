@@ -1,0 +1,70 @@
+:root {
+  --sl-color-accent-low: #e3eee9;
+  --sl-color-accent: #17634f;
+  --sl-color-accent-high: #0c352a;
+  --sl-color-white: #ffffff;
+  --sl-color-gray-1: #202320;
+  --sl-color-gray-2: #424742;
+  --sl-color-gray-3: #6d746e;
+  --sl-color-gray-4: #aeb5ae;
+  --sl-color-gray-5: #d9ddd9;
+  --sl-color-gray-6: #ecefec;
+  --sl-color-black: #f8f9f7;
+  --sl-font: ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
+  --sl-font-mono: "SFMono-Regular", Consolas, "Liberation Mono", monospace;
+}
+
+:root[data-theme='dark'] {
+  --sl-color-accent-low: #17362d;
+  --sl-color-accent: #73bba5;
+  --sl-color-accent-high: #d8eee7;
+  --sl-color-white: #f1f3f1;
+  --sl-color-gray-1: #d8ddd9;
+  --sl-color-gray-2: #afb6b0;
+  --sl-color-gray-3: #7d857e;
+  --sl-color-gray-4: #4f5650;
+  --sl-color-gray-5: #303531;
+  --sl-color-gray-6: #222622;
+  --sl-color-black: #171a17;
+}
+
+.site-title {
+  font-weight: 700;
+  letter-spacing: -0.02em;
+}
+
+.sl-markdown-content {
+  font-size: 1rem;
+  line-height: 1.72;
+}
+
+.sl-markdown-content h2 {
+  margin-top: 2.6rem;
+  padding-bottom: 0.4rem;
+  border-bottom: 1px solid var(--sl-color-gray-5);
+  font-size: clamp(1.35rem, 1.8vw, 1.65rem);
+}
+
+.sl-markdown-content h3 {
+  margin-top: 2rem;
+  font-size: 1.12rem;
+}
+
+.sl-markdown-content img {
+  border: 1px solid var(--sl-color-gray-5);
+  border-radius: 6px;
+}
+
+.sl-markdown-content table {
+  font-size: 0.92rem;
+}
+
+.sl-markdown-content blockquote {
+  border-inline-start-color: var(--sl-color-accent);
+}
+
+@media (min-width: 72rem) {
+  .main-pane {
+    --sl-content-width: 50rem;
+  }
+}

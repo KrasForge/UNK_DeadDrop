@@ -1,0 +1,44 @@
+[
+ {
+  "name": "Windows Node agent archive (win_node_agent.zip)",
+  "path": "incident-2026-07-22/samples-DO-NOT-RUN/win_node_agent.zip",
+  "bytes": 603347,
+  "sha256": "be5859f23f0781242d854dc24c102c694dabfc14a159b56429e313f0521141b6",
+  "kind": "sample"
+ },
+ {
+  "name": "VSIX package (google-update-support.vsix)",
+  "path": "incident-predicttogether-2026-07-22/samples-DO-NOT-RUN/google-update-support.vsix",
+  "bytes": 17647582,
+  "sha256": "52886aab179f26421678ff23af1b0fabf0a17ffbb534369cdbbac8008cbed8e7",
+  "kind": "sample"
+ },
+ {
+  "name": "Nested native-agent archive extracted from the VSIX",
+  "path": "incident-predicttogether-2026-07-22/extracted/extension/google-update-support-agent.zip",
+  "bytes": 17283435,
+  "sha256": "e1bf1b29e6fa3525d7f32f429290a88d6ea2890e61c06574b8ff6372aa5d0667",
+  "kind": "extracted"
+ },
+ {
+  "name": "Go agent, darwin/arm64",
+  "path": "incident-predicttogether-2026-07-22/extracted/agents/google-update-support-darwin-arm64",
+  "bytes": 13304624,
+  "sha256": "339907b44f161f57ff30819f422c552382ff437b3ae437463b4222cfe86bd943",
+  "kind": "binary"
+ },
+ {
+  "name": "Decrypted Python payload (detect_malware.py)",
+  "path": "incident-predicttogether-2026-07-22/samples-DO-NOT-RUN/detect_malware.py",
+  "bytes": 60054,
+  "sha256": "4c3fdd86a59d52a0e29f472666cbf9472b6fd83c38ef2a4b547f31c72b8ee87e",
+  "kind": "extracted"
+ },
+ {
+  "name": "Dead-drop repository Git bundle (drop-indexing/tasks)",
+  "path": "incident-2026-07-22/deaddrop-repo.bundle",
+  "bytes": 4900,
+  "sha256": "804df377a0425d0aa7433ec2402d55ce8c913e1e4063d32565ddfda8ae807245",
+  "kind": "repository"
+ }
+]

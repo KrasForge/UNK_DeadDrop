@@ -1,0 +1,9 @@
+[
+  {"name": "google-update-support.vsix (editor extension package)", "path": "incident-predicttogether-2026-07-22/samples-DO-NOT-RUN/google-update-support.vsix", "bytes": 17647582, "sha256": "52886aab179f26421678ff23af1b0fabf0a17ffbb534369cdbbac8008cbed8e7", "kind": "sample"},
+  {"name": "extension/package.json (VSIX manifest)", "path": "incident-predicttogether-2026-07-22/extracted/extension/package.json", "bytes": 3328, "sha256": "ac856c6d118f81b730544dcf7c59e98bd8a8272f98a915fe9ce31617316da893", "kind": "extracted"},
+  {"name": "extension/extension.js (obfuscated loader)", "path": "incident-predicttogether-2026-07-22/extracted/extension/extension.js", "bytes": 606460, "sha256": "d5e9288693aa745dc89368deac677e7ea1ec81e663283af30838cdae189b7a7e", "kind": "extracted"},
+  {"name": "extension/google-update-support-agent.zip (nested agent archive)", "path": "incident-predicttogether-2026-07-22/extracted/extension/google-update-support-agent.zip", "bytes": 17283435, "sha256": "e1bf1b29e6fa3525d7f32f429290a88d6ea2890e61c06574b8ff6372aa5d0667", "kind": "extracted"},
+  {"name": "google-update-support-darwin-arm64 (Go agent)", "path": "incident-predicttogether-2026-07-22/extracted/agents/google-update-support-darwin-arm64", "bytes": 13304624, "sha256": "339907b44f161f57ff30819f422c552382ff437b3ae437463b4222cfe86bd943", "kind": "binary"},
+  {"name": "google-update-support-darwin-amd64 (Go agent)", "path": "incident-predicttogether-2026-07-22/extracted/agents/google-update-support-darwin-amd64", "bytes": 14495504, "sha256": "bb10adac5b0124efedfe71102c1d5638135ec9e1cde8c8cb3353c5ed91bb9f81", "kind": "binary"},
+  {"name": "google-update-support-linux-amd64 (Go agent)", "path": "incident-predicttogether-2026-07-22/extracted/agents/google-update-support-linux-amd64", "bytes": 14655650, "sha256": "a2b9a769df84d9d3a4694bb0252a2c6a5e5f5d1a85a04565362737092bbb3a86", "kind": "binary"}
+]

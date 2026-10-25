@@ -1,0 +1,1243 @@
+{
+  "prepared": "2026-10-24",
+  "evidence_cutoff": "2026-07-24",
+  "status": "Edited supporting reports; no publication or independent acquisition attestation.",
+  "fingerprint_note": "Source hashes identify the local bytes reviewed at preparation, not acquisition dates or truth of claims.",
+  "reports": [
+    {
+      "id": "E01",
+      "title": "E01. Master investigation report",
+      "markdown": "reports/E01.md",
+      "markdown_sha256": "9bb519957bd105ec0693315cfb0f09a994118a733c1567dc7f964bea1c0db9ed",
+      "sources": [
+        {
+          "id": "S1",
+          "title": "Master investigation record",
+          "sha256": "9f3736d9c68564553945d8427d0ba6d5b7cf12a92f559bc0d615ef2fd0e26bed",
+          "bytes": 65312
+        },
+        {
+          "id": "S2",
+          "title": "Edited preprint manuscript",
+          "sha256": "abe3d13783ab2860fd4a1c0f45546c8da610b6c5c67086d0687f8c321ed21562",
+          "bytes": 47690
+        }
+      ],
+      "exhibits": 2,
+      "exhibit_inputs": [
+        {
+          "name": "Lure email: Nodit recruitment message (rcvd 22 Jun 2026)",
+          "bytes": 7185,
+          "sha256": "6c1835159c8da69aaf0743fce634c3345e6b4f16eb4a492cfda5cf893b98eb5b"
+        },
+        {
+          "name": "Lure email: D2S AI Trade recruitment message (rcvd 21 Jul 2026 UTC)",
+          "bytes": 9176,
+          "sha256": "3efb15d6cc89e3690bd1e19fbc96034110f55066d69ef25dc2d30ca057d2ee21"
+        },
+        {
+          "name": "Lure email: Category Labs recruitment message (rcvd 22 Jul 2026 UTC)",
+          "bytes": 9462,
+          "sha256": "924db78f6fe47e7696c42d77d42d8f030c80e4a04965f7529731bfab4353d6ec"
+        },
+        {
+          "name": "ClickFix lure-page JavaScript bundle",
+          "bytes": 73545,
+          "sha256": "5ee915bb8d0363bd92176cc595d7425fd7e7830508d8824d90b5285a3d2b11bd"
+        },
+        {
+          "name": "Stage-three JavaScript collection payload",
+          "bytes": 1140214,
+          "sha256": "694626bed2df1f0d0026a3f7ead7692b44c7e73041cdd799b79a025335533cdc"
+        },
+        {
+          "name": "Overlord Go implant, Linux x86-64 ELF",
+          "bytes": 15790242,
+          "sha256": "ef183bbb40f4c7c3f4b52994cdba3295f3eab2604fdad99eefa3b67b8d966e8d"
+        },
+        {
+          "name": "Windows Node agent archive (192 members)",
+          "bytes": 603347,
+          "sha256": "be5859f23f0781242d854dc24c102c694dabfc14a159b56429e313f0521141b6"
+        },
+        {
+          "name": "VSIX extension \"Google Update Support\"",
+          "bytes": 17647582,
+          "sha256": "52886aab179f26421678ff23af1b0fabf0a17ffbb534369cdbbac8008cbed8e7"
+        },
+        {
+          "name": "ECHOES archive (RAR v5)",
+          "bytes": 2294526,
+          "sha256": "7db6789c09e29305c728bf3d7b94c5ef1c3e13eef1b321ee52d3ae3997731f56"
+        },
+        {
+          "name": "ECHOES poster Post.png (C2PA)",
+          "bytes": 3698494,
+          "sha256": "d213b4184b93ccf59449237b071ac2e41ff71b83213b2e338917b26696a7b520"
+        },
+        {
+          "name": "GitLab dead-drop configuration repository (git bundle)",
+          "bytes": 4900,
+          "sha256": "804df377a0425d0aa7433ec2402d55ce8c913e1e4063d32565ddfda8ae807245"
+        },
+        {
+          "name": "Administration frontend source, wallet-balances page",
+          "bytes": 109637,
+          "sha256": "f9b1b0c3e259d90ca35e827dc84cb137335b0a79420c532d4ffa0988bd994954"
+        },
+        {
+          "name": "Targeting database, safe pool (SQLite)",
+          "bytes": 6922240,
+          "sha256": "a84cee4ce20e0d40177b750a2692acd37ae6cd30a4e303790c6eb1ecf6348187"
+        },
+        {
+          "name": "Targeting database, antispam pool (SQLite)",
+          "bytes": 5496832,
+          "sha256": "7eff7dac7119b6b4462e685855a3e81269ecf9ecb1f392fa4e51282825d4429c"
+        }
+      ],
+      "exhibit_files": [
+        {
+          "path": "exhibits/E01.md",
+          "sha256": "dbf55e8cd88fd41d7d6684c3a409556d745838eaac460d4ac14bcfbeaa115f27"
+        },
+        {
+          "path": "exhibits/E01.artifacts.json",
+          "sha256": "bdd15ae3bdef54d422865b40964a7971d036fc24847bb624f1f373afa6881789"
+        }
+      ],
+      "pdf": "E01.pdf",
+      "pdf_sha256": "7bd89ebdd78f66009f2367eb28b1e77228b5b5c672c09245542cfdb4378e5ee1"
+    },
+    {
+      "id": "E02",
+      "title": "E02. Clipboard-lure deobfuscation analysis",
+      "markdown": "reports/E02.md",
+      "markdown_sha256": "10add960a4464933defe9ea53c7ad7ff567b37d1ca66a5eb6c5f5c2d6128b13d",
+      "sources": [
+        {
+          "id": "S1",
+          "title": "Clipboard-handler analysis, 23 July 2026",
+          "sha256": "2cdf96b2a4ef16fdaf987ae73260e3531564e599aebadfad505a4c2b65a19a47",
+          "bytes": 4662
+        },
+        {
+          "id": "S2",
+          "title": "Companion validation record, 21 October 2026",
+          "sha256": "2a252efae1075c45709f131ddf58c6068720f9450d85c25c3572c85ef2495caf",
+          "bytes": 1873
+        }
+      ],
+      "exhibits": 11,
+      "exhibit_inputs": [
+        {
+          "name": "Recruitment-lure SPA bundle (held reference sample)",
+          "bytes": 73545,
+          "sha256": "5ee915bb8d0363bd92176cc595d7425fd7e7830508d8824d90b5285a3d2b11bd"
+        },
+        {
+          "name": "Recruitment-lure SPA bundle, d2saitrade[.]ink build",
+          "bytes": 101082,
+          "sha256": "775b939e40a2aeb56a741b2f4c1f93e77cac59a4484803af6bed25017d70c5c4"
+        },
+        {
+          "name": "SceneBox lure front-end script (unminified)",
+          "bytes": 22012,
+          "sha256": "ce7865ba3b511bba88c428439651c464d7f66a5a01b4c814883b62c9c6cc32fa"
+        }
+      ],
+      "exhibit_files": [
+        {
+          "path": "exhibits/E02.md",
+          "sha256": "52d03a8385942ed3576fd9f7b2dc13d4b083d4dcb5475519d5d143baf10976e5"
+        },
+        {
+          "path": "exhibits/E02.artifacts.json",
+          "sha256": "44b76f9086cfd658928d0a5b711c0a82f677c225ec2808d82fca8e10ee7c8d73"
+        }
+      ],
+      "pdf": "E02.pdf",
+      "pdf_sha256": "267bcb7e8f21a064dbd27317d4b449655e98a6e067649824c74082861856032a"
+    },
+    {
+      "id": "E03",
+      "title": "E03. Editor-extension package analysis",
+      "markdown": "reports/E03.md",
+      "markdown_sha256": "8f4be70190da06a2d0e35a9399c70eafb3f81f6d8bdce428c44c03b9916a6bed",
+      "sources": [
+        {
+          "id": "S1",
+          "title": "VSIX static analysis, 22 July 2026",
+          "sha256": "2d21fee6780bbc217490d80daa5de424cbb154dee0034b5fd53ef30af46563b2",
+          "bytes": 18399
+        },
+        {
+          "id": "S2",
+          "title": "Edited preprint manuscript",
+          "sha256": "abe3d13783ab2860fd4a1c0f45546c8da610b6c5c67086d0687f8c321ed21562",
+          "bytes": 47690
+        }
+      ],
+      "exhibits": 6,
+      "exhibit_inputs": [
+        {
+          "name": "google-update-support.vsix (editor extension package)",
+          "bytes": 17647582,
+          "sha256": "52886aab179f26421678ff23af1b0fabf0a17ffbb534369cdbbac8008cbed8e7"
+        },
+        {
+          "name": "extension/package.json (VSIX manifest)",
+          "bytes": 3328,
+          "sha256": "ac856c6d118f81b730544dcf7c59e98bd8a8272f98a915fe9ce31617316da893"
+        },
+        {
+          "name": "extension/extension.js (obfuscated loader)",
+          "bytes": 606460,
+          "sha256": "d5e9288693aa745dc89368deac677e7ea1ec81e663283af30838cdae189b7a7e"
+        },
+        {
+          "name": "extension/google-update-support-agent.zip (nested agent archive)",
+          "bytes": 17283435,
+          "sha256": "e1bf1b29e6fa3525d7f32f429290a88d6ea2890e61c06574b8ff6372aa5d0667"
+        },
+        {
+          "name": "google-update-support-darwin-arm64 (Go agent)",
+          "bytes": 13304624,
+          "sha256": "339907b44f161f57ff30819f422c552382ff437b3ae437463b4222cfe86bd943"
+        },
+        {
+          "name": "google-update-support-darwin-amd64 (Go agent)",
+          "bytes": 14495504,
+          "sha256": "bb10adac5b0124efedfe71102c1d5638135ec9e1cde8c8cb3353c5ed91bb9f81"
+        },
+        {
+          "name": "google-update-support-linux-amd64 (Go agent)",
+          "bytes": 14655650,
+          "sha256": "a2b9a769df84d9d3a4694bb0252a2c6a5e5f5d1a85a04565362737092bbb3a86"
+        }
+      ],
+      "exhibit_files": [
+        {
+          "path": "exhibits/E03.md",
+          "sha256": "6fb197fc6a086598a4d553c03617d6b75f8ecf7fca0b965e65e11c354e7023ba"
+        },
+        {
+          "path": "exhibits/E03.artifacts.json",
+          "sha256": "353487ca2aae8af63f66886cdcf6ea78e689da824af0f3148c9da20466735f8f"
+        }
+      ],
+      "pdf": "E03.pdf",
+      "pdf_sha256": "1ec77fd5a6368b0e98a9a623fc772b6a5df9b3c76ed8a2a6ad96234857cbf396"
+    },
+    {
+      "id": "E04",
+      "title": "E04. Authenticated payload-decryption analysis",
+      "markdown": "reports/E04.md",
+      "markdown_sha256": "404510bacbef0a940c62d46a4129da29c443b6a34b4edfee05db31d28d5b6244",
+      "sources": [
+        {
+          "id": "S1",
+          "title": "Authenticated payload-decryption record, 22 July 2026",
+          "sha256": "b34d0468651a78af7816d70d308e385b5e722824fec268a833532fe8a1375d7f",
+          "bytes": 9192
+        }
+      ],
+      "exhibits": 7,
+      "exhibit_inputs": [
+        {
+          "name": "extension/extension.js (obfuscated loader, key-assembly + blob layout)",
+          "bytes": 606460,
+          "sha256": "d5e9288693aa745dc89368deac677e7ea1ec81e663283af30838cdae189b7a7e"
+        },
+        {
+          "name": "detect_malware.py (decrypted VSIX payload, Chrome ABE decryptor)",
+          "bytes": 60054,
+          "sha256": "4c3fdd86a59d52a0e29f472666cbf9472b6fd83c38ef2a4b547f31c72b8ee87e"
+        },
+        {
+          "name": "windows-js-pipeline.js (decrypted VSIX payload, coordinator)",
+          "bytes": 32324,
+          "sha256": "bf820623e8deaa37092650c7fae594e56b8d81c27b541419006cca2d0536353b"
+        },
+        {
+          "name": "windows-agent-node.js (decrypted VSIX payload, Windows collection agent)",
+          "bytes": 56093,
+          "sha256": "e5b7d6411d0c95da047185d94fca98d454b73df2e7f46f2753e212af2ca45da5"
+        }
+      ],
+      "exhibit_files": [
+        {
+          "path": "exhibits/E04.md",
+          "sha256": "9120ec2951d93a76df3a6d5d6b488f9debc1eaf939b2dfc9cd159bd7c78e2e99"
+        },
+        {
+          "path": "exhibits/E04.artifacts.json",
+          "sha256": "9ee07928a3b0c51991e9b28ae7729784e122e9f51424f807fadc2258c3c0a2f2"
+        }
+      ],
+      "pdf": "E04.pdf",
+      "pdf_sha256": "0f52c3c0bcd7d46170281dcdea186c48a4858b9dc898f269f266296436db2768"
+    },
+    {
+      "id": "E05",
+      "title": "E05. Payload capability re-examination",
+      "markdown": "reports/E05.md",
+      "markdown_sha256": "adc2e8461462c3dacf17cc512563173621fd4d6597ec903996f8d4100a5ff2bf",
+      "sources": [
+        {
+          "id": "S1",
+          "title": "Static capability re-examination, 24 July 2026",
+          "sha256": "75b0ac85d0d6dd6d7b68588a0618252369a5431c268e8f4b04f24a2f4d9f3117",
+          "bytes": 9290
+        },
+        {
+          "id": "S2",
+          "title": "Companion validation record, 21 October 2026",
+          "sha256": "2a252efae1075c45709f131ddf58c6068720f9450d85c25c3572c85ef2495caf",
+          "bytes": 1873
+        }
+      ],
+      "exhibits": 8,
+      "exhibit_inputs": [
+        {
+          "name": "stage-three payload",
+          "bytes": 1140214,
+          "sha256": "694626bed2df1f0d0026a3f7ead7692b44c7e73041cdd799b79a025335533cdc"
+        },
+        {
+          "name": "Installer JavaScript",
+          "bytes": 1521039,
+          "sha256": "d24df1cacc01adee4e031b0f4d582448b7462f31975b57f553b7e0e86dddb184"
+        },
+        {
+          "name": "Decrypted deepfake-guard collector",
+          "bytes": 230621,
+          "sha256": "70ea6e2eaab58bdb83b7b235dd6253ffbcaed5e7df0286cbefd72d7650c3f47a"
+        },
+        {
+          "name": "Go implant",
+          "bytes": 15790242,
+          "sha256": "ef183bbb40f4c7c3f4b52994cdba3295f3eab2604fdad99eefa3b67b8d966e8d"
+        },
+        {
+          "name": "Windows agent bundle (ZIP)",
+          "bytes": 603347,
+          "sha256": "be5859f23f0781242d854dc24c102c694dabfc14a159b56429e313f0521141b6"
+        },
+        {
+          "name": "second large payload",
+          "bytes": 1140214,
+          "sha256": "5498038886bab8a8db2159495c015f26e322708fc7a7f3ea698e7b7c06e3d148"
+        }
+      ],
+      "exhibit_files": [
+        {
+          "path": "exhibits/E05.md",
+          "sha256": "7dfe035e81e8aa8c8a6892a3d882a3105ae260664534bdec7109d1df483c7d80"
+        },
+        {
+          "path": "exhibits/E05.artifacts.json",
+          "sha256": "9bf8f913e4a572531e8360c897314013bfbf0ee1e2ae4b72fb3d39ad3d77b346"
+        }
+      ],
+      "pdf": "E05.pdf",
+      "pdf_sha256": "2c9af5dfc82802b805d16fdb176a3749e2dda7b483abca63bcd0c4486eab0a2d"
+    },
+    {
+      "id": "E06",
+      "title": "E06. Administration frontend analysis",
+      "markdown": "reports/E06.md",
+      "markdown_sha256": "5c8ca36517eb75fb6d01d0ae34123df0e6fe974a6d3f1b50a6266b1d9d01c987",
+      "sources": [
+        {
+          "id": "S1",
+          "title": "Administration frontend recovery, 23 July 2026",
+          "sha256": "ea8e598980c0fefac94efbae41b356fa408d26df6cd890be7149f22289e60b9c",
+          "bytes": 8864
+        }
+      ],
+      "exhibits": 7,
+      "exhibit_inputs": [
+        {
+          "name": "rms-platform admin client — src/api/admin.tsx (dev-mode module)",
+          "bytes": 19103,
+          "sha256": "eb3aa4f90ee3add3494d56e3c252ad4174080848f29946c8beee7f61b3907a1f"
+        },
+        {
+          "name": "rms-platform admin client — src/pages/StatsPage/GithubCheckPage.tsx",
+          "bytes": 81876,
+          "sha256": "4267ff2fb31a951c9d0d5ea771c7e4ba98ff170918b31d2242898dd1836715a8"
+        },
+        {
+          "name": "rms-platform admin client — src/components/ecommerce/EmailStatusMetrics.tsx",
+          "bytes": 8742,
+          "sha256": "741ab0364fa1fbccdc8ca924d581b96992d03153c61d944b6d41011a5329edac"
+        },
+        {
+          "name": "rms-platform admin client — src/pages/Admin/WalletBalancesPage.tsx",
+          "bytes": 109637,
+          "sha256": "f9b1b0c3e259d90ca35e827dc84cb137335b0a79420c532d4ffa0988bd994954"
+        },
+        {
+          "name": "rms-platform admin client — src/utils/superAdmin.ts",
+          "bytes": 1574,
+          "sha256": "3a6abe7822d0807a722db687f4f0557e9fdde89f4804761b80d4b44bc8ac2116"
+        },
+        {
+          "name": "rms-platform admin client — src/routes/SuperAdminRoute.tsx",
+          "bytes": 3674,
+          "sha256": "639d6bcf1507d6e9a9820dca2562b097a88bae24c8f8750d345214cf66a46512"
+        },
+        {
+          "name": "rms-platform admin client — src/components/auth/SignUpForm.tsx",
+          "bytes": 62125,
+          "sha256": "c39f4cbb829d0aa623a3d93bcb5798665406d72b4d1cb17552faa6e224b998ba"
+        }
+      ],
+      "exhibit_files": [
+        {
+          "path": "exhibits/E06.md",
+          "sha256": "55720b20acd3b2046e5c7e41b1d60dd8b39a38b1617ef916630efecb92e016bc"
+        },
+        {
+          "path": "exhibits/E06.artifacts.json",
+          "sha256": "4b4ee929ba89601bfae11d995123a2eacfa9260b10f1e9659ec89933b99c119a"
+        }
+      ],
+      "pdf": "E06.pdf",
+      "pdf_sha256": "69db41e161139e9caf92c7833f9a0374c68b9dee1a7cf577234ec2c4f6e851da"
+    },
+    {
+      "id": "E07",
+      "title": "E07. Configuration and infrastructure history",
+      "markdown": "reports/E07.md",
+      "markdown_sha256": "4e4e0693f5b918ab3647156f74187aa7b5f928c1d512e3ebeb0d947237794b8a",
+      "sources": [
+        {
+          "id": "S1",
+          "title": "Configuration-history analysis, 23 July 2026",
+          "sha256": "8aebbd87af487636479410929d8f6847a145ff3f5da92e9aefa51859ea38e17b",
+          "bytes": 3877
+        },
+        {
+          "id": "S2",
+          "title": "Master investigation record",
+          "sha256": "9f3736d9c68564553945d8427d0ba6d5b7cf12a92f559bc0d615ef2fd0e26bed",
+          "bytes": 65312
+        }
+      ],
+      "exhibits": 7,
+      "exhibit_inputs": [
+        {
+          "name": "Dead-drop repository Git bundle (drop-indexing/tasks)",
+          "bytes": 4900,
+          "sha256": "804df377a0425d0aa7433ec2402d55ce8c913e1e4063d32565ddfda8ae807245"
+        },
+        {
+          "name": "Decrypted stealer JavaScript (deepfake-guard chain)",
+          "bytes": 230621,
+          "sha256": "70ea6e2eaab58bdb83b7b235dd6253ffbcaed5e7df0286cbefd72d7650c3f47a"
+        },
+        {
+          "name": "Overlord Go implant, linux/amd64",
+          "bytes": 15790242,
+          "sha256": "ef183bbb40f4c7c3f4b52994cdba3295f3eab2604fdad99eefa3b67b8d966e8d"
+        }
+      ],
+      "exhibit_files": [
+        {
+          "path": "exhibits/E07.md",
+          "sha256": "429c29c7a32d6dfc1c8599d2206a64db31cbacb23cc971e95feb02eafdafa675"
+        },
+        {
+          "path": "exhibits/E07.artifacts.json",
+          "sha256": "e6afdcc28c8d0519023dda0bc1a0436c2b1007542b1b97bb33d867fb5b439fb9"
+        }
+      ],
+      "pdf": "E07.pdf",
+      "pdf_sha256": "1a40f9752779d7253e6aa75ffcf8700076797376106710d90a7e82ef10f29086"
+    },
+    {
+      "id": "E08",
+      "title": "E08. Target-acquisition code and database aggregates",
+      "markdown": "reports/E08.md",
+      "markdown_sha256": "983f06eae219463e5747349b9f6ecb51a44b76e7080c0735b93ec2ed37dfef6b",
+      "sources": [
+        {
+          "id": "S1",
+          "title": "Target-acquisition analysis, 24 July 2026",
+          "sha256": "cf1dca04cc4435a57cef82991a6cd6a2576b6043b260e384584f84efe19e11a4",
+          "bytes": 6162
+        },
+        {
+          "id": "S2",
+          "title": "Edited preprint manuscript",
+          "sha256": "abe3d13783ab2860fd4a1c0f45546c8da610b6c5c67086d0687f8c321ed21562",
+          "bytes": 47690
+        },
+        {
+          "id": "S3",
+          "title": "Preprint validation record",
+          "sha256": "98611ddbba9d496852efab262532afcee4fba4d0954497947ecf6b66ec56da96",
+          "bytes": 6737
+        },
+        {
+          "id": "S4",
+          "title": "Restricted safe-pool SQLite input",
+          "sha256": "a84cee4ce20e0d40177b750a2692acd37ae6cd30a4e303790c6eb1ecf6348187",
+          "bytes": 6922240
+        },
+        {
+          "id": "S5",
+          "title": "Restricted antispam-pool SQLite input",
+          "sha256": "7eff7dac7119b6b4462e685855a3e81269ecf9ecb1f392fa4e51282825d4429c",
+          "bytes": 5496832
+        }
+      ],
+      "exhibits": 7,
+      "exhibit_inputs": [
+        {
+          "name": "Github-Fetch-Tool worker — code/1_main.py",
+          "bytes": 15996,
+          "sha256": "a5fca8cb06a62e8bcbe88c3966de608afc5c861359e02517135be81815cb28bf"
+        },
+        {
+          "name": "Github-Fetch-Tool worker config — code/config.json",
+          "bytes": 103,
+          "sha256": "8a6e5865ff398087a272d2316b410ca185d94d7510eeecd56e4e19102d73c053"
+        },
+        {
+          "name": "Github-Fetch-Tool worker config — code/2_config.json",
+          "bytes": 103,
+          "sha256": "35472cfd1a99c046c57769e2da297255bbe2a96a445e28a4c5aad35c0ef9426b"
+        },
+        {
+          "name": "Github-Fetch-Tool worker config — code/3_config.json",
+          "bytes": 103,
+          "sha256": "dc4825bea2866f391e25ea3555d029f1019668bcb9d76c9c62b8b890e146e5bf"
+        },
+        {
+          "name": "Github-Fetch-Tool — code/merge.py",
+          "bytes": 3009,
+          "sha256": "cb642220331f16af6b31d2b9bc9114cb61df6487512f1654ba6081de310a1960"
+        },
+        {
+          "name": "Github-Fetch-Tool — scheduler.log",
+          "bytes": 3334,
+          "sha256": "e1cc50c11671ebf43a0310bf9085e9c3388341cdb62fde443c86674f92d82091"
+        },
+        {
+          "name": "Harvested safe pool (withheld PII) — results_safe.db",
+          "bytes": 6922240,
+          "sha256": "a84cee4ce20e0d40177b750a2692acd37ae6cd30a4e303790c6eb1ecf6348187"
+        },
+        {
+          "name": "Harvested antispam pool (withheld PII) — results_antispam.db",
+          "bytes": 5496832,
+          "sha256": "7eff7dac7119b6b4462e685855a3e81269ecf9ecb1f392fa4e51282825d4429c"
+        }
+      ],
+      "exhibit_files": [
+        {
+          "path": "exhibits/E08.md",
+          "sha256": "4ca8d933baba193a08cbbcbf18ef0aa2b4aa877fc7502ee1af72d12b85decaf1"
+        },
+        {
+          "path": "exhibits/E08.artifacts.json",
+          "sha256": "975064a10696fa2a648c3ab29c51866f1e2463ec4ad28430c278a37a9757de27"
+        }
+      ],
+      "pdf": "E08.pdf",
+      "pdf_sha256": "4803fa98ec0e563a94ab805cfca651ae614230740ce501ab8b09d7d82d51caa1"
+    },
+    {
+      "id": "E09",
+      "title": "E09. Deployment and mail-guide analysis",
+      "markdown": "reports/E09.md",
+      "markdown_sha256": "abb773948fb3a775b543b885780fced9c7e8253e3000f8f91723e6391ee84dc1",
+      "sources": [
+        {
+          "id": "S1",
+          "title": "Deployment and mail-guide analysis, 23 July 2026",
+          "sha256": "8cf0e86faba0d7ce95bd325ea1f81f528c5a2a843d0149721fcc155050fc4b6e",
+          "bytes": 5396
+        }
+      ],
+      "exhibits": 5,
+      "exhibit_inputs": [
+        {
+          "name": "rms-platform admin client — GuidePage.tsx",
+          "bytes": 7950,
+          "sha256": "1b0fb8d05894eb3fda903005cc09521bdc8a63bcf323530db123d1cfe3dbb787"
+        },
+        {
+          "name": "Operator internal runbook — guide.html (unauthenticated /guide/ body)",
+          "bytes": 13192,
+          "sha256": "918b9e4f132bea24215fdb5005e6ac32e61cc745fc9318a81b2f801981f64746"
+        }
+      ],
+      "exhibit_files": [
+        {
+          "path": "exhibits/E09.md",
+          "sha256": "16a41fe679fb497842cbe960ddea2635294195e39d57c32d6c562dacebf48a10"
+        },
+        {
+          "path": "exhibits/E09.artifacts.json",
+          "sha256": "133847066f92f3e663496a49b229f20b9d21719bb61db8a1c3fd0516a9ac5d2d"
+        }
+      ],
+      "pdf": "E09.pdf",
+      "pdf_sha256": "2e1f14b9c20856b044a650e13ab20088017fc188bcd1216bc108f40317a3fda9"
+    },
+    {
+      "id": "E10",
+      "title": "E10. Repository-ownership reassessment",
+      "markdown": "reports/E10.md",
+      "markdown_sha256": "cbed20392506f3d3b97609d79cfc29150bf129fd9e29eed9832f675de7ac0c6d",
+      "sources": [
+        {
+          "id": "S1",
+          "title": "Repository-ownership correction, 22 July 2026",
+          "sha256": "9c412a09ff3cfa6d674d5b0bfd0833944949db5e50073b660795f67abe624a1d",
+          "bytes": 10565
+        }
+      ],
+      "exhibits": 1,
+      "exhibit_inputs": [],
+      "exhibit_files": [
+        {
+          "path": "exhibits/E10.md",
+          "sha256": "b6f2e1985a5ee2394f75436bcad2a15e8b785ae603e4beac0a74e81bf80c30ba"
+        },
+        {
+          "path": "exhibits/E10.artifacts.json",
+          "sha256": "37517e5f3dc66819f61f5a7bb8ace1921282415f10551d2defa5c3eb0985b570"
+        }
+      ],
+      "pdf": "E10.pdf",
+      "pdf_sha256": "95680eb67aa6583a3e356e0a963de1af25b00da2fb6ad7b3bbfef222c3c3d7f0"
+    },
+    {
+      "id": "E11",
+      "title": "E11. Archive lineage and configuration rotation",
+      "markdown": "reports/E11.md",
+      "markdown_sha256": "af5b9c02d7453eb4a84ffcbbfa6be6c4c153bfaae79de35f7ce5f9dc327336f6",
+      "sources": [
+        {
+          "id": "S1",
+          "title": "ECHOES archive and configuration history",
+          "sha256": "fc18853ef5c344179c451ea26eac12266e7f643b7525d2e812978c1ecdcde60f",
+          "bytes": 5681
+        }
+      ],
+      "exhibits": 7,
+      "exhibit_inputs": [
+        {
+          "name": "Historical ECHOES archive, commit prefix 03f1795d",
+          "bytes": 2292670,
+          "sha256": "4ff03731d2061ad2f50da9f63dc1481374908d5bc837c86d0c7574d23b23a37b"
+        },
+        {
+          "name": "Historical ECHOES archive, commit prefix ded13153",
+          "bytes": 2292622,
+          "sha256": "2bd4cfd495fdcad6d7b2adaedc31614ca2984ea1246aed7608c339eaa82eb978"
+        },
+        {
+          "name": "Historical ECHOES archive, commit prefix b209f365",
+          "bytes": 2294542,
+          "sha256": "11bf34ccce585fe051abaa8d01ba1b29e2d44727c070b56ab0dd84a9dc9f91b2"
+        },
+        {
+          "name": "Current ECHOES archive (attributed to 4b6ea6b2)",
+          "bytes": 2294526,
+          "sha256": "7db6789c09e29305c728bf3d7b94c5ef1c3e13eef1b321ee52d3ae3997731f56"
+        },
+        {
+          "name": "LNK launcher from 03f1795d",
+          "bytes": 420736,
+          "sha256": "9c7b507eba958ecee653ff42f13cf4e084f49cd38985d3abfd77ab2bfa40b4e2"
+        },
+        {
+          "name": "LNK launcher from ded13153",
+          "bytes": 420512,
+          "sha256": "bbbeadae38bf1406f331c9e42ab49cbdd22f503cd9caecb6b390964bafa1b56f"
+        },
+        {
+          "name": "LNK launcher from b209f365",
+          "bytes": 429662,
+          "sha256": "b80028534a414f199992a49610f8d5ffa94f8098d5a820653f68b8a9eb51e3ca"
+        },
+        {
+          "name": "LNK launcher from current archive",
+          "bytes": 429728,
+          "sha256": "a44068e9758262a65861b91f2b00d0a3eca019d3b35543dd60c1c7f2e0ba1952"
+        },
+        {
+          "name": "Decoded stage two, 03f1795d",
+          "bytes": 1629,
+          "sha256": "5e405ef279e7d33d375a7427361bce07936dd2258f02f3991441fb3e1c1cf2a2"
+        },
+        {
+          "name": "Decoded stage two, ded13153",
+          "bytes": 1603,
+          "sha256": "83c0b5f3db2e4ced741ee641a7a775fd949e769ed51ee8584229a862d268939e"
+        },
+        {
+          "name": "Decoded stage two, b209f365",
+          "bytes": 2943,
+          "sha256": "f5c729ce6f06d4c6f6d98cc1e23547c25f1b6207fdc347ed6cdbb60dad1203ae"
+        },
+        {
+          "name": "Decoded stage two, current archive",
+          "bytes": 2961,
+          "sha256": "70ee2f3ec1370960b225fd86cbe92a9477a788fc276567af2bd8c50e6744ae71"
+        }
+      ],
+      "exhibit_files": [
+        {
+          "path": "exhibits/E11.md",
+          "sha256": "730355b0148400d832b6a3e6a71ba6400b759526123377b00d30327d895e38ce"
+        },
+        {
+          "path": "exhibits/E11.artifacts.json",
+          "sha256": "11aeece4233124422848a3e854d7177a3d8b4b4f6d2faca860a5a311ac02f182"
+        }
+      ],
+      "pdf": "E11.pdf",
+      "pdf_sha256": "6a2214cbf425f4b19ef9d3073844eee8de3ac4d1383afa1cd4eb3422b3bf0e23"
+    },
+    {
+      "id": "E12",
+      "title": "E12. Attribution and build-artifact assessment",
+      "markdown": "reports/E12.md",
+      "markdown_sha256": "1582d3e630238fb1a4dd0c67eade034cf2769a2568429f4cd904a87abf46573e",
+      "sources": [
+        {
+          "id": "S1",
+          "title": "Master investigation record",
+          "sha256": "9f3736d9c68564553945d8427d0ba6d5b7cf12a92f559bc0d615ef2fd0e26bed",
+          "bytes": 65312
+        },
+        {
+          "id": "S2",
+          "title": "Archive timezone analysis, 22 July 2026",
+          "sha256": "53d713bdefacffc4aa9e8b7d0ec0cac19c2bf895fe3dd7ceaaa215a4804b4954",
+          "bytes": 9389
+        },
+        {
+          "id": "S3",
+          "title": "Embedded development-path analysis, 22 July 2026",
+          "sha256": "6eab87f118bdd56cee048f344131ef1e189556ea1155b6c880f89f8a553e9cf6",
+          "bytes": 8997
+        }
+      ],
+      "exhibits": 6,
+      "exhibit_inputs": [
+        {
+          "name": "Windows Node agent archive (win_node_agent.zip)",
+          "bytes": 603347,
+          "sha256": "be5859f23f0781242d854dc24c102c694dabfc14a159b56429e313f0521141b6"
+        },
+        {
+          "name": "VSIX package (google-update-support.vsix)",
+          "bytes": 17647582,
+          "sha256": "52886aab179f26421678ff23af1b0fabf0a17ffbb534369cdbbac8008cbed8e7"
+        },
+        {
+          "name": "Nested native-agent archive extracted from the VSIX",
+          "bytes": 17283435,
+          "sha256": "e1bf1b29e6fa3525d7f32f429290a88d6ea2890e61c06574b8ff6372aa5d0667"
+        },
+        {
+          "name": "Go agent, darwin/arm64",
+          "bytes": 13304624,
+          "sha256": "339907b44f161f57ff30819f422c552382ff437b3ae437463b4222cfe86bd943"
+        },
+        {
+          "name": "Decrypted Python payload (detect_malware.py)",
+          "bytes": 60054,
+          "sha256": "4c3fdd86a59d52a0e29f472666cbf9472b6fd83c38ef2a4b547f31c72b8ee87e"
+        },
+        {
+          "name": "Dead-drop repository Git bundle (drop-indexing/tasks)",
+          "bytes": 4900,
+          "sha256": "804df377a0425d0aa7433ec2402d55ce8c913e1e4063d32565ddfda8ae807245"
+        }
+      ],
+      "exhibit_files": [
+        {
+          "path": "exhibits/E12.md",
+          "sha256": "a2bc0f3cceed01b7ed57f880bf9fae9ec31d88d1b79dd252bb18e4508dac1c1d"
+        },
+        {
+          "path": "exhibits/E12.artifacts.json",
+          "sha256": "9e1608d4c9044a8b3aa1f12c44c8c972191c27242dc08f7c21c328df67c2c3da"
+        }
+      ],
+      "pdf": "E12.pdf",
+      "pdf_sha256": "112a4f7ee5c55c77dd39942cc973492d322b2e4d9526abbe1d185473a2d9573e"
+    },
+    {
+      "id": "E13",
+      "title": "E13. Development-application configuration analysis",
+      "markdown": "reports/E13.md",
+      "markdown_sha256": "b5b6ffb9b5e4f3d508476f98ea5f4e8dee69c0935f7680f03089d6c41d8975f1",
+      "sources": [
+        {
+          "id": "S1",
+          "title": "Development-application configuration analysis, 24 July 2026",
+          "sha256": "cedfd268264c15eebe0ac58f552ecf252edc987fe898b0af70596fba251b7a78",
+          "bytes": 7017
+        }
+      ],
+      "exhibits": 4,
+      "exhibit_inputs": [
+        {
+          "name": "Operator launchpad encrypted environment archive — HoldNow-env.rar (sealed .env member)",
+          "bytes": 486,
+          "sha256": "3ff402b45f3b8548841fcbeb2e5189b9d5373b838f0462195489288614b658ac"
+        }
+      ],
+      "exhibit_files": [
+        {
+          "path": "exhibits/E13.md",
+          "sha256": "c71602afb0987526f21cc671d8c9d4ff58ab5a7caf4d8d0227ff1a69e3c9870a"
+        },
+        {
+          "path": "exhibits/E13.artifacts.json",
+          "sha256": "e602b8889731c10f56d675b957bcef2b615f81da1a02f1f3347f4e8887bf593d"
+        }
+      ],
+      "pdf": "E13.pdf",
+      "pdf_sha256": "59776dad159506964c320d18fce5dc09182d75ff41b182ad2a27a778a8b26f1f"
+    },
+    {
+      "id": "E14",
+      "title": "E14. Image-provenance examination",
+      "markdown": "reports/E14.md",
+      "markdown_sha256": "729783e09c9f017f04ab971da3d7a0f887068b23882a93cecc53e4bda1a50696",
+      "sources": [
+        {
+          "id": "S1",
+          "title": "Recorded poster-provenance examination",
+          "sha256": "77e532b9c3d412823450d4982530fbb51d609aa838d47fbe2aa8a934c5cc1478",
+          "bytes": 3956
+        }
+      ],
+      "exhibits": 7,
+      "exhibit_inputs": [
+        {
+          "name": "ECHOES poster Post.png",
+          "bytes": 3698494,
+          "sha256": "d213b4184b93ccf59449237b071ac2e41ff71b83213b2e338917b26696a7b520"
+        },
+        {
+          "name": "Portrait Lyra.png",
+          "bytes": 862883,
+          "sha256": "f7d17f0c0f035b67c96b8f37a4e55e27141df0c4d69b534a309191f398a66a47"
+        },
+        {
+          "name": "Portrait Solace.png",
+          "bytes": 605016,
+          "sha256": "6e5e8ecf4b38580ed494556e0cd12150790ce0bf790b3da8588df91298aeadce"
+        },
+        {
+          "name": "Portrait Kael.png",
+          "bytes": 816478,
+          "sha256": "8a0d38a6089e5c5d276820bb13089986798f5ca3e3136cd028a41e37da1892c0"
+        },
+        {
+          "name": "Previously extracted C2PA thumbnail (compared to embedded bidb payload)",
+          "bytes": 73435,
+          "sha256": "fee5e557f82c8a500818b917f4861e781eee664315d27e0d99f1683957f13e57"
+        }
+      ],
+      "exhibit_files": [
+        {
+          "path": "exhibits/E14.md",
+          "sha256": "f899aa3bdc5b799ac737ec705875b3758b1b5c17ef397e8c1722908ad49227d0"
+        },
+        {
+          "path": "exhibits/E14.artifacts.json",
+          "sha256": "8ae93b68845302f6d4295fad22f2d3e5937e2852e9bab87acde8f5b2db782a75"
+        }
+      ],
+      "pdf": "E14.pdf",
+      "pdf_sha256": "c0e99011d885d0416200be9ac3756ebb9c3c7b3bb271577a9428d7d0e3620c6c"
+    },
+    {
+      "id": "E15",
+      "title": "E15. Companion tooling and validation record",
+      "markdown": "reports/E15.md",
+      "markdown_sha256": "64de00cffc464b502a9948ae4784c1220145425a039f81ecc73abdc7fde2aab4",
+      "sources": [
+        {
+          "id": "S1",
+          "title": "Companion validation record, 21 October 2026",
+          "sha256": "2a252efae1075c45709f131ddf58c6068720f9450d85c25c3572c85ef2495caf",
+          "bytes": 1873
+        },
+        {
+          "id": "S2",
+          "title": "AST tool design",
+          "sha256": "b1d14b75bf59ee6c2e432f8631665e5a393ca93dda94b1e0cae38c9a35c45fe4",
+          "bytes": 2011
+        },
+        {
+          "id": "S3",
+          "title": "Experimental wallet-agent YARA rule",
+          "sha256": "4cc26ce2b70b19a1a18dc92ed05c5503d7ceaea76a1443126a9addd4c862419e",
+          "bytes": 771
+        },
+        {
+          "id": "S4",
+          "title": "Experimental Linux persistence Sigma rule",
+          "sha256": "34047a57d90536fd90d6829298ecb7bbc4e37e1039eae261121e572671394a23",
+          "bytes": 831
+        },
+        {
+          "id": "S5",
+          "title": "Experimental Windows task Sigma rule",
+          "sha256": "d6efe8045af6b031829ac881026b48e191e0d834a03d2ffff765084af8591cad",
+          "bytes": 796
+        },
+        {
+          "id": "S6",
+          "title": "Parse-only scanner implementation",
+          "sha256": "adc936d308f486ab522d5696069a52591d71099028b3cf2d3def7f5b9bffdf9b",
+          "bytes": 4841
+        },
+        {
+          "id": "S7",
+          "title": "Scanner test implementation",
+          "sha256": "864bc2ea0f4814e7bf1370ea7a1cd7bcfd959fd2e0465f5db76eca5c073019c3",
+          "bytes": 1956
+        },
+        {
+          "id": "S8",
+          "title": "Detection test implementation",
+          "sha256": "1fbcb9f791fd6cb3c4e3dbfd7699a1ec0d88614aa7b0b15da8e358d395e56193",
+          "bytes": 3531
+        }
+      ],
+      "exhibits": 7,
+      "exhibit_inputs": [
+        {
+          "name": "Companion validation record",
+          "bytes": 1873,
+          "sha256": "2a252efae1075c45709f131ddf58c6068720f9450d85c25c3572c85ef2495caf"
+        },
+        {
+          "name": "Companion YARA rule",
+          "bytes": 771,
+          "sha256": "4cc26ce2b70b19a1a18dc92ed05c5503d7ceaea76a1443126a9addd4c862419e"
+        },
+        {
+          "name": "Companion Linux Sigma rule",
+          "bytes": 831,
+          "sha256": "34047a57d90536fd90d6829298ecb7bbc4e37e1039eae261121e572671394a23"
+        },
+        {
+          "name": "Companion Windows Sigma rule",
+          "bytes": 796,
+          "sha256": "d6efe8045af6b031829ac881026b48e191e0d834a03d2ffff765084af8591cad"
+        },
+        {
+          "name": "Companion parse-only scanner",
+          "bytes": 4841,
+          "sha256": "adc936d308f486ab522d5696069a52591d71099028b3cf2d3def7f5b9bffdf9b"
+        },
+        {
+          "name": "Companion AST test suite (rerun offline)",
+          "bytes": 1956,
+          "sha256": "864bc2ea0f4814e7bf1370ea7a1cd7bcfd959fd2e0465f5db76eca5c073019c3"
+        },
+        {
+          "name": "Companion detection tests (not rerun)",
+          "bytes": 3531,
+          "sha256": "1fbcb9f791fd6cb3c4e3dbfd7699a1ec0d88614aa7b0b15da8e358d395e56193"
+        },
+        {
+          "name": "Held lure JavaScript (hashed only)",
+          "bytes": 73545,
+          "sha256": "5ee915bb8d0363bd92176cc595d7425fd7e7830508d8824d90b5285a3d2b11bd"
+        },
+        {
+          "name": "Held stage-three JavaScript (hashed only)",
+          "bytes": 1140214,
+          "sha256": "694626bed2df1f0d0026a3f7ead7692b44c7e73041cdd799b79a025335533cdc"
+        },
+        {
+          "name": "Held Overlord Go implant ELF (hashed only)",
+          "bytes": 15790242,
+          "sha256": "ef183bbb40f4c7c3f4b52994cdba3295f3eab2604fdad99eefa3b67b8d966e8d"
+        }
+      ],
+      "exhibit_files": [
+        {
+          "path": "exhibits/E15.md",
+          "sha256": "9b014228f56dcbfebf08abaa0534d371caebf37ef3e30dca08b3bf8ccbb0a9d5"
+        },
+        {
+          "path": "exhibits/E15.artifacts.json",
+          "sha256": "e508ab42122059ddf6a70e5def2a71d47efca3ded684a3f08e8b0d5e77271070"
+        }
+      ],
+      "pdf": "E15.pdf",
+      "pdf_sha256": "660ea12c252c5faa543159dc304488703c5a12d05bbb23b57fa252f619f807dd"
+    },
+    {
+      "id": "E16",
+      "title": "E16. Retraction of an earlier campaign attribution",
+      "markdown": "reports/E16.md",
+      "markdown_sha256": "33eb30a4d6fed0a51d4f349da0db165a4269f58a04dad96c6374fd0afa19ec77",
+      "sources": [
+        {
+          "id": "S1",
+          "title": "Earlier-phase retraction, 24 July 2026",
+          "sha256": "75d9ea47cfe375a03598f29892e184229bbc2ac0417bd19ec420d036399cc10d",
+          "bytes": 9494
+        }
+      ],
+      "exhibits": 6,
+      "exhibit_inputs": [
+        {
+          "name": "Investigation log as committed with the earlier-phase attribution",
+          "bytes": 127990,
+          "sha256": "8a8c7891b260b5f8b54710149f4a30fbe12e26a5e4214c4414cb62644c0650ff"
+        },
+        {
+          "name": "Retraction record as committed",
+          "bytes": 9494,
+          "sha256": "75d9ea47cfe375a03598f29892e184229bbc2ac0417bd19ec420d036399cc10d"
+        }
+      ],
+      "exhibit_files": [
+        {
+          "path": "exhibits/E16.md",
+          "sha256": "8b7659d8c1feb40b3deb2bbc2207f9d2a6f9fd47538803f4dbbcdfa3c68b3999"
+        },
+        {
+          "path": "exhibits/E16.artifacts.json",
+          "sha256": "470524c9f5fbfc297b242df988d32a63c468d0adc3c997217c7b331a251b00e4"
+        }
+      ],
+      "pdf": "E16.pdf",
+      "pdf_sha256": "b1a4faa71f84237d0cb72bee8c055dc5d4da709ff2563beba29e56840c360d31"
+    },
+    {
+      "id": "E17",
+      "title": "E17. Stage-three collection and configuration analysis",
+      "markdown": "reports/E17.md",
+      "markdown_sha256": "8c4ce7f690fd359eabc6ef1d7578a86674a9c1a879f2cba1caa1885fa10d9f85",
+      "sources": [
+        {
+          "id": "S1",
+          "title": "Stage-three collection and configuration analysis, 22 July 2026",
+          "sha256": "22fb14f77f99ffbacdf538951b6ad3d02b26a71d5c307276754cce08d1687869",
+          "bytes": 9755
+        },
+        {
+          "id": "S2",
+          "title": "Companion validation record, 21 October 2026",
+          "sha256": "2a252efae1075c45709f131ddf58c6068720f9450d85c25c3572c85ef2495caf",
+          "bytes": 1873
+        }
+      ],
+      "exhibits": 4,
+      "exhibit_inputs": [
+        {
+          "name": "Large JavaScript stage-three payload (reference sample)",
+          "bytes": 1140214,
+          "sha256": "694626bed2df1f0d0026a3f7ead7692b44c7e73041cdd799b79a025335533cdc"
+        }
+      ],
+      "exhibit_files": [
+        {
+          "path": "exhibits/E17.md",
+          "sha256": "a6da8b7f35a29ac8b0c7963ae4ba12beb513f3abad1a929b8ba2334a4ba7061f"
+        },
+        {
+          "path": "exhibits/E17.artifacts.json",
+          "sha256": "2b75dc33b04e528d2b08e6d82b103976c963a6d36e0a7643de8e235f6220f451"
+        }
+      ],
+      "pdf": "E17.pdf",
+      "pdf_sha256": "ea6fdbc133219eec6fa5edb7f25bc2baf2e502aa7e80334edfe58acf86f89245"
+    },
+    {
+      "id": "E18",
+      "title": "E18. Framework and sample comparison",
+      "markdown": "reports/E18.md",
+      "markdown_sha256": "2b1a4ebab501ae1975df6c0d4eeea88c76924c708a2e431e491a78f6a3ceb342",
+      "sources": [
+        {
+          "id": "S1",
+          "title": "Framework comparison, 22 July 2026",
+          "sha256": "1f0d02347ae2bc952b31779cb0c5e946b0305daf6bd75f5b795000e2690e21f7",
+          "bytes": 10772
+        },
+        {
+          "id": "S2",
+          "title": "Static capability re-examination, 24 July 2026",
+          "sha256": "75b0ac85d0d6dd6d7b68588a0618252369a5431c268e8f4b04f24a2f4d9f3117",
+          "bytes": 9290
+        }
+      ],
+      "exhibits": 3,
+      "exhibit_inputs": [
+        {
+          "name": "Go implant (linux-amd64)",
+          "bytes": 15790242,
+          "sha256": "ef183bbb40f4c7c3f4b52994cdba3295f3eab2604fdad99eefa3b67b8d966e8d"
+        }
+      ],
+      "exhibit_files": [
+        {
+          "path": "exhibits/E18.md",
+          "sha256": "59c030b19d5a6229465adcf96d0c0872b7b3d3dae8c8c802c3f9542b48900f5e"
+        },
+        {
+          "path": "exhibits/E18.artifacts.json",
+          "sha256": "ce426b7c8e850ece6780e3b652003e1cb11fe56ba2eac6c061265f08329f59d4"
+        }
+      ],
+      "pdf": "E18.pdf",
+      "pdf_sha256": "1cb36229f8505ea3fb4ad1dd3502890f2620bd5c6c4a0a9398074e8ca5526c3f"
+    },
+    {
+      "id": "E19",
+      "title": "E19. Windows elevation and Electron execution analysis",
+      "markdown": "reports/E19.md",
+      "markdown_sha256": "caeabf781ea1f73d10f143b0ae0cd7fdedc1360d1d7ec6df3d7e3af918e130d8",
+      "sources": [
+        {
+          "id": "S1",
+          "title": "Windows COM and Electron analysis, 22 July 2026",
+          "sha256": "202e0e73ad9c2092943f5caa52f4e6901165807ded2cf07371c0a73e60a98316",
+          "bytes": 11931
+        }
+      ],
+      "exhibits": 6,
+      "exhibit_inputs": [
+        {
+          "name": "windows-js-pipeline.js (decrypted VSIX payload, COM elevation + Electron LOLBIN)",
+          "bytes": 32324,
+          "sha256": "bf820623e8deaa37092650c7fae594e56b8d81c27b541419006cca2d0536353b"
+        },
+        {
+          "name": "stage3.js (ClickFix chain stage-three JavaScript, shared elevation tooling)",
+          "bytes": 1140214,
+          "sha256": "694626bed2df1f0d0026a3f7ead7692b44c7e73041cdd799b79a025335533cdc"
+        }
+      ],
+      "exhibit_files": [
+        {
+          "path": "exhibits/E19.md",
+          "sha256": "9d5796c620b8b18aef8a5ad4ee7423cbd39ebe1d52a78a5ea155f2d42763a074"
+        },
+        {
+          "path": "exhibits/E19.artifacts.json",
+          "sha256": "fe8bd0fd178f128e6b9a328048b477dd1be9f698ae1c564c486a813295eae22f"
+        }
+      ],
+      "pdf": "E19.pdf",
+      "pdf_sha256": "876ba3e157955186c5be948b5af7f10434500630acd430b23ab6136deda549b1"
+    },
+    {
+      "id": "E20",
+      "title": "E20. Historical origin-server observations",
+      "markdown": "reports/E20.md",
+      "markdown_sha256": "341e35982fc7d8f057bbc9e7b8c47057d59083eb310b96a678791ac551f0eb05",
+      "sources": [
+        {
+          "id": "S1",
+          "title": "Historical origin-server analysis, 23–24 July 2026",
+          "sha256": "234b2b355bb32644bf73d572d4850a45560e15006d0119d72ce317a248b7d48f",
+          "bytes": 7668
+        }
+      ],
+      "exhibits": 3,
+      "exhibit_inputs": [
+        {
+          "name": "Subtensor panel page (retained copy)",
+          "bytes": 3665,
+          "sha256": "ed2ee1e1ba0c38ab0f0568326ef060c9a1543f27d30806c8b7a19a4627953b6d"
+        },
+        {
+          "name": "Panel login script (retained copy)",
+          "bytes": 6380,
+          "sha256": "5557912dedf7f75666683afbe2632e0b89b8ee23f621432296a9c48eff63e9f4"
+        }
+      ],
+      "exhibit_files": [
+        {
+          "path": "exhibits/E20.md",
+          "sha256": "e041b5948ff114ba0f178bbc297fcd4b8c9ee40d691c1613173351094f2bd74f"
+        },
+        {
+          "path": "exhibits/E20.artifacts.json",
+          "sha256": "58c6421794f593a1925c1d485f596df84b893edeb6eed918ac404e7db2e1f755"
+        }
+      ],
+      "pdf": "E20.pdf",
+      "pdf_sha256": "1945290c8262c2850c34bbf719c4dba2e27c5de29ae8202450c376f7457521b2"
+    },
+    {
+      "id": "E21",
+      "title": "E21. Build and hosting chronology",
+      "markdown": "reports/E21.md",
+      "markdown_sha256": "6053579208d48930384b7d7e7895674ae977b4191baaef517afe7b663c728089",
+      "sources": [
+        {
+          "id": "S1",
+          "title": "Build-artifact analysis, 22 July 2026",
+          "sha256": "b9bcb011e8e78bdf876fd2225956b27d263a86d3afd7c9f147619727a8e4b0ca",
+          "bytes": 11326
+        },
+        {
+          "id": "S2",
+          "title": "Historical shared-host observations, 23 July 2026",
+          "sha256": "687bcb25909e7ee65b762110636f672e7039f3c83078f441343b297d98d3eac6",
+          "bytes": 5533
+        },
+        {
+          "id": "S3",
+          "title": "Historical origin-server analysis, 23–24 July 2026",
+          "sha256": "234b2b355bb32644bf73d572d4850a45560e15006d0119d72ce317a248b7d48f",
+          "bytes": 7668
+        }
+      ],
+      "exhibits": 4,
+      "exhibit_inputs": [
+        {
+          "name": "Phishing message as received (.eml)",
+          "bytes": 9176,
+          "sha256": "3efb15d6cc89e3690bd1e19fbc96034110f55066d69ef25dc2d30ca057d2ee21"
+        },
+        {
+          "name": "Go implant (linux-amd64)",
+          "bytes": 15790242,
+          "sha256": "ef183bbb40f4c7c3f4b52994cdba3295f3eab2604fdad99eefa3b67b8d966e8d"
+        },
+        {
+          "name": "Windows agent bundle (ZIP)",
+          "bytes": 603347,
+          "sha256": "be5859f23f0781242d854dc24c102c694dabfc14a159b56429e313f0521141b6"
+        }
+      ],
+      "exhibit_files": [
+        {
+          "path": "exhibits/E21.md",
+          "sha256": "671fedc5fe36ff7c0e1d80cb9ed1a8dcb7e8cab178654b59e9ce5468c42db4af"
+        },
+        {
+          "path": "exhibits/E21.artifacts.json",
+          "sha256": "e1a0425ca466e714df2a18fdb573df596b204be7a8108424b3ae0622a1bc44b0"
+        }
+      ],
+      "pdf": "E21.pdf",
+      "pdf_sha256": "b199bc0c6f6ead69892a901363c20f40f2cb18a0a01d86ee9ca436ca71cf197f"
+    }
+  ]
+}
