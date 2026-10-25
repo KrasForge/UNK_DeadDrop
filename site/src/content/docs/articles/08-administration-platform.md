@@ -22,9 +22,11 @@ The administration recovery followed imports exposed by a Vite development serve
 
 The acquisition followed only modules loaded by the application. It involved no login or call to the authenticated data API. The result is software for displaying and managing data, not a dump of backend tables.
 
-![Evidence from the target-acquisition and administration components](../assets/06-administration.png)
+![What the recovered client makes visible](../assets/06-administration.png)
 
-*Figure 1. Separate recovered components and the functions they expose. The diagram does not assert a verified end-to-end backend integration.*
+*Figure 1. What the recovered client makes visible. The backend, authenticated records and completed wallet transfers were not recovered.*
+
+[Open full-size vector diagram](/UNK_DeadDrop/diagrams/06-administration.svg). Sources: [E06](../../evidence/E06.pdf), [E08](../../evidence/E08.pdf), [E09](../../evidence/E09.pdf).
 
 ### A monitor for delivery repositories
 

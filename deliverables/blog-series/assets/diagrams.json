@@ -1,0 +1,132 @@
+[
+  {
+    "part": 1,
+    "name": "01-clickfix",
+    "title": "One copy action, two command effects",
+    "sources": [
+      "E02",
+      "E15"
+    ],
+    "limit": "A copy event does not establish terminal execution or installation."
+  },
+  {
+    "part": 2,
+    "name": "02-vsix",
+    "title": "How the editor becomes an interpreter",
+    "sources": [
+      "E03",
+      "E04",
+      "E19"
+    ],
+    "limit": "Workspace trust, permissions and elevation outcomes were not reproduced."
+  },
+  {
+    "part": 3,
+    "name": "03-deobfuscation",
+    "title": "From obfuscated syntax to authenticated files",
+    "sources": [
+      "E04",
+      "E15"
+    ],
+    "limit": "Parsing is not execution; the companion scanner does not implement full recovery."
+  },
+  {
+    "part": 4,
+    "name": "04-collection",
+    "title": "A selected file is only the first step",
+    "sources": [
+      "E04",
+      "E17",
+      "E18"
+    ],
+    "limit": "Collection, decryption and completed upload are different claims."
+  },
+  {
+    "part": 5,
+    "name": "05-screen-capture",
+    "title": "Why these symbols suggest repeated capture",
+    "sources": [
+      "E05",
+      "E17"
+    ],
+    "limit": "No victim session, achieved frame rate or bandwidth was measured."
+  },
+  {
+    "part": 6,
+    "name": "05-resolver",
+    "title": "Two configuration files, separate histories",
+    "sources": [
+      "E07",
+      "E20",
+      "E21"
+    ],
+    "limit": "The sequence does not establish fallback selection or client refresh behavior."
+  },
+  {
+    "part": 7,
+    "name": "07-targeting",
+    "title": "Two pools, two different counting problems",
+    "sources": [
+      "E08",
+      "E09"
+    ],
+    "limit": "Rows count stored address strings, not people, delivered mail or infections."
+  },
+  {
+    "part": 8,
+    "name": "06-administration",
+    "title": "What the recovered client makes visible",
+    "sources": [
+      "E06",
+      "E08",
+      "E09"
+    ],
+    "limit": "The backend, authenticated records and completed wallet transfers were not recovered."
+  },
+  {
+    "part": 9,
+    "name": "07-echoes",
+    "title": "Four retained ECHOES archive revisions",
+    "sources": [
+      "E11",
+      "E14",
+      "E16"
+    ],
+    "limit": "Final PowerShell payloads were unavailable; the retained history establishes staging lineage."
+  },
+  {
+    "part": 10,
+    "name": "10-evidence-map",
+    "title": "Connections need named relationships",
+    "sources": [
+      "E01",
+      "E02",
+      "E03",
+      "E07",
+      "E08",
+      "E06",
+      "E11"
+    ],
+    "limit": "Different edge labels support different claims; end-to-end execution was not established."
+  },
+  {
+    "part": 11,
+    "name": "11-detection-logic",
+    "title": "A YARA match requires the full conjunction",
+    "sources": [
+      "E15"
+    ],
+    "limit": "Fixture results do not establish production precision, recall or alert delivery."
+  },
+  {
+    "part": 12,
+    "name": "12-framework-boundary",
+    "title": "Framework lineage and collection evidence",
+    "sources": [
+      "E05",
+      "E17",
+      "E18"
+    ],
+    "limit": "The upstream files were not preserved as a pinned baseline; authorship remains unresolved."
+  }
+]

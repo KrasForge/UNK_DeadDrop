@@ -30,9 +30,11 @@ The history also contains `config-alt.json`, identified as a fallback set. The r
 
 Two relationships need preserving: the payload's dependency on the configuration resource, and the value that resource held at the time of a relevant execution. A hash-only inventory captures neither.
 
-![Primary and fallback configuration history](../assets/05-resolver.png)
+![Two configuration files, separate histories](../assets/05-resolver.png)
 
-*Figure 1. Selected configuration-history observations. The dates identify recorded file changes, not confirmed connections from every client.*
+*Figure 1. Two configuration files, separate histories. The sequence does not establish fallback selection or client refresh behavior.*
+
+[Open full-size vector diagram](/UNK_DeadDrop/diagrams/05-resolver.svg). Sources: [E07](../../evidence/E07.pdf), [E20](../../evidence/E20.pdf), [E21](../../evidence/E21.pdf).
 
 ### Reconstructing the changes
 

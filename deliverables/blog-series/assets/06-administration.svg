@@ -1,0 +1,217 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1000" height="840" viewBox="0 0 1000 840" role="img" aria-labelledby="title desc">
+<title id="title">What the recovered client makes visible</title><desc id="desc">Seventy frontend modules expose interface intent and API references. The backend, authenticated records and completed wallet transfers were not recovered.</desc>
+<defs><marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M 0 0 L 10 5 L 0 10 z" fill="#17634f"/></marker></defs>
+<rect width="1000" height="100%" fill="#fff"/>
+<text x="36" y="39" font-family="DejaVu Sans,sans-serif" font-size="16" font-weight="400" fill="#17634f" text-anchor="start">UNK_DeadDrop / Part 08</text>
+<text x="36" y="80" font-family="DejaVu Sans,sans-serif" font-size="29" font-weight="700" fill="#202a26" text-anchor="start">What the recovered client makes visible</text>
+<text x="36" y="115" font-family="DejaVu Sans,sans-serif" font-size="18" font-weight="400" fill="#53615a" text-anchor="start">Seventy frontend modules expose interface intent and API references.</text>
+<line x1="36.0" y1="135.0" x2="964.0" y2="135.0" stroke="#b9c8be" stroke-width="2.5"/>
+<rect x="36" y="172" width="588" height="470" rx="3" fill="#eaf3ee" stroke="#17634f" stroke-width="1.5"/>
+<text x="56" y="211" font-family="DejaVu Sans,sans-serif" font-size="24" font-weight="700" fill="#202a26" text-anchor="start">Recovered rms-platform frontend</text>
+<rect x="58" y="238" width="544" height="105" rx="3" fill="#f4f6f4" stroke="#b9c8be" stroke-width="1.5"/>
+<text x="74" y="269" font-family="DejaVu Sans,sans-serif" font-size="21" font-weight="700" fill="#202a26" text-anchor="start">Mail and task views</text>
+<text x="74" y="301" font-family="DejaVu Sans,sans-serif" font-size="19" font-weight="400" fill="#53615a" text-anchor="start">Metrics, templates, auto-reply, task board</text>
+<rect x="58" y="363" width="544" height="105" rx="3" fill="#f4f6f4" stroke="#b9c8be" stroke-width="1.5"/>
+<text x="74" y="394" font-family="DejaVu Sans,sans-serif" font-size="21" font-weight="700" fill="#202a26" text-anchor="start">Repository availability</text>
+<text x="74" y="426" font-family="DejaVu Sans,sans-serif" font-size="19" font-weight="400" fill="#53615a" text-anchor="start">clone_url and refresh controls</text>
+<rect x="58" y="488" width="544" height="105" rx="3" fill="#f4f6f4" stroke="#b9c8be" stroke-width="1.5"/>
+<text x="74" y="519" font-family="DejaVu Sans,sans-serif" font-size="21" font-weight="700" fill="#202a26" text-anchor="start">Wallet interfaces</text>
+<text x="74" y="551" font-family="DejaVu Sans,sans-serif" font-size="19" font-weight="400" fill="#53615a" text-anchor="start">Import, preview, refresh and claim actions</text>
+<line x1="656.0" y1="172.0" x2="656.0" y2="179.0" stroke="#8c5518" stroke-width="2.5"/>
+<line x1="656.0" y1="185.0" x2="656.0" y2="192.0" stroke="#8c5518" stroke-width="2.5"/>
+<line x1="656.0" y1="198.0" x2="656.0" y2="205.0" stroke="#8c5518" stroke-width="2.5"/>
+<line x1="656.0" y1="211.0" x2="656.0" y2="218.0" stroke="#8c5518" stroke-width="2.5"/>
+<line x1="656.0" y1="224.0" x2="656.0" y2="231.0" stroke="#8c5518" stroke-width="2.5"/>
+<line x1="656.0" y1="237.0" x2="656.0" y2="244.0" stroke="#8c5518" stroke-width="2.5"/>
+<line x1="656.0" y1="250.0" x2="656.0" y2="257.0" stroke="#8c5518" stroke-width="2.5"/>
+<line x1="656.0" y1="263.0" x2="656.0" y2="270.0" stroke="#8c5518" stroke-width="2.5"/>
+<line x1="656.0" y1="276.0" x2="656.0" y2="283.0" stroke="#8c5518" stroke-width="2.5"/>
+<line x1="656.0" y1="289.0" x2="656.0" y2="296.0" stroke="#8c5518" stroke-width="2.5"/>
+<line x1="656.0" y1="302.0" x2="656.0" y2="309.0" stroke="#8c5518" stroke-width="2.5"/>
+<line x1="656.0" y1="315.0" x2="656.0" y2="322.0" stroke="#8c5518" stroke-width="2.5"/>
+<line x1="656.0" y1="328.0" x2="656.0" y2="335.0" stroke="#8c5518" stroke-width="2.5"/>
+<line x1="656.0" y1="341.0" x2="656.0" y2="348.0" stroke="#8c5518" stroke-width="2.5"/>
+<line x1="656.0" y1="354.0" x2="656.0" y2="361.0" stroke="#8c5518" stroke-width="2.5"/>
+<line x1="656.0" y1="367.0" x2="656.0" y2="374.0" stroke="#8c5518" stroke-width="2.5"/>
+<line x1="656.0" y1="380.0" x2="656.0" y2="387.0" stroke="#8c5518" stroke-width="2.5"/>
+<line x1="656.0" y1="393.0" x2="656.0" y2="400.0" stroke="#8c5518" stroke-width="2.5"/>
+<line x1="656.0" y1="406.0" x2="656.0" y2="413.0" stroke="#8c5518" stroke-width="2.5"/>
+<line x1="656.0" y1="419.0" x2="656.0" y2="426.0" stroke="#8c5518" stroke-width="2.5"/>
+<line x1="656.0" y1="432.0" x2="656.0" y2="439.0" stroke="#8c5518" stroke-width="2.5"/>
+<line x1="656.0" y1="445.0" x2="656.0" y2="452.0" stroke="#8c5518" stroke-width="2.5"/>
+<line x1="656.0" y1="458.0" x2="656.0" y2="465.0" stroke="#8c5518" stroke-width="2.5"/>
+<line x1="656.0" y1="471.0" x2="656.0" y2="478.0" stroke="#8c5518" stroke-width="2.5"/>
+<line x1="656.0" y1="484.0" x2="656.0" y2="491.0" stroke="#8c5518" stroke-width="2.5"/>
+<line x1="656.0" y1="497.0" x2="656.0" y2="504.0" stroke="#8c5518" stroke-width="2.5"/>
+<line x1="656.0" y1="510.0" x2="656.0" y2="517.0" stroke="#8c5518" stroke-width="2.5"/>
+<line x1="656.0" y1="523.0" x2="656.0" y2="530.0" stroke="#8c5518" stroke-width="2.5"/>
+<line x1="656.0" y1="536.0" x2="656.0" y2="543.0" stroke="#8c5518" stroke-width="2.5"/>
+<line x1="656.0" y1="549.0" x2="656.0" y2="556.0" stroke="#8c5518" stroke-width="2.5"/>
+<line x1="656.0" y1="562.0" x2="656.0" y2="569.0" stroke="#8c5518" stroke-width="2.5"/>
+<line x1="656.0" y1="575.0" x2="656.0" y2="582.0" stroke="#8c5518" stroke-width="2.5"/>
+<line x1="656.0" y1="588.0" x2="656.0" y2="595.0" stroke="#8c5518" stroke-width="2.5"/>
+<line x1="656.0" y1="601.0" x2="656.0" y2="608.0" stroke="#8c5518" stroke-width="2.5"/>
+<line x1="656.0" y1="614.0" x2="656.0" y2="621.0" stroke="#8c5518" stroke-width="2.5"/>
+<line x1="656.0" y1="627.0" x2="656.0" y2="634.0" stroke="#8c5518" stroke-width="2.5"/>
+<line x1="656.0" y1="640.0" x2="656.0" y2="642.0" stroke="#8c5518" stroke-width="2.5"/>
+<text x="680" y="206" font-family="DejaVu Sans,sans-serif" font-size="20" font-weight="700" fill="#8c5518" text-anchor="start">Recovery boundary</text>
+<rect x="690" y="255" width="274" height="147" rx="3" fill="#fff4df" stroke="none" stroke-width="1.5"/>
+<line x1="690.0" y1="255.0" x2="697.0" y2="255.0" stroke="#8c5518" stroke-width="2.5"/>
+<line x1="703.0" y1="255.0" x2="710.0" y2="255.0" stroke="#8c5518" stroke-width="2.5"/>
+<line x1="716.0" y1="255.0" x2="723.0" y2="255.0" stroke="#8c5518" stroke-width="2.5"/>
+<line x1="729.0" y1="255.0" x2="736.0" y2="255.0" stroke="#8c5518" stroke-width="2.5"/>
+<line x1="742.0" y1="255.0" x2="749.0" y2="255.0" stroke="#8c5518" stroke-width="2.5"/>
+<line x1="755.0" y1="255.0" x2="762.0" y2="255.0" stroke="#8c5518" stroke-width="2.5"/>
+<line x1="768.0" y1="255.0" x2="775.0" y2="255.0" stroke="#8c5518" stroke-width="2.5"/>
+<line x1="781.0" y1="255.0" x2="788.0" y2="255.0" stroke="#8c5518" stroke-width="2.5"/>
+<line x1="794.0" y1="255.0" x2="801.0" y2="255.0" stroke="#8c5518" stroke-width="2.5"/>
+<line x1="807.0" y1="255.0" x2="814.0" y2="255.0" stroke="#8c5518" stroke-width="2.5"/>
+<line x1="820.0" y1="255.0" x2="827.0" y2="255.0" stroke="#8c5518" stroke-width="2.5"/>
+<line x1="833.0" y1="255.0" x2="840.0" y2="255.0" stroke="#8c5518" stroke-width="2.5"/>
+<line x1="846.0" y1="255.0" x2="853.0" y2="255.0" stroke="#8c5518" stroke-width="2.5"/>
+<line x1="859.0" y1="255.0" x2="866.0" y2="255.0" stroke="#8c5518" stroke-width="2.5"/>
+<line x1="872.0" y1="255.0" x2="879.0" y2="255.0" stroke="#8c5518" stroke-width="2.5"/>
+<line x1="885.0" y1="255.0" x2="892.0" y2="255.0" stroke="#8c5518" stroke-width="2.5"/>
+<line x1="898.0" y1="255.0" x2="905.0" y2="255.0" stroke="#8c5518" stroke-width="2.5"/>
+<line x1="911.0" y1="255.0" x2="918.0" y2="255.0" stroke="#8c5518" stroke-width="2.5"/>
+<line x1="924.0" y1="255.0" x2="931.0" y2="255.0" stroke="#8c5518" stroke-width="2.5"/>
+<line x1="937.0" y1="255.0" x2="944.0" y2="255.0" stroke="#8c5518" stroke-width="2.5"/>
+<line x1="950.0" y1="255.0" x2="957.0" y2="255.0" stroke="#8c5518" stroke-width="2.5"/>
+<line x1="963.0" y1="255.0" x2="964.0" y2="255.0" stroke="#8c5518" stroke-width="2.5"/>
+<line x1="964.0" y1="255.0" x2="964.0" y2="262.0" stroke="#8c5518" stroke-width="2.5"/>
+<line x1="964.0" y1="268.0" x2="964.0" y2="275.0" stroke="#8c5518" stroke-width="2.5"/>
+<line x1="964.0" y1="281.0" x2="964.0" y2="288.0" stroke="#8c5518" stroke-width="2.5"/>
+<line x1="964.0" y1="294.0" x2="964.0" y2="301.0" stroke="#8c5518" stroke-width="2.5"/>
+<line x1="964.0" y1="307.0" x2="964.0" y2="314.0" stroke="#8c5518" stroke-width="2.5"/>
+<line x1="964.0" y1="320.0" x2="964.0" y2="327.0" stroke="#8c5518" stroke-width="2.5"/>
+<line x1="964.0" y1="333.0" x2="964.0" y2="340.0" stroke="#8c5518" stroke-width="2.5"/>
+<line x1="964.0" y1="346.0" x2="964.0" y2="353.0" stroke="#8c5518" stroke-width="2.5"/>
+<line x1="964.0" y1="359.0" x2="964.0" y2="366.0" stroke="#8c5518" stroke-width="2.5"/>
+<line x1="964.0" y1="372.0" x2="964.0" y2="379.0" stroke="#8c5518" stroke-width="2.5"/>
+<line x1="964.0" y1="385.0" x2="964.0" y2="392.0" stroke="#8c5518" stroke-width="2.5"/>
+<line x1="964.0" y1="398.0" x2="964.0" y2="402.0" stroke="#8c5518" stroke-width="2.5"/>
+<line x1="964.0" y1="402.0" x2="957.0" y2="402.0" stroke="#8c5518" stroke-width="2.5"/>
+<line x1="951.0" y1="402.0" x2="944.0" y2="402.0" stroke="#8c5518" stroke-width="2.5"/>
+<line x1="938.0" y1="402.0" x2="931.0" y2="402.0" stroke="#8c5518" stroke-width="2.5"/>
+<line x1="925.0" y1="402.0" x2="918.0" y2="402.0" stroke="#8c5518" stroke-width="2.5"/>
+<line x1="912.0" y1="402.0" x2="905.0" y2="402.0" stroke="#8c5518" stroke-width="2.5"/>
+<line x1="899.0" y1="402.0" x2="892.0" y2="402.0" stroke="#8c5518" stroke-width="2.5"/>
+<line x1="886.0" y1="402.0" x2="879.0" y2="402.0" stroke="#8c5518" stroke-width="2.5"/>
+<line x1="873.0" y1="402.0" x2="866.0" y2="402.0" stroke="#8c5518" stroke-width="2.5"/>
+<line x1="860.0" y1="402.0" x2="853.0" y2="402.0" stroke="#8c5518" stroke-width="2.5"/>
+<line x1="847.0" y1="402.0" x2="840.0" y2="402.0" stroke="#8c5518" stroke-width="2.5"/>
+<line x1="834.0" y1="402.0" x2="827.0" y2="402.0" stroke="#8c5518" stroke-width="2.5"/>
+<line x1="821.0" y1="402.0" x2="814.0" y2="402.0" stroke="#8c5518" stroke-width="2.5"/>
+<line x1="808.0" y1="402.0" x2="801.0" y2="402.0" stroke="#8c5518" stroke-width="2.5"/>
+<line x1="795.0" y1="402.0" x2="788.0" y2="402.0" stroke="#8c5518" stroke-width="2.5"/>
+<line x1="782.0" y1="402.0" x2="775.0" y2="402.0" stroke="#8c5518" stroke-width="2.5"/>
+<line x1="769.0" y1="402.0" x2="762.0" y2="402.0" stroke="#8c5518" stroke-width="2.5"/>
+<line x1="756.0" y1="402.0" x2="749.0" y2="402.0" stroke="#8c5518" stroke-width="2.5"/>
+<line x1="743.0" y1="402.0" x2="736.0" y2="402.0" stroke="#8c5518" stroke-width="2.5"/>
+<line x1="730.0" y1="402.0" x2="723.0" y2="402.0" stroke="#8c5518" stroke-width="2.5"/>
+<line x1="717.0" y1="402.0" x2="710.0" y2="402.0" stroke="#8c5518" stroke-width="2.5"/>
+<line x1="704.0" y1="402.0" x2="697.0" y2="402.0" stroke="#8c5518" stroke-width="2.5"/>
+<line x1="691.0" y1="402.0" x2="690.0" y2="402.0" stroke="#8c5518" stroke-width="2.5"/>
+<line x1="690.0" y1="402.0" x2="690.0" y2="395.0" stroke="#8c5518" stroke-width="2.5"/>
+<line x1="690.0" y1="389.0" x2="690.0" y2="382.0" stroke="#8c5518" stroke-width="2.5"/>
+<line x1="690.0" y1="376.0" x2="690.0" y2="369.0" stroke="#8c5518" stroke-width="2.5"/>
+<line x1="690.0" y1="363.0" x2="690.0" y2="356.0" stroke="#8c5518" stroke-width="2.5"/>
+<line x1="690.0" y1="350.0" x2="690.0" y2="343.0" stroke="#8c5518" stroke-width="2.5"/>
+<line x1="690.0" y1="337.0" x2="690.0" y2="330.0" stroke="#8c5518" stroke-width="2.5"/>
+<line x1="690.0" y1="324.0" x2="690.0" y2="317.0" stroke="#8c5518" stroke-width="2.5"/>
+<line x1="690.0" y1="311.0" x2="690.0" y2="304.0" stroke="#8c5518" stroke-width="2.5"/>
+<line x1="690.0" y1="298.0" x2="690.0" y2="291.0" stroke="#8c5518" stroke-width="2.5"/>
+<line x1="690.0" y1="285.0" x2="690.0" y2="278.0" stroke="#8c5518" stroke-width="2.5"/>
+<line x1="690.0" y1="272.0" x2="690.0" y2="265.0" stroke="#8c5518" stroke-width="2.5"/>
+<line x1="690.0" y1="259.0" x2="690.0" y2="255.0" stroke="#8c5518" stroke-width="2.5"/>
+<text x="706" y="286" font-family="DejaVu Sans,sans-serif" font-size="21" font-weight="700" fill="#202a26" text-anchor="start">Backend API</text>
+<text x="706" y="318" font-family="DejaVu Sans,sans-serif" font-size="19" font-weight="400" fill="#53615a" text-anchor="start">Implementation and</text>
+<text x="706" y="343" font-family="DejaVu Sans,sans-serif" font-size="19" font-weight="400" fill="#53615a" text-anchor="start">populated records</text>
+<text x="706" y="368" font-family="DejaVu Sans,sans-serif" font-size="19" font-weight="400" fill="#53615a" text-anchor="start">unobserved.</text>
+<rect x="690" y="458" width="274" height="147" rx="3" fill="#fff4df" stroke="none" stroke-width="1.5"/>
+<line x1="690.0" y1="458.0" x2="697.0" y2="458.0" stroke="#8c5518" stroke-width="2.5"/>
+<line x1="703.0" y1="458.0" x2="710.0" y2="458.0" stroke="#8c5518" stroke-width="2.5"/>
+<line x1="716.0" y1="458.0" x2="723.0" y2="458.0" stroke="#8c5518" stroke-width="2.5"/>
+<line x1="729.0" y1="458.0" x2="736.0" y2="458.0" stroke="#8c5518" stroke-width="2.5"/>
+<line x1="742.0" y1="458.0" x2="749.0" y2="458.0" stroke="#8c5518" stroke-width="2.5"/>
+<line x1="755.0" y1="458.0" x2="762.0" y2="458.0" stroke="#8c5518" stroke-width="2.5"/>
+<line x1="768.0" y1="458.0" x2="775.0" y2="458.0" stroke="#8c5518" stroke-width="2.5"/>
+<line x1="781.0" y1="458.0" x2="788.0" y2="458.0" stroke="#8c5518" stroke-width="2.5"/>
+<line x1="794.0" y1="458.0" x2="801.0" y2="458.0" stroke="#8c5518" stroke-width="2.5"/>
+<line x1="807.0" y1="458.0" x2="814.0" y2="458.0" stroke="#8c5518" stroke-width="2.5"/>
+<line x1="820.0" y1="458.0" x2="827.0" y2="458.0" stroke="#8c5518" stroke-width="2.5"/>
+<line x1="833.0" y1="458.0" x2="840.0" y2="458.0" stroke="#8c5518" stroke-width="2.5"/>
+<line x1="846.0" y1="458.0" x2="853.0" y2="458.0" stroke="#8c5518" stroke-width="2.5"/>
+<line x1="859.0" y1="458.0" x2="866.0" y2="458.0" stroke="#8c5518" stroke-width="2.5"/>
+<line x1="872.0" y1="458.0" x2="879.0" y2="458.0" stroke="#8c5518" stroke-width="2.5"/>
+<line x1="885.0" y1="458.0" x2="892.0" y2="458.0" stroke="#8c5518" stroke-width="2.5"/>
+<line x1="898.0" y1="458.0" x2="905.0" y2="458.0" stroke="#8c5518" stroke-width="2.5"/>
+<line x1="911.0" y1="458.0" x2="918.0" y2="458.0" stroke="#8c5518" stroke-width="2.5"/>
+<line x1="924.0" y1="458.0" x2="931.0" y2="458.0" stroke="#8c5518" stroke-width="2.5"/>
+<line x1="937.0" y1="458.0" x2="944.0" y2="458.0" stroke="#8c5518" stroke-width="2.5"/>
+<line x1="950.0" y1="458.0" x2="957.0" y2="458.0" stroke="#8c5518" stroke-width="2.5"/>
+<line x1="963.0" y1="458.0" x2="964.0" y2="458.0" stroke="#8c5518" stroke-width="2.5"/>
+<line x1="964.0" y1="458.0" x2="964.0" y2="465.0" stroke="#8c5518" stroke-width="2.5"/>
+<line x1="964.0" y1="471.0" x2="964.0" y2="478.0" stroke="#8c5518" stroke-width="2.5"/>
+<line x1="964.0" y1="484.0" x2="964.0" y2="491.0" stroke="#8c5518" stroke-width="2.5"/>
+<line x1="964.0" y1="497.0" x2="964.0" y2="504.0" stroke="#8c5518" stroke-width="2.5"/>
+<line x1="964.0" y1="510.0" x2="964.0" y2="517.0" stroke="#8c5518" stroke-width="2.5"/>
+<line x1="964.0" y1="523.0" x2="964.0" y2="530.0" stroke="#8c5518" stroke-width="2.5"/>
+<line x1="964.0" y1="536.0" x2="964.0" y2="543.0" stroke="#8c5518" stroke-width="2.5"/>
+<line x1="964.0" y1="549.0" x2="964.0" y2="556.0" stroke="#8c5518" stroke-width="2.5"/>
+<line x1="964.0" y1="562.0" x2="964.0" y2="569.0" stroke="#8c5518" stroke-width="2.5"/>
+<line x1="964.0" y1="575.0" x2="964.0" y2="582.0" stroke="#8c5518" stroke-width="2.5"/>
+<line x1="964.0" y1="588.0" x2="964.0" y2="595.0" stroke="#8c5518" stroke-width="2.5"/>
+<line x1="964.0" y1="601.0" x2="964.0" y2="605.0" stroke="#8c5518" stroke-width="2.5"/>
+<line x1="964.0" y1="605.0" x2="957.0" y2="605.0" stroke="#8c5518" stroke-width="2.5"/>
+<line x1="951.0" y1="605.0" x2="944.0" y2="605.0" stroke="#8c5518" stroke-width="2.5"/>
+<line x1="938.0" y1="605.0" x2="931.0" y2="605.0" stroke="#8c5518" stroke-width="2.5"/>
+<line x1="925.0" y1="605.0" x2="918.0" y2="605.0" stroke="#8c5518" stroke-width="2.5"/>
+<line x1="912.0" y1="605.0" x2="905.0" y2="605.0" stroke="#8c5518" stroke-width="2.5"/>
+<line x1="899.0" y1="605.0" x2="892.0" y2="605.0" stroke="#8c5518" stroke-width="2.5"/>
+<line x1="886.0" y1="605.0" x2="879.0" y2="605.0" stroke="#8c5518" stroke-width="2.5"/>
+<line x1="873.0" y1="605.0" x2="866.0" y2="605.0" stroke="#8c5518" stroke-width="2.5"/>
+<line x1="860.0" y1="605.0" x2="853.0" y2="605.0" stroke="#8c5518" stroke-width="2.5"/>
+<line x1="847.0" y1="605.0" x2="840.0" y2="605.0" stroke="#8c5518" stroke-width="2.5"/>
+<line x1="834.0" y1="605.0" x2="827.0" y2="605.0" stroke="#8c5518" stroke-width="2.5"/>
+<line x1="821.0" y1="605.0" x2="814.0" y2="605.0" stroke="#8c5518" stroke-width="2.5"/>
+<line x1="808.0" y1="605.0" x2="801.0" y2="605.0" stroke="#8c5518" stroke-width="2.5"/>
+<line x1="795.0" y1="605.0" x2="788.0" y2="605.0" stroke="#8c5518" stroke-width="2.5"/>
+<line x1="782.0" y1="605.0" x2="775.0" y2="605.0" stroke="#8c5518" stroke-width="2.5"/>
+<line x1="769.0" y1="605.0" x2="762.0" y2="605.0" stroke="#8c5518" stroke-width="2.5"/>
+<line x1="756.0" y1="605.0" x2="749.0" y2="605.0" stroke="#8c5518" stroke-width="2.5"/>
+<line x1="743.0" y1="605.0" x2="736.0" y2="605.0" stroke="#8c5518" stroke-width="2.5"/>
+<line x1="730.0" y1="605.0" x2="723.0" y2="605.0" stroke="#8c5518" stroke-width="2.5"/>
+<line x1="717.0" y1="605.0" x2="710.0" y2="605.0" stroke="#8c5518" stroke-width="2.5"/>
+<line x1="704.0" y1="605.0" x2="697.0" y2="605.0" stroke="#8c5518" stroke-width="2.5"/>
+<line x1="691.0" y1="605.0" x2="690.0" y2="605.0" stroke="#8c5518" stroke-width="2.5"/>
+<line x1="690.0" y1="605.0" x2="690.0" y2="598.0" stroke="#8c5518" stroke-width="2.5"/>
+<line x1="690.0" y1="592.0" x2="690.0" y2="585.0" stroke="#8c5518" stroke-width="2.5"/>
+<line x1="690.0" y1="579.0" x2="690.0" y2="572.0" stroke="#8c5518" stroke-width="2.5"/>
+<line x1="690.0" y1="566.0" x2="690.0" y2="559.0" stroke="#8c5518" stroke-width="2.5"/>
+<line x1="690.0" y1="553.0" x2="690.0" y2="546.0" stroke="#8c5518" stroke-width="2.5"/>
+<line x1="690.0" y1="540.0" x2="690.0" y2="533.0" stroke="#8c5518" stroke-width="2.5"/>
+<line x1="690.0" y1="527.0" x2="690.0" y2="520.0" stroke="#8c5518" stroke-width="2.5"/>
+<line x1="690.0" y1="514.0" x2="690.0" y2="507.0" stroke="#8c5518" stroke-width="2.5"/>
+<line x1="690.0" y1="501.0" x2="690.0" y2="494.0" stroke="#8c5518" stroke-width="2.5"/>
+<line x1="690.0" y1="488.0" x2="690.0" y2="481.0" stroke="#8c5518" stroke-width="2.5"/>
+<line x1="690.0" y1="475.0" x2="690.0" y2="468.0" stroke="#8c5518" stroke-width="2.5"/>
+<line x1="690.0" y1="462.0" x2="690.0" y2="458.0" stroke="#8c5518" stroke-width="2.5"/>
+<text x="706" y="489" font-family="DejaVu Sans,sans-serif" font-size="21" font-weight="700" fill="#202a26" text-anchor="start">Execution outcomes</text>
+<text x="706" y="521" font-family="DejaVu Sans,sans-serif" font-size="19" font-weight="400" fill="#53615a" text-anchor="start">No demonstrated server</text>
+<text x="706" y="546" font-family="DejaVu Sans,sans-serif" font-size="19" font-weight="400" fill="#53615a" text-anchor="start">authorization or wallet</text>
+<text x="706" y="571" font-family="DejaVu Sans,sans-serif" font-size="19" font-weight="400" fill="#53615a" text-anchor="start">transfer.</text>
+<line x1="624.0" y1="541.0" x2="631.0" y2="541.0" stroke="#17634f" stroke-width="2.5"/>
+<line x1="637.0" y1="541.0" x2="644.0" y2="541.0" stroke="#17634f" stroke-width="2.5"/>
+<line x1="650.0" y1="541.0" x2="657.0" y2="541.0" stroke="#17634f" stroke-width="2.5"/>
+<line x1="663.0" y1="541.0" x2="670.0" y2="541.0" stroke="#17634f" stroke-width="2.5"/>
+<line x1="676.0" y1="541.0" x2="683.0" y2="541.0" stroke="#17634f" stroke-width="2.5"/>
+<line x1="689.0" y1="541.0" x2="690.0" y2="541.0" stroke="#17634f" stroke-width="2.5"/>
+<polygon points="690,541 678.0,536.0 678.0,546.0" fill="#17634f"/>
+<rect x="36" y="691" width="928" height="86" rx="3" fill="#fff4df" stroke="#8c5518" stroke-width="1.5"/>
+<text x="54" y="720" font-family="DejaVu Sans,sans-serif" font-size="20" font-weight="700" fill="#8c5518" text-anchor="start">A client action is a request design</text>
+<text x="54" y="746" font-family="DejaVu Sans,sans-serif" font-size="18" font-weight="400" fill="#202a26" text-anchor="start">Route names and buttons show intended operations. Service-side records are needed to establish</text>
+<text x="54" y="769" font-family="DejaVu Sans,sans-serif" font-size="18" font-weight="400" fill="#202a26" text-anchor="start">outcomes.</text>
+<line x1="36.0" y1="792.0" x2="964.0" y2="792.0" stroke="#b9c8be" stroke-width="2.5"/>
+<text x="36" y="818" font-family="DejaVu Sans,sans-serif" font-size="16" font-weight="400" fill="#53615a" text-anchor="start">Sources: E06, E08, E09 | Static reconstruction</text>
+</svg>

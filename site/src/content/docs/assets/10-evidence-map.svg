@@ -1,0 +1,63 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1000" height="1000" viewBox="0 0 1000 1000" role="img" aria-labelledby="title desc">
+<title id="title">Connections need named relationships</title><desc id="desc">Read each row as an evidence pivot, not as an observed execution sequence. Different edge labels support different claims; end-to-end execution was not established.</desc>
+<defs><marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M 0 0 L 10 5 L 0 10 z" fill="#17634f"/></marker></defs>
+<rect width="1000" height="100%" fill="#fff"/>
+<text x="36" y="39" font-family="DejaVu Sans,sans-serif" font-size="16" font-weight="400" fill="#17634f" text-anchor="start">UNK_DeadDrop / Part 10</text>
+<text x="36" y="80" font-family="DejaVu Sans,sans-serif" font-size="29" font-weight="700" fill="#202a26" text-anchor="start">Connections need named relationships</text>
+<text x="36" y="115" font-family="DejaVu Sans,sans-serif" font-size="18" font-weight="400" fill="#53615a" text-anchor="start">Read each row as an evidence pivot, not as an observed execution sequence.</text>
+<line x1="36.0" y1="135.0" x2="964.0" y2="135.0" stroke="#b9c8be" stroke-width="2.5"/>
+<rect x="36" y="173" width="324" height="65" rx="3" fill="#f4f6f4" stroke="#b9c8be" stroke-width="1.5"/>
+<text x="52" y="204" font-family="DejaVu Sans,sans-serif" font-size="21" font-weight="700" fill="#202a26" text-anchor="start">Received messages</text>
+<line x1="369.0" y1="218.0" x2="626.0" y2="218.0" stroke="#17634f" stroke-width="2.5"/>
+<polygon points="626,218 614.0,213.0 614.0,223.0" fill="#17634f"/>
+<text x="498" y="202" font-family="DejaVu Sans,sans-serif" font-size="18" font-weight="400" fill="#17634f" text-anchor="middle">link to</text>
+<rect x="640" y="173" width="324" height="65" rx="3" fill="#eaf3ee" stroke="#17634f" stroke-width="1.5"/>
+<text x="656" y="204" font-family="DejaVu Sans,sans-serif" font-size="21" font-weight="700" fill="#202a26" text-anchor="start">Recruitment lures</text>
+<rect x="36" y="264" width="324" height="65" rx="3" fill="#f4f6f4" stroke="#b9c8be" stroke-width="1.5"/>
+<text x="52" y="295" font-family="DejaVu Sans,sans-serif" font-size="21" font-weight="700" fill="#202a26" text-anchor="start">Lure copy handler</text>
+<line x1="369.0" y1="309.0" x2="626.0" y2="309.0" stroke="#17634f" stroke-width="2.5"/>
+<polygon points="626,309 614.0,304.0 614.0,314.0" fill="#17634f"/>
+<text x="498" y="293" font-family="DejaVu Sans,sans-serif" font-size="18" font-weight="400" fill="#17634f" text-anchor="middle">calls</text>
+<rect x="640" y="264" width="324" height="65" rx="3" fill="#eaf3ee" stroke="#17634f" stroke-width="1.5"/>
+<text x="656" y="295" font-family="DejaVu Sans,sans-serif" font-size="21" font-weight="700" fill="#202a26" text-anchor="start">Command builder</text>
+<rect x="36" y="355" width="324" height="65" rx="3" fill="#f4f6f4" stroke="#b9c8be" stroke-width="1.5"/>
+<text x="52" y="386" font-family="DejaVu Sans,sans-serif" font-size="21" font-weight="700" fill="#202a26" text-anchor="start">Project task / settings</text>
+<line x1="369.0" y1="400.0" x2="626.0" y2="400.0" stroke="#17634f" stroke-width="2.5"/>
+<polygon points="626,400 614.0,395.0 614.0,405.0" fill="#17634f"/>
+<text x="498" y="384" font-family="DejaVu Sans,sans-serif" font-size="18" font-weight="400" fill="#17634f" text-anchor="middle">configure</text>
+<rect x="640" y="355" width="324" height="65" rx="3" fill="#eaf3ee" stroke="#17634f" stroke-width="1.5"/>
+<text x="656" y="386" font-family="DejaVu Sans,sans-serif" font-size="21" font-weight="700" fill="#202a26" text-anchor="start">Extension deployment</text>
+<rect x="36" y="446" width="324" height="65" rx="3" fill="#f4f6f4" stroke="#b9c8be" stroke-width="1.5"/>
+<text x="52" y="477" font-family="DejaVu Sans,sans-serif" font-size="21" font-weight="700" fill="#202a26" text-anchor="start">Held collector</text>
+<line x1="369.0" y1="491.0" x2="626.0" y2="491.0" stroke="#17634f" stroke-width="2.5"/>
+<polygon points="626,491 614.0,486.0 614.0,496.0" fill="#17634f"/>
+<text x="498" y="475" font-family="DejaVu Sans,sans-serif" font-size="18" font-weight="400" fill="#17634f" text-anchor="middle">references</text>
+<rect x="640" y="446" width="324" height="65" rx="3" fill="#eaf3ee" stroke="#17634f" stroke-width="1.5"/>
+<text x="656" y="477" font-family="DejaVu Sans,sans-serif" font-size="21" font-weight="700" fill="#202a26" text-anchor="start">GitLab configuration</text>
+<rect x="36" y="537" width="324" height="65" rx="3" fill="#f4f6f4" stroke="#b9c8be" stroke-width="1.5"/>
+<text x="52" y="568" font-family="DejaVu Sans,sans-serif" font-size="21" font-weight="700" fill="#202a26" text-anchor="start">Sender configuration</text>
+<line x1="369.0" y1="582.0" x2="626.0" y2="582.0" stroke="#17634f" stroke-width="2.5"/>
+<polygon points="626,582 614.0,577.0 614.0,587.0" fill="#17634f"/>
+<text x="498" y="566" font-family="DejaVu Sans,sans-serif" font-size="18" font-weight="400" fill="#17634f" text-anchor="middle">names</text>
+<rect x="640" y="537" width="324" height="65" rx="3" fill="#eaf3ee" stroke="#17634f" stroke-width="1.5"/>
+<text x="656" y="568" font-family="DejaVu Sans,sans-serif" font-size="21" font-weight="700" fill="#202a26" text-anchor="start">Two targeting pools</text>
+<rect x="36" y="628" width="324" height="65" rx="3" fill="#f4f6f4" stroke="#b9c8be" stroke-width="1.5"/>
+<text x="52" y="659" font-family="DejaVu Sans,sans-serif" font-size="21" font-weight="700" fill="#202a26" text-anchor="start">Recovered frontend</text>
+<line x1="369.0" y1="673.0" x2="626.0" y2="673.0" stroke="#17634f" stroke-width="2.5"/>
+<polygon points="626,673 614.0,668.0 614.0,678.0" fill="#17634f"/>
+<text x="498" y="657" font-family="DejaVu Sans,sans-serif" font-size="18" font-weight="400" fill="#17634f" text-anchor="middle">defines</text>
+<rect x="640" y="628" width="324" height="65" rx="3" fill="#eaf3ee" stroke="#17634f" stroke-width="1.5"/>
+<text x="656" y="659" font-family="DejaVu Sans,sans-serif" font-size="21" font-weight="700" fill="#202a26" text-anchor="start">Mail / wallet actions</text>
+<rect x="36" y="719" width="324" height="65" rx="3" fill="#f4f6f4" stroke="#b9c8be" stroke-width="1.5"/>
+<text x="52" y="750" font-family="DejaVu Sans,sans-serif" font-size="21" font-weight="700" fill="#202a26" text-anchor="start">Archive history</text>
+<line x1="369.0" y1="764.0" x2="626.0" y2="764.0" stroke="#17634f" stroke-width="2.5"/>
+<polygon points="626,764 614.0,759.0 614.0,769.0" fill="#17634f"/>
+<text x="498" y="748" font-family="DejaVu Sans,sans-serif" font-size="18" font-weight="400" fill="#17634f" text-anchor="middle">preserves</text>
+<rect x="640" y="719" width="324" height="65" rx="3" fill="#eaf3ee" stroke="#17634f" stroke-width="1.5"/>
+<text x="656" y="750" font-family="DejaVu Sans,sans-serif" font-size="21" font-weight="700" fill="#202a26" text-anchor="start">ECHOES revisions</text>
+<rect x="36" y="841" width="928" height="86" rx="3" fill="#fff4df" stroke="#8c5518" stroke-width="1.5"/>
+<text x="54" y="870" font-family="DejaVu Sans,sans-serif" font-size="20" font-weight="700" fill="#8c5518" text-anchor="start">What these edges do not establish</text>
+<text x="54" y="896" font-family="DejaVu Sans,sans-serif" font-size="18" font-weight="400" fill="#202a26" text-anchor="start">Infection, one integrated backend, successful transfers and operator identity require additional evidence.</text>
+<line x1="36.0" y1="952.0" x2="964.0" y2="952.0" stroke="#b9c8be" stroke-width="2.5"/>
+<text x="36" y="978" font-family="DejaVu Sans,sans-serif" font-size="16" font-weight="400" fill="#53615a" text-anchor="start">Sources: E01, E02, E03, E07, E08, E06, E11 | Static reconstruction</text>
+</svg>

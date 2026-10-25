@@ -1,0 +1,32 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1000" height="810" viewBox="0 0 1000 810" role="img" aria-labelledby="title desc">
+<title id="title">Two configuration files, separate histories</title><desc id="desc">Dates describe retained configuration changes, not observed client connections. The sequence does not establish fallback selection or client refresh behavior.</desc>
+<defs><marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M 0 0 L 10 5 L 0 10 z" fill="#17634f"/></marker></defs>
+<rect width="1000" height="100%" fill="#fff"/>
+<text x="36" y="39" font-family="DejaVu Sans,sans-serif" font-size="16" font-weight="400" fill="#17634f" text-anchor="start">UNK_DeadDrop / Part 06</text>
+<text x="36" y="80" font-family="DejaVu Sans,sans-serif" font-size="29" font-weight="700" fill="#202a26" text-anchor="start">Two configuration files, separate histories</text>
+<text x="36" y="115" font-family="DejaVu Sans,sans-serif" font-size="18" font-weight="400" fill="#53615a" text-anchor="start">Dates describe retained configuration changes, not observed client connections.</text>
+<line x1="36.0" y1="135.0" x2="964.0" y2="135.0" stroke="#b9c8be" stroke-width="2.5"/>
+<text x="36" y="185" font-family="DejaVu Sans,sans-serif" font-size="19" font-weight="700" fill="#17634f" text-anchor="start">PRIMARY FILE</text>
+<line x1="60.0" y1="226.0" x2="940.0" y2="226.0" stroke="#17634f" stroke-width="2.5"/>
+<circle cx="95" cy="226" r="9" fill="#eaf3ee" stroke="#17634f" stroke-width="2"/>
+<circle cx="850" cy="226" r="9" fill="#eaf3ee" stroke="#17634f" stroke-width="2"/>
+<rect x="36" y="266" width="430" height="154" rx="3" fill="#eaf3ee" stroke="#17634f" stroke-width="1.5"/>
+<text x="52" y="297" font-family="DejaVu Sans,sans-serif" font-size="21" font-weight="700" fill="#202a26" text-anchor="start">26 May 2026</text>
+<text x="52" y="329" font-family="DejaVu Sans,sans-serif" font-size="19" font-weight="400" fill="#53615a" text-anchor="start">Final listed set:</text>
+<text x="52" y="354" font-family="DejaVu Sans,sans-serif" font-size="19" font-weight="400" fill="#53615a" text-anchor="start">api.domatisc[.]ink</text>
+<text x="52" y="379" font-family="DejaVu Sans,sans-serif" font-size="19" font-weight="400" fill="#53615a" text-anchor="start">api.coslyintra[.]online</text>
+<rect x="534" y="266" width="430" height="154" rx="3" fill="#eaf3ee" stroke="#17634f" stroke-width="1.5"/>
+<text x="550" y="297" font-family="DejaVu Sans,sans-serif" font-size="21" font-weight="700" fill="#202a26" text-anchor="start">13 July 2026</text>
+<text x="550" y="329" font-family="DejaVu Sans,sans-serif" font-size="19" font-weight="400" fill="#53615a" text-anchor="start">Changed set:</text>
+<text x="550" y="354" font-family="DejaVu Sans,sans-serif" font-size="19" font-weight="400" fill="#53615a" text-anchor="start">api.cklomino[.]ink</text>
+<text x="550" y="379" font-family="DejaVu Sans,sans-serif" font-size="19" font-weight="400" fill="#53615a" text-anchor="start">api.dsfmot[.]xyz</text>
+<text x="36" y="476" font-family="DejaVu Sans,sans-serif" font-size="19" font-weight="700" fill="#17634f" text-anchor="start">FALLBACK FILE</text>
+<line x1="60.0" y1="511.0" x2="940.0" y2="511.0" stroke="#17634f" stroke-width="2.5"/>
+<circle cx="410" cy="511" r="9" fill="#eaf3ee" stroke="#17634f" stroke-width="2"/>
+<rect x="200" y="546" width="600" height="110" rx="3" fill="#eaf3ee" stroke="#17634f" stroke-width="1.5"/>
+<text x="216" y="577" font-family="DejaVu Sans,sans-serif" font-size="21" font-weight="700" fill="#202a26" text-anchor="start">1 June 2026</text>
+<text x="216" y="609" font-family="DejaVu Sans,sans-serif" font-size="19" font-weight="400" fill="#53615a" text-anchor="start">api.onoplainai[.]ink / api.migadyn[.]info</text>
+<text x="36" y="708" font-family="DejaVu Sans,sans-serif" font-size="19" font-weight="400" fill="#53615a" text-anchor="start">Primary and fallback are file roles. No switch between them is drawn.</text>
+<line x1="36.0" y1="762.0" x2="964.0" y2="762.0" stroke="#b9c8be" stroke-width="2.5"/>
+<text x="36" y="788" font-family="DejaVu Sans,sans-serif" font-size="16" font-weight="400" fill="#53615a" text-anchor="start">Sources: E07, E20, E21 | Static reconstruction</text>
+</svg>

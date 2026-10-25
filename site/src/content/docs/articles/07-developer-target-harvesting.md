@@ -30,6 +30,12 @@ The sender configuration refers to both pools. Different intervals, cooldowns an
 
 This connects collection to message preparation, but a stored row does not show that a message was sent to that address. That distinction matters because the databases contain far more rows than the messages received in this case.
 
+![Two pools, two different counting problems](../assets/07-targeting.png)
+
+*Figure 1. Two pools, two different counting problems. Rows count stored address strings, not people, delivered mail or infections.*
+
+[Open full-size vector diagram](/UNK_DeadDrop/diagrams/07-targeting.svg). Sources: [E08](../../evidence/E08.pdf), [E09](../../evidence/E09.pdf).
+
 ### The repository count needed a union
 
 My first repository total was 20,880, but that described only the safe pool. The second database added repository values that partly overlapped with the first, so counting the full corpus required a union. Read-only aggregate queries recorded on 23 October found:

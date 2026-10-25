@@ -27,6 +27,12 @@ The Windows collection path splits across a Node agent, a coordinator and a Pyth
 
 The Python source handles DPAPI-related key recovery and browser elevation services associated with App-Bound Encryption. Its comments and staging logic describe caller-path requirements, helping explain why the pipeline attempts elevation and prepares a particular execution environment. But a copied `Login Data` file is not a set of plaintext passwords, and an elevated process does not prove browser decryption succeeded. The investigation found no endpoint telemetry showing what the attempts yielded. Wallet selectors extend the scope beyond browser stores; Part 8 examines corresponding mnemonic and ColdKey fields in the administration frontend.
 
+![A selected file is only the first step](assets/04-collection.png)
+
+*Figure 1. A selected file is only the first step. Collection, decryption and completed upload are different claims.*
+
+[Open full-size vector diagram](assets/04-collection.svg). Sources: [E04](../preprint/evidence/E04.pdf), [E17](../preprint/evidence/E17.pdf), [E18](../preprint/evidence/E18.pdf).
+
 ### Phase three searches filenames
 
 The large JavaScript collector accepts three upload variants, `main`, `pass` and `phase3`, and it is the third of these that walks the home directory looking for candidate files whose names and extensions match its selection logic. The recorded filename expression includes:

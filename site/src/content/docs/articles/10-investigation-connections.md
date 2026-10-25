@@ -44,6 +44,12 @@ The Windows source became inspectable through the recorded authenticated decrypt
 
 This is also where published research constrains the contribution claim. The extension and Windows architecture corroborate the public baseline described in the earlier articles. Recovering readable code supports a detailed explanation; it does not make an already published architecture a new discovery.
 
+![Connections need named relationships](../assets/10-evidence-map.png)
+
+*Figure 1. Connections need named relationships. Different edge labels support different claims; end-to-end execution was not established.*
+
+[Open full-size vector diagram](/UNK_DeadDrop/diagrams/10-evidence-map.svg). Sources: [E01](../../evidence/E01.pdf), [E02](../../evidence/E02.pdf), [E03](../../evidence/E03.pdf), [E07](../../evidence/E07.pdf), [E08](../../evidence/E08.pdf), [E06](../../evidence/E06.pdf), [E11](../../evidence/E11.pdf).
+
 ## A relationship map with named edges
 
 The following map summarizes analytical relationships rather than a proven end-to-end execution trace. Detailed supporting records are linked below.

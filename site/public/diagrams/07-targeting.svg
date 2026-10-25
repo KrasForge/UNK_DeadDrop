@@ -1,0 +1,40 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1000" height="950" viewBox="0 0 1000 950" role="img" aria-labelledby="title desc">
+<title id="title">Two pools, two different counting problems</title><desc id="desc">Recorded aggregate queries across the safe and antispam SQLite pools. Rows count stored address strings, not people, delivered mail or infections.</desc>
+<defs><marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M 0 0 L 10 5 L 0 10 z" fill="#17634f"/></marker></defs>
+<rect width="1000" height="100%" fill="#fff"/>
+<text x="36" y="39" font-family="DejaVu Sans,sans-serif" font-size="16" font-weight="400" fill="#17634f" text-anchor="start">UNK_DeadDrop / Part 07</text>
+<text x="36" y="80" font-family="DejaVu Sans,sans-serif" font-size="29" font-weight="700" fill="#202a26" text-anchor="start">Two pools, two different counting problems</text>
+<text x="36" y="115" font-family="DejaVu Sans,sans-serif" font-size="18" font-weight="400" fill="#53615a" text-anchor="start">Recorded aggregate queries across the safe and antispam SQLite pools.</text>
+<line x1="36.0" y1="135.0" x2="964.0" y2="135.0" stroke="#b9c8be" stroke-width="2.5"/>
+<text x="36" y="183" font-family="DejaVu Sans,sans-serif" font-size="23" font-weight="700" fill="#202a26" text-anchor="start">Stored address strings: exact overlap = 0</text>
+<rect x="36" y="210" width="400" height="124" rx="3" fill="#eaf3ee" stroke="#17634f" stroke-width="1.5"/>
+<text x="52" y="241" font-family="DejaVu Sans,sans-serif" font-size="21" font-weight="700" fill="#202a26" text-anchor="start">Safe pool</text>
+<text x="52" y="273" font-family="DejaVu Sans,sans-serif" font-size="19" font-weight="400" fill="#53615a" text-anchor="start">79,698 rows</text>
+<text x="500" y="285" font-family="DejaVu Sans,sans-serif" font-size="35" font-weight="400" fill="#17634f" text-anchor="middle">+</text>
+<rect x="564" y="210" width="400" height="124" rx="3" fill="#eaf3ee" stroke="#17634f" stroke-width="1.5"/>
+<text x="580" y="241" font-family="DejaVu Sans,sans-serif" font-size="21" font-weight="700" fill="#202a26" text-anchor="start">Antispam pool</text>
+<text x="580" y="273" font-family="DejaVu Sans,sans-serif" font-size="19" font-weight="400" fill="#53615a" text-anchor="start">62,667 rows</text>
+<line x1="236.0" y1="334.0" x2="236.0" y2="368.0" stroke="#17634f" stroke-width="2.5"/>
+<line x1="236.0" y1="368.0" x2="500.0" y2="368.0" stroke="#17634f" stroke-width="2.5"/>
+<line x1="500.0" y1="368.0" x2="500.0" y2="390.0" stroke="#17634f" stroke-width="2.5"/>
+<polygon points="500,390 505.0,378.0 495.0,378.0" fill="#17634f"/>
+<line x1="764.0" y1="334.0" x2="764.0" y2="368.0" stroke="#17634f" stroke-width="2.5"/>
+<line x1="764.0" y1="368.0" x2="500.0" y2="368.0" stroke="#17634f" stroke-width="2.5"/>
+<rect x="226" y="390" width="548" height="94" rx="3" fill="#eaf3ee" stroke="#17634f" stroke-width="1.5"/>
+<text x="242" y="421" font-family="DejaVu Sans,sans-serif" font-size="21" font-weight="700" fill="#202a26" text-anchor="start">UNION: 142,365 address strings</text>
+<text x="242" y="453" font-family="DejaVu Sans,sans-serif" font-size="19" font-weight="400" fill="#53615a" text-anchor="start">No additional person-level identity resolution.</text>
+<text x="36" y="540" font-family="DejaVu Sans,sans-serif" font-size="23" font-weight="700" fill="#202a26" text-anchor="start">Repository values: sets overlap</text>
+<text x="56" y="603" font-family="DejaVu Sans,sans-serif" font-size="20" font-weight="400" fill="#202a26" text-anchor="start">Safe-pool count: 20,880</text>
+<text x="56" y="637" font-family="DejaVu Sans,sans-serif" font-size="22" font-weight="700" fill="#17634f" text-anchor="start">Combined UNION: 27,698</text>
+<text x="56" y="678" font-family="DejaVu Sans,sans-serif" font-size="19" font-weight="400" fill="#202a26" text-anchor="start">Adding per-pool counts overcounts.</text>
+<circle cx="714" cy="631" r="76" fill="none" stroke="#17634f" stroke-width="2"/>
+<circle cx="818" cy="631" r="76" fill="none" stroke="#17634f" stroke-width="2"/>
+<text x="683" y="638" font-family="DejaVu Sans,sans-serif" font-size="18" font-weight="400" fill="#202a26" text-anchor="middle">safe</text>
+<text x="842" y="638" font-family="DejaVu Sans,sans-serif" font-size="18" font-weight="400" fill="#202a26" text-anchor="middle">antispam</text>
+<text x="767" y="738" font-family="DejaVu Sans,sans-serif" font-size="16" font-weight="400" fill="#53615a" text-anchor="middle">Schematic overlap; areas are not scaled.</text>
+<rect x="36" y="785" width="928" height="86" rx="3" fill="#fff4df" stroke="#8c5518" stroke-width="1.5"/>
+<text x="54" y="814" font-family="DejaVu Sans,sans-serif" font-size="20" font-weight="700" fill="#8c5518" text-anchor="start">Impact boundary</text>
+<text x="54" y="840" font-family="DejaVu Sans,sans-serif" font-size="18" font-weight="400" fill="#202a26" text-anchor="start">Stored target data establishes neither delivered-message volume nor successful compromise.</text>
+<line x1="36.0" y1="902.0" x2="964.0" y2="902.0" stroke="#b9c8be" stroke-width="2.5"/>
+<text x="36" y="928" font-family="DejaVu Sans,sans-serif" font-size="16" font-weight="400" fill="#53615a" text-anchor="start">Sources: E08, E09 | Static reconstruction</text>
+</svg>

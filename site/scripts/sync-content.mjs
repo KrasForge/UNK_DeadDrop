@@ -36,6 +36,7 @@ const yamlValue = (frontmatter, key) => {
 };
 
 const rewriteLinks = (body) => body
+  .replace(/\]\(assets\/([^\s)]+\.svg)\)/g, `](${basePrefix}/diagrams/$1)`)
   .replaceAll('](assets/', '](../assets/')
   .replaceAll('](../preprint/evidence/', '](../../evidence/')
   .replaceAll('](../preprint/UNK_DeadDrop-Preprint.pdf)', '](../../downloads/UNK_DeadDrop-Preprint.pdf)')
@@ -69,7 +70,14 @@ await rm(resolve(publicRoot, 'companion'), { recursive: true, force: true });
 await rm(resolve(publicRoot, 'downloads'), { recursive: true, force: true });
 
 await rm(resolve(docsRoot, 'assets'), { recursive: true, force: true });
-await cp(resolve(seriesRoot, 'assets'), resolve(docsRoot, 'assets'), { recursive: true });
+await cp(resolve(seriesRoot, 'assets'), resolve(docsRoot, 'assets'), {
+  recursive: true,
+  filter: (source) => !source.endsWith('.md') && !source.endsWith('.json')
+});
+await mkdir(resolve(publicRoot, 'diagrams'), { recursive: true });
+for (const name of await readdir(resolve(seriesRoot, 'assets'))) {
+  if (name.endsWith('.svg')) await cp(resolve(seriesRoot, 'assets', name), resolve(publicRoot, 'diagrams', name));
+}
 await cp(resolve(workspaceRoot, 'deliverables/preprint/evidence'), resolve(publicRoot, 'evidence'), {
   recursive: true,
   filter: (source) => !source.endsWith('build.py')

@@ -52,6 +52,12 @@ The installer checks for the capture files and raises an error if they are missi
 
 One discrepancy also needed resolution. An earlier upstream dependency comparison suggested that the Linux build lacked capture; later symbol examination found positive capture-related evidence. Missing expected dependencies are not enough to rule out an implementation present in the binary.
 
+![Why these symbols suggest repeated capture](assets/05-screen-capture.png)
+
+*Figure 1. Why these symbols suggest repeated capture. No victim session, achieved frame rate or bandwidth was measured.*
+
+[Open full-size vector diagram](assets/05-screen-capture.svg). Sources: [E05](../preprint/evidence/E05.pdf), [E17](../preprint/evidence/E17.pdf).
+
 ### Reading the evidence at the right level
 
 | Artifact | What it supports | What remains untested |

@@ -33,9 +33,11 @@ The repository task uses `runOn: folderOpen` and points into an ordinary-looking
 
 After installation, the extension is no longer confined to the project. It declares startup activation, while surrounding scripts clean up the task and staging files. Deleting the clone therefore does not establish that the extension or anything it launched has been removed.
 
-![The repository, extension and Windows interpreter stages](assets/02-vsix.png)
+![How the editor becomes an interpreter](assets/02-vsix.png)
 
-*Figure 1. The Windows extension path reconstructed from task, package and decrypted source. Elevation is an attempted step, not a verified outcome on a victim endpoint.*
+*Figure 1. How the editor becomes an interpreter. Workspace trust, permissions and elevation outcomes were not reproduced.*
+
+[Open full-size vector diagram](assets/02-vsix.svg). Sources: [E03](../preprint/evidence/E03.pdf), [E04](../preprint/evidence/E04.pdf), [E19](../preprint/evidence/E19.pdf).
 
 ### Inside Google Update Support
 

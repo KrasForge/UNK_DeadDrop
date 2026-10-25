@@ -1,0 +1,66 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1000" height="850" viewBox="0 0 1000 850" role="img" aria-labelledby="title desc">
+<title id="title">Why these symbols suggest repeated capture</title><desc id="desc">Illustrative blocks explain the design; they are not recovered display frames. No victim session, achieved frame rate or bandwidth was measured.</desc>
+<defs><marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M 0 0 L 10 5 L 0 10 z" fill="#17634f"/></marker></defs>
+<rect width="1000" height="100%" fill="#fff"/>
+<text x="36" y="39" font-family="DejaVu Sans,sans-serif" font-size="16" font-weight="400" fill="#17634f" text-anchor="start">UNK_DeadDrop / Part 05</text>
+<text x="36" y="80" font-family="DejaVu Sans,sans-serif" font-size="29" font-weight="700" fill="#202a26" text-anchor="start">Why these symbols suggest repeated capture</text>
+<text x="36" y="115" font-family="DejaVu Sans,sans-serif" font-size="18" font-weight="400" fill="#53615a" text-anchor="start">Illustrative blocks explain the design; they are not recovered display frames.</text>
+<line x1="36.0" y1="135.0" x2="964.0" y2="135.0" stroke="#b9c8be" stroke-width="2.5"/>
+<text x="36" y="185" font-family="DejaVu Sans,sans-serif" font-size="22" font-weight="700" fill="#202a26" text-anchor="start">Previous frame</text>
+<rect x="36" y="209" width="60" height="52" rx="3" fill="#eaf3ee" stroke="#b9c8be" stroke-width="1.5"/>
+<rect x="104" y="209" width="60" height="52" rx="3" fill="#eaf3ee" stroke="#b9c8be" stroke-width="1.5"/>
+<rect x="172" y="209" width="60" height="52" rx="3" fill="#eaf3ee" stroke="#b9c8be" stroke-width="1.5"/>
+<rect x="240" y="209" width="60" height="52" rx="3" fill="#eaf3ee" stroke="#b9c8be" stroke-width="1.5"/>
+<rect x="36" y="269" width="60" height="52" rx="3" fill="#eaf3ee" stroke="#b9c8be" stroke-width="1.5"/>
+<rect x="104" y="269" width="60" height="52" rx="3" fill="#eaf3ee" stroke="#b9c8be" stroke-width="1.5"/>
+<rect x="172" y="269" width="60" height="52" rx="3" fill="#eaf3ee" stroke="#b9c8be" stroke-width="1.5"/>
+<rect x="240" y="269" width="60" height="52" rx="3" fill="#eaf3ee" stroke="#b9c8be" stroke-width="1.5"/>
+<rect x="36" y="329" width="60" height="52" rx="3" fill="#eaf3ee" stroke="#b9c8be" stroke-width="1.5"/>
+<rect x="104" y="329" width="60" height="52" rx="3" fill="#eaf3ee" stroke="#b9c8be" stroke-width="1.5"/>
+<rect x="172" y="329" width="60" height="52" rx="3" fill="#eaf3ee" stroke="#b9c8be" stroke-width="1.5"/>
+<rect x="240" y="329" width="60" height="52" rx="3" fill="#eaf3ee" stroke="#b9c8be" stroke-width="1.5"/>
+<text x="362" y="185" font-family="DejaVu Sans,sans-serif" font-size="22" font-weight="700" fill="#202a26" text-anchor="start">Current frame</text>
+<rect x="362" y="209" width="60" height="52" rx="3" fill="#eaf3ee" stroke="#b9c8be" stroke-width="1.5"/>
+<rect x="430" y="209" width="60" height="52" rx="3" fill="#eaf3ee" stroke="#b9c8be" stroke-width="1.5"/>
+<rect x="498" y="209" width="60" height="52" rx="3" fill="#fff4df" stroke="#8c5518" stroke-width="1.5"/>
+<rect x="566" y="209" width="60" height="52" rx="3" fill="#eaf3ee" stroke="#b9c8be" stroke-width="1.5"/>
+<rect x="362" y="269" width="60" height="52" rx="3" fill="#eaf3ee" stroke="#b9c8be" stroke-width="1.5"/>
+<rect x="430" y="269" width="60" height="52" rx="3" fill="#eaf3ee" stroke="#b9c8be" stroke-width="1.5"/>
+<rect x="498" y="269" width="60" height="52" rx="3" fill="#fff4df" stroke="#8c5518" stroke-width="1.5"/>
+<rect x="566" y="269" width="60" height="52" rx="3" fill="#eaf3ee" stroke="#b9c8be" stroke-width="1.5"/>
+<rect x="362" y="329" width="60" height="52" rx="3" fill="#eaf3ee" stroke="#b9c8be" stroke-width="1.5"/>
+<rect x="430" y="329" width="60" height="52" rx="3" fill="#eaf3ee" stroke="#b9c8be" stroke-width="1.5"/>
+<rect x="498" y="329" width="60" height="52" rx="3" fill="#eaf3ee" stroke="#b9c8be" stroke-width="1.5"/>
+<rect x="566" y="329" width="60" height="52" rx="3" fill="#fff4df" stroke="#8c5518" stroke-width="1.5"/>
+<line x1="308.0" y1="293.0" x2="350.0" y2="293.0" stroke="#17634f" stroke-width="2.5"/>
+<polygon points="350,293 338.0,288.0 338.0,298.0" fill="#17634f"/>
+<rect x="688" y="209" width="276" height="172" rx="3" fill="#eaf3ee" stroke="#17634f" stroke-width="1.5"/>
+<text x="704" y="240" font-family="DejaVu Sans,sans-serif" font-size="21" font-weight="700" fill="#202a26" text-anchor="start">Compare blocks</text>
+<text x="704" y="272" font-family="DejaVu Sans,sans-serif" font-size="19" font-weight="400" fill="#53615a" text-anchor="start">copyPrev</text>
+<text x="704" y="297" font-family="DejaVu Sans,sans-serif" font-size="19" font-weight="400" fill="#53615a" text-anchor="start">blockChanged</text>
+<text x="704" y="322" font-family="DejaVu Sans,sans-serif" font-size="19" font-weight="400" fill="#53615a" text-anchor="start">encodeBlocks</text>
+<line x1="634.0" y1="293.0" x2="688.0" y2="293.0" stroke="#17634f" stroke-width="2.5"/>
+<polygon points="688,293 676.0,288.0 676.0,298.0" fill="#17634f"/>
+<text x="36" y="425" font-family="DejaVu Sans,sans-serif" font-size="19" font-weight="400" fill="#53615a" text-anchor="start">Amber cells illustrate changed regions. Grid size is schematic.</text>
+<rect x="36" y="472" width="280" height="132" rx="3" fill="#eaf3ee" stroke="#17634f" stroke-width="1.5"/>
+<text x="52" y="503" font-family="DejaVu Sans,sans-serif" font-size="21" font-weight="700" fill="#202a26" text-anchor="start">Capture repeatedly</text>
+<text x="52" y="535" font-family="DejaVu Sans,sans-serif" font-size="19" font-weight="400" fill="#53615a" text-anchor="start">CaptureDisplay</text>
+<text x="52" y="560" font-family="DejaVu Sans,sans-serif" font-size="19" font-weight="400" fill="#53615a" text-anchor="start">CaptureAndSend</text>
+<text x="52" y="585" font-family="DejaVu Sans,sans-serif" font-size="19" font-weight="400" fill="#53615a" text-anchor="start">Loop / frameFPS</text>
+<rect x="360" y="472" width="280" height="132" rx="3" fill="#eaf3ee" stroke="#17634f" stroke-width="1.5"/>
+<text x="376" y="503" font-family="DejaVu Sans,sans-serif" font-size="21" font-weight="700" fill="#202a26" text-anchor="start">Encode</text>
+<text x="376" y="535" font-family="DejaVu Sans,sans-serif" font-size="19" font-weight="400" fill="#53615a" text-anchor="start">encodeJPEG</text>
+<text x="376" y="560" font-family="DejaVu Sans,sans-serif" font-size="19" font-weight="400" fill="#53615a" text-anchor="start">Changed-block encoding</text>
+<rect x="684" y="472" width="280" height="132" rx="3" fill="#f4f6f4" stroke="#b9c8be" stroke-width="1.5"/>
+<text x="700" y="503" font-family="DejaVu Sans,sans-serif" font-size="21" font-weight="700" fill="#202a26" text-anchor="start">Windows bundle</text>
+<text x="700" y="535" font-family="DejaVu Sans,sans-serif" font-size="19" font-weight="400" fill="#53615a" text-anchor="start">node-screenshots</text>
+<text x="700" y="560" font-family="DejaVu Sans,sans-serif" font-size="19" font-weight="400" fill="#53615a" text-anchor="start">jpeg-js / MessagePack / ws</text>
+<line x1="316.0" y1="538.0" x2="360.0" y2="538.0" stroke="#17634f" stroke-width="2.5"/>
+<polygon points="360,538 348.0,533.0 348.0,543.0" fill="#17634f"/>
+<text x="684" y="641" font-family="DejaVu Sans,sans-serif" font-size="17" font-weight="400" fill="#53615a" text-anchor="start">Independent component evidence</text>
+<rect x="36" y="688" width="928" height="86" rx="3" fill="#fff4df" stroke="#8c5518" stroke-width="1.5"/>
+<text x="54" y="717" font-family="DejaVu Sans,sans-serif" font-size="20" font-weight="700" fill="#8c5518" text-anchor="start">What remains unmeasured</text>
+<text x="54" y="743" font-family="DejaVu Sans,sans-serif" font-size="18" font-weight="400" fill="#202a26" text-anchor="start">Display access, permissions, successful capture and transport require execution evidence.</text>
+<line x1="36.0" y1="802.0" x2="964.0" y2="802.0" stroke="#b9c8be" stroke-width="2.5"/>
+<text x="36" y="828" font-family="DejaVu Sans,sans-serif" font-size="16" font-weight="400" fill="#53615a" text-anchor="start">Sources: E05, E17 | Static reconstruction</text>
+</svg>

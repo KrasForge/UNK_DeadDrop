@@ -29,9 +29,11 @@ The repository history records archive changes on 5 March, on 17 March and twice
 
 The repeated staging structure establishes a useful lineage, but it also shows why describing the later versions as "the same archive with a different C2" is not quite accurate, since the third and fourth versions include an additional persistence component. The history also contains embedded access tokens, but those values are not needed to demonstrate the sequence, so I have omitted them here, and they were not used to retrieve the final stage.
 
-![The four retained ECHOES revisions](../assets/07-echoes.png)
+![Four retained ECHOES archive revisions](../assets/07-echoes.png)
 
-*Figure 1. Recorded March archive revisions. The final payload remains outside the recovered corpus.*
+*Figure 1. Four retained ECHOES archive revisions. Final PowerShell payloads were unavailable; the retained history establishes staging lineage.*
+
+[Open full-size vector diagram](/UNK_DeadDrop/diagrams/07-echoes.svg). Sources: [E11](../../evidence/E11.pdf), [E14](../../evidence/E14.pdf), [E16](../../evidence/E16.pdf).
 
 ### Separating the artwork from the staging code
 

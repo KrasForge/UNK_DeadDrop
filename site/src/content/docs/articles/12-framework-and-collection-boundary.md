@@ -52,6 +52,12 @@ That limits the strength of a negative comparison. A retained binary can be insp
 
 The article therefore treats upstream differences as recorded findings within the examined scope. It does not describe them as an exhaustive diff across every version, fork or plugin. The missing baseline is also why the strongest result is the sample's positive collection evidence rather than a claim that nobody else using the framework could possess it.
 
+![Framework lineage and collection evidence](../assets/12-framework-boundary.png)
+
+*Figure 1. Framework lineage and collection evidence. The upstream files were not preserved as a pinned baseline; authorship remains unresolved.*
+
+[Open full-size vector diagram](/UNK_DeadDrop/diagrams/12-framework-boundary.svg). Sources: [E05](../../evidence/E05.pdf), [E17](../../evidence/E17.pdf), [E18](../../evidence/E18.pdf).
+
 ### Features inherited from the framework
 
 The historical comparison identifies the `overlord-client` module name as upstream. The embedded path is useful for recognizing software ancestry, but it was not a name invented for this deployment. The same distinction applies to the WebAssembly plugin runtime and the general remote-control and transport surface.

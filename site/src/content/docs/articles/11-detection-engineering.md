@@ -24,6 +24,12 @@ The three rules operate on different inputs. YARA scans file content. The Linux 
 
 The rule set was authored for the companion in October 2026. Performance figures attached to earlier rules in the original case do not transfer to these revisions. Assessment starts with the exact selectors and the test cases that accompany them.
 
+![A YARA match requires the full conjunction](../assets/11-detection-logic.png)
+
+*Figure 1. A YARA match requires the full conjunction. Fixture results do not establish production precision, recall or alert delivery.*
+
+[Open full-size vector diagram](/UNK_DeadDrop/diagrams/11-detection-logic.svg). Sources: [E15](../../evidence/E15.pdf).
+
 ### The wallet-agent conjunction
 
 The YARA rule requires a file smaller than 64 MiB, a framework module marker, an environment marker and at least two of three wallet markers. Its operative section is:

@@ -1,0 +1,43 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1000" height="810" viewBox="0 0 1000 810" role="img" aria-labelledby="title desc">
+<title id="title">One copy action, two command effects</title><desc id="desc">The selected text and the clipboard value are different artifacts. A copy event does not establish terminal execution or installation.</desc>
+<defs><marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M 0 0 L 10 5 L 0 10 z" fill="#17634f"/></marker></defs>
+<rect width="1000" height="100%" fill="#fff"/>
+<text x="36" y="39" font-family="DejaVu Sans,sans-serif" font-size="16" font-weight="400" fill="#17634f" text-anchor="start">UNK_DeadDrop / Part 01</text>
+<text x="36" y="80" font-family="DejaVu Sans,sans-serif" font-size="29" font-weight="700" fill="#202a26" text-anchor="start">One copy action, two command effects</text>
+<text x="36" y="115" font-family="DejaVu Sans,sans-serif" font-size="18" font-weight="400" fill="#53615a" text-anchor="start">The selected text and the clipboard value are different artifacts.</text>
+<line x1="36.0" y1="135.0" x2="964.0" y2="135.0" stroke="#b9c8be" stroke-width="2.5"/>
+<rect x="36" y="165" width="410" height="112" rx="3" fill="#f4f6f4" stroke="#b9c8be" stroke-width="1.5"/>
+<text x="52" y="196" font-family="DejaVu Sans,sans-serif" font-size="21" font-weight="700" fill="#202a26" text-anchor="start">Displayed verification step</text>
+<text x="52" y="228" font-family="DejaVu Sans,sans-serif" font-size="19" font-weight="400" fill="#53615a" text-anchor="start">Candidate selects the page instruction.</text>
+<rect x="554" y="165" width="410" height="112" rx="3" fill="#eaf3ee" stroke="#17634f" stroke-width="1.5"/>
+<text x="570" y="196" font-family="DejaVu Sans,sans-serif" font-size="21" font-weight="700" fill="#202a26" text-anchor="start">Copy handler</text>
+<text x="570" y="228" font-family="DejaVu Sans,sans-serif" font-size="19" font-weight="400" fill="#53615a" text-anchor="start">Cancels the default copy operation.</text>
+<line x1="446.0" y1="221.0" x2="554.0" y2="221.0" stroke="#17634f" stroke-width="2.5"/>
+<polygon points="554,221 542.0,216.0 542.0,226.0" fill="#17634f"/>
+<rect x="554" y="325" width="410" height="127" rx="3" fill="#eaf3ee" stroke="#17634f" stroke-width="1.5"/>
+<text x="570" y="356" font-family="DejaVu Sans,sans-serif" font-size="21" font-weight="700" fill="#202a26" text-anchor="start">Clipboard replacement</text>
+<text x="570" y="388" font-family="DejaVu Sans,sans-serif" font-size="19" font-weight="400" fill="#53615a" text-anchor="start">R(nonce, phrase, OS) supplies the</text>
+<text x="570" y="413" font-family="DejaVu Sans,sans-serif" font-size="19" font-weight="400" fill="#53615a" text-anchor="start">generated command.</text>
+<line x1="759.0" y1="277.0" x2="759.0" y2="325.0" stroke="#17634f" stroke-width="2.5"/>
+<polygon points="759,325 764.0,313.0 754.0,313.0" fill="#17634f"/>
+<text x="36" y="333" font-family="DejaVu Sans,sans-serif" font-size="20" font-weight="700" fill="#202a26" text-anchor="start">The displayed text is bypassed.</text>
+<text x="36" y="364" font-family="DejaVu Sans,sans-serif" font-size="19" font-weight="400" fill="#53615a" text-anchor="start">setData() writes the builder output.</text>
+<line x1="759.0" y1="452.0" x2="759.0" y2="480.0" stroke="#17634f" stroke-width="2.5"/>
+<line x1="759.0" y1="480.0" x2="270.0" y2="480.0" stroke="#17634f" stroke-width="2.5"/>
+<line x1="270.0" y1="480.0" x2="270.0" y2="518.0" stroke="#17634f" stroke-width="2.5"/>
+<polygon points="270,518 275.0,506.0 265.0,506.0" fill="#17634f"/>
+<line x1="759.0" y1="480.0" x2="759.0" y2="518.0" stroke="#17634f" stroke-width="2.5"/>
+<polygon points="759,518 764.0,506.0 754.0,506.0" fill="#17634f"/>
+<text x="500" y="500" font-family="DejaVu Sans,sans-serif" font-size="17" font-weight="400" fill="#8c5518" text-anchor="middle">Requires the candidate to paste and run</text>
+<rect x="36" y="518" width="448" height="110" rx="3" fill="#eaf3ee" stroke="#17634f" stroke-width="1.5"/>
+<text x="52" y="549" font-family="DejaVu Sans,sans-serif" font-size="21" font-weight="700" fill="#202a26" text-anchor="start">Visible verification result</text>
+<text x="52" y="581" font-family="DejaVu Sans,sans-serif" font-size="19" font-weight="400" fill="#53615a" text-anchor="start">The command prints a VERIFY- result.</text>
+<rect x="516" y="518" width="448" height="110" rx="3" fill="#fff4df" stroke="#8c5518" stroke-width="1.5"/>
+<text x="532" y="549" font-family="DejaVu Sans,sans-serif" font-size="21" font-weight="700" fill="#202a26" text-anchor="start">Installation attempt</text>
+<text x="532" y="581" font-family="DejaVu Sans,sans-serif" font-size="19" font-weight="400" fill="#53615a" text-anchor="start">Download and execution logic also runs.</text>
+<rect x="36" y="660" width="928" height="86" rx="3" fill="#fff4df" stroke="#8c5518" stroke-width="1.5"/>
+<text x="54" y="689" font-family="DejaVu Sans,sans-serif" font-size="20" font-weight="700" fill="#8c5518" text-anchor="start">Observation boundary</text>
+<text x="54" y="715" font-family="DejaVu Sans,sans-serif" font-size="18" font-weight="400" fill="#202a26" text-anchor="start">The source explains the command design. No victim execution record is shown.</text>
+<line x1="36.0" y1="762.0" x2="964.0" y2="762.0" stroke="#b9c8be" stroke-width="2.5"/>
+<text x="36" y="788" font-family="DejaVu Sans,sans-serif" font-size="16" font-weight="400" fill="#53615a" text-anchor="start">Sources: E02, E15 | Static reconstruction</text>
+</svg>

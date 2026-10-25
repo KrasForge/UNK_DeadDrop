@@ -70,9 +70,11 @@ console.log(fn.type, returned.argument.type);
 
 The workflow never imported or evaluated the target, or ran the extension in a VM. It recovered selected transformations from the syntax tree and implemented those separately. This remains sample-specific analysis: an AST can describe arbitrary behavior, and parsing does not prove what a program will do. The narrower goal was to recover the index and key transformations used by these wrappers.
 
-![The static recovery workflow](assets/03-deobfuscation.png)
+![From obfuscated syntax to authenticated files](assets/03-deobfuscation.png)
 
-*Figure 1. Static reconstruction followed by authenticated decryption. Parsing and decoding the retained bytes did not invoke the extension's activation code.*
+*Figure 1. From obfuscated syntax to authenticated files. Parsing is not execution; the companion scanner does not implement full recovery.*
+
+[Open full-size vector diagram](assets/03-deobfuscation.svg). Sources: [E04](../preprint/evidence/E04.pdf), [E15](../preprint/evidence/E15.pdf).
 
 ### One readable string was not enough
 

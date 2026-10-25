@@ -33,9 +33,11 @@ The recovered lures use recruitment and technical-assessment themes. Their verif
 
 The analysis found two frontend variants. Lighter bundles show an access-key or anti-spam panel. Larger ones load TensorFlow.js face-detection models and activate the camera for a more elaborate device-check presentation. Three.js appears only in a separate design-challenge lure. Across these interfaces, the clipboard substitution is the behavior that changes the command.
 
-![The ClickFix delivery sequence reconstructed from the lure code](assets/01-clickfix.png)
+![One copy action, two command effects](assets/01-clickfix.png)
 
-*Figure 1. Source-derived ClickFix sequence. Terminal execution requires the candidate to paste and run the copied command.*
+*Figure 1. One copy action, two command effects. A copy event does not establish terminal execution or installation.*
+
+[Open full-size vector diagram](assets/01-clickfix.svg). Sources: [E02](../preprint/evidence/E02.pdf), [E15](../preprint/evidence/E15.pdf).
 
 ### The command changes on copy
 
