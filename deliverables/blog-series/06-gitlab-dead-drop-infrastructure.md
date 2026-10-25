@@ -68,16 +68,14 @@ In the wider July analysis, `207.241.172[.]222` was cast as the C2 and administr
 
 The saved service enumeration listed SSH, HTTP and HTTPS. Its SSH profile included a host key, banner and handshake information, but these had different value as search pivots. The common OpenSSH banner and handshake fingerprint matched broad populations of hosts. The more selective host key returned only the address already known. That negative search result does not prove the operation had no backup host.
 
-The original note called the origin dedicated and said an IP-level action would have no collateral effect. The available observations could establish neither claim. A panel on the bare IP strengthens a service association without revealing every tenant or ownership change outside the scan's coverage. The certificate's validity dates describe that certificate, not the operation's start or end.
+These observations do not establish that the origin was dedicated or that blocking its IP would have no collateral effect. The panel seen on the bare IP strengthens the service association, but the scan cannot establish every tenant or later ownership change. The certificate's validity dates describe the certificate, not the operation's start or end.
 
-### A five-minute timeline error
+### A timestamp mistaken for a build time
 
-The infrastructure and build histories show two close timestamps: a phishing message recorded at 01:08:32 UTC on 21 July, followed by a Go `vcs.time` value of 01:14:06 UTC. The gap is five minutes and thirty-four seconds. An early note described an implant compiled shortly after the message, but `vcs.time` records version-control metadata, not a certified compile time.
+The infrastructure and build records show two nearby timestamps: a phishing message at 01:08:32 UTC on 21 July, followed by a Go `vcs.time` value of 01:14:06 UTC. The gap is five minutes and thirty-four seconds. An earlier note treated the second value as the implant's compile time. It records version-control metadata, so the sequence does not show when the implant was built.
 
-The correlation is worth retaining with the field named correctly. As with domain registrations, configuration changes and archive timestamps, label each value by the event it actually records.
+Keep the correlation, but label each timestamp by what it records. The same discipline applies to domain registrations, configuration changes and archive metadata.
 
-Several of my infrastructure notes evolved in a similar way, moving from an early view centred on a single host towards additional addresses and later origin observations, and keeping their dates intact avoids collapsing a sequence of changing findings into one timeless network.
-
-Preserve more than a list of domains: record the resource location, file-specific revisions, selected values, observation dates and client code that consumes them. For each origin association, note whether it came from resolution, a presented certificate or matching application content. That record stays useful after a destination disappears and lets another analyst test each relationship instead of inheriting an unexplained “C2” label.
+Across the infrastructure analysis, preserve the resource URL, per-file revision history, selected values, observation dates, client code and source of each origin association. Distinguish DNS resolution, certificate names and application content. That provenance lets another analyst reassess a relationship after infrastructure changes without inheriting an unexplained “C2” label.
 
 Part 7 examines the target-acquisition tooling and its two SQLite pools. Part 8 follows the separately recovered administration frontend, including its delivery-repository monitor and wallet-management screens.

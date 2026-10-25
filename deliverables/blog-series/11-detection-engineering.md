@@ -1,6 +1,6 @@
 ---
 title: "Building and Testing Detections for UNK_DeadDrop"
-description: "Three experimental rules, their actual match conditions, and inert tests that expose useful blind spots."
+description: "Ten experimental rules, their actual match conditions, and inert tests that expose useful blind spots."
 date: "2026-10-25"
 author: "Ilja Krasnjanski"
 canonical: "https://example.com/blog/11-detection-engineering"
@@ -13,20 +13,20 @@ tags:
 og_image_alt: "Building and Testing Detections for UNK_DeadDrop"
 ---
 
-What does a match actually tell an analyst? The companion contains one YARA rule combining framework and wallet markers, plus Sigma rules for a Linux service path and a Windows scheduled-task command. A match can identify bytes or an event that meets those conditions. It does not show that a file executed, a task succeeded or a particular group was responsible.
+What does a match actually tell an analyst? The original companion bundle contains one YARA rule combining framework and wallet markers, plus Sigma rules for a Linux service path and a Windows scheduled-task command. The public companion now publishes ten experimental rules: four YARA and six Sigma. A match can identify bytes or an event that meets those conditions. It does not show that a file executed, a task succeeded or a particular group was responsible.
 
-This article walks through the rules and their test fixtures, including three boundary cases: harmless prose that matches YARA, a longer task name that matches the Windows selector, and mixed-case input accepted by the local Linux fixture evaluator. These cases reveal selector behavior; they are not malware execution or production detection measurements.
+This article walks through the original three rules and their test fixtures, including three boundary cases: harmless prose that matches YARA, a longer task name that matches the Windows selector, and mixed-case input accepted by the local Linux fixture evaluator. The seven later additions cover [editor-spawned Node](https://github.com/KrasForge/unk-deaddrop-companion/blob/main/rules/sigma/windows_editor_node_collection.yml), [PowerShell Electron Node mode](https://github.com/KrasForge/unk-deaddrop-companion/blob/main/rules/sigma/windows_powershell_electron_node_mode.yml), [temporary elevation artifacts](https://github.com/KrasForge/unk-deaddrop-companion/blob/main/rules/sigma/windows_elevation_temp_artifacts.yml), [VS Code extension artifacts](https://github.com/KrasForge/unk-deaddrop-companion/blob/main/rules/sigma/windows_vscode_extension_artifact.yml), [capture-agent markers](https://github.com/KrasForge/unk-deaddrop-companion/blob/main/rules/yara/deaddrop_capture_agent.yar), [VSIX manifest indicators](https://github.com/KrasForge/unk-deaddrop-companion/blob/main/rules/yara/deaddrop_vsix_manifest.yar), and [the stage-three collector source](https://github.com/KrasForge/unk-deaddrop-companion/blob/main/rules/yara/deaddrop_stage3_collector.yar). These cases and rules reveal selector behavior; they are not malware execution or production detection measurements.
 
 > **Key Takeaways**
 >
-> - Framework identity alone is deliberately insufficient for the wallet-agent YARA rule.
+> - Framework identity alone is deliberately insufficient for the original wallet-agent YARA rule.
 > - The YARA conjunction can match research text containing its strings; acquisition context matters.
 > - The Windows rule uses substring matching for the task marker, not parsed task-name equality.
 > - Sigma schema parsing and fixture evaluation do not validate SIEM ingestion, conversion or alert delivery.
 
 ## Match the rule to its telemetry
 
-The three rules operate on different inputs. YARA scans file content. The Linux Sigma rule expects file-event telemetry with a target path. The Windows Sigma rule expects process-creation telemetry with an image path and command line. A detection can only evaluate the fields it receives, so a missing command line or an uncollected user-service directory creates a gap before the rule logic is considered.
+The original three rules operate on different inputs. YARA scans file content. The Linux Sigma rule expects file-event telemetry with a target path. The Windows Sigma rule expects process-creation telemetry with an image path and command line. A detection can only evaluate the fields it receives, so a missing command line or an uncollected user-service directory creates a gap before the rule logic is considered.
 
 The rule set was authored for the companion in October 2026. Performance figures attached to earlier rules in the original case do not transfer to these revisions. Assessment starts with the exact selectors and the test cases that accompany them.
 
@@ -87,7 +87,7 @@ This distinction is useful when triaging a hit. Inspect the complete command and
 
 ## What was tested locally
 
-The original detection suite has four tests: real YARA compilation and marker fixtures, Sigma schema parsing, Linux field fixtures and Windows field fixtures. The three added boundary tests bring this run to seven detection tests. The companion's separate eight AST tests also pass. All fixtures are inert; no service was installed, task registered or malware launched.
+The original detection bundle documented here has seven tests, including boundary fixtures. The expanded public companion now has 14 inert detection tests and eight AST scanner tests. These checks exercise rule and parser behavior; no service was installed, task registered or malware launched.
 
 | Check | What it establishes | What it does not establish |
 |---|---|---|
@@ -99,7 +99,7 @@ The original detection suite has four tests: real YARA compilation and marker fi
 
 The local Sigma evaluator is deliberately small; it is not a SIEM backend. Case handling, field mapping and event normalization still need validation in the intended platform. These tests check the implementation reproducibly, but they are not deployment sign-off.
 
-The download bundle includes the [original detection tests](../public-repository/tests/test_detections.py), [three boundary tests](../public-repository/tests/test_blog_boundaries.py), [pinned Python requirements](../public-repository/requirements-dev.txt), [YARA rule](../public-repository/rules/yara/deaddrop_wallet_agent.yar), [Linux rule](../public-repository/rules/sigma/linux_google_agent_persistence.yml) and [Windows rule](../public-repository/rules/sigma/windows_capture_task.yml). Run from the extracted bundle root:
+The [public companion repository](https://github.com/KrasForge/unk-deaddrop-companion) contains the expanded rules, tests and AST scanner. The downloadable blog bundle preserves the [original detection tests](../public-repository/tests/test_detections.py), [boundary tests](../public-repository/tests/test_blog_boundaries.py), [pinned Python requirements](../public-repository/requirements-dev.txt), [YARA rule](../public-repository/rules/yara/deaddrop_wallet_agent.yar), [Linux rule](../public-repository/rules/sigma/linux_google_agent_persistence.yml) and [Windows rule](../public-repository/rules/sigma/windows_capture_task.yml). Run those original tests from the extracted bundle root:
 
 ```sh
 python -m venv .venv
@@ -107,7 +107,7 @@ python -m venv .venv
 .venv/bin/python -m unittest discover -s public-repository/tests -v
 ```
 
-Those commands run the seven detection tests. The separate AST tests require the full companion project and are not included in this small detection bundle. Code and rules retain the companion's [MIT license](../public-repository/LICENSE); that grant does not cover the research prose or underlying evidence.
+Those commands run the seven detection tests in the blog bundle. The expanded companion's AST tests require its full project checkout. Code and rules retain the companion's [MIT license](../public-repository/LICENSE); that grant does not cover the research prose or underlying evidence.
 
 ### From a selector to an investigation
 

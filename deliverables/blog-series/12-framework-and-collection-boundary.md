@@ -101,4 +101,4 @@ The historical lookup did not find the embedded build revision in the public rep
 
 A rigorous follow-up would preserve the exact upstream commit and relevant files, identify each sample by hash, and record the extraction commands and comparison output. That would make a future absence claim inspectable. It would still require care before translating a code difference into an operator identity.
 
-For detection, combine framework markers with collection context, as the experimental YARA rule in Part 11 does, and interpret each match in light of where the file was found. Framework ancestry starts the analysis; surrounding artifacts determine how far the conclusion can go.
+For detection, combine framework markers with collection context, as the companion's [wallet-agent YARA rule](https://github.com/KrasForge/unk-deaddrop-companion/blob/main/rules/yara/deaddrop_wallet_agent.yar) does, and interpret each match in light of where the file was found. Framework ancestry starts the analysis; surrounding artifacts determine how far the conclusion can go.
