@@ -1,11 +1,8 @@
-<svg xmlns="http://www.w3.org/2000/svg" width="1000" height="820" viewBox="0 0 1000 820" role="img" aria-labelledby="title desc">
+<svg xmlns="http://www.w3.org/2000/svg" width="1000" height="700" viewBox="0 0 1000 700" role="img" aria-labelledby="title desc">
 <title id="title">From obfuscated syntax to authenticated files</title><desc id="desc">The historical recovery is broader than the companion AST scanner. Parsing is not execution; the companion scanner does not implement full recovery.</desc>
 <defs><marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M 0 0 L 10 5 L 0 10 z" fill="#17634f"/></marker></defs>
 <rect width="1000" height="100%" fill="#fff"/>
-<text x="36" y="39" font-family="DejaVu Sans,sans-serif" font-size="16" font-weight="400" fill="#17634f" text-anchor="start">UNK_DeadDrop / Part 03</text>
-<text x="36" y="80" font-family="DejaVu Sans,sans-serif" font-size="29" font-weight="700" fill="#202a26" text-anchor="start">From obfuscated syntax to authenticated files</text>
-<text x="36" y="115" font-family="DejaVu Sans,sans-serif" font-size="18" font-weight="400" fill="#53615a" text-anchor="start">The historical recovery is broader than the companion AST scanner.</text>
-<line x1="36.0" y1="135.0" x2="964.0" y2="135.0" stroke="#b9c8be" stroke-width="2.5"/>
+<g transform="translate(0,-120)">
 <rect x="36" y="175" width="280" height="125" rx="3" fill="#eaf3ee" stroke="#17634f" stroke-width="1.5"/>
 <text x="52" y="206" font-family="DejaVu Sans,sans-serif" font-size="21" font-weight="700" fill="#202a26" text-anchor="start">1 / Parse with Acorn</text>
 <text x="52" y="238" font-family="DejaVu Sans,sans-serif" font-size="19" font-weight="400" fill="#53615a" text-anchor="start">Recover syntax, call sites,</text>
@@ -70,6 +67,5 @@
 <rect x="36" y="663" width="928" height="86" rx="3" fill="#fff4df" stroke="#8c5518" stroke-width="1.5"/>
 <text x="54" y="692" font-family="DejaVu Sans,sans-serif" font-size="20" font-weight="700" fill="#8c5518" text-anchor="start">Tool boundary</text>
 <text x="54" y="718" font-family="DejaVu Sans,sans-serif" font-size="18" font-weight="400" fill="#202a26" text-anchor="start">The companion AST scanner locates supported syntax patterns; full recovery was a separate analysis.</text>
-<line x1="36.0" y1="772.0" x2="964.0" y2="772.0" stroke="#b9c8be" stroke-width="2.5"/>
-<text x="36" y="798" font-family="DejaVu Sans,sans-serif" font-size="16" font-weight="400" fill="#53615a" text-anchor="start">Sources: E04, E15 | Static reconstruction</text>
+</g>
 </svg>

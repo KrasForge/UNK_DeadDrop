@@ -1,11 +1,8 @@
-<svg xmlns="http://www.w3.org/2000/svg" width="1000" height="840" viewBox="0 0 1000 840" role="img" aria-labelledby="title desc">
+<svg xmlns="http://www.w3.org/2000/svg" width="1000" height="700" viewBox="0 0 1000 700" role="img" aria-labelledby="title desc">
 <title id="title">What the recovered client makes visible</title><desc id="desc">Seventy frontend modules expose interface intent and API references. The backend, authenticated records and completed wallet transfers were not recovered.</desc>
 <defs><marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M 0 0 L 10 5 L 0 10 z" fill="#17634f"/></marker></defs>
 <rect width="1000" height="100%" fill="#fff"/>
-<text x="36" y="39" font-family="DejaVu Sans,sans-serif" font-size="16" font-weight="400" fill="#17634f" text-anchor="start">UNK_DeadDrop / Part 08</text>
-<text x="36" y="80" font-family="DejaVu Sans,sans-serif" font-size="29" font-weight="700" fill="#202a26" text-anchor="start">What the recovered client makes visible</text>
-<text x="36" y="115" font-family="DejaVu Sans,sans-serif" font-size="18" font-weight="400" fill="#53615a" text-anchor="start">Seventy frontend modules expose interface intent and API references.</text>
-<line x1="36.0" y1="135.0" x2="964.0" y2="135.0" stroke="#b9c8be" stroke-width="2.5"/>
+<g transform="translate(0,-120)">
 <rect x="36" y="172" width="588" height="470" rx="3" fill="#eaf3ee" stroke="#17634f" stroke-width="1.5"/>
 <text x="56" y="211" font-family="DejaVu Sans,sans-serif" font-size="24" font-weight="700" fill="#202a26" text-anchor="start">Recovered rms-platform frontend</text>
 <rect x="58" y="238" width="544" height="105" rx="3" fill="#f4f6f4" stroke="#b9c8be" stroke-width="1.5"/>
@@ -212,6 +209,5 @@
 <text x="54" y="720" font-family="DejaVu Sans,sans-serif" font-size="20" font-weight="700" fill="#8c5518" text-anchor="start">A client action is a request design</text>
 <text x="54" y="746" font-family="DejaVu Sans,sans-serif" font-size="18" font-weight="400" fill="#202a26" text-anchor="start">Route names and buttons show intended operations. Service-side records are needed to establish</text>
 <text x="54" y="769" font-family="DejaVu Sans,sans-serif" font-size="18" font-weight="400" fill="#202a26" text-anchor="start">outcomes.</text>
-<line x1="36.0" y1="792.0" x2="964.0" y2="792.0" stroke="#b9c8be" stroke-width="2.5"/>
-<text x="36" y="818" font-family="DejaVu Sans,sans-serif" font-size="16" font-weight="400" fill="#53615a" text-anchor="start">Sources: E06, E08, E09 | Static reconstruction</text>
+</g>
 </svg>

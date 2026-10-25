@@ -1,11 +1,8 @@
-<svg xmlns="http://www.w3.org/2000/svg" width="1000" height="900" viewBox="0 0 1000 900" role="img" aria-labelledby="title desc">
+<svg xmlns="http://www.w3.org/2000/svg" width="1000" height="690" viewBox="0 0 1000 690" role="img" aria-labelledby="title desc">
 <title id="title">Framework lineage and collection evidence</title><desc id="desc">A positive observation in a held sample is stronger than an unpinned absence claim. The upstream files were not preserved as a pinned baseline; authorship remains unresolved.</desc>
 <defs><marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M 0 0 L 10 5 L 0 10 z" fill="#17634f"/></marker></defs>
 <rect width="1000" height="100%" fill="#fff"/>
-<text x="36" y="39" font-family="DejaVu Sans,sans-serif" font-size="16" font-weight="400" fill="#17634f" text-anchor="start">UNK_DeadDrop / Part 12</text>
-<text x="36" y="80" font-family="DejaVu Sans,sans-serif" font-size="29" font-weight="700" fill="#202a26" text-anchor="start">Framework lineage and collection evidence</text>
-<text x="36" y="115" font-family="DejaVu Sans,sans-serif" font-size="18" font-weight="400" fill="#53615a" text-anchor="start">A positive observation in a held sample is stronger than an unpinned absence claim.</text>
-<line x1="36.0" y1="135.0" x2="964.0" y2="135.0" stroke="#b9c8be" stroke-width="2.5"/>
+<g transform="translate(0,-120)">
 <rect x="36" y="178" width="446" height="250" rx="3" fill="#f4f6f4" stroke="#b9c8be" stroke-width="1.5"/>
 <text x="52" y="209" font-family="DejaVu Sans,sans-serif" font-size="21" font-weight="700" fill="#202a26" text-anchor="start">Recorded framework lineage</text>
 <text x="52" y="241" font-family="DejaVu Sans,sans-serif" font-size="19" font-weight="400" fill="#53615a" text-anchor="start">overlord-client module path</text>
@@ -136,6 +133,5 @@
 <text x="54" y="724" font-family="DejaVu Sans,sans-serif" font-size="20" font-weight="700" fill="#8c5518" text-anchor="start">Claims the comparison cannot settle</text>
 <text x="54" y="750" font-family="DejaVu Sans,sans-serif" font-size="18" font-weight="400" fill="#202a26" text-anchor="start">Who wrote each addition, whether every upstream variant lacks it, or whether a victim-side action</text>
 <text x="54" y="773" font-family="DejaVu Sans,sans-serif" font-size="18" font-weight="400" fill="#202a26" text-anchor="start">succeeded.</text>
-<line x1="36.0" y1="852.0" x2="964.0" y2="852.0" stroke="#b9c8be" stroke-width="2.5"/>
-<text x="36" y="878" font-family="DejaVu Sans,sans-serif" font-size="16" font-weight="400" fill="#53615a" text-anchor="start">Sources: E05, E17, E18 | Static reconstruction</text>
+</g>
 </svg>

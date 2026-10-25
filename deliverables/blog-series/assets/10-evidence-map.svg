@@ -1,11 +1,8 @@
-<svg xmlns="http://www.w3.org/2000/svg" width="1000" height="1000" viewBox="0 0 1000 1000" role="img" aria-labelledby="title desc">
+<svg xmlns="http://www.w3.org/2000/svg" width="1000" height="830" viewBox="0 0 1000 830" role="img" aria-labelledby="title desc">
 <title id="title">Connections need named relationships</title><desc id="desc">Read each row as an evidence pivot, not as an observed execution sequence. Different edge labels support different claims; end-to-end execution was not established.</desc>
 <defs><marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M 0 0 L 10 5 L 0 10 z" fill="#17634f"/></marker></defs>
 <rect width="1000" height="100%" fill="#fff"/>
-<text x="36" y="39" font-family="DejaVu Sans,sans-serif" font-size="16" font-weight="400" fill="#17634f" text-anchor="start">UNK_DeadDrop / Part 10</text>
-<text x="36" y="80" font-family="DejaVu Sans,sans-serif" font-size="29" font-weight="700" fill="#202a26" text-anchor="start">Connections need named relationships</text>
-<text x="36" y="115" font-family="DejaVu Sans,sans-serif" font-size="18" font-weight="400" fill="#53615a" text-anchor="start">Read each row as an evidence pivot, not as an observed execution sequence.</text>
-<line x1="36.0" y1="135.0" x2="964.0" y2="135.0" stroke="#b9c8be" stroke-width="2.5"/>
+<g transform="translate(0,-120)">
 <rect x="36" y="173" width="324" height="65" rx="3" fill="#f4f6f4" stroke="#b9c8be" stroke-width="1.5"/>
 <text x="52" y="204" font-family="DejaVu Sans,sans-serif" font-size="21" font-weight="700" fill="#202a26" text-anchor="start">Received messages</text>
 <line x1="369.0" y1="218.0" x2="626.0" y2="218.0" stroke="#17634f" stroke-width="2.5"/>
@@ -58,6 +55,5 @@
 <rect x="36" y="841" width="928" height="86" rx="3" fill="#fff4df" stroke="#8c5518" stroke-width="1.5"/>
 <text x="54" y="870" font-family="DejaVu Sans,sans-serif" font-size="20" font-weight="700" fill="#8c5518" text-anchor="start">What these edges do not establish</text>
 <text x="54" y="896" font-family="DejaVu Sans,sans-serif" font-size="18" font-weight="400" fill="#202a26" text-anchor="start">Infection, one integrated backend, successful transfers and operator identity require additional evidence.</text>
-<line x1="36.0" y1="952.0" x2="964.0" y2="952.0" stroke="#b9c8be" stroke-width="2.5"/>
-<text x="36" y="978" font-family="DejaVu Sans,sans-serif" font-size="16" font-weight="400" fill="#53615a" text-anchor="start">Sources: E01, E02, E03, E07, E08, E06, E11 | Static reconstruction</text>
+</g>
 </svg>

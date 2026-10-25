@@ -1,11 +1,8 @@
-<svg xmlns="http://www.w3.org/2000/svg" width="1000" height="850" viewBox="0 0 1000 850" role="img" aria-labelledby="title desc">
+<svg xmlns="http://www.w3.org/2000/svg" width="1000" height="700" viewBox="0 0 1000 700" role="img" aria-labelledby="title desc">
 <title id="title">Why these symbols suggest repeated capture</title><desc id="desc">Illustrative blocks explain the design; they are not recovered display frames. No victim session, achieved frame rate or bandwidth was measured.</desc>
 <defs><marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M 0 0 L 10 5 L 0 10 z" fill="#17634f"/></marker></defs>
 <rect width="1000" height="100%" fill="#fff"/>
-<text x="36" y="39" font-family="DejaVu Sans,sans-serif" font-size="16" font-weight="400" fill="#17634f" text-anchor="start">UNK_DeadDrop / Part 05</text>
-<text x="36" y="80" font-family="DejaVu Sans,sans-serif" font-size="29" font-weight="700" fill="#202a26" text-anchor="start">Why these symbols suggest repeated capture</text>
-<text x="36" y="115" font-family="DejaVu Sans,sans-serif" font-size="18" font-weight="400" fill="#53615a" text-anchor="start">Illustrative blocks explain the design; they are not recovered display frames.</text>
-<line x1="36.0" y1="135.0" x2="964.0" y2="135.0" stroke="#b9c8be" stroke-width="2.5"/>
+<g transform="translate(0,-120)">
 <text x="36" y="185" font-family="DejaVu Sans,sans-serif" font-size="22" font-weight="700" fill="#202a26" text-anchor="start">Previous frame</text>
 <rect x="36" y="209" width="60" height="52" rx="3" fill="#eaf3ee" stroke="#b9c8be" stroke-width="1.5"/>
 <rect x="104" y="209" width="60" height="52" rx="3" fill="#eaf3ee" stroke="#b9c8be" stroke-width="1.5"/>
@@ -61,6 +58,5 @@
 <rect x="36" y="688" width="928" height="86" rx="3" fill="#fff4df" stroke="#8c5518" stroke-width="1.5"/>
 <text x="54" y="717" font-family="DejaVu Sans,sans-serif" font-size="20" font-weight="700" fill="#8c5518" text-anchor="start">What remains unmeasured</text>
 <text x="54" y="743" font-family="DejaVu Sans,sans-serif" font-size="18" font-weight="400" fill="#202a26" text-anchor="start">Display access, permissions, successful capture and transport require execution evidence.</text>
-<line x1="36.0" y1="802.0" x2="964.0" y2="802.0" stroke="#b9c8be" stroke-width="2.5"/>
-<text x="36" y="828" font-family="DejaVu Sans,sans-serif" font-size="16" font-weight="400" fill="#53615a" text-anchor="start">Sources: E05, E17 | Static reconstruction</text>
+</g>
 </svg>

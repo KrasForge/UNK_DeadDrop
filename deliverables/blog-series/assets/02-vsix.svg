@@ -1,11 +1,8 @@
-<svg xmlns="http://www.w3.org/2000/svg" width="1000" height="790" viewBox="0 0 1000 790" role="img" aria-labelledby="title desc">
+<svg xmlns="http://www.w3.org/2000/svg" width="1000" height="670" viewBox="0 0 1000 670" role="img" aria-labelledby="title desc">
 <title id="title">How the editor becomes an interpreter</title><desc id="desc">Windows path reconstructed from task, extension and payload source. Workspace trust, permissions and elevation outcomes were not reproduced.</desc>
 <defs><marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M 0 0 L 10 5 L 0 10 z" fill="#17634f"/></marker></defs>
 <rect width="1000" height="100%" fill="#fff"/>
-<text x="36" y="39" font-family="DejaVu Sans,sans-serif" font-size="16" font-weight="400" fill="#17634f" text-anchor="start">UNK_DeadDrop / Part 02</text>
-<text x="36" y="80" font-family="DejaVu Sans,sans-serif" font-size="29" font-weight="700" fill="#202a26" text-anchor="start">How the editor becomes an interpreter</text>
-<text x="36" y="115" font-family="DejaVu Sans,sans-serif" font-size="18" font-weight="400" fill="#53615a" text-anchor="start">Windows path reconstructed from task, extension and payload source.</text>
-<line x1="36.0" y1="135.0" x2="964.0" y2="135.0" stroke="#b9c8be" stroke-width="2.5"/>
+<g transform="translate(0,-120)">
 <rect x="36" y="177" width="280" height="147" rx="3" fill="#f4f6f4" stroke="#b9c8be" stroke-width="1.5"/>
 <text x="52" y="208" font-family="DejaVu Sans,sans-serif" font-size="21" font-weight="700" fill="#202a26" text-anchor="start">Project task</text>
 <text x="52" y="240" font-family="DejaVu Sans,sans-serif" font-size="19" font-weight="400" fill="#53615a" text-anchor="start">folderOpen selects the</text>
@@ -44,6 +41,5 @@
 <rect x="36" y="600" width="928" height="86" rx="3" fill="#fff4df" stroke="#8c5518" stroke-width="1.5"/>
 <text x="54" y="629" font-family="DejaVu Sans,sans-serif" font-size="20" font-weight="700" fill="#8c5518" text-anchor="start">Different evidence is needed for each step</text>
 <text x="54" y="655" font-family="DejaVu Sans,sans-serif" font-size="18" font-weight="400" fill="#202a26" text-anchor="start">An installed extension, an elevated process and recovered credentials are separate outcomes.</text>
-<line x1="36.0" y1="742.0" x2="964.0" y2="742.0" stroke="#b9c8be" stroke-width="2.5"/>
-<text x="36" y="768" font-family="DejaVu Sans,sans-serif" font-size="16" font-weight="400" fill="#53615a" text-anchor="start">Sources: E03, E04, E19 | Static reconstruction</text>
+</g>
 </svg>
