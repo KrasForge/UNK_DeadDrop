@@ -26,7 +26,6 @@ The acquisition followed only modules loaded by the application. It involved no 
 
 *Figure 1. What the recovered client makes visible. The backend, authenticated records and completed wallet transfers were not recovered.*
 
-[Open full-size vector diagram](/UNK_DeadDrop/diagrams/06-administration.svg). Sources: [E06](../../evidence/E06.pdf), [E08](../../evidence/E08.pdf), [E09](../../evidence/E09.pdf).
 
 ### A monitor for delivery repositories
 

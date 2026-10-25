@@ -25,7 +25,6 @@ The Python source handles DPAPI-related key recovery and browser elevation servi
 
 *Figure 1. A selected file is only the first step. Collection, decryption and completed upload are different claims.*
 
-[Open full-size vector diagram](/UNK_DeadDrop/diagrams/04-collection.svg). Sources: [E04](../../evidence/E04.pdf), [E17](../../evidence/E17.pdf), [E18](../../evidence/E18.pdf).
 
 ### Phase three searches filenames
 

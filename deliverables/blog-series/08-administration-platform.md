@@ -32,7 +32,6 @@ The acquisition followed only modules loaded by the application. It involved no 
 
 *Figure 1. What the recovered client makes visible. The backend, authenticated records and completed wallet transfers were not recovered.*
 
-[Open full-size vector diagram](assets/06-administration.svg). Sources: [E06](../preprint/evidence/E06.pdf), [E08](../preprint/evidence/E08.pdf), [E09](../preprint/evidence/E09.pdf).
 
 ### A monitor for delivery repositories
 

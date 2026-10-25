@@ -34,7 +34,6 @@ The rule set was authored for the companion in October 2026. Performance figures
 
 *Figure 1. A YARA match requires the full conjunction. Fixture results do not establish production precision, recall or alert delivery.*
 
-[Open full-size vector diagram](assets/11-detection-logic.svg). Sources: [E15](../preprint/evidence/E15.pdf).
 
 ### The wallet-agent conjunction
 

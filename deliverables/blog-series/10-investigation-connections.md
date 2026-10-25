@@ -54,7 +54,6 @@ This is also where published research constrains the contribution claim. The ext
 
 *Figure 1. Connections need named relationships. Different edge labels support different claims; end-to-end execution was not established.*
 
-[Open full-size vector diagram](assets/10-evidence-map.svg). Sources: [E01](../preprint/evidence/E01.pdf), [E02](../preprint/evidence/E02.pdf), [E03](../preprint/evidence/E03.pdf), [E07](../preprint/evidence/E07.pdf), [E08](../preprint/evidence/E08.pdf), [E06](../preprint/evidence/E06.pdf), [E11](../preprint/evidence/E11.pdf).
 
 ## A relationship map with named edges
 

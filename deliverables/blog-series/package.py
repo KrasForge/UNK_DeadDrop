@@ -9,6 +9,7 @@ ROOT=BASE.parent
 posts=sorted(BASE.glob('[0-9][0-9]-*.md'))
 assert len(posts)==12
 files=set(posts+[BASE/'README.md',BASE/'VALIDATION.md',BASE/'build_diagrams.py',BASE/'assets/diagrams.json',BASE/'assets/DIAGRAMS.md'])
+files.update((BASE/'assets').glob('*.svg'))
 for p in posts:
     for target in re.findall(r'\]\(([^)]+)\)',p.read_text()):
         if target.startswith('https://'): continue

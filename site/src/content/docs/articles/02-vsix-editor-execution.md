@@ -30,7 +30,6 @@ After installation, the extension is no longer confined to the project. It decla
 
 *Figure 1. How the editor becomes an interpreter. Workspace trust, permissions and elevation outcomes were not reproduced.*
 
-[Open full-size vector diagram](/UNK_DeadDrop/diagrams/02-vsix.svg). Sources: [E03](../../evidence/E03.pdf), [E04](../../evidence/E04.pdf), [E19](../../evidence/E19.pdf).
 
 ### Inside Google Update Support
 

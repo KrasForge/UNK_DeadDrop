@@ -40,7 +40,6 @@ The repeated staging structure establishes a useful lineage, but it also shows w
 
 *Figure 1. Four retained ECHOES archive revisions. Final PowerShell payloads were unavailable; the retained history establishes staging lineage.*
 
-[Open full-size vector diagram](assets/07-echoes.svg). Sources: [E11](../preprint/evidence/E11.pdf), [E14](../preprint/evidence/E14.pdf), [E16](../preprint/evidence/E16.pdf).
 
 ### Separating the artwork from the staging code
 

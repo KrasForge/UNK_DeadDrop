@@ -62,7 +62,6 @@ The article therefore treats upstream differences as recorded findings within th
 
 *Figure 1. Framework lineage and collection evidence. The upstream files were not preserved as a pinned baseline; authorship remains unresolved.*
 
-[Open full-size vector diagram](assets/12-framework-boundary.svg). Sources: [E05](../preprint/evidence/E05.pdf), [E17](../preprint/evidence/E17.pdf), [E18](../preprint/evidence/E18.pdf).
 
 ### Features inherited from the framework
 

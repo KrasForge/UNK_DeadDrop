@@ -74,7 +74,6 @@ The workflow never imported or evaluated the target, or ran the extension in a V
 
 *Figure 1. From obfuscated syntax to authenticated files. Parsing is not execution; the companion scanner does not implement full recovery.*
 
-[Open full-size vector diagram](assets/03-deobfuscation.svg). Sources: [E04](../preprint/evidence/E04.pdf), [E15](../preprint/evidence/E15.pdf).
 
 ### One readable string was not enough
 

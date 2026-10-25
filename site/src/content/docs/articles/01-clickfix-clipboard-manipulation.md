@@ -30,7 +30,6 @@ The analysis found two frontend variants. Lighter bundles show an access-key or 
 
 *Figure 1. One copy action, two command effects. A copy event does not establish terminal execution or installation.*
 
-[Open full-size vector diagram](/UNK_DeadDrop/diagrams/01-clickfix.svg). Sources: [E02](../../evidence/E02.pdf), [E15](../../evidence/E15.pdf).
 
 ### The command changes on copy
 

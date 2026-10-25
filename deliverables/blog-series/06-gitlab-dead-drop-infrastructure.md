@@ -41,7 +41,6 @@ Two relationships need preserving: the payload's dependency on the configuration
 
 *Figure 1. Two configuration files, separate histories. The sequence does not establish fallback selection or client refresh behavior.*
 
-[Open full-size vector diagram](assets/05-resolver.svg). Sources: [E07](../preprint/evidence/E07.pdf), [E20](../preprint/evidence/E20.pdf), [E21](../preprint/evidence/E21.pdf).
 
 ### Reconstructing the changes
 

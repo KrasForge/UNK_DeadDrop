@@ -40,7 +40,6 @@ This connects collection to message preparation, but a stored row does not show 
 
 *Figure 1. Two pools, two different counting problems. Rows count stored address strings, not people, delivered mail or infections.*
 
-[Open full-size vector diagram](assets/07-targeting.svg). Sources: [E08](../preprint/evidence/E08.pdf), [E09](../preprint/evidence/E09.pdf).
 
 ### The repository count needed a union
 
