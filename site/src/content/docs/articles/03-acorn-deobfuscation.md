@@ -7,7 +7,7 @@ sidebar:
 ---
 
 
-The VSIX loader did not contain a readily searchable AES key. It assembled one from sixteen fragments: nine returned by obfuscated decoder calls and seven written as literals. Resolving those calls required mapping wrapper functions and a rotated string table. My first shortcut failed because one wrapper declared an intermediate value before returning. A later attempt produced five plausible but incorrect array rotations. Then the correct encrypted-blob layout appeared to fail because `openssl enc` was the wrong tool for the authentication step.
+The VSIX loader assembled one AES key from sixteen fragments: nine decoder calls and seven literals. Recovering it required mapping wrapper functions and a rotated string table. A simple regex missed a wrapper that declared an intermediate value before returning, and five plausible rotations failed checks across the call sites.
 
 The final result was three authenticated plaintext files, recovered without executing the extension. This post follows the checks that distinguished a valid decode from a plausible-looking result. [Proofpoint's report](https://www.proofpoint.com/us/blog/threat-insight/dont-fear-repo-unkdeaddrop-phishing-campaign-targets-developers-steal) already describes the key and Windows architecture; the focus here is the static analysis method.
 
@@ -20,7 +20,7 @@ The final result was three authenticated plaintext files, recovered without exec
 
 ## Start with the calls around the key expression
 
-The key assignment combines literals with calls to several wrapper functions, and reading any one of those calls in isolation is not enough, because a wrapper may change the index, reorder its arguments or add an offset before it ever invokes the underlying decoder. The July analysis identified seven wrappers in the bootstrap and five in `extension.js`, and for each of them I needed to map out three things:
+The key assignment combines literals with calls to several wrapper functions. A wrapper may change the index, reorder its arguments or add an offset before invoking the underlying decoder, so each call must be traced through its wrapper. The July analysis identified seven wrappers in the bootstrap and five in `extension.js`. Each needed three fields mapped:
 
 ```text
 Which argument supplies the string-table index?
@@ -28,7 +28,7 @@ Which argument supplies the decoder key?
 What offset is applied before the underlying call?
 ```
 
-A regex that expects every wrapper to return a decoder call immediately will miss any function that first declares an intermediate value, and that is precisely where the original pass failed. [Acorn](https://github.com/acornjs/acorn) fixes this structural problem by representing both statements in the syntax tree, and although it does not solve the decoder automatically, it gives the analysis something far more reliable to work with than text patterns.
+A regex that expects every wrapper to return a decoder call immediately can miss a function that first declares an intermediate value. [Acorn](https://github.com/acornjs/acorn) represents both statements in the syntax tree. It does not solve the decoder automatically, but it provides a more reliable structure to inspect than text patterns.
 
 ### Parsing an obfuscated wrapper
 
@@ -68,7 +68,7 @@ The workflow never imported or evaluated the target, or ran the extension in a V
 *Figure 1. From obfuscated syntax to authenticated files. Parsing is not execution; the companion scanner does not implement full recovery.*
 
 
-The string array had been rotated, so a valid-looking index could point to the wrong encoded element until the array order was resolved. An early search used one expected `crypt` anchor and produced five misleading candidates. The stronger approach compared each rotation against all resolved call sites.
+The string array had been rotated, so a valid-looking index could point to the wrong encoded element until the array order was resolved. Searching from one expected `crypt` anchor yielded five plausible rotations. Comparing each rotation against all resolved call sites narrowed the candidates.
 
 The recorded offsets were 391 for the extension and 261 for the bootstrap. The selected candidate produced printable decodes at 15 of 15 tested sites; the runner-up produced 3 of 15. That gap was useful, but printability remained a heuristic. The next checks were whether each string fit its call context and whether the key fragments could be reconstructed in source order. The encrypted payloads would provide a stronger validation.
 
@@ -76,7 +76,7 @@ The recorded offsets were 391 for the extension and 261 for the bootstrap. The s
 
 The key expression combined nine decoder results with seven literal fragments. Recovering their values was only half the work; the fragments also had to be concatenated in the original order, including values nested inside parenthesized additions.
 
-A small bounded evaluator handled only string literals and already-decoded values. It never ran the sample code, activated the extension or contacted a server. I have omitted the key itself. Its expected length would be weak evidence; the stronger result is that the recovered key authenticated the retained encrypted payloads.
+A small bounded evaluator handled only string literals and already-decoded values. It never ran the sample code, activated the extension or contacted a server. The key's expected length would be weak evidence; successful authentication of the retained encrypted payloads provides a stronger check.
 
 ## From authenticated payloads to triage
 
@@ -88,17 +88,19 @@ bytes 12–27    authentication tag
 bytes 28–end   ciphertext
 ```
 
-The first attempt with this layout appeared to fail. The historical analysis attributes that result to using `openssl enc` for a GCM authentication workflow. Switching to [Node's cryptographic library](https://nodejs.org/api/crypto.html) allowed the stored tag to be checked correctly. This tooling error could have sent the analysis back into the decoder: a failed command did not show that the key, rotation or field boundaries were wrong.
+The initial `openssl enc` attempt failed because that command did not provide the required GCM authentication check. Switching to [Node's cryptographic library](https://nodejs.org/api/crypto.html) allowed the stored tag to be verified. The failed command did not show that the key, rotation or field boundaries were wrong.
 
 With the corrected operation, all three payloads passed authentication: `detect_malware.py` (60,054 bytes), the browser-related decryption component; `windows-agent-node.js` (56,093 bytes), the Windows collection agent; and `windows-js-pipeline.js` (32,324 bytes), the collection and elevation coordinator.
 
-The plaintext was readable, commented source, which made the next analysis easier. The comments did not establish successful decryption; authentication tied the plaintext to its encrypted input under the recovered parameters. Nor did authentication establish that the payloads ran or collected data. Those are runtime questions. This recovery was completed in July and was not repeated while drafting this series.
+All three payloads decrypted to readable, commented source. Authentication tied each plaintext to its encrypted input under the recovered parameters, but did not establish that a payload ran or collected data. Those remain runtime questions.
 
 ### The smaller scanner built afterward
 
-The companion scanner uses Acorn as well, but it solves a rather different problem, finding selected clipboard-write calls and campaign markers, returning their source locations along with an input hash, and folding a limited set of literal string expressions. A literal addition, for example, can be resolved without evaluating arbitrary JavaScript, whereas a variable reference or function call remains unresolved, and the scanner makes no attempt to reproduce the wrapper mapping or rotated-array recovery described above. Its implementation limits input to 8 MiB and bounds nested literal folding, and the October validation record reports eight AST tests passing, while static spot checks found two clipboard-write sites in the lure bundle and five campaign-marker findings in the larger JavaScript collector. Those results make it useful for triage rather than a universal deobfuscator, and because parsing remains an in-process operation, a byte limit alone is no guarantee against expensive adversarial syntax.
+The companion scanner also uses Acorn, but for a narrower task: it locates selected clipboard-write calls and campaign markers, reports source locations with an input hash, and folds a limited set of literal strings. It can resolve literal additions but leaves variable references and function calls unresolved. It does not reproduce the wrapper mapping or rotated-array recovery described above.
 
-In this case, the complete recovery depended on several checks working together:
+The scanner limits input to 8 MiB and bounds nested literal folding. Eight AST tests cover its parser behavior. Static spot checks found two clipboard-write sites in the lure and five campaign markers in the larger collector. These results support triage use, not general deobfuscation. Because parsing runs in process, the byte limit alone cannot prevent expensive adversarial syntax.
+
+Confidence in the recovery came from several checks working together:
 
 1. structural parsing of the wrappers;
 2. mapping each wrapper's index, key and offset;
@@ -106,7 +108,7 @@ In this case, the complete recovery depended on several checks working together:
 4. exact fragment ordering in the key expression;
 5. authenticated decryption of the payloads.
 
-It was that last step that proved most valuable, because instead of stopping at source that looked reasonable, the analysis had a cryptographic test of the recovered bytes.
+Authenticated decryption was decisive: it tested the recovered bytes rather than whether the source merely looked plausible.
 
 ```text
 detect_malware.py

@@ -44,7 +44,7 @@ The Windows bundle independently points the same way, since it contains:
 
 The installer checks for the capture files and raises an error if they are missing. The associated task is named `GoogleUpdateSupporterNode`. Together, these artifacts support a capture-streaming implementation in the examined material, but there is no recorded victim session. Display availability, permissions and the execution path remain conditions for capture to succeed.
 
-One discrepancy also needed resolution. An earlier upstream dependency comparison suggested that the Linux build lacked capture; later symbol examination found positive capture-related evidence. Missing expected dependencies are not enough to rule out an implementation present in the binary.
+An upstream dependency comparison suggested that the Linux build lacked capture, but later symbol examination found positive capture-related evidence. Missing expected dependencies cannot rule out an implementation present in the binary.
 
 ![Why these symbols suggest repeated capture](../assets/05-screen-capture.png)
 

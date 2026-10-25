@@ -22,7 +22,7 @@ This article walks through the original three rules and their test fixtures, inc
 
 The original three rules operate on different inputs. YARA scans file content. The Linux Sigma rule expects file-event telemetry with a target path. The Windows Sigma rule expects process-creation telemetry with an image path and command line. A detection can only evaluate the fields it receives, so a missing command line or an uncollected user-service directory creates a gap before the rule logic is considered.
 
-The rule set was authored for the companion in October 2026. Performance figures attached to earlier rules in the original case do not transfer to these revisions. Assessment starts with the exact selectors and the test cases that accompany them.
+These companion rules are experimental. Performance figures attached to earlier rules in the original case do not transfer to these versions.
 
 ![A YARA match requires the full conjunction](../assets/11-detection-logic.png)
 
@@ -52,7 +52,7 @@ The additional fixture contains research prose followed by the required framewor
 
 The paired negative replaces the required environment marker with a different label. That buffer no longer matches. Together the fixtures demonstrate both the usefulness and the fragility of the conjunction: it excludes incomplete marker sets, but it can include documentation and miss a renamed implementation.
 
-A match in a malware-analysis archive should therefore be interpreted differently from a match on an unexpected installed agent. Adding an executable-format condition would be a possible design change, but would need its own scope decision and tests. This article leaves the existing rule unchanged and documents its actual behaviour.
+A match in a malware-analysis archive should therefore be interpreted differently from a match on an unexpected installed agent. An executable-format condition would change the rule's scope and needs separate tests; the current rule matches the documented string conjunction.
 
 ### Linux: a path event is not service execution
 
@@ -107,4 +107,4 @@ Those commands run the seven detection tests in the blog bundle. The expanded co
 
 For a YARA hit, retain the file identity, acquisition context and matching offsets. For a Linux unit, inspect the unit definition and associated process activity. For a Windows task, recover the full command line, task action and relevant ancestry. Those follow-ups help separate a research artifact or simulation from an unexpected deployment.
 
-The next step is conversion and replay against representative telemetry from the intended environment, including clean developer workloads. That evaluation has not been performed, so the rules remain experimental. The present fixtures make its open questions visible instead of hiding them behind a passing test count.
+The rules still need conversion and replay against representative telemetry from the intended environment, including clean developer workloads. That evaluation has not been performed, so operational precision and recall remain unknown.

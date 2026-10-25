@@ -60,7 +60,7 @@ Is this a protected top-level directory on macOS?
               failure or timeout -> skip
 ```
 
-The code is designed to avoid pursuing locations it cannot readily access, which is a much narrower behavior than a TCC bypass, because permissions the process has already been granted can still change what it is able to reach. The earlier claim that the implementation could never produce a privacy prompt was, in hindsight, too broad.
+The code avoids pursuing locations it cannot readily access; this is narrower than a TCC bypass. Permissions already granted to the process can still affect access and may produce a privacy prompt.
 
 ### KeePass is caught by an extension selector
 

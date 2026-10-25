@@ -93,6 +93,6 @@ On the static side, a later scan of a held lure bundle found two clipboard-write
 5ee915bb8d0363bd92176cc595d7425fd7e7830508d8824d90b5285a3d2b11bd
 ```
 
-The companion scanner can locate those calls and report their arguments wherever they happen to be literal, but it cannot demonstrate the visual deception on its own, which still requires the comparison I described above between the rendered instruction and the generated command.
+The companion scanner can locate those calls and report their arguments when the values are literal. It cannot demonstrate the visual deception, which requires comparing the rendered instruction with the generated command.
 
 In the next post I follow the repository branch, where a package calling itself Google Update Support installs its collection components through the code editor.

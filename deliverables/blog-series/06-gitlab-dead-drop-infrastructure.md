@@ -23,7 +23,6 @@ Following that dependency led from the collector to the configuration history, t
 > - The payload reads its destinations from `config.json` in a GitLab repository, which also holds a `config-alt.json` fallback set, so servers can change without a new payload hash.
 > - The primary file had five revisions on 26 May and was switched to `api.cklomino[.]ink` and `api.dsfmot[.]xyz` on 13 July 2026.
 > - A certificate and a Subtensor sign-in panel historically associated `207.241.172[.]222` with the C2 and administration services.
-> - A Go `vcs.time` value five minutes and thirty-four seconds after a phishing message is version-control metadata, not proof of when the implant was compiled.
 
 ## The resolver
 
@@ -54,7 +53,7 @@ The July change is associated with commit `c3c71d65`; it replaces the primary de
 
 The configuration resource lets a destination change independently of the payload. It does not show how each client handles that change. A client may read the new value at startup; one using a cached address may keep trying the old destination. A failed connection could trigger a refresh, use a fallback or simply retry. Those are implementation and runtime questions beyond the fact that the file changed.
 
-The early case narrative called domain takedowns ineffective. That was too categorical: blocking a destination can interrupt traffic, while the configuration resource may supply another address to clients that consult it. Response should establish whether an affected client has a usable destination, how it obtains one and whether it connects.
+Blocking a destination can interrupt traffic, while a client that consults this configuration resource may receive another address. The history does not show whether clients refreshed their configuration. Response should establish which destination an affected client used and whether it connected.
 
 ## From the host list to the origin
 
@@ -70,12 +69,4 @@ The saved service enumeration listed SSH, HTTP and HTTPS. Its SSH profile includ
 
 These observations do not establish that the origin was dedicated or that blocking its IP would have no collateral effect. The panel seen on the bare IP strengthens the service association, but the scan cannot establish every tenant or later ownership change. The certificate's validity dates describe the certificate, not the operation's start or end.
 
-### A timestamp mistaken for a build time
-
-The infrastructure and build records show two nearby timestamps: a phishing message at 01:08:32 UTC on 21 July, followed by a Go `vcs.time` value of 01:14:06 UTC. The gap is five minutes and thirty-four seconds. An earlier note treated the second value as the implant's compile time. It records version-control metadata, so the sequence does not show when the implant was built.
-
-Keep the correlation, but label each timestamp by what it records. The same discipline applies to domain registrations, configuration changes and archive metadata.
-
-Across the infrastructure analysis, preserve the resource URL, per-file revision history, selected values, observation dates, client code and source of each origin association. Distinguish DNS resolution, certificate names and application content. That provenance lets another analyst reassess a relationship after infrastructure changes without inheriting an unexplained “C2” label.
-
-Part 7 examines the target-acquisition tooling and its two SQLite pools. Part 8 follows the separately recovered administration frontend, including its delivery-repository monitor and wallet-management screens.
+Part 7 follows the target-acquisition tooling behind the two SQLite pools.

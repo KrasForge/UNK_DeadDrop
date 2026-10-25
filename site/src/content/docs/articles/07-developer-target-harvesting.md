@@ -37,7 +37,7 @@ This connects collection to message preparation, but a stored row does not show 
 
 ### The repository count needed a union
 
-My first repository total was 20,880, but that described only the safe pool. The second database added repository values that partly overlapped with the first, so counting the full corpus required a union. Read-only aggregate queries recorded on 23 October found:
+An earlier repository count of 20,880 covered only the safe pool. The second database added repository values that partly overlapped with the first, so counting the full corpus required a union. Read-only aggregate queries recorded on 23 October found:
 
 - 79,698 rows in the safe pool;
 - 62,667 rows in the antispam pool;
@@ -72,7 +72,5 @@ The mail path must therefore be tied to specific configurations and messages, no
 ## Where the targeting evidence stops
 
 The code and configuration connect harvesting to message preparation. The databases quantify the stored contact material. Neither supplies the missing send logs, delivery outcomes or endpoint evidence needed to count people contacted or compromised. Even the repository total describes stored values rather than a fresh verification of repository existence or ownership.
-
-The earlier total of 20,880 repository values was therefore a scope error, not evidence that the operation suddenly acquired thousands of new targets. Adding the second pool changed the corpus being counted. Recording the input files and the comparison method makes that correction inspectable without publishing individual addresses.
 
 The separate administration frontend is the subject of Part 8. Its mail and wallet views are relevant to the wider investigation, but they are not evidence that every address in these databases entered one integrated backend.

@@ -48,9 +48,9 @@ A rendered Claim All button is not a transaction receipt. No backend implementat
 
 ### The SuperAdmin check
 
-The client helper grants super-administrator treatment when either a user flag is set or an email comparison matches. It controls frontend navigation and protected routes; I have omitted the mailbox value. My early interpretation was too strong: a hardcoded client-side email does not establish which accounts could execute a server-side claim, especially since the helper has another condition and the backend authorization logic was not recovered.
+The client helper grants super-administrator treatment when either a user flag is set or an email comparison matches. These checks control frontend navigation and protected routes; without the backend authorization logic, they do not establish which accounts could execute a server-side claim.
 
-I also revised an early interpretation of the signup route. It initially suggested a broader operator-account workflow, but further source inspection found a disabled-signup message. The interface supports roles; it does not reveal how many people used them.
+The signup route displays a disabled-signup message, so the client does not establish an active account-creation workflow. The interface supports roles but does not reveal how many people used them.
 
 ## Connecting the client to the collection analysis
 
@@ -59,5 +59,3 @@ The strongest relationship is concrete: the collectors select wallet-related mat
 The harvesting tools discussed in Part 7 were recovered separately. Their functions fit the wider operation, but the frontend does not demonstrate a complete integration between those SQLite pools, the mail views and the wallet workflow. Actual sends, populated backend tables, completed claim requests and confirmed transactions would answer different questions and require their own evidence.
 
 The seventy modules made the client inspectable. They did not turn the investigation into an authenticated session or a database export. Source maps preserved comments and helped explain interface intent, but comments and route names are still statements in client code. The analysis rests on the recovered modules and their relationships, with backend implementation and outcomes left unresolved.
-
-That boundary is useful for later investigation: it identifies which features are visible in source and which conclusions need service-side records. It also prevents a compelling interface from being mistaken for a record of successful theft.

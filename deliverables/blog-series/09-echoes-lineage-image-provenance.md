@@ -16,7 +16,7 @@ og_image_alt: "Diagram of the four retained ECHOES archive revisions"
 
 The ECHOES lure paired an animation-project theme with a password-protected archive. Its repository history preserved four versions of the delivery kit. The artwork and staging structure remained recognizable as repository destinations changed. The third revision added a persistence-related script, which the fourth retained.
 
-The final PowerShell payloads were unavailable through the unauthenticated retrieval routes I examined. The archive still supports two investigations: a revision-by-revision account of staging changes, and a provenance trail in the project's poster image. ECHOES is a separate branch from the ClickFix and VSIX chains. Its missing payload means the collection capabilities recovered from those other samples cannot be assigned to it.
+The archive supports two investigations: a revision-by-revision account of staging changes and a provenance trail in the project's poster image. ECHOES is a separate branch from the ClickFix and VSIX chains. Capabilities recovered from those other samples cannot be assigned to it without the missing payload.
 
 > **Key Takeaways**
 >
@@ -34,7 +34,7 @@ The repository history records archive changes on 5 March, on 17 March and twice
 3. `b209f365`, 25 March, 03:54: another repository destination, with the tag changed to WORD and a VBS persistence layer added.
 4. `4b6ea6b2`, 25 March, 13:29: a further destination change and a new access token, with the staging otherwise unchanged.
 
-The repeated staging structure establishes a useful lineage, but it also shows why describing the later versions as "the same archive with a different C2" is not quite accurate, since the third and fourth versions include an additional persistence component. The history also contains embedded access tokens, but those values are not needed to demonstrate the sequence, so I have omitted them here, and they were not used to retrieve the final stage.
+The repeated staging structure establishes a useful lineage, but describing the later versions as "the same archive with a different C2" misses the persistence component added in the third revision and retained in the fourth. The history also contains embedded access tokens. Their values are unnecessary to establish the sequence, and they were not used to retrieve the final stage.
 
 ![Four retained ECHOES archive revisions](assets/07-echoes.png)
 
@@ -47,9 +47,9 @@ That is why complete revisions are more informative than a project name or poste
 
 ## Where the payload trail stopped
 
-The staging references led to final PowerShell resources that were unavailable through the unauthenticated routes I examined. I did not use recovered operator credentials, so the capability assessment stops at the staging code.
+The staging references led to final PowerShell resources unavailable through the unauthenticated routes. No final payload was available for capability analysis.
 
-Account status was less clear than a 404 suggested. One historical check found an unavailable account whose name was also unavailable for registration. That supports a suspension hypothesis, but does not confirm it with the platform. I also checked neighboring numeric identifiers and found no distinctive batch-registration pattern. Consecutive IDs can belong to unrelated signups; proving common registration control would require unavailable platform data. These limits prevent weak account relationships from filling the missing payload gap. They do not diminish the preserved archive history.
+Account status was less clear than a 404 suggested. One historical check found an unavailable account whose name was also unavailable for registration. That supports a suspension hypothesis, but does not confirm it with the platform. Neighboring numeric identifiers showed no distinctive batch-registration pattern. Consecutive IDs can belong to unrelated signups; proving common registration control would require unavailable platform data. These limits prevent weak account relationships from filling the missing payload gap. They do not diminish the preserved archive history.
 
 ## The poster retained a C2PA structure
 
@@ -66,17 +66,17 @@ OpenAI / Sora signing-pipeline references
 
 The manifest history records creation, conversion and ingredient-opening actions across two manifests. Its embedded thumbnail was described as a lower-resolution version of the poster. These fields provide stronger evidence about the artwork's production pipeline than a visual judgment that it “looks AI-generated.”
 
-The original examination also reports successful signature validation. I report that historical result here; I did not freshly validate the image or certificate status. The provenance assertions concern the image. They do not identify who placed it in the lure or prove that the distributor generated it.
+The case record reports successful signature validation; no fresh image or certificate-status validation is available here. The provenance assertions concern the image. They do not identify who placed it in the lure or prove that the distributor generated it.
 
-The recorded manifest inspection found no prompt or user identifier, and its redacted-assertions array was empty. An earlier interpretation treated the missing fields as if they had been stripped. The evidence does not support that: information may simply never have been included, and an empty redaction list is not a record of removal.
+The manifest contains no prompt or user identifier, and its redacted-assertions array is empty. Those fields may never have been included; an empty redaction list is not evidence that information was removed.
 
 Other portraits examined in the case lacked the poster's C2PA structure. Re-encoding could explain that difference, but it does not prove intentional provenance removal; different export paths or source histories could produce the same result. The bounded conclusion is that the retained poster carries assertions associated with an AI image-generation pipeline, but no operator identity.
 
 ### The certificate date was not a creation timestamp
 
-The leaf certificate was valid from 15 April 2025 to 15 April 2026; the examination found no trusted timestamp token. My initial note used that interval to date the image's generation. That overreached: certificate validity does not establish when an artifact was signed or generated. Repository commits date when the image appears in preserved history, not when it was created.
+The leaf certificate was valid from 15 April 2025 to 15 April 2026, and the examination found no trusted timestamp token. Certificate validity does not establish when an artifact was signed or generated. Repository commits date when the image appears in preserved history, not when it was created.
 
-This is the same timestamp problem as Go's `vcs.time` in Part 6: an accurate field can support an inaccurate conclusion if its meaning shifts. The PNG examination found no payload appended after the end marker. That is a bounded structural result, not exhaustive proof that the image contains no hidden content.
+The PNG examination found no payload appended after the end marker. That is a bounded structural result, not exhaustive proof that the image contains no hidden content.
 
 ### What the archive establishes
 

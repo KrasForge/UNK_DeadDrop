@@ -17,7 +17,7 @@ Three recruitment messages started this investigation: a Nodit-themed lure in Ju
 
 That breadth can make the case look more unified than the evidence warrants. Each connection had to be established separately, and some relationships remain hypotheses. This article reconstructs the links and marks where the trail stops.
 
-The first nine articles examined individual components. Here I connect them by asking what each artifact established, why it prompted the next question, and where the evidence stopped. This is a reconstruction from retained records, not a claim that every discovery happened in one uninterrupted sequence.
+The first nine posts examined individual components. This post connects them by tracing what each artifact establishes, why it prompts the next question and where the evidence stops.
 
 > **Key Takeaways**
 >
@@ -30,7 +30,7 @@ The first nine articles examined individual components. Here I connect them by a
 
 The retained message index records the Nodit message on 22 June, the D2S AI Trade message on 21 July and the Category Labs message on 22 July 2026. Those dates describe the received-message record. Later repository commits or historical infrastructure observations can predate the first message without becoming earlier observations made by the analyst.
 
-The headers also contained a practical trap: an inbound forwarding service inserted reverse-alias information. Treating that visible address as operator infrastructure would have attached the analyst's own forwarding path to the campaign. The investigation therefore separated message presentation, original-sender fields and transport evidence. Public articles omit the personal mailbox values; the lesson depends on the distinction between fields, not on exposing those addresses.
+The headers also contained a practical trap: an inbound forwarding service inserted reverse-alias information. Treating that visible address as operator infrastructure would have attached the analyst's own forwarding path to the campaign. The investigation therefore separated message presentation, original-sender fields and transport evidence.
 
 These three messages are evidence that their recipients received these lures. They are not a statistical sample of all targeting, and they do not show what happened after delivery. That narrow starting claim matters when the investigation later encounters a database containing over a hundred thousand address strings.
 
@@ -73,7 +73,7 @@ The labels on those relationships are essential. “References” is a source ob
 
 Once a held component references a mutable configuration resource, the payload hash no longer describes the entire destination-selection state. The relevant evidence includes the configuration value and the revision or observation time associated with it. The July history records a destination change; it does not show every client's response to that edit.
 
-The origin analysis adds another type of relationship. Certificates, passive DNS and matching panel content support historical service associations. They do not establish exclusive ownership of an address or identify every tenant. The withdrawn earlier-phase hypothesis illustrates why shared hosting alone cannot extend the campaign timeline. A new node in an infrastructure graph requires an explicit reason for inclusion, not just proximity to an existing node.
+The origin analysis adds another type of relationship. Certificates, passive DNS and matching panel content support historical service associations. They do not establish exclusive ownership of an address or identify every tenant. Add an infrastructure node only when evidence supports its relationship, not merely because it is close to an existing node.
 
 Part 6 examines these observations individually. In the broader investigation, their purpose is to connect particular service roles at particular times while leaving ownership and current availability separate.
 
@@ -89,11 +89,11 @@ ECHOES preserves four archive revisions and a changing retrieval configuration. 
 
 The same discipline applies to the rest of the case. Source can establish a collection attempt, authentication can validate recovered plaintext, and a hash can establish identity. None alone establishes victim loss or a real-world perpetrator. The research becomes more useful when a reader can tell which kind of evidence supports each sentence.
 
-For a follow-up investigation, I would preserve a compact record for every relationship: the two artifacts, their identities, the observation date, the source of the relationship and the strongest alternative explanation. That would make it possible to revise one conclusion without silently rewriting the rest of the case.
+A useful follow-up record names each relationship's two artifacts, their identities, the observation date, the supporting evidence and the strongest alternative explanation. That makes individual conclusions revisable without silently rewriting the rest of the case.
 
 ## What the public record adds, and what remains distinctive
 
-The public reporting now includes [a direct account of the UNK_DeadDrop campaign](https://brhopkins.uk/posts/foxtopia/), as well as [later reporting on developer lures and overlapping implementation details](https://dev.to/edison_flores_6d2cd381b13/a-fake-recruiter-sent-me-a-job-offer-that-ended-in-my-terminal-the-trojan-is-still-live-2okf). These reports matter to the novelty assessment: developer phishing, malicious VS Code extensions, credential and wallet theft, and the broad Overlord lineage are not new claims of this investigation. The July article that surfaced in the refresh predates the original evidence cutoff; its later update does not make its initial reporting a post-cutoff discovery.
+The public reporting includes [a direct account of the UNK_DeadDrop campaign](https://brhopkins.uk/posts/foxtopia/), as well as [later reporting on developer lures and overlapping implementation details](https://dev.to/edison_flores_6d2cd381b13/a-fake-recruiter-sent-me-a-job-offer-that-ended-in-my-terminal-the-trojan-is-still-live-2okf). These reports matter to the novelty assessment: developer phishing, malicious VS Code extensions, credential and wallet theft, and the broad Overlord lineage are not new claims of this investigation. The July article predates the original evidence cutoff; its later update does not make its initial reporting a post-cutoff discovery.
 
 The strongest contribution here is narrower and case-specific: the retained artifacts let readers inspect how the clipboard builder works, how the VSIX configuration selects deployment settings, how targeting data and administration functions are represented, and how the resolver and ECHOES archives changed over time. The October follow-up describes similar implementation markers, but it traces back to the same reporter's account and does not independently verify a sample. It is a useful lead, not independent confirmation. On this evidence, the series supports a detailed technical contribution; it does not establish that these behaviors were first observed here.
 

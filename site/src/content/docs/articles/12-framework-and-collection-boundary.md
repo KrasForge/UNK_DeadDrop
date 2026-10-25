@@ -7,9 +7,9 @@ sidebar:
 ---
 
 
-The Linux sample identifies itself as `overlord-client/cmd/agent` and includes a WebAssembly runtime. Both initially looked distinctive. The historical upstream comparison showed that the module path and general plugin capability belonged to the framework lineage. A dependency comparison also appeared to rule out screen capture, but later binary examination found capture-related symbols.
+The Linux sample identifies itself as `overlord-client/cmd/agent` and includes a WebAssembly runtime. A historical upstream comparison places the module path and general plugin capability in the framework lineage. A dependency comparison suggested that the Linux build lacked screen capture, but later binary examination found capture-related symbols.
 
-The retained case supports an Overlord-derived agent with additional collection-related components. It does not include a complete, pinned source diff that establishes who wrote each addition. This article separates positive evidence in the sample from the limited historical comparison, then shows which conclusions remain supported.
+The retained case supports an Overlord-derived agent with additional collection-related components, but no complete, pinned source diff establishes who wrote each addition. Positive evidence in the sample must therefore remain distinct from the limited historical comparison.
 
 > **Key Takeaways**
 >
@@ -48,7 +48,7 @@ The July comparison inspected selected Overlord files, including the client modu
 
 That limits the strength of a negative comparison. A retained binary can be inspected again. A statement that a string was absent from an upstream file in July cannot be reproduced against an unspecified later version and called the same experiment. Looking at today's repository would establish a new comparison, not repair the missing historical snapshot.
 
-The article therefore treats upstream differences as recorded findings within the examined scope. It does not describe them as an exhaustive diff across every version, fork or plugin. The missing baseline is also why the strongest result is the sample's positive collection evidence rather than a claim that nobody else using the framework could possess it.
+These upstream differences are findings within the examined scope, not an exhaustive diff across every version, fork or plugin. Without the missing baseline, the strongest result is the sample's positive collection evidence, not a claim that nobody else using the framework could possess it.
 
 ![Framework lineage and collection evidence](../assets/12-framework-boundary.png)
 
@@ -81,18 +81,18 @@ Other parts of the case add deployment context: the phased JavaScript collection
 | Wallet endpoint and client-header markers | Held artifact and collection analysis | Narrower selectors when combined with framework context |
 | GUS configuration and phase-three sweep | Separate recovered collection source | Deployment/collection logic beyond a generic framework label |
 | Missing public build revision | Historical lookup result | Unresolved source provenance, not proof of ownership |
-| Capture-related symbols | Later binary capability review | Earlier capture-free inference cannot stand as categorical |
+| Capture-related symbols | Later binary capability review | Capture implementation markers occur in the held binary; runtime remains unverified |
 
 The table keeps the evidence types separate. A source selector, module dependency and symbol set have different relationships to runtime behavior. Combining them can strengthen an assessment only when their provenance remains visible.
 
-The original comparison inferred that the Linux implant lacked capture because certain expected upstream capture dependencies were missing. The later recheck found previous-frame, block-comparison and capture-loop symbols in the held binary. Those positive observations require withdrawing the categorical capture-free conclusion.
+The original comparison inferred that the Linux implant lacked capture because expected dependencies were missing. Later examination found previous-frame, block-comparison and capture-loop symbols in the held binary, so the evidence does not support a categorical capture-free conclusion.
 
-They do not establish a working desktop stream on every Linux host. Reachability, platform implementation, display access and permissions remain separate questions. Part 5 examines the capture evidence in detail; the lesson here is methodological. A dependency inventory is evidence about recorded components, not an exhaustive proof that an implementation is absent.
+The symbols do not establish a working desktop stream on every Linux host. Reachability, platform implementation, display access and permissions remain separate questions. Part 5 examines the capture evidence in detail. A dependency inventory describes recorded components; it cannot prove an implementation is absent.
 
 The same restraint applies to authorship. Finding an addition relative to selected public files does not identify who wrote it. Reused code, another fork or an unpublished component could explain the difference. The retained artifacts support the behaviour assessment more strongly than they support a personal attribution.
 
-The historical lookup did not find the embedded build revision in the public repository examined. The early note treated that as proof of a private fork. The revised evidence report allows other explanations, including unpublished work, removed history or metadata provenance that the corpus cannot resolve.
+The historical lookup did not find the embedded build revision in the public repository examined. That does not establish a private fork. Unpublished work, removed history or other metadata provenance remain possible explanations that the retained corpus cannot resolve.
 
-A rigorous follow-up would preserve the exact upstream commit and relevant files, identify each sample by hash, and record the extraction commands and comparison output. That would make a future absence claim inspectable. It would still require care before translating a code difference into an operator identity.
+Reproducing the comparison requires the exact upstream commit and files, each sample's hash, and the extraction commands and output. Even then, a code difference would not by itself identify an operator.
 
 For detection, combine framework markers with collection context, as the companion's [wallet-agent YARA rule](https://github.com/KrasForge/unk-deaddrop-companion/blob/main/rules/yara/deaddrop_wallet_agent.yar) does, and interpret each match in light of where the file was found. Framework ancestry starts the analysis; surrounding artifacts determine how far the conclusion can go.
