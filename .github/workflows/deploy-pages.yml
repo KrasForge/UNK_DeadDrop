@@ -7,10 +7,7 @@ on:
       - 'site/**'
       - 'deliverables/blog-series/**'
       - 'deliverables/preprint/**'
-      - 'deliverables/public-repository/rules/**'
-      - 'deliverables/public-repository/tests/**'
-      - 'deliverables/public-repository/requirements-dev.txt'
-      - 'deliverables/public-repository/LICENSE'
+      - 'deliverables/unk-deaddrop-companion/**'
       - '.github/workflows/deploy-pages.yml'
   workflow_dispatch:
 
@@ -29,6 +26,9 @@ jobs:
     steps:
       - name: Checkout repository
         uses: actions/checkout@v7
+
+      - name: Package the current article series
+        run: python3 deliverables/blog-series/package.py
 
       - name: Install, build, and upload site
         uses: withastro/action@v6

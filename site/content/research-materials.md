@@ -17,7 +17,7 @@ Each article links directly to the reports supporting its claims. The complete p
 
 ## Detection companion
 
-The [companion repository](https://github.com/KrasForge/unk-deaddrop-companion) contains the parse-only AST scanner, experimental YARA and Sigma rules, and inert test fixtures. Tests do not establish production precision, recall, telemetry coverage, or alert delivery.
+The [companion repository](https://github.com/KrasForge/unk-deaddrop-companion) contains the parse-only AST scanner and 33 named YARA rules across 28 files. A read-only replay matched every rule against retained case artifacts; a separate scan of 1,914 local software files produced no hits. The rules remain experimental and the small baseline does not establish fleet-wide false-positive rates. Sigma rules are omitted because authentic endpoint event logs were unavailable for replay.
 
 ## Citation boundary
 

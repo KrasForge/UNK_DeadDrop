@@ -23,15 +23,15 @@ The archive preserves the relative links between articles, images and evidence.
 
 The numbered Markdown files and ZIP are the current twelve-part edition. Current
 standalone HTML and PDF renders are in [`rendered/2026-10-26/`](rendered/2026-10-26/index.html).
-The `2026-10-25` edition retains the earlier viewport previews. Older folders
-directly inside `rendered/` retain historical seven-part previews. The ZIP
-contains the Markdown edition and linked evidence, not the rendered previews.
+Only that dated edition is current; earlier rendered folders are superseded
+previews and should not be cited. The ZIP contains the Markdown edition and linked
+evidence, not the rendered previews.
 Each hosted article has a canonical GitHub Pages URL. Every article links to the
 [companion detections and static scanner](https://github.com/KrasForge/unk-deaddrop-companion).
 The preprint is published on Zenodo as version 1.0 under CC BY 4.0:
 [version DOI](https://doi.org/10.5281/zenodo.23652298) ·
-[latest-version DOI](https://doi.org/10.5281/zenodo.23652297). The ZIP also
-includes the small rule/test bundle linked from Part 11.
+[latest-version DOI](https://doi.org/10.5281/zenodo.23652297). Current rules,
+tests and validation notes live in the companion repository.
 
 ## Editorial approach
 
@@ -70,7 +70,7 @@ series; the separate preprint has a Zenodo record.
 The supporting PDFs are edited reports derived from restricted evidence. They do
 not contain the raw databases or a complete forensic sample set. The ZIP includes
 the twelve articles, this index, validation notes, twelve diagrams, linked evidence
-PDFs, the preprint, the explicitly linked detection rules/tests and their license
-and requirements, and a checksum file.
+PDFs, the preprint, and a checksum file. Current detection rules and tests are
+maintained in the companion repository.
 
 [Validation record](VALIDATION.md) · [Technical paper](../preprint/UNK_DeadDrop-Preprint.pdf)

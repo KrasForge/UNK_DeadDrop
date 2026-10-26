@@ -11,7 +11,7 @@ tags:
   - "dead drop resolver"
   - "GitLab"
   - "infrastructure"
-og_image_alt: "Diagram of the primary and fallback configuration history"
+og_image_alt: "Diagram of the config.json history and separate config-alt.json record"
 ---
 
 On 13 July 2026, a GitLab commit replaced a list of server names with `api.cklomino[.]ink` and `api.dsfmot[.]xyz`. The file held configuration, not a payload; its significance came from the client code that read it. A client consulting this resource could obtain its destination without carrying a fixed address in the deployed file. The configuration could therefore change without requiring a new payload hash.
@@ -26,23 +26,23 @@ The payload references this resource:
 gitlab[.]com/drop-indexing/tasks/-/raw/main/config.json
 ```
 
-The history also contains `config-alt.json`, identified as a fallback set. The repository therefore publishes destination values separately from the executable code. MITRE ATT&CK describes the general technique as a [dead drop resolver (T1102.001)](https://attack.mitre.org/techniques/T1102/001/).
+The repository also contains a separate `config-alt.json` file with another pair of destination strings. Neither retained payload references that file, so its name and contents do not show that a client used it. The recovered JavaScript has its own hard-coded fallback, `api.domatisc[.]ink`, and a resolver function that requests the raw GitLab `config.json` resource. No retained endpoint log confirms that a victim fetched either file. This code pattern is relevant to MITRE ATT&CK's [dead drop resolver technique (T1102.001)](https://attack.mitre.org/techniques/T1102/001/).
 
 A payload with the same hash can receive different destinations depending on when it fetches this resource.
 
-![Two configuration files, separate histories](assets/05-resolver.png)
+![Timeline of the referenced config.json changes and the separate config-alt.json file](assets/05-resolver.svg)
 
-*Figure 1. The primary configuration changed in May and July; the fallback file has a separate June revision.*
+*Figure 1. The referenced configuration changed in May and July. A separate file was added in June, but no retained payload references it.*
 
 ### Reconstructing the changes
 
 The primary file has five recorded revisions on 26 May, beginning with an initial set of `domatisc[.]ink`, `coslyintra[.]online` and `valorecuiting[.]online`, after which subsequent edits remove and restore an entry, introduce `api.` prefixes, and finally leave a set of two hosts. The recorded states after that, in order, are:
 
 1. 26 May 2026, final listed revision of `config.json`: `api.domatisc[.]ink` and `api.coslyintra[.]online`.
-2. 1 June 2026, fallback file `config-alt.json`: `api.onoplainai[.]ink` and `api.migadyn[.]info`.
+2. 1 June 2026, separate file `config-alt.json`: `api.onoplainai[.]ink` and `api.migadyn[.]info`. Its use by the recovered client is unestablished.
 3. 13 July 2026, about 07:10 UTC, `config.json`: `api.cklomino[.]ink` and `api.dsfmot[.]xyz`.
 
-Commit `c3c71d65` replaces the primary destination set left by the May revisions. The retained history contains six commits to `config.json` and one to `config-alt.json`. The fallback was a separate resource with its own revision history.
+Commit `c3c71d65` replaces the primary destination set left by the May revisions. The retained history contains six commits to `config.json` and one to `config-alt.json`. The latter is a separately recorded resource, not an evidenced client fallback.
 
 The configuration resource lets a destination change independently of the payload. It does not show how each client handles that change. A client that fetches the file again may receive a new address, while one using a cached destination may continue trying the old server. The retained history contains no client execution trace to resolve that behavior.
 

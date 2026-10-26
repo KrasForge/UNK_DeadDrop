@@ -19,22 +19,43 @@ Checked all twelve source files for valid local links, canonical URLs, companion
 links, balanced fences, absence of em dashes and absence of the removed FAQ and
 article-details sections. All checks passed.
 
-Refreshed the current standalone HTML/PDF edition with the existing claude-blog
-renderer at commit `3544423`, using WeasyPrint. All twelve HTML source hashes match
-the rendered Markdown, the PDFs have valid headers, and local HTML links resolve.
-Historical editions and the deposited preprint were not rewritten.
+Rendered all twelve standalone HTML/PDF articles with the claude-blog
+`blog_render.py` renderer, using WeasyPrint. Each HTML source hash matches its
+rendered Markdown copy, and the PDFs were produced successfully. The current
+edition includes the latest Part 2 and Part 11 scope and rule references. The
+deposited preprint remains version 1.0.
 
 The Astro production build passed with Node.js 24. All twelve generated article
 bodies contain their diagrams and exclude em dashes and the removed sections.
 
+## Detection coverage revision, 26 October 2026
+
+Updated Parts 2 and 11 to link only to retained, artifact-tested detections.
+The companion now contains 33 named YARA rules in 28 files. A read-only replay
+covered 192 selected files and 395 raw or archive-member views; every rule
+matched retained case material. A separate scan of 1,914 local software files
+and 2,379 views had no hits. Five RAR containers were not decoded. Sigma event
+rules were removed because authentic endpoint logs were unavailable, and
+workspace-file rules were removed because the original `.vscode` targets were
+not retained. The wallet rule's earlier prose collision was fixed by requiring
+ELF magic at byte zero; the marker-rich prose boundary fixture now stays
+negative. The small baseline does not establish production false-positive
+rates.
+No samples were executed or uploaded.
+The Astro Pages build also passed with Node.js 22.23.4 after syncing the current
+companion source and article Markdown.
+
 ## Current standalone render, 26 October 2026
 
-Rendered each current Markdown article to HTML and PDF with the public
+The initial twelve-page edition was rendered with the public
 [claude-blog](https://github.com/AgriciDaniel/claude-blog) renderer at commit
-`3544423`. Canonical metadata, Open Graph URLs and companion links come from the
-current article sources. The published Zenodo version 1.0 PDF and linked public
-evidence reports are included; the local version 1.1 preprint draft is excluded.
-The standalone edition is under `rendered/2026-10-26/`.
+`3544423`. After the detection-scope revision, Parts 2 and 11 were regenerated
+from current Markdown using the existing claude-blog HTML/CSS template, Python
+Markdown and WeasyPrint. Their source hashes, descriptions, dates and word counts
+were updated; Part 11's diagram now shows the artifact replay and local baseline.
+The other ten pages are unchanged. The published Zenodo version 1.0 PDF and
+linked public evidence reports are included; the local version 1.1 preprint draft
+is excluded. The edition is under `rendered/2026-10-26/`.
 
 The full five-gate delivery contract and new viewport screenshots were not run.
 These refreshed formats are not marked as contract-approved. The 25 October
@@ -77,24 +98,26 @@ upstream snapshot explicit; no fresh upstream comparison is represented as compl
 
 Checks for this edition:
 
-- Twelve sequentially numbered Markdown articles; 45 distinct local link targets resolve.
-- Six existing figures remain linked; new articles use evidence comparison tables.
+- Twelve sequentially numbered Markdown articles; 23 local link targets resolve.
+- All twelve articles render with their current diagrams and selected evidence links.
 - Three existing JavaScript snippets parse, and the inert Acorn demonstration passes.
-- Eight companion AST tests rerun successfully.
-- Four original detection tests plus three new inert boundary tests pass (seven total).
-- Boundary tests demonstrate a harmless-text YARA match, task-marker substring
-  matching and case folding in the local Sigma fixture evaluator. Rules are unchanged.
-- Official YARA, Sigma modifier and Go build-setting references were consulted for
-  technical semantics. References are linked beside the relevant article statements.
-- The ZIP includes only the articles and explicitly selected supporting files,
-  including the small detection test/rule bundle with pinned requirements and MIT license.
-- ZIP member hashes are checked by the package builder. The extracted detection tests
-  were rerun successfully from the bundle, independently of the source workspace layout.
+- Eight companion AST scanner tests and six Python detection/boundary tests pass.
+- The read-only actual-artifact replay produced hits for all 33 YARA rules. The
+  small baseline scan produced no hits; neither result estimates production
+  precision or recall.
+- The inert boundaries reject prose collisions and partial-marker cases. No
+  Sigma rules or synthetic event records are published as detections.
+- Official YARA and Go build-setting references were consulted for technical
+  semantics. References are linked beside the relevant article statements.
+- The ZIP includes the Markdown articles, diagrams, preprint v1.0, selected
+  edited evidence reports and checksums. Current detection rules live in the
+  companion repository.
+- ZIP member hashes are checked by the package builder.
 
 Historical sample scans are reported as historical; no malware execution, service
 installation, scheduled-task registration or production SIEM validation was performed.
-Existing HTML/PDF previews are still the historical seven-part edition and are not
-updated previews of these twelve Markdown articles.
+Earlier render folders are superseded previews. The current HTML/PDF edition is
+the twelve-part `rendered/2026-10-26/` set.
 
 ## Previous split validation
 

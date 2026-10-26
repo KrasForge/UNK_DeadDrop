@@ -5,6 +5,7 @@ import { fileURLToPath } from 'node:url';
 const siteRoot = resolve(dirname(fileURLToPath(import.meta.url)), '..');
 const workspaceRoot = resolve(siteRoot, '..');
 const seriesRoot = resolve(workspaceRoot, 'deliverables/blog-series');
+const companionRoot = resolve(workspaceRoot, 'deliverables/unk-deaddrop-companion');
 const docsRoot = resolve(siteRoot, 'src/content/docs');
 const contentRoot = resolve(siteRoot, 'content');
 const generatedRoot = resolve(docsRoot, 'articles');
@@ -91,21 +92,17 @@ await copyFile(
   resolve(publicRoot, 'downloads/UNK_DeadDrop-Blog-Series.zip')
 );
 
-const companionFiles = [
-  'LICENSE',
-  'requirements-dev.txt',
-  'tests/test_detections.py',
-  'tests/test_blog_boundaries.py',
-  'rules/yara/deaddrop_wallet_agent.yar',
-  'rules/sigma/linux_google_agent_persistence.yml',
-  'rules/sigma/windows_capture_task.yml'
-];
+const copyCompanionTree = async (source, destination) => {
+  await mkdir(destination, { recursive: true });
+  for (const entry of await readdir(source, { withFileTypes: true })) {
+    if (['.git', '.venv', 'node_modules', '__pycache__'].includes(entry.name)) continue;
+    const from = resolve(source, entry.name);
+    const to = resolve(destination, entry.name);
+    if (entry.isDirectory()) await copyCompanionTree(from, to);
+    else if (entry.isFile()) await copyFile(from, to);
+  }
+};
 
-for (const relativePath of companionFiles) {
-  await copyFile(
-    resolve(workspaceRoot, 'deliverables/public-repository', relativePath),
-    resolve(publicRoot, 'companion', relativePath)
-  );
-}
+await copyCompanionTree(companionRoot, resolve(publicRoot, 'companion'));
 
 console.log(`Synced ${sourceFiles.length} articles and their public evidence.`);

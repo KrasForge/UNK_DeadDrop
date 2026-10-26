@@ -54,13 +54,13 @@
   {
     "part": 6,
     "name": "05-resolver",
-    "title": "Two configuration files, separate histories",
+    "title": "Referenced resolver file and separate config history",
     "sources": [
       "E07",
       "E20",
       "E21"
     ],
-    "limit": "The sequence does not establish fallback selection or client refresh behavior."
+    "limit": "No retained payload references config-alt.json; endpoint records do not confirm a fetch of config.json."
   },
   {
     "part": 7,
@@ -116,7 +116,7 @@
     "sources": [
       "E15"
     ],
-    "limit": "Fixture results do not establish production precision, recall or alert delivery."
+    "limit": "The software baseline is small; an ELF header does not prove code reachability or execution."
   },
   {
     "part": 12,

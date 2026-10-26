@@ -35,7 +35,7 @@ The received messages have a separate transport detail: an inbound forwarding se
 
 ## Configuration and infrastructure
 
-The [GitLab resolver](06-gitlab-dead-drop-infrastructure.md) separates destination settings from deployed payloads. The retained history records changes to `config.json` and a separate `config-alt.json` fallback. On 13 July, the primary set changed to `api.cklomino[.]ink` and `api.dsfmot[.]xyz`. A payload hash alone cannot identify which configuration a client fetched.
+The [GitLab resolver](06-gitlab-dead-drop-infrastructure.md) separates destination settings from deployed payloads. The retained history records changes to `config.json` and a separate `config-alt.json` file, but no retained payload references the latter. On 13 July, the referenced `config.json` set changed to `api.cklomino[.]ink` and `api.dsfmot[.]xyz`. A payload hash alone cannot identify which configuration a client fetched.
 
 A certificate naming `api.cklomino[.]ink` and a Subtensor sign-in panel observed at `207.241.172[.]222` connect that address to the historical service. Passive DNS and related research-service records supplied further pivots. These observations identify dated service associations without establishing exclusive ownership of the address. Client refresh behavior and connections after the configuration change remain unknown.
 

@@ -1,11 +1,11 @@
 <svg xmlns="http://www.w3.org/2000/svg" width="1000" height="835" viewBox="0 0 1000 835" role="img" aria-labelledby="title desc">
-<title id="title">A YARA match requires the full conjunction</title><desc id="desc">Each gate is necessary; matching bytes still need acquisition context. Fixture results do not establish production precision, recall or alert delivery.</desc>
+<title id="title">A YARA match requires the full conjunction</title><desc id="desc">Every gate is necessary; matching bytes still need acquisition context. The software baseline is small; an ELF header does not prove code reachability or execution.</desc>
 <defs><marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M 0 0 L 10 5 L 0 10 z" fill="#17634f"/></marker></defs>
 <rect width="1000" height="100%" fill="#fff"/>
 <g transform="translate(0,-120)">
 <rect x="36" y="172" width="565" height="87" rx="3" fill="#eaf3ee" stroke="#17634f" stroke-width="1.5"/>
-<text x="52" y="203" font-family="DejaVu Sans,sans-serif" font-size="21" font-weight="700" fill="#202a26" text-anchor="start">File size</text>
-<text x="52" y="235" font-family="DejaVu Sans,sans-serif" font-size="19" font-weight="400" fill="#53615a" text-anchor="start">Less than 64 MiB</text>
+<text x="52" y="203" font-family="DejaVu Sans,sans-serif" font-size="21" font-weight="700" fill="#202a26" text-anchor="start">ELF format and size</text>
+<text x="52" y="235" font-family="DejaVu Sans,sans-serif" font-size="19" font-weight="400" fill="#53615a" text-anchor="start">ELF magic at byte zero; under 64 MiB</text>
 <line x1="601.0" y1="215.0" x2="675.0" y2="215.0" stroke="#17634f" stroke-width="2.5"/>
 <line x1="675.0" y1="215.0" x2="675.0" y2="367.0" stroke="#17634f" stroke-width="2.5"/>
 <rect x="36" y="277" width="565" height="87" rx="3" fill="#eaf3ee" stroke="#17634f" stroke-width="1.5"/>
@@ -32,19 +32,19 @@
 <polygon points="853,476 858.0,464.0 848.0,464.0" fill="#17634f"/>
 <rect x="692" y="476" width="272" height="120" rx="3" fill="#fff4df" stroke="#8c5518" stroke-width="1.5"/>
 <text x="708" y="507" font-family="DejaVu Sans,sans-serif" font-size="21" font-weight="700" fill="#202a26" text-anchor="start">Content match</text>
-<text x="708" y="539" font-family="DejaVu Sans,sans-serif" font-size="19" font-weight="400" fill="#53615a" text-anchor="start">Harmless research text</text>
-<text x="708" y="564" font-family="DejaVu Sans,sans-serif" font-size="19" font-weight="400" fill="#53615a" text-anchor="start">can also satisfy the rule.</text>
-<text x="36" y="638" font-family="DejaVu Sans,sans-serif" font-size="23" font-weight="700" fill="#202a26" text-anchor="start">Sigma rules use different telemetry</text>
+<text x="708" y="539" font-family="DejaVu Sans,sans-serif" font-size="19" font-weight="400" fill="#53615a" text-anchor="start">A match is not proof of</text>
+<text x="708" y="564" font-family="DejaVu Sans,sans-serif" font-size="19" font-weight="400" fill="#53615a" text-anchor="start">execution.</text>
+<text x="36" y="638" font-family="DejaVu Sans,sans-serif" font-size="23" font-weight="700" fill="#202a26" text-anchor="start">Replay results</text>
 <rect x="36" y="665" width="446" height="143" rx="3" fill="#f4f6f4" stroke="#b9c8be" stroke-width="1.5"/>
-<text x="52" y="696" font-family="DejaVu Sans,sans-serif" font-size="21" font-weight="700" fill="#202a26" text-anchor="start">Linux / file event</text>
-<text x="52" y="728" font-family="DejaVu Sans,sans-serif" font-size="19" font-weight="400" fill="#53615a" text-anchor="start">System unit path OR user unit suffix.</text>
-<text x="52" y="753" font-family="DejaVu Sans,sans-serif" font-size="19" font-weight="400" fill="#53615a" text-anchor="start">A file event does not prove a service ran.</text>
+<text x="52" y="696" font-family="DejaVu Sans,sans-serif" font-size="21" font-weight="700" fill="#202a26" text-anchor="start">Retained case artifacts</text>
+<text x="52" y="728" font-family="DejaVu Sans,sans-serif" font-size="19" font-weight="400" fill="#53615a" text-anchor="start">33 named rules matched artifacts.</text>
+<text x="52" y="753" font-family="DejaVu Sans,sans-serif" font-size="19" font-weight="400" fill="#53615a" text-anchor="start">90/192 inputs hit; 395 raw/member views.</text>
 <rect x="518" y="665" width="446" height="143" rx="3" fill="#f4f6f4" stroke="#b9c8be" stroke-width="1.5"/>
-<text x="534" y="696" font-family="DejaVu Sans,sans-serif" font-size="21" font-weight="700" fill="#202a26" text-anchor="start">Windows / process event</text>
-<text x="534" y="728" font-family="DejaVu Sans,sans-serif" font-size="19" font-weight="400" fill="#53615a" text-anchor="start">schtasks.exe suffix AND both command-line</text>
-<text x="534" y="753" font-family="DejaVu Sans,sans-serif" font-size="19" font-weight="400" fill="#53615a" text-anchor="start">substrings.</text>
+<text x="534" y="696" font-family="DejaVu Sans,sans-serif" font-size="21" font-weight="700" fill="#202a26" text-anchor="start">Local software baseline</text>
+<text x="534" y="728" font-family="DejaVu Sans,sans-serif" font-size="19" font-weight="400" fill="#53615a" text-anchor="start">Zero hits; 2,379 views / 1,914 files (59.2 MB).</text>
+<text x="534" y="753" font-family="DejaVu Sans,sans-serif" font-size="19" font-weight="400" fill="#53615a" text-anchor="start">Small and not independently curated.</text>
 <rect x="36" y="843" width="928" height="86" rx="3" fill="#fff4df" stroke="#8c5518" stroke-width="1.5"/>
-<text x="54" y="872" font-family="DejaVu Sans,sans-serif" font-size="20" font-weight="700" fill="#8c5518" text-anchor="start">Substring is not exact task-name equality</text>
-<text x="54" y="898" font-family="DejaVu Sans,sans-serif" font-size="18" font-weight="400" fill="#202a26" text-anchor="start">GoogleUpdateSupporterNode-Lab still contains the required Windows task marker.</text>
+<text x="54" y="872" font-family="DejaVu Sans,sans-serif" font-size="20" font-weight="700" fill="#8c5518" text-anchor="start">False-positive boundary</text>
+<text x="54" y="898" font-family="DejaVu Sans,sans-serif" font-size="18" font-weight="400" fill="#202a26" text-anchor="start">Plain prose now misses; a marker-rich ELF can still match.</text>
 </g>
 </svg>
