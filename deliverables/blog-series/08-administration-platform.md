@@ -3,7 +3,7 @@ title: "Inside rms-platform: Delivery Monitoring and Wallet Administration"
 description: "What seventy recovered frontend modules reveal about repository monitoring, wallet workflows and authorization limits."
 date: "2026-10-25"
 author: "Ilja Krasnjanski"
-canonical: "https://example.com/blog/08-administration-platform"
+canonical: "https://krasforge.github.io/UNK_DeadDrop/articles/08-administration-platform/"
 kicker: "UNK_DeadDrop · Part 8"
 tags:
   - "UNK_DeadDrop"
@@ -65,3 +65,5 @@ The strongest relationship is concrete: the collectors select wallet-related mat
 The harvesting tools discussed in Part 7 were recovered separately. Their functions fit the wider operation, but the frontend does not demonstrate a complete integration between those SQLite pools, the mail views and the wallet workflow. Actual sends, populated backend tables, completed claim requests and confirmed transactions would answer different questions and require their own evidence.
 
 The seventy modules made the client inspectable. They did not turn the investigation into an authenticated session or a database export. Source maps preserved comments and helped explain interface intent, but comments and route names are still statements in client code. The analysis rests on the recovered modules and their relationships, with backend implementation and outcomes left unresolved.
+
+[Companion detections and static scanner](https://github.com/KrasForge/unk-deaddrop-companion).

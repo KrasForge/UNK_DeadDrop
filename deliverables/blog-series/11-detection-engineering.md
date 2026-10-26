@@ -3,7 +3,7 @@ title: "Building and Testing Detections for UNK_DeadDrop"
 description: "Ten experimental rules, their actual match conditions, and inert tests that expose useful blind spots."
 date: "2026-10-25"
 author: "Ilja Krasnjanski"
-canonical: "https://example.com/blog/11-detection-engineering"
+canonical: "https://krasforge.github.io/UNK_DeadDrop/articles/11-detection-engineering/"
 kicker: "UNK_DeadDrop · Part 11"
 tags:
   - "UNK_DeadDrop"
@@ -114,3 +114,5 @@ Those commands run the seven detection tests in the blog bundle. The expanded co
 For a YARA hit, retain the file identity, acquisition context and matching offsets. For a Linux unit, inspect the unit definition and associated process activity. For a Windows task, recover the full command line, task action and relevant ancestry. Those follow-ups help separate a research artifact or simulation from an unexpected deployment.
 
 The rules still need conversion and replay against representative telemetry from the intended environment, including clean developer workloads. That evaluation has not been performed, so operational precision and recall remain unknown.
+
+[Companion detections and static scanner](https://github.com/KrasForge/unk-deaddrop-companion).

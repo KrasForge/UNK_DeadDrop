@@ -3,7 +3,7 @@ title: "How a Malicious VSIX Uses the Signed Editor Runtime"
 description: "How a fake Google Update Support extension installs collection components and turns the editor's own Electron binary into a Node interpreter on Windows."
 date: "2026-10-25"
 author: "Ilja Krasnjanski"
-canonical: "https://example.com/blog/02-vsix-editor-execution"
+canonical: "https://krasforge.github.io/UNK_DeadDrop/articles/02-vsix-editor-execution/"
 kicker: "UNK_DeadDrop · Part 2"
 tags:
   - "UNK_DeadDrop"
@@ -99,3 +99,5 @@ A process name or publisher check is incomplete here. A legitimate signature aut
 Repository-only review can miss the installed extension; a hunt limited to native binaries can miss the JavaScript Windows branch. Preserve task definitions, workspace settings, extension metadata, script arguments, process ancestry and any resulting persistence. The extension identifier and package hash provide exact selectors. The editor-to-interpreter transition gives responders a behavior to investigate when names or builds change. Part 3 describes how the encrypted source was recovered.
 
 The companion repository adds focused selectors for [the editor spawning Node](https://github.com/KrasForge/unk-deaddrop-companion/blob/main/rules/sigma/windows_editor_node_collection.yml), [PowerShell using Electron's Node mode](https://github.com/KrasForge/unk-deaddrop-companion/blob/main/rules/sigma/windows_powershell_electron_node_mode.yml), [temporary elevation artifacts](https://github.com/KrasForge/unk-deaddrop-companion/blob/main/rules/sigma/windows_elevation_temp_artifacts.yml), and [installed VS Code extension artifacts](https://github.com/KrasForge/unk-deaddrop-companion/blob/main/rules/sigma/windows_vscode_extension_artifact.yml), plus a [YARA rule for the VSIX manifest](https://github.com/KrasForge/unk-deaddrop-companion/blob/main/rules/yara/deaddrop_vsix_manifest.yar). These are triage selectors: a match does not establish successful execution, elevation or collection.
+
+[Companion detections and static scanner](https://github.com/KrasForge/unk-deaddrop-companion).

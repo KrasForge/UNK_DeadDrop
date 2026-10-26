@@ -3,7 +3,7 @@ title: "Where Overlord Ends and the Collection Toolchain Begins"
 description: "Separating inherited framework features, sample-specific collection markers and claims the comparison cannot support."
 date: "2026-10-25"
 author: "Ilja Krasnjanski"
-canonical: "https://example.com/blog/12-framework-and-collection-boundary"
+canonical: "https://krasforge.github.io/UNK_DeadDrop/articles/12-framework-and-collection-boundary/"
 kicker: "UNK_DeadDrop · Part 12"
 tags:
   - "UNK_DeadDrop"
@@ -102,3 +102,5 @@ The historical lookup did not find the embedded build revision in the public rep
 Reproducing the comparison requires the exact upstream commit and files, each sample's hash, and the extraction commands and output. Even then, a code difference would not by itself identify an operator.
 
 For detection, combine framework markers with collection context, as the companion's [wallet-agent YARA rule](https://github.com/KrasForge/unk-deaddrop-companion/blob/main/rules/yara/deaddrop_wallet_agent.yar) does, and interpret each match in light of where the file was found. Framework ancestry starts the analysis; surrounding artifacts determine how far the conclusion can go.
+
+[Companion detections and static scanner](https://github.com/KrasForge/unk-deaddrop-companion).

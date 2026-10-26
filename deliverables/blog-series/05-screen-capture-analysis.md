@@ -3,7 +3,7 @@ title: "Beyond Screenshot Strings: Reconstructing Screen Capture"
 description: "Capture symbols, Windows dependencies and a misleading keylogging lead in the held samples."
 date: "2026-10-25"
 author: "Ilja Krasnjanski"
-canonical: "https://example.com/blog/05-screen-capture-analysis"
+canonical: "https://krasforge.github.io/UNK_DeadDrop/articles/05-screen-capture-analysis/"
 kicker: "UNK_DeadDrop · Part 5"
 tags:
   - "UNK_DeadDrop"
@@ -81,3 +81,5 @@ Go implant SHA-256:
 ef183bbb40f4c7c3f4b52994cdba3295f3eab2604fdad99eefa3b67b8d966e8d
 Capture task: GoogleUpdateSupporterNode
 ```
+
+[Companion detections and static scanner](https://github.com/KrasForge/unk-deaddrop-companion).

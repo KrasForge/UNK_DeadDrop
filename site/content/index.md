@@ -11,6 +11,9 @@ hero:
     - text: Read the technical paper
       link: __BASE_PATH__/downloads/UNK_DeadDrop-Preprint.pdf
       variant: minimal
+    - text: Open Source Detection Rules
+      link: https://github.com/KrasForge/unk-deaddrop-companion
+      variant: minimal
 ---
 
 The series starts with three recruitment messages received in June and July 2026. It follows the evidence through clipboard substitution, a malicious editor extension, credential and wallet collection, mutable infrastructure, targeting databases, administration software, and experimental detections.

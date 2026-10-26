@@ -3,7 +3,7 @@ title: "Anatomy of a Developer Lure: ClickFix Clipboard Manipulation"
 description: "How a fake recruitment verification page replaces a copied command with one that also runs an installer, and what that means for detection."
 date: "2026-10-24"
 author: "Ilja Krasnjanski"
-canonical: "https://example.com/blog/01-clickfix-clipboard-manipulation"
+canonical: "https://krasforge.github.io/UNK_DeadDrop/articles/01-clickfix-clipboard-manipulation/"
 kicker: "UNK_DeadDrop · Part 1"
 tags:
   - "UNK_DeadDrop"
@@ -96,3 +96,5 @@ On the static side, a later scan of a held lure bundle found two clipboard-write
 The companion scanner can locate those calls and report their arguments when the values are literal. It cannot demonstrate the visual deception, which requires comparing the rendered instruction with the generated command.
 
 In the next post I follow the repository branch, where a package calling itself Google Update Support installs its collection components through the code editor.
+
+[Companion detections and static scanner](https://github.com/KrasForge/unk-deaddrop-companion).

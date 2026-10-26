@@ -3,7 +3,7 @@ title: "Parsing Without Executing: JavaScript Deobfuscation with Acorn"
 description: "Rebuilding an AES key from sixteen obfuscated fragments with Acorn, and proving it with authenticated decryption without ever running the malicious extension."
 date: "2026-10-25"
 author: "Ilja Krasnjanski"
-canonical: "https://example.com/blog/03-acorn-deobfuscation"
+canonical: "https://krasforge.github.io/UNK_DeadDrop/articles/03-acorn-deobfuscation/"
 kicker: "UNK_DeadDrop · Part 3"
 tags:
   - "UNK_DeadDrop"
@@ -127,3 +127,5 @@ e5b7d6411d0c95da047185d94fca98d454b73df2e7f46f2753e212af2ca45da5
 windows-js-pipeline.js
 bf820623e8deaa37092650c7fae594e56b8d81c27b541419006cca2d0536353b
 ```
+
+[Companion detections and static scanner](https://github.com/KrasForge/unk-deaddrop-companion).

@@ -3,7 +3,7 @@ title: "From Commit Metadata to a Developer Target List"
 description: "Reconstructing the harvester, sender configuration and aggregate counts behind two SQLite targeting pools."
 date: "2026-10-25"
 author: "Ilja Krasnjanski"
-canonical: "https://example.com/blog/07-developer-target-harvesting"
+canonical: "https://krasforge.github.io/UNK_DeadDrop/articles/07-developer-target-harvesting/"
 kicker: "UNK_DeadDrop · Part 7"
 tags:
   - "UNK_DeadDrop"
@@ -80,3 +80,5 @@ The mail path must therefore be tied to specific configurations and messages, no
 The code and configuration connect harvesting to message preparation. The databases quantify the stored contact material. Neither supplies the missing send logs, delivery outcomes or endpoint evidence needed to count people contacted or compromised. Even the repository total describes stored values rather than a fresh verification of repository existence or ownership.
 
 The separate administration frontend is the subject of Part 8. Its mail and wallet views are relevant to the wider investigation, but they are not evidence that every address in these databases entered one integrated backend.
+
+[Companion detections and static scanner](https://github.com/KrasForge/unk-deaddrop-companion).

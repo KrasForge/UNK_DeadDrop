@@ -3,7 +3,7 @@ title: "Following the GitLab Dead Drop: Configuration Changes and C2 History"
 description: "How a GitLab-hosted configuration file let the UNK_DeadDrop operators change servers without new payloads, and what its revision history reveals."
 date: "2026-10-25"
 author: "Ilja Krasnjanski"
-canonical: "https://example.com/blog/06-gitlab-dead-drop-infrastructure"
+canonical: "https://krasforge.github.io/UNK_DeadDrop/articles/06-gitlab-dead-drop-infrastructure/"
 kicker: "UNK_DeadDrop · Part 6"
 tags:
   - "UNK_DeadDrop"
@@ -70,3 +70,5 @@ The saved service enumeration listed SSH, HTTP and HTTPS. Its SSH profile includ
 These observations do not establish that the origin was dedicated or that blocking its IP would have no collateral effect. The panel seen on the bare IP strengthens the service association, but the scan cannot establish every tenant or later ownership change. The certificate's validity dates describe the certificate, not the operation's start or end.
 
 Part 7 follows the target-acquisition tooling behind the two SQLite pools.
+
+[Companion detections and static scanner](https://github.com/KrasForge/unk-deaddrop-companion).

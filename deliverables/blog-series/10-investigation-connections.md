@@ -3,7 +3,7 @@ title: "From Three Phishing Emails to a Connected Investigation"
 description: "The pivots linking recruitment messages, delivery artifacts, payload configuration and supporting software."
 date: "2026-10-25"
 author: "Ilja Krasnjanski"
-canonical: "https://example.com/blog/10-investigation-connections"
+canonical: "https://krasforge.github.io/UNK_DeadDrop/articles/10-investigation-connections/"
 kicker: "UNK_DeadDrop · Part 10"
 tags:
   - "UNK_DeadDrop"
@@ -98,3 +98,5 @@ The public reporting includes [a direct account of the UNK_DeadDrop campaign](ht
 The strongest contribution here is narrower and case-specific: the retained artifacts let readers inspect how the clipboard builder works, how the VSIX configuration selects deployment settings, how targeting data and administration functions are represented, and how the resolver and ECHOES archives changed over time. The October follow-up describes similar implementation markers, but it traces back to the same reporter's account and does not independently verify a sample. It is a useful lead, not independent confirmation. On this evidence, the series supports a detailed technical contribution; it does not establish that these behaviors were first observed here.
 
 That boundary is useful to readers. Novelty can attach to the evidence recovered, the level of implementation detail, or a particular relationship between artifacts. It should not be stretched to cover a campaign category or technique already described elsewhere.
+
+[Companion detections and static scanner](https://github.com/KrasForge/unk-deaddrop-companion).

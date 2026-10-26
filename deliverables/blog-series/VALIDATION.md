@@ -1,4 +1,24 @@
-# Twelve-part edition, 25 October 2026
+# Twelve-part edition, 26 October 2026
+
+The 12 Markdown articles now use their GitHub Pages canonical URLs and each
+ends with a direct link to the companion repository. The landing page links the
+Zenodo preprint record and companion repository. No technical claims changed in
+this publication-metadata update.
+
+## Current standalone render, 26 October 2026
+
+Rendered each current Markdown article to HTML and PDF with the public
+[claude-blog](https://github.com/AgriciDaniel/claude-blog) renderer at commit
+`3544423`. Canonical metadata, Open Graph URLs and companion links come from the
+current article sources. The published Zenodo version 1.0 PDF and linked public
+evidence reports are included; the local version 1.1 preprint draft is excluded.
+The standalone edition is under `rendered/2026-10-26/`.
+
+The full five-gate delivery contract and new viewport screenshots were not run.
+These refreshed formats are not marked as contract-approved. The 25 October
+folder retains its earlier screenshots and historical render.
+
+## Previous standalone render, 25 October 2026
 
 Editorial update: Parts 1–12 received a series-wide prose and structure pass,
 including clearer openings, shorter paragraphs, stronger section progression,
@@ -11,7 +31,7 @@ case-specific technical detail rather than a first-ever claim. New sources and
 their independence limits are linked in the article and index. The case evidence
 cutoff remains 24 July 2026.
 
-## Rendered edition, 25 October 2026
+## Historical rendered edition, 25 October 2026
 
 Rendered all twelve Markdown sources with the public
 [claude-blog](https://github.com/AgriciDaniel/claude-blog) renderer at commit
@@ -23,8 +43,9 @@ links the articles.
 
 The full five-gate delivery contract was not run. In particular, the required
 independent `blog-reviewer` agent was unavailable in this runtime, so these
-renders are not marked as contract-approved for publication. Existing
-example.com canonical URLs remain placeholders.
+renders are not marked as contract-approved for publication. That edition's
+canonical URLs used example.com placeholders; the 26 October render now uses
+the GitHub Pages article URLs.
 
 Added three full articles: investigation connections (Part 10), detection engineering
 (Part 11), and the framework/collection boundary (Part 12). The series index,

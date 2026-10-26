@@ -3,7 +3,7 @@ title: "Inside the Collector: Browser Credentials and Wallet Files"
 description: "How the collector selects browser stores, wallet material and recovery files, and what limits its reach."
 date: "2026-10-25"
 author: "Ilja Krasnjanski"
-canonical: "https://example.com/blog/04-credential-wallet-collection"
+canonical: "https://krasforge.github.io/UNK_DeadDrop/articles/04-credential-wallet-collection/"
 kicker: "UNK_DeadDrop · Part 4"
 tags:
   - "UNK_DeadDrop"
@@ -101,3 +101,5 @@ Configuration: GUS_UPLOAD_CHUNK_SIZE, GUS_KEEP_AGENT_STATE
 Large JavaScript payload SHA-256:
 694626bed2df1f0d0026a3f7ead7692b44c7e73041cdd799b79a025335533cdc
 ```
+
+[Companion detections and static scanner](https://github.com/KrasForge/unk-deaddrop-companion).
