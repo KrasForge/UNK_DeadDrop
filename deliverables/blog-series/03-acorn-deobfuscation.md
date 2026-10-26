@@ -16,14 +16,7 @@ og_image_alt: "Diagram of the static reconstruction and authenticated decryption
 
 The VSIX loader assembled one AES key from sixteen fragments: nine decoder calls and seven literals. Recovering it required mapping wrapper functions and a rotated string table. A simple regex missed a wrapper that declared an intermediate value before returning, and five plausible rotations failed checks across the call sites.
 
-The final result was three authenticated plaintext files, recovered without executing the extension. This post follows the checks that distinguished a valid decode from a plausible-looking result. [Proofpoint's report](https://www.proofpoint.com/us/blog/threat-insight/dont-fear-repo-unkdeaddrop-phishing-campaign-targets-developers-steal) already describes the key and Windows architecture; the focus here is the static analysis method.
-
-> **Key Takeaways**
->
-> - The loader assembled its AES key from nine decoder calls and seven literals, hidden behind wrapper functions and a rotated string table.
-> - Acorn parses the wrappers into a syntax tree without executing them, which avoids the regex failure that missed a declaration before a return statement.
-> - The correct rotation, with rotation offsets of 391 and 261, decoded fifteen of fifteen tested call sites, against three for the runner-up.
-> - The decisive check was authentication: all three payloads passed once Node's crypto library replaced `openssl enc` for the GCM workflow.
+All three encrypted payloads passed GCM authentication under the reconstructed key. [Proofpoint's report](https://www.proofpoint.com/us/blog/threat-insight/dont-fear-repo-unkdeaddrop-phishing-campaign-targets-developers-steal) also documents the key and Windows architecture.
 
 ## Start with the calls around the key expression
 
@@ -39,7 +32,7 @@ A regex that expects every wrapper to return a decoder call immediately can miss
 
 ### Parsing an obfuscated wrapper
 
-The small example below is invented to illustrate the relevant shape, and it parses source containing a wrapper without ever calling that wrapper:
+This synthetic example parses a wrapper containing a declaration before its return statement:
 
 ```javascript
 import { parse } from 'acorn';
@@ -68,12 +61,11 @@ console.log(fn.type, returned.argument.type);
 
 `decode` is undefined, but parsing does not require it to exist. Acorn reads the program as a string and returns the structure of declarations and expressions; it does not resolve or run them.
 
-The workflow never imported or evaluated the target, or ran the extension in a VM. It recovered selected transformations from the syntax tree and implemented those separately. This remains sample-specific analysis: an AST can describe arbitrary behavior, and parsing does not prove what a program will do. The narrower goal was to recover the index and key transformations used by these wrappers.
+The analysis reconstructed the wrappers' index and key transformations from their syntax trees, then implemented those transformations separately. It did not import or execute the extension.
 
 ![From obfuscated syntax to authenticated files](assets/03-deobfuscation.png)
 
-*Figure 1. From obfuscated syntax to authenticated files. Parsing is not execution; the companion scanner does not implement full recovery.*
-
+*Figure 1. Wrapper mapping and string-table recovery supply the key fragments; GCM authentication checks the reconstructed key against the payloads.*
 
 The string array had been rotated, so a valid-looking index could point to the wrong encoded element until the array order was resolved. Searching from one expected `crypt` anchor yielded five plausible rotations. Comparing each rotation against all resolved call sites narrowed the candidates.
 
@@ -83,7 +75,7 @@ The recorded offsets were 391 for the extension and 261 for the bootstrap. The s
 
 The key expression combined nine decoder results with seven literal fragments. Recovering their values was only half the work; the fragments also had to be concatenated in the original order, including values nested inside parenthesized additions.
 
-A small bounded evaluator handled only string literals and already-decoded values. It never ran the sample code, activated the extension or contacted a server. The key's expected length would be weak evidence; successful authentication of the retained encrypted payloads provides a stronger check.
+A small bounded evaluator concatenated string literals and already-decoded values in source order. The recovered key could then be checked against the encrypted payloads.
 
 ## From authenticated payloads to triage
 
@@ -101,21 +93,11 @@ With the corrected operation, all three payloads passed authentication: `detect_
 
 All three payloads decrypted to readable, commented source. Authentication tied each plaintext to its encrypted input under the recovered parameters, but did not establish that a payload ran or collected data. Those remain runtime questions.
 
-### The smaller scanner built afterward
+### Clipboard and marker triage with Acorn
 
 The companion scanner also uses Acorn, but for a narrower task: it locates selected clipboard-write calls and campaign markers, reports source locations with an input hash, and folds a limited set of literal strings. It can resolve literal additions but leaves variable references and function calls unresolved. It does not reproduce the wrapper mapping or rotated-array recovery described above.
 
 The scanner limits input to 8 MiB and bounds nested literal folding. Eight AST tests cover its parser behavior. Static spot checks found two clipboard-write sites in the lure and five campaign markers in the larger collector. These results support triage use, not general deobfuscation. Because parsing runs in process, the byte limit alone cannot prevent expensive adversarial syntax.
-
-Confidence in the recovery came from several checks working together:
-
-1. structural parsing of the wrappers;
-2. mapping each wrapper's index, key and offset;
-3. agreement across call sites for the chosen rotation;
-4. exact fragment ordering in the key expression;
-5. authenticated decryption of the payloads.
-
-Authenticated decryption was decisive: it tested the recovered bytes rather than whether the source merely looked plausible.
 
 ```text
 detect_malware.py

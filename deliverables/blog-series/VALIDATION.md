@@ -5,6 +5,28 @@ ends with a direct link to the companion repository. The landing page links the
 Zenodo preprint record and companion repository. No technical claims changed in
 this publication-metadata update.
 
+## Prose revision, 26 October 2026
+
+Reviewed all twelve posts for editorial metacommentary. Removed repeated takeaway
+boxes, narration about correcting earlier drafts, instructions about how claims
+should be presented, and repeated conclusions. Parts 5, 10 and 12 were restructured
+around their technical findings. Limitations affecting interpretation remain next
+to the relevant artifacts, including the missing ECHOES payload, absent runtime
+and backend observations, and unavailable pinned upstream source files.
+
+Compared all fenced code and evidence blocks with the previous sources: unchanged.
+Checked all twelve source files for valid local links, canonical URLs, companion
+links, balanced fences, absence of em dashes and absence of the removed FAQ and
+article-details sections. All checks passed.
+
+Refreshed the current standalone HTML/PDF edition with the existing claude-blog
+renderer at commit `3544423`, using WeasyPrint. All twelve HTML source hashes match
+the rendered Markdown, the PDFs have valid headers, and local HTML links resolve.
+Historical editions and the deposited preprint were not rewritten.
+
+The Astro production build passed with Node.js 24. All twelve generated article
+bodies contain their diagrams and exclude em dashes and the removed sections.
+
 ## Current standalone render, 26 October 2026
 
 Rendered each current Markdown article to HTML and PDF with the public

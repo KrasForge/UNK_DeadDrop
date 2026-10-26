@@ -16,16 +16,9 @@ og_image_alt: "Diagram of the ClickFix delivery sequence reconstructed from the 
 
 The recruitment site asks the candidate to copy a verification command, run it in a terminal, and paste back the result. The page promises a `VERIFY-` code. But when the candidate presses copy, the page replaces the selected text with a command that also attempts to install a payload.
 
-That is the ClickFix technique: a web page persuades someone to paste and run a command, shifting execution from the browser to the user's terminal. Three phishing messages received in June and July 2026 led me to several delivery branches, collection payloads, a GitLab configuration resolver and exposed administration software. This article follows the browser branch and shows how the verification step conceals the install attempt.
+That is the ClickFix technique: a web page persuades someone to paste and run a command, shifting execution from the browser to the user's terminal. Three phishing messages received in June and July 2026 led me to several delivery branches, collection payloads, a GitLab configuration resolver and exposed administration software. In the browser branch, the verification step conceals the install attempt.
 
 [Proofpoint tracks the cluster as UNK_DeadDrop](https://www.proofpoint.com/us/blog/threat-insight/dont-fear-repo-unkdeaddrop-phishing-campaign-targets-developers-steal). Its reporting, together with [Denys Vitali's earlier investigation](https://blog.denv.it/posts/i-was-likely-targeted-by-dprk-in-a-sophisticated-developer-malware-campaign/), provides context for the editor-based branch in the next post. Unit 42's [research on fake-recruiter campaigns delivering BeaverTail and InvisibleFerret](https://unit42.paloaltonetworks.com/north-korean-threat-actors-lure-tech-job-seekers-as-fake-recruiters/) describes the wider pattern of job-themed lures aimed at developers. The W3C [Clipboard API specification](https://www.w3.org/TR/clipboard-apis/) defines the copy event that allows a page to replace selected text.
-
-> **Key Takeaways**
->
-> - The lure's copy handler cancels the normal copy and puts a command built by `R()` on the clipboard, so the text the candidate highlights is not what reaches the terminal.
-> - The command still prints the promised `VERIFY-` code, which makes the page and the terminal appear to agree while the installation attempt runs.
-> - The first-stage download URL is built from `window.location.origin`, so the first-stage host need not appear as a literal in the bundle, and a search limited to known C2 domains will miss it.
-> - The recovered frontend shows the design of the copy step and its telemetry; it is not a log of completed infections.
 
 ## The verification page
 
@@ -35,12 +28,11 @@ The analysis found two frontend variants. Lighter bundles show an access-key or 
 
 ![One copy action, two command effects](assets/01-clickfix.png)
 
-*Figure 1. One copy action, two command effects. A copy event does not establish terminal execution or installation.*
-
+*Figure 1. The copied command combines the verification output with an installation attempt.*
 
 ### The command changes on copy
 
-The handler responsible for all of this turns out to be remarkably short. Here it is as served by one of the lure sites, `d2saitrade[.]ink`, with line breaks added for readability but the minified identifiers and tokens unchanged:
+The copy handler served by `d2saitrade[.]ink` replaces the clipboard contents in a few lines. Only line breaks have been added to this excerpt:
 
 ```javascript
 c.addEventListener(`copy`, e => {
@@ -77,7 +69,7 @@ This design makes the frontend portable across lure domains: changing the page's
 
 The bundle references `/device-check`, `/verify`, `/complete` and `/track-activity`, plus challenge-specific routes. The `cmdline_copied` event shows that the client is designed to report when someone copies the command.
 
-These details help reconstruct the intended interaction, but copying, pasting, execution, installation and callback are distinct events. The recovered frontend establishes the design of the flow; it is not a backend log of completed infections.
+The telemetry records a copy action before any terminal execution. Neither that event nor the verification output confirms installation; no backend infection log was recovered.
 
 ## Detection opportunities
 
@@ -95,6 +87,6 @@ On the static side, a later scan of a held lure bundle found two clipboard-write
 
 The companion scanner can locate those calls and report their arguments when the values are literal. It cannot demonstrate the visual deception, which requires comparing the rendered instruction with the generated command.
 
-In the next post I follow the repository branch, where a package calling itself Google Update Support installs its collection components through the code editor.
+The [repository branch](02-vsix-editor-execution.md) uses a different entry point: a package calling itself Google Update Support installs collection components through the code editor.
 
 [Companion detections and static scanner](https://github.com/KrasForge/unk-deaddrop-companion).

@@ -1,28 +1,17 @@
 ---
 title: "Beyond Screenshot Strings: Reconstructing Screen Capture"
-description: "Capture symbols, Windows dependencies and a misleading keylogging lead in the held samples."
+description: "Frame-comparison symbols in the Linux Go agent, a Windows capture bundle, and the desktop access each requires."
 lastUpdated: 2026-10-25
 sidebar:
   order: 5
 ---
 
 
-When I rechecked the Go implant, three keylog matches initially looked like evidence of keyboard collection. Their surrounding names showed otherwise: they belonged to TLS. Elsewhere, the same examination found capture loops, previous-frame storage and block-change routines. Together with a Windows capture bundle, those artifacts supported a more specific surveillance assessment than the earlier inventory. This post follows the evidence for that assessment and the boundaries that remain without a recorded capture session.
+The Go implant contains symbols for capturing a display, retaining a previous frame, comparing blocks and encoding JPEG data. A separate Windows bundle combines screen acquisition, JPEG encoding, MessagePack serialization and WebSocket transport. Together, these artifacts point to a design for repeatedly capturing and transmitting changes on a desktop.
 
-> **Key Takeaways**
->
-> - The keylog matches identified TLS internals, not keyboard hooks.
-> - Capture-related symbols support a frame-difference streaming design.
-> - Windows bundle dependencies and installer checks provide separate evidence of a capture component.
-> - No measured frame rate, victim session or successful execution was established.
+No capture session was recorded. The available evidence comes from the native binary, the Windows bundle and its installer, leaving achieved frame rate, bandwidth and desktop access unmeasured.
 
-## The keylogging lead that did not hold
-
-The three matches were `writeKeyLog`, `KeyLogWriter` and `crypto/tls.(*Config).writeKeyLog`. Their context places them in TLS key logging. Counting those strings as keyboard interception would have assigned a capability on the basis of a shared word rather than the implementation consuming it.
-
-That correction does not establish that keylogging is impossible in every build. It narrows the conclusion to the searches and samples examined: those matches did not demonstrate it. A dynamically supplied module or a differently named implementation would require separate analysis.
-
-## What the capture artifacts establish
+## Frame comparison in the Go agent
 
 The Go symbols included the following group:
 
@@ -33,45 +22,43 @@ capture.encodeBlocks      capture.blockChanged
 capture.copyPrev          capture.frameFPS
 ```
 
-A screenshot function on its own would support a much smaller claim, but here the combination of previous-frame storage, block comparisons and frame-rate accounting fits a design that repeatedly captures the display and transmits whatever has changed, which MITRE ATT&CK catalogues under [Screen Capture (T1113)](https://attack.mitre.org/techniques/T1113/).
+`CaptureDisplay` and `CaptureAndSend` suggest acquisition and transfer. The more distinctive names are `copyPrev`, `blockChanged` and `encodeBlocks`: they fit a design that retains an earlier frame, compares image regions and encodes changes for transmission. `Loop` and `frameFPS` add evidence of repeated capture and rate accounting. MITRE ATT&CK groups screen acquisition under [Screen Capture (T1113)](https://attack.mitre.org/techniques/T1113/).
 
-The Windows bundle independently points the same way, since it contains:
+The symbols do not establish exact block dimensions or how often the capture loop runs. They also leave open whether the relevant code is reachable on a particular host. A Linux process needs access to a usable display session and sufficient permissions before a capture routine can acquire an image.
+
+![Why these symbols suggest repeated capture](../assets/05-screen-capture.png)
+
+*Figure 1. Previous-frame storage and block comparison suggest transmission of changed regions between captures.*
+
+## The Windows capture bundle
+
+The Windows bundle supplies a separate set of components:
 
 - `node-screenshots` and its native module, for screen acquisition;
 - `jpeg-js`, for JPEG encoding;
 - MessagePack, for serialization;
 - `ws`, for WebSocket communication.
 
-The installer checks for the capture files and raises an error if they are missing. The associated task is named `GoogleUpdateSupporterNode`. Together, these artifacts support a capture-streaming implementation in the examined material, but there is no recorded victim session. Display availability, permissions and the execution path remain conditions for capture to succeed.
+The installer checks for the capture files and raises an error if they are missing. The associated scheduled task is named `GoogleUpdateSupporterNode`. These checks make the capture component an explicit installation requirement.
 
-An upstream dependency comparison suggested that the Linux build lacked capture, but later symbol examination found positive capture-related evidence. Missing expected dependencies cannot rule out an implementation present in the binary.
+The Windows dependencies and Go symbols come from different artifacts. They suggest similar capture and transfer functions, but do not establish a shared implementation across operating systems. For the Windows branch, the installed bundle, task action and process session would be the starting points for determining whether capture actually ran.
 
-![Why these symbols suggest repeated capture](../assets/05-screen-capture.png)
+### The TLS key-log strings
 
-*Figure 1. Why these symbols suggest repeated capture. No victim session, achieved frame rate or bandwidth was measured.*
+Three other matches in the Go binary were `writeKeyLog`, `KeyLogWriter` and `crypto/tls.(*Config).writeKeyLog`. Their surrounding names identify TLS key logging. None of those matches provides evidence of keyboard interception; no keyboard hook was established by this search.
 
+## Hunting for the capture component
 
-### Reading the evidence at the right level
+The [capture-agent YARA rule](https://github.com/KrasForge/unk-deaddrop-companion/blob/main/rules/yara/deaddrop_capture_agent.yar) requires an Overlord environment marker and four capture-related symbol strings. It can locate files containing that combination for further inspection. Its match does not establish that a desktop was accessed or that frames reached a server.
 
-| Artifact | What it supports | What remains untested |
-|---|---|---|
-| Previous-frame and block-comparison symbols | A design consistent with comparing successive captures | Reachability and behaviour in a particular execution |
-| JPEG encoding and frame-rate accounting | Encoding and repeated-capture implementation | Achieved frame rate or bandwidth |
-| Windows capture, encoding and transport dependencies | A bundle containing components for capture and transfer | Successful acquisition and transmission |
-| Installer check and scheduled-task name | An installation requirement and a host artifact | Successful task execution or a recorded session |
+On a host, the useful follow-up evidence includes the installed component, its process and session context, display permissions and associated network activity. For the Windows branch, the `GoogleUpdateSupporterNode` task gives an additional place to look for the executable and arguments used.
 
-These observations are complementary, but their combination is not a runtime trace. The previous-frame and block-comparison names fit an implementation that retains an earlier image and encodes changed regions. The evidence does not establish exact block dimensions, a measured compression ratio or a particular capture cadence, so none is assigned here.
-
-The distinction between Go and Windows evidence also matters. The symbol set belongs to the inspected native artifact; the dependency set comes from a separate Windows bundle. They support capture-related implementation in the examined material, not an assertion that every operating-system build takes the same path.
-
-The public Overlord framework provides a software lineage, not an operator identity. The earlier upstream dependency comparison and the later binary examination answer different questions: what packages appear in selected source metadata, and what implementation-related names are present in the held binary. The positive symbol evidence prevents treating a missing expected dependency as proof of absence, while still leaving platform support and successful invocation unresolved.
-
-The recorded task name, `GoogleUpdateSupporterNode`, is a useful exact artifact, but finding it does not show that a screen stream was sent. Investigators would need to establish the installed bundle, the process and session context in which it ran, and associated network activity. Display availability and permissions are material conditions, especially when distinguishing a staged component from one that actually accessed a desktop. The companion's [capture-agent YARA rule](https://github.com/KrasForge/unk-deaddrop-companion/blob/main/rules/yara/deaddrop_capture_agent.yar) selects capture-related markers in the agent. A hit supports the presence of those markers, not a victim session or successful transmission.
-
-Screen capture also changes the exposure question. File selection concerns stored material; a functioning capture component could expose material displayed during its operation. The static record provides no duration or victim session from which to enumerate that material. Keeping that boundary explicit makes the finding usable without converting capability into an unsupported impact claim.
+A functioning capture component could expose information displayed during its operation, including material never saved to a file. The static artifacts provide no session duration or captured images from which to determine what was visible.
 
 ```text
 Go implant SHA-256:
 ef183bbb40f4c7c3f4b52994cdba3295f3eab2604fdad99eefa3b67b8d966e8d
 Capture task: GoogleUpdateSupporterNode
 ```
+
+[Companion detections and static scanner](https://github.com/KrasForge/unk-deaddrop-companion).

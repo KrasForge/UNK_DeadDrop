@@ -9,14 +9,7 @@ sidebar:
 
 The ECHOES lure paired an animation-project theme with a password-protected archive. Its repository history preserved four versions of the delivery kit. The artwork and staging structure remained recognizable as repository destinations changed. The third revision added a persistence-related script, which the fourth retained.
 
-The archive supports two investigations: a revision-by-revision account of staging changes and a provenance trail in the project's poster image. ECHOES is a separate branch from the ClickFix and VSIX chains. Capabilities recovered from those other samples cannot be assigned to it without the missing payload.
-
-> **Key Takeaways**
->
-> - Four archive revisions between 5 and 25 March 2026 keep the artwork and staging structure while changing destinations, and the third adds a VBS persistence layer that the fourth keeps.
-> - The final PowerShell payloads were unavailable through the unauthenticated routes examined, so ECHOES is not credited with capabilities recovered from other samples.
-> - The poster's C2PA manifest records ChatGPT, GPT-4o and `trainedAlgorithmicMedia`, but no prompt or user identifier.
-> - The signing certificate's validity period, 15 April 2025 to 15 April 2026, does not date the image's creation.
+The final PowerShell payload was unavailable, leaving its capabilities unresolved. The retained archives preserve the staging scripts and a poster whose embedded C2PA metadata records an AI image pipeline.
 
 ## Four versions of the same lure
 
@@ -27,22 +20,17 @@ The repository history records archive changes on 5 March, on 17 March and twice
 3. `b209f365`, 25 March, 03:54: another repository destination, with the tag changed to WORD and a VBS persistence layer added.
 4. `4b6ea6b2`, 25 March, 13:29: a further destination change and a new access token, with the staging otherwise unchanged.
 
-The repeated staging structure establishes a useful lineage, but describing the later versions as "the same archive with a different C2" misses the persistence component added in the third revision and retained in the fourth. The history also contains embedded access tokens. Their values are unnecessary to establish the sequence, and they were not used to retrieve the final stage.
+The third revision changed both retrieval and persistence; the fourth retained that staging while replacing the destination and access token. The embedded tokens were not used to retrieve the final stage, and their values are withheld.
 
 ![Four retained ECHOES archive revisions](../assets/07-echoes.png)
 
-*Figure 1. Four retained ECHOES archive revisions. Final PowerShell payloads were unavailable; the retained history establishes staging lineage.*
-
-
-Compare the archive in three layers: presentation (the project theme and decoy imagery), staging (launch and persistence logic), and retrieval configuration (the location of the next resource). A destination can change while the artwork and staging remain largely intact; the same artwork could also be reused with a different delivery mechanism.
-
-That is why complete revisions are more informative than a project name or poster. A shared account or repository is a distribution lead, not a substitute for the missing payload bytes. The history supports reuse and modification within this archive lineage, but does not establish that the final stage was the Go agent, JavaScript collector or Windows pipeline described earlier.
+*Figure 1. ECHOES changed retrieval destinations across four revisions and added a VBS persistence layer in the third.*
 
 ## Where the payload trail stopped
 
 The staging references led to final PowerShell resources unavailable through the unauthenticated routes. No final payload was available for capability analysis.
 
-Account status was less clear than a 404 suggested. One historical check found an unavailable account whose name was also unavailable for registration. That supports a suspension hypothesis, but does not confirm it with the platform. Neighboring numeric identifiers showed no distinctive batch-registration pattern. Consecutive IDs can belong to unrelated signups; proving common registration control would require unavailable platform data. These limits prevent weak account relationships from filling the missing payload gap. They do not diminish the preserved archive history.
+Account status was less clear than a 404 suggested. One historical check found an unavailable account whose name was also unavailable for registration. That supports a suspension hypothesis, but does not confirm it with the platform. Neighboring numeric identifiers showed no distinctive batch-registration pattern. Consecutive IDs can belong to unrelated signups; proving common registration control would require unavailable platform data.
 
 ## The poster retained a C2PA structure
 
@@ -57,24 +45,18 @@ Recorded certificate subject fields:
 OpenAI / Sora signing-pipeline references
 ```
 
-The manifest history records creation, conversion and ingredient-opening actions across two manifests. Its embedded thumbnail was described as a lower-resolution version of the poster. These fields provide stronger evidence about the artwork's production pipeline than a visual judgment that it “looks AI-generated.”
+The manifest history records creation, conversion and ingredient-opening actions across two manifests. Its embedded thumbnail was described as a lower-resolution version of the poster.
 
-The case record reports successful signature validation; no fresh image or certificate-status validation is available here. The provenance assertions concern the image. They do not identify who placed it in the lure or prove that the distributor generated it.
+The recorded examination reports successful signature validation. No subsequent certificate-status check was performed. The manifest identifies the image pipeline but contains no identity for the person who generated or distributed the poster.
 
 The manifest contains no prompt or user identifier, and its redacted-assertions array is empty. Those fields may never have been included; an empty redaction list is not evidence that information was removed.
 
-Other portraits examined in the case lacked the poster's C2PA structure. Re-encoding could explain that difference, but it does not prove intentional provenance removal; different export paths or source histories could produce the same result. The bounded conclusion is that the retained poster carries assertions associated with an AI image-generation pipeline, but no operator identity.
+Other portraits examined in the case lacked the poster's C2PA structure. Re-encoding could explain that difference, but it does not prove intentional provenance removal; different export paths or source histories could produce the same result.
 
-### The certificate date was not a creation timestamp
+### Certificate validity and image dates
 
 The leaf certificate was valid from 15 April 2025 to 15 April 2026, and the examination found no trusted timestamp token. Certificate validity does not establish when an artifact was signed or generated. Repository commits date when the image appears in preserved history, not when it was created.
 
-The PNG examination found no payload appended after the end marker. That is a bounded structural result, not exhaustive proof that the image contains no hidden content.
+The PNG examination found no data appended after the end marker; other forms of hidden content were not ruled out.
 
-### What the archive establishes
-
-ECHOES adds a distinct delivery history: four preserved revisions, recurring staging, changing destinations and a later persistence addition. The poster supplies a separate provenance finding. The final payload remains unresolved. Keeping that gap visible prevents the better-understood ClickFix and extension samples from lending their capabilities to ECHOES by association. Any recovered payload should be matched to its revision rather than assumed to represent all four.
-
-The first nine posts connect recruitment lures to collection code, mutable configuration, target-acquisition data and administration interfaces. Some links rest on complete source or exact hashes; others stop at configuration, frontend behavior or historical observations. The technical value is in making each relationship inspectable and showing where the artifacts run out.
-
-The final three posts step back: Part 10 maps the relationships and reassesses novelty, Part 11 examines the companion detections, and Part 12 separates framework features from collection-specific evidence.
+[Companion detections and static scanner](https://github.com/KrasForge/unk-deaddrop-companion).

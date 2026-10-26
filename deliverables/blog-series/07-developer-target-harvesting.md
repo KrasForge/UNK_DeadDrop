@@ -13,14 +13,7 @@ tags:
 og_image_alt: "From Commit Metadata to a Developer Target List"
 ---
 
-The sender configuration pointed to two SQLite databases. Following those references led to harvesting code and pools containing 79,698 and 62,667 rows. Their combined contents gave the investigation a measurable result: 142,365 distinct stored address strings associated with 27,698 repository values. The interesting part is how those values were collected and counted, and how easily either total could be mistaken for a measure of campaign impact.
-
-> **Key Takeaways**
->
-> - Commit metadata supplied contact addresses to a multi-worker harvesting workflow.
-> - The two pools contain 142,365 distinct stored address strings, not a count of infections.
-> - Repository sets overlap even though the tested address sets are disjoint.
-> - Configured endpoints and received headers are stronger provider evidence than variable names.
+The sender configuration pointed to two SQLite databases. Following those references led to harvesting code and pools containing 79,698 and 62,667 rows. Together they contain 142,365 distinct stored address strings associated with 27,698 repository values. The harvesting code collected those addresses from public commit metadata for use by the sender tooling.
 
 ## Following the database references
 
@@ -32,18 +25,17 @@ emails
   repo: associated repository value
 ```
 
-The sender configuration refers to both pools. Different intervals, cooldowns and warm-up settings control how the tools consume them. The labels `safe` and `antispam` come from the toolkit, not from the investigation.
+The sender configuration refers to both pools. Different intervals, cooldowns and warm-up settings control how the tools consume them. The toolkit names the two pools `safe` and `antispam`.
 
-This connects collection to message preparation, but a stored row does not show that a message was sent to that address. That distinction matters because the databases contain far more rows than the messages received in this case.
+The database references connect harvesting to message preparation. No send logs were recovered to establish which addresses received messages.
 
 ![Two pools, two different counting problems](assets/07-targeting.png)
 
-*Figure 1. Two pools, two different counting problems. Rows count stored address strings, not people, delivered mail or infections.*
+*Figure 1. The address sets are disjoint, while repository values overlap between the two pools.*
 
+### Counting the two pools
 
-### The repository count needed a union
-
-An earlier repository count of 20,880 covered only the safe pool. The second database added repository values that partly overlapped with the first, so counting the full corpus required a union. Read-only aggregate queries recorded on 23 October found:
+The two databases share some repository values. A SQL union counts each value once across both pools. Read-only aggregate queries on 23 October found:
 
 - 79,698 rows in the safe pool;
 - 62,667 rows in the antispam pool;
@@ -51,7 +43,7 @@ An earlier repository count of 20,880 covered only the safe pool. The second dat
 - 142,365 distinct address strings across both;
 - 27,698 distinct repository values across both.
 
-The relevant distinction is easy to see in the SQL:
+The queries check address overlap and count the combined repository values:
 
 ```sql
 -- Address overlap
@@ -69,16 +61,16 @@ SELECT count(*) FROM (
 
 In this comparison, the stored address sets are disjoint but the repository sets overlap. Adding the two repository counts would therefore overcount.
 
-The aggregate check applied no additional address canonicalization or person-level identity resolution beyond what the harvester had stored. I call these “address strings” because aliases and people with multiple addresses remain unresolved. The figure counts target data, not infected developers.
+The queries compare stored strings without additional address canonicalization or identity resolution. Aliases and multiple addresses belonging to one person remain separate entries.
 
-The sender code uses `mail.privateemail.com`, although some variables carry a `ZOHO` prefix. Reading the variable names without checking their values would misidentify the provider. A recovered guide supports the Private Email configuration through its DNS examples; later received-message evidence contains Mailgun-related information.
+The sender code configures `mail.privateemail.com` through variables carrying a `ZOHO` prefix. A recovered guide also provides Private Email DNS examples, while later received-message headers contain Mailgun-related information.
 
-The mail path must therefore be tied to specific configurations and messages, not treated as one fixed provider for the operation. The guide also discusses a shared outbound relay. Its other tenants do not become campaign infrastructure just because they use the same service. Follow concrete values through the code: labels show how a developer named a setting, while endpoints and received headers show the route configured or observed.
+The records describe more than one mail route over time. The guide also discusses a shared outbound relay, whose other tenants are outside the scope of the observed campaign traffic.
 
-## Where the targeting evidence stops
+## Delivery volume remains unknown
 
 The code and configuration connect harvesting to message preparation. The databases quantify the stored contact material. Neither supplies the missing send logs, delivery outcomes or endpoint evidence needed to count people contacted or compromised. Even the repository total describes stored values rather than a fresh verification of repository existence or ownership.
 
-The separate administration frontend is the subject of Part 8. Its mail and wallet views are relevant to the wider investigation, but they are not evidence that every address in these databases entered one integrated backend.
+The [administration frontend](08-administration-platform.md) contains mail and wallet views, but its connection to these particular SQLite pools remains unverified.
 
 [Companion detections and static scanner](https://github.com/KrasForge/unk-deaddrop-companion).

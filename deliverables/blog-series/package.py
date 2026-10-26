@@ -26,7 +26,8 @@ with zipfile.ZipFile(output,'w',zipfile.ZIP_DEFLATED) as z:
         if p==BASE/'README.md':
             text=data.decode()
             text=re.sub(r'\[Download the series and linked supporting PDFs\]\(UNK_DeadDrop-Blog-Series.zip\)\.\nThe archive preserves the relative links between articles, images and evidence\.\n', 'This extracted collection preserves relative links between articles, images and evidence.\n', text)
-            text=text.replace('[`rendered/2026-10-25/`](rendered/2026-10-25/index.html)', '`rendered/2026-10-25/` (workspace previews are not included in this source archive)')
+            for edition in ('2026-10-25', '2026-10-26'):
+                text=text.replace(f'[`rendered/{edition}/`](rendered/{edition}/index.html)', f'`rendered/{edition}/` (workspace previews are not included in this source archive)')
             data=text.encode()
         z.writestr(relative,data)
         checks.append(hashlib.sha256(data).hexdigest()+'  '+relative)

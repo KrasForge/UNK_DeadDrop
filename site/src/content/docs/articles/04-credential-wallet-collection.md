@@ -7,13 +7,7 @@ sidebar:
 ---
 
 
-The collection code reaches beyond browser passwords. Its third upload variant searches the home directory for filenames associated with seeds, recovery material, credentials and tokens, while another selector includes encrypted KeePass databases. The source also sets explicit traversal budgets and skips selected inaccessible directories. Following those decisions shows what the collector attempts to take and why selecting a file is only the beginning of assessing exposure.
-
-> **Key Takeaways**
->
-> - Browser-database collection and recovery of plaintext credentials are separate steps.
-> - The phase-three sweep selects filenames and extensions within explicit time and traversal budgets.
-> - The generic extension selector includes encrypted KeePass databases; no dedicated unlock routine was established.
+The collection code reaches beyond browser passwords. Its third upload variant searches the home directory for filenames associated with seeds, recovery material, credentials and tokens, while another selector includes encrypted KeePass databases. The source also sets explicit traversal budgets and skips selected inaccessible directories. Access permissions, traversal limits and file encryption constrain what it can recover.
 
 ## Browser collection has several steps
 
@@ -23,8 +17,7 @@ The Python source handles DPAPI-related key recovery and browser elevation servi
 
 ![A selected file is only the first step](../assets/04-collection.png)
 
-*Figure 1. A selected file is only the first step. Collection, decryption and completed upload are different claims.*
-
+*Figure 1. Filename selection, file access, decryption and upload form separate stages of collection.*
 
 ### Phase three searches filenames
 
@@ -37,7 +30,7 @@ password / backup / recovery / keystore
 API key / token
 ```
 
-The selector also includes configuration and text formats such as JSON, YAML, TOML, INI, property lists and `.env` files. Calling it only an “environment-file sweep” would understate its range. Selection is lexical: a wallet backup or recovery note can match by filename alone, without the code understanding its contents. Conversely, useful data under a nonmatching name can be missed.
+The selector also includes configuration and text formats such as JSON, YAML, TOML, INI, property lists and `.env` files. Selection is lexical: a wallet backup or recovery note can match by filename alone, without the code understanding its contents. Conversely, useful data under a nonmatching name can be missed.
 
 The search also runs within explicit budgets, which in the inspected source default to:
 
@@ -48,7 +41,7 @@ The search also runs within explicit budgets, which in the inspected source defa
 - a walk depth of 6;
 - 500 candidate files.
 
-Several of these settings can be overridden through environment variables, and the skip list covers selected system locations, dependency trees, caches and cloud-storage directories, all of which makes the source considerably more specific than any generic claim that the malware "steals all files".
+Environment variables can override several budgets. The skip list excludes selected system locations, dependency trees, caches and cloud-storage directories.
 
 A helper checks whether selected protected top-level directories are readable, and the walker skips any that fail the probe, caches the results, and has a timeout path. The control flow is effectively:
 
@@ -60,7 +53,7 @@ Is this a protected top-level directory on macOS?
               failure or timeout -> skip
 ```
 
-The code avoids pursuing locations it cannot readily access; this is narrower than a TCC bypass. Permissions already granted to the process can still affect access and may produce a privacy prompt.
+The walker skips protected directories when its readability probe fails or times out. Access still depends on the process's existing permissions and may produce a privacy prompt; no TCC bypass was established.
 
 ### KeePass is caught by an extension selector
 
@@ -73,21 +66,19 @@ const KEY_EXTENSIONS = new Set([
 ]);
 ```
 
-This selector can collect an encrypted KeePass database without a dedicated KeePass module. The examined code does not establish a KDBX parser, master-password recovery routine or in-malware unlock operation. Context also matters when reviewing strings: `kdbx` buried in an encoded blob is not equivalent to `.kdbx` in a file-selection set. The relevant question is where the string occurs and what code consumes it.
+This selector can collect an encrypted KeePass database without a dedicated KeePass module. The examined code does not establish a KDBX parser, master-password recovery routine or in-malware unlock operation.
 
 ## Uploads and the framework boundary
 
 The transfer code uses a default 2 MiB chunk size and a five-retry setting. A separate upload-until-success routine repeats attempts with delays capped at 120 seconds. The inspected HTTPS request path also disables certificate verification. These settings describe intended delivery behavior; retries do not guarantee transfer if the destination is unreachable.
 
-Other capabilities come from the public Overlord framework. Its module path, WebAssembly runtime and transport features are lineage markers; they do not implicate the framework's authors or every deployment. The bounded upstream comparison found SQLite-related dependencies and wallet/browser-collection markers in the samples that were absent from the selected upstream files. This supports sample-specific extensions relative to that comparison, not a claim about every framework version. The companion's [wallet-agent YARA rule](https://github.com/KrasForge/unk-deaddrop-companion/blob/main/rules/yara/deaddrop_wallet_agent.yar) combines framework and environment markers with wallet-related strings, while its [stage-three collector rule](https://github.com/KrasForge/unk-deaddrop-companion/blob/main/rules/yara/deaddrop_stage3_collector.yar) targets the recovered source. A match does not establish that the collector ran or completed an upload.
+The Go agent carries the Overlord module path, WebAssembly runtime and transport features alongside SQLite dependencies and wallet/browser markers. The [framework analysis](../12-framework-and-collection-boundary/) examines these components and the limits of the available upstream comparison. The companion's [wallet-agent YARA rule](https://github.com/KrasForge/unk-deaddrop-companion/blob/main/rules/yara/deaddrop_wallet_agent.yar) combines framework and environment markers with wallet-related strings, while its [stage-three collector rule](https://github.com/KrasForge/unk-deaddrop-companion/blob/main/rules/yara/deaddrop_stage3_collector.yar) targets the recovered source. A match does not establish that the collector ran or completed an upload.
 
 ## From selected files to exposure
 
-The collection inventory needs to be read alongside the access conditions. A filename match identifies a candidate; permissions and traversal limits determine whether the process can reach it; and encryption can still protect its contents after collection. The KeePass selector makes that distinction particularly visible, but the same reasoning applies to browser stores and wallet backups.
+For response, the useful questions are which component ran, which phase it reached, and which files were accessible in that execution context. The source does not provide a victim-side inventory or a record of completed uploads.
 
-For response, the useful questions are which component ran, which phase it reached, and which files were accessible in that execution context. The source does not provide a victim-side inventory or a record of completed uploads. Its retry logic describes persistence in attempting a transfer, not proof of delivery.
-
-The next post examines a separate exposure path: screen capture. That finding rests on capture-related symbols and bundle components rather than the file selectors examined here.
+The [screen-capture components](../05-screen-capture-analysis/) extend potential exposure to information displayed on the desktop.
 
 ```text
 Upload variants: main, pass, phase3
@@ -95,3 +86,5 @@ Configuration: GUS_UPLOAD_CHUNK_SIZE, GUS_KEEP_AGENT_STATE
 Large JavaScript payload SHA-256:
 694626bed2df1f0d0026a3f7ead7692b44c7e73041cdd799b79a025335533cdc
 ```
+
+[Companion detections and static scanner](https://github.com/KrasForge/unk-deaddrop-companion).

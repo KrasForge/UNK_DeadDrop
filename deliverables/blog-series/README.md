@@ -39,8 +39,8 @@ The revised posts follow the broad structure of the technical paper's references
 a concrete finding at the opening, an investigation organized around the relevant
 artifacts, code and configuration details, and implications tied to the analysis.
 They use original wording and the case's own evidence. Academic citation labels
-have been replaced with descriptive evidence links. Methodological qualifications
-remain beside the specific claims they limit, with a short method note at the end.
+have been replaced with descriptive evidence links. Limitations appear beside the findings they affect. The articles omit recurring
+takeaway boxes, editing history and repeated commentary about how to assess the prose.
 
 References consulted for structure and pacing:
 
@@ -69,7 +69,7 @@ series; the separate preprint has a Zenodo record.
 
 The supporting PDFs are edited reports derived from restricted evidence. They do
 not contain the raw databases or a complete forensic sample set. The ZIP includes
-the twelve articles, this index, validation notes, six diagrams, linked evidence
+the twelve articles, this index, validation notes, twelve diagrams, linked evidence
 PDFs, the preprint, the explicitly linked detection rules/tests and their license
 and requirements, and a checksum file.
 

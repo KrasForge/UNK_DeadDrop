@@ -1,6 +1,6 @@
 ---
 title: "Where Overlord Ends and the Collection Toolchain Begins"
-description: "Separating inherited framework features, sample-specific collection markers and claims the comparison cannot support."
+description: "Overlord build metadata, browser-store selectors, wallet-upload markers and capture components in the Linux agent."
 date: "2026-10-25"
 author: "Ilja Krasnjanski"
 canonical: "https://krasforge.github.io/UNK_DeadDrop/articles/12-framework-and-collection-boundary/"
@@ -13,26 +13,17 @@ tags:
 og_image_alt: "Where Overlord Ends and the Collection Toolchain Begins"
 ---
 
-The Linux sample identifies itself as `overlord-client/cmd/agent` and includes a WebAssembly runtime. A historical upstream comparison places the module path and general plugin capability in the framework lineage. A dependency comparison suggested that the Linux build lacked screen capture, but later binary examination found capture-related symbols.
+The Linux Go agent embeds the module path `overlord-client/cmd/agent`, a WebAssembly runtime and SQLite dependencies. Its strings include browser database names, wallet-upload configuration and capture-related symbols. Those components connect a general remote-access framework to the collection functions found in this sample.
 
-The retained case supports an Overlord-derived agent with additional collection-related components, but no complete, pinned source diff establishes who wrote each addition. Positive evidence in the sample must therefore remain distinct from the limited historical comparison.
+## Build metadata in the Linux agent
 
-> **Key Takeaways**
->
-> - The module path, plugin runtime and generic transport features identify framework lineage, not a campaign operator.
-> - SQLite dependencies and wallet/browser markers support collection-related implementation in the held sample.
-> - The upstream files examined in July were not retained as a pinned snapshot, limiting reproducibility of absence claims.
-> - A missing public commit and an absent dependency do not prove a private fork or the absence of a capability.
-
-## Anchor the sample before comparing it
-
-The retained Linux amd64 artifact is 15,790,242 bytes and has this SHA-256:
+The Linux amd64 artifact is 15,790,242 bytes and has this SHA-256:
 
 ```text
 ef183bbb40f4c7c3f4b52994cdba3295f3eab2604fdad99eefa3b67b8d966e8d
 ```
 
-The evidence report includes output obtained by reading its Go build information. Selected fields are:
+Reading its Go build information yielded these fields:
 
 ```text
 path                 overlord-client/cmd/agent
@@ -46,61 +37,30 @@ vcs.revision         056221e342357056c8539585806f76632660e414
 vcs.time             2026-07-21T01:14:06Z
 ```
 
-This is a reformatted selection from the retained extraction, not a new execution result. Reading build information does not run the target binary. The fields identify embedded build metadata and dependencies; they do not independently authenticate a developer or a physical build machine.
+The module path connects the binary to the Overlord agent codebase. The `wazero` dependency supplies a WebAssembly runtime, consistent with the framework's plugin support. SQLite provides local database functionality, which becomes relevant alongside the browser-store markers elsewhere in the file.
 
-The [Go build-setting documentation](https://go.dev/pkg/runtime/debug/?m=old) defines `vcs.revision` as the revision associated with the checkout and `vcs.time` as its associated modification time. That is why the timestamp cannot be promoted into a certified compilation time, even when it falls close to a phishing message.
-
-The July comparison inspected selected Overlord files, including the client module file and configuration examples. It recorded a shared module path, plugin support and generic transport configuration. However, the upstream files used for that comparison were not saved in the workspace, and the evidence does not provide a pinned baseline for their contents.
-
-That limits the strength of a negative comparison. A retained binary can be inspected again. A statement that a string was absent from an upstream file in July cannot be reproduced against an unspecified later version and called the same experiment. Looking at today's repository would establish a new comparison, not repair the missing historical snapshot.
-
-These upstream differences are findings within the examined scope, not an exhaustive diff across every version, fork or plugin. Without the missing baseline, the strongest result is the sample's positive collection evidence, not a claim that nobody else using the framework could possess it.
+The [Go build-setting documentation](https://go.dev/pkg/runtime/debug/?m=old) defines `vcs.revision` as the checkout revision and `vcs.time` as its associated modification time. The timestamp is version-control metadata; the binary's compilation time remains unverified. The recorded repository lookup did not locate the embedded revision, leaving the corresponding source checkout unresolved.
 
 ![Framework lineage and collection evidence](assets/12-framework-boundary.png)
 
-*Figure 1. Framework lineage and collection evidence. The upstream files were not preserved as a pinned baseline; authorship remains unresolved.*
+*Figure 1. The agent combines Overlord framework markers with browser, wallet and capture-related components.*
 
+### What the upstream comparison covered
 
-### Features inherited from the framework
+The July comparison inspected selected client module and configuration files. It found the shared module path, plugin support and generic transport configuration. It also recorded a newer wazero version in the examined upstream module file than the sample's v1.7.0. That difference establishes a dependency mismatch, but cannot date a fork or deployment.
 
-The historical comparison identifies the `overlord-client` module name as upstream. The embedded path is useful for recognizing software ancestry, but it was not a name invented for this deployment. The same distinction applies to the WebAssembly plugin runtime and the general remote-control and transport surface.
+SQLite-related dependencies and wallet/browser markers were absent from the selected upstream files. Those files were not retained at a pinned revision, preventing a reproducible source diff. Other versions, forks and plugins were not exhaustively compared, and the authorship of these components remains unresolved.
 
-The recorded sample uses wazero v1.7.0, while the examined upstream module file was reported to use a newer version. That is a dependency-version difference, not a date for the fork. A maintainer can pin, backport or change dependencies independently of when a deployment began. Without the corresponding source history, the version cannot provide a complete chronology.
+## Browser, wallet and capture components
 
-This matters for attribution and detection alike. A rule built only around the framework path or plugin runtime can identify unrelated deployments. The framework authors and other users do not become participants in this case because their software shares those properties.
+String examinations found `Login Data`, `Local State`, `logins.json` and `key4.db`, along with wallet names and extension identifiers. These are browser-store and collection selectors. Their presence alongside SQLite is more informative than a database dependency alone, although it does not demonstrate a successful read or decryption on a victim host.
 
-## Collection evidence inside the held artifact
+The wallet-related markers include an endpoint setting, a client header and an upload path. The companion's [wallet-agent YARA rule](https://github.com/KrasForge/unk-deaddrop-companion/blob/main/rules/yara/deaddrop_wallet_agent.yar) combines these with the Overlord module and server-environment markers. A generic framework match would also identify unrelated Overlord deployments; requiring wallet context narrows the search to files carrying that additional combination.
 
-The build metadata includes `modernc.org/sqlite` and related dependencies. Separately, retained string examinations identify browser-store names such as `Login Data`, `Local State`, `logins.json` and `key4.db`, along with wallet-related names and extension identifiers. The combination is more informative than SQLite alone: database support is common in legitimate software, while the surrounding collection markers supply context.
+The binary also contains previous-frame, block-comparison and capture-loop symbols. These provide evidence of capture-related implementation despite the absence of expected packages in the selected upstream dependency files. [The capture analysis](05-screen-capture-analysis.md) examines those symbols and the separate Windows bundle. Display access, code reachability and successful transmission were not reproduced.
 
-The historical comparison found collection-related dependencies and markers absent from the selected upstream files. That supports a distinction relative to those files. It does not prove that the campaign's operators personally authored every module, that all upstream variants lack collection features, or that a browser database was successfully read from a victim.
+The phased JavaScript collection, GUS-prefixed configuration and Windows Node/Python pipeline occur in separate components of the toolchain. Their functions extend the collection paths beyond the Go executable. They cannot all be assigned to changes in one agent's source.
 
-Other parts of the case add deployment context: the phased JavaScript collection, GUS-prefixed configuration, the Windows Node/Python pipeline and the delivery artifacts described earlier in the series. These are separate components and should not all be presented as modifications to one Go executable. A toolchain can combine inherited code, additional modules and external orchestration.
-
-### A comparison table with bounded conclusions
-
-| Observation | Evidence basis | Supported conclusion |
-|---|---|---|
-| `overlord-client` module path | Retained build metadata; recorded upstream comparison | Framework lineage |
-| WebAssembly runtime | Retained wazero dependency; historical upstream examples | Plugin support is not unique operator evidence |
-| SQLite and browser-store markers | Retained dependency output and string observations | Collection-related implementation context |
-| Wallet endpoint and client-header markers | Held artifact and collection analysis | Narrower selectors when combined with framework context |
-| GUS configuration and phase-three sweep | Separate recovered collection source | Deployment/collection logic beyond a generic framework label |
-| Missing public build revision | Historical lookup result | Unresolved source provenance, not proof of ownership |
-| Capture-related symbols | Later binary capability review | Capture implementation markers occur in the held binary; runtime remains unverified |
-
-The table keeps the evidence types separate. A source selector, module dependency and symbol set have different relationships to runtime behavior. Combining them can strengthen an assessment only when their provenance remains visible.
-
-The original comparison inferred that the Linux implant lacked capture because expected dependencies were missing. Later examination found previous-frame, block-comparison and capture-loop symbols in the held binary, so the evidence does not support a categorical capture-free conclusion.
-
-The symbols do not establish a working desktop stream on every Linux host. Reachability, platform implementation, display access and permissions remain separate questions. Part 5 examines the capture evidence in detail. A dependency inventory describes recorded components; it cannot prove an implementation is absent.
-
-The same restraint applies to authorship. Finding an addition relative to selected public files does not identify who wrote it. Reused code, another fork or an unpublished component could explain the difference. The retained artifacts support the behaviour assessment more strongly than they support a personal attribution.
-
-The historical lookup did not find the embedded build revision in the public repository examined. That does not establish a private fork. Unpublished work, removed history or other metadata provenance remain possible explanations that the retained corpus cannot resolve.
-
-Reproducing the comparison requires the exact upstream commit and files, each sample's hash, and the extraction commands and output. Even then, a code difference would not by itself identify an operator.
-
-For detection, combine framework markers with collection context, as the companion's [wallet-agent YARA rule](https://github.com/KrasForge/unk-deaddrop-companion/blob/main/rules/yara/deaddrop_wallet_agent.yar) does, and interpret each match in light of where the file was found. Framework ancestry starts the analysis; surrounding artifacts determine how far the conclusion can go.
+For file hunting, the wallet-agent rule and [capture-agent rule](https://github.com/KrasForge/unk-deaddrop-companion/blob/main/rules/yara/deaddrop_capture_agent.yar) select different marker combinations. Both remain experimental. A hit identifies content for inspection, and can include source or research material containing those strings. For an unexpected installed agent, preserve its hash, configuration, launch mechanism and outbound destinations alongside the matching offsets.
 
 [Companion detections and static scanner](https://github.com/KrasForge/unk-deaddrop-companion).
