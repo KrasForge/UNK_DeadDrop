@@ -1,5 +1,16 @@
 # Twelve-part edition, 26 October 2026
 
+## Preprint alignment update, 27 October 2026
+
+Updated Parts 3 and 11 to separate the public companion scanner and YARA
+snapshot from the later local scanner package and YARA noise review. Part 11
+reports the 177-input/380-view review and the 31-input scanner evaluation with
+their limited scope. Added the published Zenodo v1.2 DOI to the relevant pages,
+series index and research-materials page. Regenerated the standalone HTML/PDF
+for Parts 3 and 11, refreshed the full-edition index, and replaced its preprint
+PDF with the deposited v1.2 file. The historical artifact cutoff remains
+24 July 2026.
+
 The 12 Markdown articles now use their GitHub Pages canonical URLs and each
 ends with a direct link to the companion repository. The landing page links the
 Zenodo preprint record and companion repository. No technical claims changed in

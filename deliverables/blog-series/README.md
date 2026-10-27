@@ -1,6 +1,6 @@
 # UNK_DeadDrop: a twelve-part technical series
 
-Twelve articles by Ilja Krasnjanski, updated 26 October 2026.
+Twelve articles by Ilja Krasnjanski, updated 27 October 2026.
 Parts 10–12 add the investigative connections, detection engineering and framework
 comparison. Parts 4–5 and 7–8 are the split collection/capture and targeting/admin
 articles. The hosted edition is available at [krasforge.github.io/UNK_DeadDrop](https://krasforge.github.io/UNK_DeadDrop/).
@@ -21,16 +21,16 @@ articles. The hosted edition is available at [krasforge.github.io/UNK_DeadDrop](
 [Download the series and linked supporting PDFs](UNK_DeadDrop-Blog-Series.zip).
 The archive preserves the relative links between articles, images and evidence.
 
-The numbered Markdown files and ZIP are the current twelve-part edition. Current
-standalone HTML and PDF renders are in [`rendered/2026-10-26/`](rendered/2026-10-26/index.html).
-Only that dated edition is current; earlier rendered folders are superseded
-previews and should not be cited. The ZIP contains the Markdown edition and linked
-evidence, not the rendered previews.
+The numbered Markdown files, ZIP and hosted Pages site are the current twelve-part
+edition. Parts 3 and 11 were refreshed on 27 October. Standalone HTML/PDF files
+are generated for local review under `rendered/2026-10-27/`; the hosted Pages
+site is the public rendered edition. The ZIP contains the Markdown edition and
+linked evidence, not the standalone previews.
 Each hosted article has a canonical GitHub Pages URL. Every article links to the
 [companion detections and static scanner](https://github.com/KrasForge/unk-deaddrop-companion).
-The preprint is published on Zenodo as version 1.0 under CC BY 4.0:
-[version DOI](https://doi.org/10.5281/zenodo.23652298) ·
-[latest-version DOI](https://doi.org/10.5281/zenodo.23652297). Current rules,
+The preprint is published on Zenodo as version 1.2 under CC BY 4.0:
+[version DOI](https://doi.org/10.5281/zenodo.23696198) ·
+[concept DOI](https://doi.org/10.5281/zenodo.23652297). Current rules,
 tests and validation notes live in the companion repository.
 
 ## Editorial approach
