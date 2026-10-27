@@ -8,6 +8,7 @@ The site ships with the public materials needed to review the series without dep
 ## Paper and source edition
 
 - [Technical paper (PDF)](/UNK_DeadDrop/downloads/UNK_DeadDrop-Preprint.pdf)
+- [Zenodo preprint](https://doi.org/10.5281/zenodo.23696198) · [Concept DOI](https://doi.org/10.5281/zenodo.23652297) · CC BY 4.0.
 - [Blog series source package](/UNK_DeadDrop/downloads/UNK_DeadDrop-Blog-Series.zip)
 
 ## Evidence reports
@@ -16,7 +17,7 @@ Each article links directly to the reports supporting its claims. The complete p
 
 ## Detection companion
 
-Part 11 links the YARA and Sigma rules and their inert test fixtures. These files are experimental research artifacts. Their local tests do not establish production precision, recall, telemetry coverage, or alert delivery.
+The [companion repository](https://github.com/KrasForge/unk-deaddrop-companion) contains the parse-only AST scanner and 33 named YARA rules across 28 files. A read-only replay matched every rule against retained case artifacts; a separate scan of 1,914 local software files produced no hits. The paper distinguishes that public snapshot from later local YARA noise review and scanner evaluation. The rules remain experimental and the small baselines do not establish fleet-wide false-positive rates. Sigma rules are omitted because authentic endpoint event logs were unavailable for replay.
 
 ## Citation boundary
 

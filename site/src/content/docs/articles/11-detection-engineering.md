@@ -1,104 +1,46 @@
 ---
 title: "Building and Testing Detections for UNK_DeadDrop"
-description: "Ten experimental rules, their actual match conditions, and inert tests that expose useful blind spots."
-lastUpdated: 2026-10-25
+description: "Thirty-three YARA rules replayed against retained artifacts, followed by a separate noise review and static scanner evaluation."
+lastUpdated: 2026-10-27
 sidebar:
   order: 11
 ---
 
 
-A harmless paragraph containing four marker strings satisfies the wallet-agent YARA rule. A scheduled task named `GoogleUpdateSupporterNode-Lab` satisfies the Windows task selector. Both results follow from the rules' matching conditions and affect how an analyst should triage a hit.
+The published companion snapshot contains 33 named YARA rules in 28 files. Every rule matched at least one object in the saved investigation material, and none matched the small local software baseline. A later, separate local review narrowed seven source rules after selected controls produced collisions. The revisions preserved all earlier artifact matches, but are not part of the published snapshot. The wallet-agent rule initially matched marker-rich research prose; requiring ELF magic at byte zero makes that text fixture negative, though it does not validate the file's code or prove execution.
 
-The [public companion](https://github.com/KrasForge/unk-deaddrop-companion) publishes four experimental YARA rules and six Sigma rules. Alongside the wallet-agent, Linux service and Windows task selectors, it covers [editor-spawned Node](https://github.com/KrasForge/unk-deaddrop-companion/blob/main/rules/sigma/windows_editor_node_collection.yml), [PowerShell Electron Node mode](https://github.com/KrasForge/unk-deaddrop-companion/blob/main/rules/sigma/windows_powershell_electron_node_mode.yml), [temporary elevation artifacts](https://github.com/KrasForge/unk-deaddrop-companion/blob/main/rules/sigma/windows_elevation_temp_artifacts.yml), [VS Code extension artifacts](https://github.com/KrasForge/unk-deaddrop-companion/blob/main/rules/sigma/windows_vscode_extension_artifact.yml), [capture-agent markers](https://github.com/KrasForge/unk-deaddrop-companion/blob/main/rules/yara/deaddrop_capture_agent.yar), [VSIX manifest indicators](https://github.com/KrasForge/unk-deaddrop-companion/blob/main/rules/yara/deaddrop_vsix_manifest.yar), and [the stage-three collector source](https://github.com/KrasForge/unk-deaddrop-companion/blob/main/rules/yara/deaddrop_stage3_collector.yar).
+The [companion repository](https://github.com/KrasForge/unk-deaddrop-companion) contains file-content rules and a parse-only JavaScript scanner. It no longer includes the event rules or workspace-configuration rules: authentic endpoint logs and the original `.vscode` task and settings files were not available for replay. Synthetic event records and invented configuration files would show how a rule behaves, not whether it matches the collected targets.
 
-## Match the rule to its telemetry
+## A content match is not an execution finding
 
-The wallet-agent, Linux service and Windows task rules operate on different inputs. YARA scans file content. The Linux Sigma rule expects file-event telemetry with a target path. The Windows Sigma rule expects process-creation telemetry with an image path and command line. A detection can only evaluate the fields it receives, so a missing command line or an uncollected user-service directory creates a gap before the rule logic is considered.
+The wallet-agent rule is a useful example. It now requires ELF magic at byte zero, a file smaller than 64 MiB, an Overlord module path, a server-environment marker and at least two wallet-collection strings. The combination matched the held Go agent. Removing the header or one required marker category gives a negative result in the inert boundary tests.
 
-The checks described here cover syntax and selected input combinations. No evaluation against a representative fleet has measured these rules' precision or recall.
+The earlier rule version matched a harmless fixture with the complete marker set in research prose. Requiring the ELF header at offset zero prevents that ordinary text collision, but YARA does not validate the rest of the executable or determine whether the strings are reachable code. A marker-rich ELF can still match. A file signature can help identify an artifact for review, but it cannot establish that the file ran, that data left the host or that the activity belongs to a particular operator.
 
-![A YARA match requires the full conjunction](../assets/11-detection-logic.png)
+![YARA conditions and validation results](/UNK_DeadDrop/diagrams/11-detection-logic.svg)
 
-*Figure 1. The wallet-agent rule requires both framework and environment markers plus at least two wallet markers.*
+*Figure 1. Every wallet-agent condition is required. The retained rules matched case artifacts, while the local software baseline and marker-rich prose fixture had no hits.*
 
-### The wallet-agent conjunction
+## Replay against retained files
 
-The YARA rule requires a file smaller than 64 MiB, a framework module marker, an environment marker and at least two of three wallet markers. Its strings and condition are:
+The read-only replay covered 192 selected files: the 15 directories marked `DO-NOT-RUN`, compressed lure bundles, related web assets, extracted VSIX components and agent archives, source files, and six retained lure messages. The helper read ZIP, VSIX, TAR, gzip and nested ZIP content in memory without writing extracted files. It evaluated 395 raw or archive-member views totaling about 234 MB; all 33 named rules in 28 files matched at least once. At least one rule matched 90 input files, while 102 had no hits. Counts include copied variants and nested archive views, so they are not independent samples or incidents. No file was executed.
 
-```text
-strings:
-    $framework = "overlord-client/cmd/agent" ascii wide
-    $env = "OVERLORD_SERVER_RAW" ascii wide
-    $wallet1 = "OVERLORD_COMPANY_WALLET_EP" ascii wide
-    $wallet2 = "X-Company-Wallet-Client-Id" ascii wide
-    $wallet3 = "/api/company-wallet/upload" ascii wide
-condition:
-    filesize < 64MB and $framework and $env and 2 of ($wallet*)
-```
+Four ECHOES RAR archives require a password, so their members were not inspected; the separate sealed environment archive was scanned only as raw bytes. Exact hashes identify the four ECHOES containers without making claims about their contents. A separate exact-hash rule identifies the retained Surge Group message; the rule does not claim it shares control with UNK_DeadDrop. Other hash rules identify exact retained packages, launchers and messages; any modification or repackaging evades them. Most unmatched inputs were generic dashboard modules, web assets or research context without a distinctive file-content signature. They were reviewed in the coverage accounting, but weak rules that merely identify those records would not be useful detections.
 
-The excerpt omits the rule declaration and metadata. Requiring wallet markers narrows the match beyond generic Overlord framework strings. The `ascii wide` modifiers accommodate ordinary byte strings and their zero-interleaved wide form; they do not decrypt a packed or encrypted payload. The [YARA rule documentation](https://yara.readthedocs.io/en/stable/writingrules.html) describes those modifiers and condition syntax.
+Workspace-file signatures remain absent because neither the original `.vscode/tasks.json` nor `.vscode/settings.json` appears in the saved repository archive or its commit history. Event rules were removed because there are no authentic Windows process, Linux audit or comparable endpoint logs in the retained set. The companion therefore has no Sigma rules. The two SQLite databases containing target addresses were also excluded from scanning.
 
-The tests compile the rule and supply inert buffers. They check positive ASCII and wide cases, then remove enough context to produce framework-only, wallet-only and partial-marker negatives. A historical static spot check also matched the held Go implant. Neither exercise measures how many unrelated files in a developer fleet would match.
+The companion's [artifact-validation report](https://github.com/KrasForge/unk-deaddrop-companion/blob/main/docs/actual-artifact-validation.md) lists per-rule match counts and corpus limits. Its [detection notes](https://github.com/KrasForge/unk-deaddrop-companion/blob/main/docs/detection-notes.md) document what each condition does and does not establish.
 
-One fixture contains research prose followed by the required framework, environment and two wallet strings. It has no executable instructions. It still matches, because the rule asks whether those bytes occur, not whether the containing file is an executable or whether its contents are reachable code.
+## A limited software baseline
 
-The paired negative replaces the required environment marker with a different label. That buffer no longer matches. Renaming one required marker therefore evades the rule, while documenting the full marker set can trigger it.
+The second scan covered 1,914 files and about 59.2 MB across 2,379 raw and nested object views from the local CPython standard library, installed Python packages, global npm packages and Acorn. No retained rule matched. The 19 Markdown articles and companion notes also produced no hits after source-oriented conditions were narrowed to avoid prose collisions. This is a small local baseline, not a representative or independently curated clean endpoint corpus, so it does not provide a fleet false-positive rate or a production precision estimate.
 
-A match in a malware-analysis archive should therefore be interpreted differently from a match on an unexpected installed agent. The current rule has no executable-format check.
+The prose fixture remains important alongside that zero-hit result. It records a false-positive case from the rule's earlier form and confirms the current ELF-header check rejects plain text. Analysts should still review file type, acquisition context and matched bytes before treating a hit as suspicious. For process and persistence behavior, collect authentic endpoint logs first; this repository does not publish event rules without them.
 
-### Service paths and scheduled-task commands
+A later local review covered 177 case inputs, 380 views and 344 distinct objects. Seven source rules were narrowed after collisions in selected research, dual-use tooling, ordinary software, installed software and upstream-fork controls. Every previous case-artifact match was preserved, and the seven revised forms had no hits in the external controls scanned. This bounded control set does not estimate a production false-positive rate; the revisions remain separate from the public companion snapshot.
 
-The Linux rule selects either the exact system unit path `/etc/systemd/system/google-agent.service` or a target ending in `/.config/systemd/user/google-agent.service`. The logical condition is an OR between those two selections.
+The [preprint on Zenodo](https://doi.org/10.5281/zenodo.23696198) also evaluates a separate local `unk-scanner` 0.1.0 package. It parsed 31 selected JavaScript inputs from the case material, producing 27 syntax-based findings and four identity-only records covering three distinct hashes. Of 500 local JavaScript baseline files, all parsed; one legitimate clipboard operation produced a syntax finding, and none matched an identity record. These 31 inputs were accounted for, not all identified as malicious. The package and evaluation were not part of the public companion commit.
 
-The existing fixtures cover both paths, a similarly named nonmatching unit and a missing field. A boundary fixture also shows that this evaluator folds case: an uppercase unit name in the field is accepted. That is a property of the matching implementation, not a claim that Linux filesystem paths are interchangeable across case.
-
-A service file event does not establish that the service was enabled, started or successfully ran the collector. Investigators still need the unit contents and supporting process or service activity. A renamed unit escapes this exact selector, while a security exercise using the recorded name can produce a legitimate match.
-
-The Windows selector is:
-
-```yaml
-selection:
-  Image|endswith: '\schtasks.exe'
-  CommandLine|contains|all:
-    - '/create'
-    - 'GoogleUpdateSupporterNode'
-condition: selection
-```
-
-Both command-line substrings must occur, and the image must have the required suffix. The [Sigma modifier documentation](https://sigmahq.io/docs/basics/modifiers.html) explains how `all` combines the listed values and how `contains` and `endswith` constrain the match.
-
-The rule does not parse `/TN` and compare its argument for equality. A fixture uses `GoogleUpdateSupporterNode-Lab`, which still contains the required marker and therefore matches in the local evaluator. Negative fixtures cover a query command, a different executable and a missing command line.
-
-A hit requires examination of the complete command and task definition. Registration through another API, a renamed task or missing command-line telemetry can bypass the selector.
-
-## What was tested locally
-
-The downloadable blog bundle contains seven detection tests, including boundary fixtures. The expanded public companion now has 14 inert detection tests and eight AST scanner tests. These checks exercise rule and parser behavior; no service was installed, task registered or malware launched.
-
-| Check | What it establishes | What it does not establish |
-|---|---|---|
-| YARA compilation and buffers | Syntax and selected marker combinations | Malware precision or recall |
-| Harmless-text match | Content can match outside executable code | Frequency of that false positive in a fleet |
-| Sigma parsing | Rules accepted by the installed parser | Backend query correctness |
-| Field fixtures | Behaviour of the local modifier subset | Real event collection or end-to-end alerts |
-| AST tests | Supported parser-tool behaviour | Automatic recovery of the encrypted loader |
-
-The local Sigma evaluator is deliberately small; it is not a SIEM backend. Case handling, field mapping and event normalization still need validation in the intended platform.
-
-The [public companion repository](https://github.com/KrasForge/unk-deaddrop-companion) contains the expanded rules, tests and AST scanner. The downloadable blog bundle preserves the [original detection tests](../../companion/tests/test_detections.py), [boundary tests](../../companion/tests/test_blog_boundaries.py), [pinned Python requirements](../../companion/requirements-dev.txt), [YARA rule](../../companion/rules/yara/deaddrop_wallet_agent.yar), [Linux rule](../../companion/rules/sigma/linux_google_agent_persistence.yml) and [Windows rule](../../companion/rules/sigma/windows_capture_task.yml). Run those original tests from the extracted bundle root:
-
-```sh
-python -m venv .venv
-.venv/bin/pip install -r public-repository/requirements-dev.txt
-.venv/bin/python -m unittest discover -s public-repository/tests -v
-```
-
-Those commands run the seven detection tests in the blog bundle. The expanded companion's AST tests require its full project checkout. Code and rules retain the companion's [MIT license](../../companion/LICENSE); that grant does not cover the research prose or underlying evidence.
-
-### Triaging matches
-
-For a YARA hit, retain the file identity, acquisition context and matching offsets. For a Linux unit, inspect the unit definition and associated process activity. For a Windows task, recover the full command line, task action and relevant ancestry. Those follow-ups help separate a research artifact or simulation from an unexpected deployment.
-
-The rules still need conversion and replay against representative telemetry from the intended environment, including clean developer workloads.
+The repository includes inert [YARA boundary tests](https://github.com/KrasForge/unk-deaddrop-companion/blob/main/tests/test_detections.py), a [prose false-positive test](https://github.com/KrasForge/unk-deaddrop-companion/blob/main/tests/test_blog_boundaries.py), and the [test requirements](https://github.com/KrasForge/unk-deaddrop-companion/blob/main/requirements-dev.txt). Run the checks using the instructions in its README. These tests are repeatable checks of rule behavior, not malware execution or production validation.
 
 [Companion detections and static scanner](https://github.com/KrasForge/unk-deaddrop-companion).

@@ -1,7 +1,7 @@
 ---
 title: "Parsing Without Executing: JavaScript Deobfuscation with Acorn"
 description: "Rebuilding an AES key from sixteen obfuscated fragments with Acorn, and proving it with authenticated decryption without ever running the malicious extension."
-lastUpdated: 2026-10-25
+lastUpdated: 2026-10-27
 sidebar:
   order: 3
 ---
@@ -90,7 +90,9 @@ All three payloads decrypted to readable, commented source. Authentication tied 
 
 The companion scanner also uses Acorn, but for a narrower task: it locates selected clipboard-write calls and campaign markers, reports source locations with an input hash, and folds a limited set of literal strings. It can resolve literal additions but leaves variable references and function calls unresolved. It does not reproduce the wrapper mapping or rotated-array recovery described above.
 
-The scanner limits input to 8 MiB and bounds nested literal folding. Eight AST tests cover its parser behavior. Static spot checks found two clipboard-write sites in the lure and five campaign markers in the larger collector. These results support triage use, not general deobfuscation. Because parsing runs in process, the byte limit alone cannot prevent expensive adversarial syntax.
+In the published repository snapshot, the scanner limits input to 8 MiB and bounds nested literal folding. Eight AST tests cover its parser behavior. Static spot checks found two clipboard-write sites in the lure and five campaign markers in the larger collector. These results support triage use, not general deobfuscation. Because parsing runs in process, the byte limit alone cannot prevent expensive adversarial syntax.
+
+A separate local package, `unk-scanner` 0.1.0, adds bounded gzip decoding, worker deadlines and recognition of encrypted-loader syntax. Its evaluation is summarized in [Part 11](../11-detection-engineering/) and the [preprint](https://doi.org/10.5281/zenodo.23696198). The package and evaluation were not part of the public companion snapshot.
 
 ```text
 detect_malware.py

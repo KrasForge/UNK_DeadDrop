@@ -99,7 +99,7 @@ The companion scanner also uses Acorn, but for a narrower task: it locates selec
 
 In the published repository snapshot, the scanner limits input to 8 MiB and bounds nested literal folding. Eight AST tests cover its parser behavior. Static spot checks found two clipboard-write sites in the lure and five campaign markers in the larger collector. These results support triage use, not general deobfuscation. Because parsing runs in process, the byte limit alone cannot prevent expensive adversarial syntax.
 
-A separate local package, `unk-scanner` 0.1.0, adds bounded gzip decoding, worker deadlines and recognition of encrypted-loader syntax. Its evaluation is summarized in [Part 11](11-detection-engineering.md) and the [version 1.2 preprint](https://doi.org/10.5281/zenodo.23696198). The package and evaluation were not part of the public companion snapshot.
+A separate local package, `unk-scanner` 0.1.0, adds bounded gzip decoding, worker deadlines and recognition of encrypted-loader syntax. Its evaluation is summarized in [Part 11](11-detection-engineering.md) and the [preprint](https://doi.org/10.5281/zenodo.23696198). The package and evaluation were not part of the public companion snapshot.
 
 ```text
 detect_malware.py

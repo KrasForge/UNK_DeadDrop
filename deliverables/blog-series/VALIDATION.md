@@ -5,10 +5,10 @@
 Updated Parts 3 and 11 to separate the public companion scanner and YARA
 snapshot from the later local scanner package and YARA noise review. Part 11
 reports the 177-input/380-view review and the 31-input scanner evaluation with
-their limited scope. Added the published Zenodo v1.2 DOI to the relevant pages,
+their limited scope. Added the current Zenodo DOI to the relevant pages,
 series index and research-materials page. Regenerated the standalone HTML/PDF
 for Parts 3 and 11, refreshed the full-edition index, and replaced its preprint
-PDF with the deposited v1.2 file. GitHub Pages run 40539680516 succeeded; live
+PDF with the deposited file. GitHub Pages run 40539680516 succeeded; live
 Parts 3 and 11, Research Materials, and the downloadable PDF were checked. The
 PDF checksum matches Zenodo. The historical artifact cutoff remains 24 July 2026.
 
@@ -35,7 +35,7 @@ Rendered all twelve standalone HTML/PDF articles with the claude-blog
 `blog_render.py` renderer, using WeasyPrint. Each HTML source hash matches its
 rendered Markdown copy, and the PDFs were produced successfully. The current
 edition includes the latest Part 2 and Part 11 scope and rule references. The
-deposited preprint remains version 1.0.
+earlier rendered edition used the first deposited preprint.
 
 The Astro production build passed with Node.js 24. All twelve generated article
 bodies contain their diagrams and exclude em dashes and the removed sections.
@@ -65,8 +65,8 @@ The initial twelve-page edition was rendered with the public
 from current Markdown using the existing claude-blog HTML/CSS template, Python
 Markdown and WeasyPrint. Their source hashes, descriptions, dates and word counts
 were updated; Part 11's diagram now shows the artifact replay and local baseline.
-The other ten pages are unchanged. The published Zenodo version 1.0 PDF and
-linked public evidence reports are included; the local version 1.1 preprint draft
+The other ten pages are unchanged. The previously deposited Zenodo PDF and
+linked public evidence reports are included; the unsubmitted local preprint draft
 is excluded. The edition is under `rendered/2026-10-26/`.
 
 The full five-gate delivery contract and new viewport screenshots were not run.
@@ -121,7 +121,7 @@ Checks for this edition:
   Sigma rules or synthetic event records are published as detections.
 - Official YARA and Go build-setting references were consulted for technical
   semantics. References are linked beside the relevant article statements.
-- The ZIP includes the Markdown articles, diagrams, preprint v1.0, selected
+- The ZIP includes the Markdown articles, diagrams, preprint, selected
   edited evidence reports and checksums. Current detection rules live in the
   companion repository.
 - ZIP member hashes are checked by the package builder.

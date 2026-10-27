@@ -28,8 +28,8 @@ site is the public rendered edition. The ZIP contains the Markdown edition and
 linked evidence, not the standalone previews.
 Each hosted article has a canonical GitHub Pages URL. Every article links to the
 [companion detections and static scanner](https://github.com/KrasForge/unk-deaddrop-companion).
-The preprint is published on Zenodo as version 1.2 under CC BY 4.0:
-[version DOI](https://doi.org/10.5281/zenodo.23696198) ·
+The preprint is published on Zenodo under CC BY 4.0:
+[record DOI](https://doi.org/10.5281/zenodo.23696198) ·
 [concept DOI](https://doi.org/10.5281/zenodo.23652297). Current rules,
 tests and validation notes live in the companion repository.
 
