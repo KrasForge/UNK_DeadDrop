@@ -8,8 +8,9 @@ reports the 177-input/380-view review and the 31-input scanner evaluation with
 their limited scope. Added the published Zenodo v1.2 DOI to the relevant pages,
 series index and research-materials page. Regenerated the standalone HTML/PDF
 for Parts 3 and 11, refreshed the full-edition index, and replaced its preprint
-PDF with the deposited v1.2 file. The historical artifact cutoff remains
-24 July 2026.
+PDF with the deposited v1.2 file. GitHub Pages run 40539680516 succeeded; live
+Parts 3 and 11, Research Materials, and the downloadable PDF were checked. The
+PDF checksum matches Zenodo. The historical artifact cutoff remains 24 July 2026.
 
 The 12 Markdown articles now use their GitHub Pages canonical URLs and each
 ends with a direct link to the companion repository. The landing page links the
