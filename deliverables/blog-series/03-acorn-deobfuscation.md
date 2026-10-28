@@ -100,7 +100,14 @@ The companion scanner also uses Acorn, but for a narrower task: it locates selec
 
 In the published repository snapshot, the scanner limits input to 8 MiB and bounds nested literal folding. Eight AST tests cover its parser behavior. Static spot checks found two clipboard-write sites in the lure and five campaign markers in the larger collector. These results support triage use, not general deobfuscation. Because parsing runs in process, the byte limit alone cannot prevent expensive adversarial syntax.
 
-A separate local package, `unk-scanner` 0.1.0, adds bounded gzip decoding, worker deadlines and recognition of encrypted-loader syntax. Its evaluation is summarized in [Part 11](11-detection-engineering.md) and the [preprint](https://doi.org/10.5281/zenodo.23696198). The package and evaluation were not part of the public companion snapshot.
+The installable [`unk-scanner` package](https://www.npmjs.com/package/unk-scanner) adds bounded gzip decoding, worker deadlines and recognition of a specific encrypted-loader sequence. It is also available on [PyPI](https://pypi.org/project/unk-scanner/). With Node.js 22 or later, scan a retained JavaScript file using:
+
+```sh
+npm install --global unk-scanner@0.1.1 --ignore-scripts
+unk-scanner suspect.js > findings.json
+```
+
+Use `--gzip` for a compressed HTTP response body. The package reports linked loader syntax without recovering keys, decrypting payloads or executing input. Its CLI uses a worker deadline and heap limits; the synchronous JavaScript API runs in the caller's process without those protections. A successful exit means analysis completed, not that the file is safe. [Part 11](11-detection-engineering.md) describes the retained-input evaluation and the distinction between syntax findings and exact-source identity.
 
 ```text
 detect_malware.py

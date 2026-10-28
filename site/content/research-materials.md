@@ -45,7 +45,7 @@ The [historical indicator reference](__BASE_PATH__/indicators/) collects defange
 
 ## Detection companion
 
-The [companion repository](https://github.com/KrasForge/unk-deaddrop-companion) contains the parse-only AST scanner and 33 named YARA rules across 28 files. A read-only replay matched every rule against retained case artifacts; a separate scan of 1,914 local software files produced no hits. The paper distinguishes that public snapshot from later local YARA noise review and scanner evaluation. The rules remain experimental and the small baselines do not establish fleet-wide false-positive rates. Sigma rules are omitted because authentic endpoint event logs were unavailable for replay.
+The [companion repository](https://github.com/KrasForge/unk-deaddrop-companion) contains the parse-only AST scanner and 33 named YARA rules across 28 files. A read-only replay matched every rule against retained case artifacts; a separate scan of 1,914 local software files produced no hits. The paper distinguishes the published rule snapshot from a later local YARA noise review. The installable scanner is now available on [npm](https://www.npmjs.com/package/unk-scanner) and [PyPI](https://pypi.org/project/unk-scanner/); its retained-input evaluation is described in Part 11. The rules remain experimental and the small baselines do not establish fleet-wide false-positive rates. Sigma rules are omitted because authentic endpoint event logs were unavailable for replay.
 
 ## Citation boundary
 
