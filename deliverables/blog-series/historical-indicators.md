@@ -187,6 +187,18 @@ alphanonega[.]org  domatisc[.]ink
 
 The reported sender IPs `170.205.29[.]83` and `170.205.30[.]227` are kept separate from the confirmed C2 and lure-origin roles above. Personal email addresses, analyst network addresses, victim account names and credentials are not reproduced.
 
+## Post-cutoff public reporting leads
+
+These values were reported after the 24 July case cutoff. They are kept apart from the historical indicators above because the underlying resolver generation or sample was not independently recovered for this case. They are research leads, not a current blocklist.
+
+| Reported value | Source and relationship | Limit |
+| --- | --- | --- |
+| `api.chestsoi[.]ink` | The [August-updated passive-DNS investigation](https://brhopkins.uk/posts/foxtopia/) reports this hostname in the GitLab dead-drop sequence. | The retained local GitLab history does not preserve this generation. Direct-source report only; independent historical DNS or provider records would be needed to corroborate it. |
+| `taikotalent[.]xyz`, `api.gaganata[.]ink`, `api.fallgganata[.]ink` | The [October developer-lure report](https://dev.to/edison_flores_6d2cd381b13/a-fake-recruiter-sent-me-a-job-offer-that-ended-in-my-terminal-the-trojan-is-still-live-2okf) reports these names alongside launcher markers overlapping with retained material. | One reporting origin. The reported sample was not independently obtained in this investigation, and current domain activity was not tested. |
+| SHA-256 `c7c22e322c17bda8198257342d4034af6250a5c433242461b870879ba9aa285d` | Hash reported with the TaikoTalent article and its [structured IOC follow-up](https://gist.github.com/eddyflores100-lang/198d8a13ba5901ea8ed7c63d5292c6ff). | The article and follow-up share one origin. The sample was not independently recovered or hashed here. |
+
+The TaikoTalent report also names `deepfake_guard`, `/var/tmp/.kdm.XXXXXX` and `/guard-launcher-result`. The overlaps support comparison as a probable continuation lead, not independent confirmation of the sample or its infrastructure. See [Part 10](https://krasforge.github.io/UNK_DeadDrop/articles/10-investigation-connections/).
+
 ## Delivery repository URLs
 
 The July repository review identified these repositories as weaponized at the time of inspection:
