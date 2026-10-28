@@ -67,6 +67,12 @@ The saved service enumeration listed SSH, HTTP and HTTPS. Its SSH profile includ
 
 The scan exposed a panel on the bare IP but did not enumerate every tenant. Other services may have shared the address, so an IP block could affect unrelated traffic.
 
+### Certificates as a maintenance log
+
+Certificate transparency was more informative than port scanning, and it read better as a maintenance record than as a list of names. A backward enumeration of issuances for the known base domains on 23 July turned up subdomains that the payloads never mentioned: an administration `dashboard` host on the cklomino base, two mail subdomains themed `dev` and `hr` on lure domains, and a `hiring` host beside a career-themed API. They are listed with their first-issuance dates in the [indicator reference](historical-indicators.md). Most of the C2 and store bases also carried wildcard certificates, so new subdomains could be brought up without leaving a fresh certificate log entry. Watching subdomain names alone would therefore miss part of the estate. The same pull showed that on 23 July, the day of the query, fresh certificates were issued for the current store pair, the new dashboard host and several older lure domains such as `d2saitrade[.]ink`, `joincategory[.]xyz` and `surgecareer[.]ink`. Renewals on one day across both generations suggest that one administrator was still tending both, although a certificate proves only that someone controlled the name's validation at that moment, not that a lure was being served.
+
+A sweep of the hosting provider's two /23 ranges, about a thousand addresses of which 291 exposed services, showed why ports were a poor discriminator. The provider is ordinary shared hosting, about twenty unrelated tenants ran something on port 3000, and the free scan dataset returned nothing on the agent's port 5173 for either range, so a port-based hunt could neither separate the campaign hosts from their neighbors nor reach the one port that mattered. These are dated observations from research services, and none of them has been refreshed since 24 July.
+
 Part 7 follows the target-acquisition tooling behind the two SQLite pools.
 
 [Companion detections and static scanner](https://github.com/KrasForge/unk-deaddrop-companion).
