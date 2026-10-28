@@ -2,7 +2,7 @@
 
 Prepared 24 October 2026 from the restricted case records cited by the preprint. These are edited analytical reports with exhibits: selected artifact excerpts and clearly identified secondary records, with input fingerprints and extraction methods. Redactions and display transformations are noted in the exhibits. They are not complete forensic exports. Historical findings remain dated to the underlying observations; companion engineering checks were recorded in October 2026.
 
-The reports omit local folder organization, raw contact rows, usable credentials and personal identity leads. They preserve corrections and limits on older claims. The underlying records and databases remain restricted. This collection has not been uploaded or published.
+The reports omit local folder organization, raw contact rows, usable credentials and personal identity leads. They preserve corrections and limits on older claims. The underlying records and databases remain restricted. The edited reports and exhibit index are published at https://krasforge.github.io/UNK_DeadDrop/evidence/. The underlying records remain restricted.
 
 [Download all 21 PDFs](UNK_DeadDrop-E01-E21-PDFs.zip). Editable report text is retained alongside the builder.
 
