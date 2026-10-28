@@ -13,7 +13,8 @@ tags:
 og_image_alt: "From Commit Metadata to a Developer Target List"
 ---
 
-The sender configuration pointed to two SQLite databases. Following those references led to harvesting code and pools containing 79,698 and 62,667 rows. Together they contain 142,365 distinct stored address strings associated with 27,698 repository values. The harvesting code collected those addresses from public commit metadata for use by the sender tooling.
+
+The sender configuration pointed to two SQLite databases. Following those references led to harvesting code and pools containing 79,698 and 62,667 rows. Together they contain 142,365 distinct stored address strings associated with 27,698 repository values. The worker, configuration and read-only count records are summarized in [E08](../preprint/evidence/E08.pdf). The harvesting code collected those addresses from public commit metadata for use by the sender tooling.
 
 ## Following the database references
 
@@ -63,9 +64,7 @@ In this comparison, the stored address sets are disjoint but the repository sets
 
 The queries compare stored strings without additional address canonicalization or identity resolution. Aliases and multiple addresses belonging to one person remain separate entries.
 
-The sender code configures `mail.privateemail.com` through variables carrying a `ZOHO` prefix. A recovered guide also provides Private Email DNS examples, while later received-message headers contain Mailgun-related information.
-
-The records describe more than one mail route over time. The guide also discusses a shared outbound relay, whose other tenants are outside the scope of the observed campaign traffic.
+The sender code configures `mail.privateemail.com` through variables carrying a `ZOHO` prefix. That is a toolkit setting, not proof that this campaign used the service. Retained message headers instead show Mailgun VERP envelope behavior for the D2S and Category Labs messages; the Nodit message used its own domain in the envelope. A forwarding service obscured the original sending IP, so its relay address is not attributed to the operators. The [indicator reference](historical-indicators.md) records the observed sender and tracking-domain details, with the limits of each observation.
 
 ## Delivery volume remains unknown
 

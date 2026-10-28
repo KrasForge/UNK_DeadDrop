@@ -1,7 +1,7 @@
 ---
 title: "From Three Phishing Emails to a Connected Investigation"
 description: "The pivots linking recruitment messages, delivery artifacts, payload configuration and supporting software."
-lastUpdated: 2026-10-25
+lastUpdated: 2026-10-28
 sidebar:
   order: 10
 ---
@@ -21,7 +21,7 @@ Authenticated decryption exposed a Windows Node/Python pipeline inside the exten
 
 [Proofpoint's earlier report](https://www.proofpoint.com/us/blog/threat-insight/dont-fear-repo-unkdeaddrop-phishing-campaign-targets-developers-steal) documents the extension route and Windows architecture. The recovered package corroborates those mechanisms and exposes the configuration and process-building code in detail.
 
-The received messages have a separate transport detail: an inbound forwarding service inserted reverse-alias information into the headers. Those addresses belong to the recipient's forwarding path and were excluded from the campaign infrastructure list.
+The message-header review also identified Mailgun VERP envelope behavior for the D2S and Category Labs lures, while the Nodit message used its own domain in the envelope. The messages arrived through a forwarding service, so the original sending IP was not preserved. The forwarding service and its relay addresses belong to the recipient's mail path, not the campaign infrastructure. Personal addresses and envelope identifiers are omitted; the message evidence is summarized in [E01](/UNK_DeadDrop/evidence/E01.pdf).
 
 ![Connections need named relationships](../assets/10-evidence-map.png)
 
@@ -29,9 +29,11 @@ The received messages have a separate transport detail: an inbound forwarding se
 
 ## Configuration and infrastructure
 
-The [GitLab resolver](../06-gitlab-dead-drop-infrastructure/) separates destination settings from deployed payloads. The retained history records changes to `config.json` and a separate `config-alt.json` fallback. On 13 July, the primary set changed to `api.cklomino[.]ink` and `api.dsfmot[.]xyz`. A payload hash alone cannot identify which configuration a client fetched.
+The [GitLab resolver](../06-gitlab-dead-drop-infrastructure/) separates destination settings from deployed payloads. The retained history records changes to `config.json` and a separate `config-alt.json` file, but no retained payload references the latter. On 13 July, the referenced `config.json` set changed to `api.cklomino[.]ink` and `api.dsfmot[.]xyz` ([E07](../../evidence/E07.pdf)). A payload hash alone cannot identify which configuration a client fetched.
 
 A certificate naming `api.cklomino[.]ink` and a Subtensor sign-in panel observed at `207.241.172[.]222` connect that address to the historical service. Passive DNS and related research-service records supplied further pivots. These observations identify dated service associations without establishing exclusive ownership of the address. Client refresh behavior and connections after the configuration change remain unknown.
+
+The late July lure generation added a second dated origin picture. On 23 and 24 July, `170.205.31[.]182` served the `3dscenebox[.]online` lure and was associated with several reactivated lure domains. Separately, the `api.aazdias[.]ink` and `api.fallaazdis[.]ink` store pair was linked to `207.241.172[.]222` through certificate and passive-scan records. [E20](../../evidence/E20.pdf) and [E21](../../evidence/E21.pdf) show the limits of the origin and hosting observations; the public bundle does not contain the complete provider responses. The older `23.137.105[.]75:5173` C2 observation belongs to an earlier generation. A 22 July analyst note also records an Express response from `23.137.105[.]75:3000` and a CORS preflight allowing `X-Guard-Platform`, a header present in the recovered installer. The 404 and preflight do not prove that a specific route existed or received data, and the probe transcript is not in the public evidence PDFs. None of these July observations has been refreshed since 24 July.
 
 The main connections are:
 
@@ -45,9 +47,11 @@ The main connections are:
 | Administration frontend | Imports and API route references | Repository monitoring and wallet-management controls |
 | ECHOES repository history | Four retained archive revisions | Changes to retrieval and persistence |
 
+The [historical indicator reference](../indicators/) collects the exact hostnames, paths and IP observations behind these links, with the evidence type and uncertainty recorded for each. The [artifact reference](../artifacts/) gives file hashes for the samples and archive revisions used in the pivots.
+
 ## Targeting data and administration software
 
-The [harvester](../07-developer-target-harvesting/) searches repositories by star range and extracts author and committer addresses from branch histories. Sender configuration names two SQLite pools containing 142,365 distinct stored address strings associated with 27,698 repository values. The counts quantify the available targeting material. Missing send logs and endpoint records prevent a count of recipients contacted or systems compromised.
+The [harvester](../07-developer-target-harvesting/) searches repositories by star range and extracts author and committer addresses from branch histories. Sender configuration names two SQLite pools containing 142,365 distinct stored address strings associated with 27,698 repository values ([E08](../../evidence/E08.pdf)). The counts quantify the available targeting material. Missing send logs and endpoint records prevent a count of recipients contacted or systems compromised.
 
 The separately recovered [rms-platform frontend](../08-administration-platform/) contains mail views, repository availability monitoring and wallet import, preview and claim controls. Its mnemonic and ColdKey fields correspond to material selected by the collectors. That connection describes compatible data and functions; no recovered backend establishes that the targeting pools, mail system and wallet workflow were integrated or used successfully.
 

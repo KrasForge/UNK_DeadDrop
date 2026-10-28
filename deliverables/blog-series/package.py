@@ -8,9 +8,10 @@ BASE=Path(__file__).resolve().parent
 ROOT=BASE.parent
 posts=sorted(BASE.glob('[0-9][0-9]-*.md'))
 assert len(posts)==12
-files=set(posts+[BASE/'README.md',BASE/'VALIDATION.md',BASE/'build_diagrams.py',BASE/'assets/diagrams.json',BASE/'assets/DIAGRAMS.md'])
+references=[BASE/'historical-indicators.md',BASE/'artifact-reference.md']
+files=set(posts+references+[BASE/'README.md',BASE/'VALIDATION.md',BASE/'build_diagrams.py',BASE/'assets/diagrams.json',BASE/'assets/DIAGRAMS.md'])
 files.update((BASE/'assets').glob('*.svg'))
-for p in posts:
+for p in posts+references:
     for target in re.findall(r'\]\(([^)]+)\)',p.read_text()):
         if target.startswith('https://'): continue
         dest=(p.parent/target).resolve()

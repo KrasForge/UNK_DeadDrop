@@ -1,7 +1,7 @@
 ---
 title: "How a Malicious VSIX Uses the Signed Editor Runtime"
 description: "How a fake Google Update Support extension installs collection components and turns the editor's own Electron binary into a Node interpreter on Windows."
-lastUpdated: 2026-10-25
+lastUpdated: 2026-10-28
 sidebar:
   order: 2
 ---
@@ -10,6 +10,8 @@ sidebar:
 The extension calls itself **Google Update Support** and claims to secure and update the development environment. Inside the 17.6 MB package are native agents for macOS and Linux, encrypted Windows components, and code that selects deployment settings. On Windows, one path uses the editor's Electron executable to interpret attacker-controlled JavaScript. The environment variable `ELECTRON_RUN_AS_NODE=1` enables that mode.
 
 This is the repository-based branch: a project task leads to the extension installer, which supplies the collection pipeline. Part 1's clipboard lure is a separate entry point. Related Windows elevation code appears in both branches.
+
+The July repository review identified weaponized copies at `github[.]com/Lyracartoon/predict-together`, `github[.]com/pridnet/dscufo-assessment-fe`, `gitlab[.]com/pulsynk/rekt-db`, `gitlab[.]com/stefan[.]kano/forge-4626-invariants` and `gitlab[.]com/predicttogether/forge-4626-invariants`. A sixth copy, `gitlab[.]com/lautaro19/rekt-db`, contained matching payload markers, but the evidence supports only a likely operator-control assessment, not confirmed ownership. The separate `pulsynk-org/rekt-db` path was reported removed by GitLab; `pulsynk/rekt-db` is a different repository. The [historical indicator reference](../indicators/) records the dated repository observations, and the [artifact reference](../artifacts/) lists exact hashes for selected task and settings files. Current availability has not been checked.
 
 [Proofpoint's UNK_DeadDrop analysis](https://www.proofpoint.com/us/blog/threat-insight/dont-fear-repo-unkdeaddrop-phishing-campaign-targets-developers-steal) documents the VSIX route and Windows architecture also present in this package. Jamf Threat Labs has separately documented [threat actors abusing Visual Studio Code](https://www.jamf.com/blog/threat-actors-expand-abuse-of-visual-studio-code/), and the editor's own [task documentation](https://code.visualstudio.com/docs/debugtest/tasks) and Electron's [environment-variable reference](https://www.electronjs.org/docs/latest/api/environment-variables) describe the two legitimate features this chain repurposes.
 
@@ -36,7 +38,7 @@ The extension manifest contains these fields:
 }
 ```
 
-The installed identifier is `google-dev-tools.google-update-support`. These names are part of the masquerade; they establish neither Google authorship nor a trusted signature. The VSIX collected on 22 July 2026 is 17,647,582 bytes:
+The installed identifier is `google-dev-tools.google-update-support`. These names are part of the masquerade; they establish neither Google authorship nor a trusted signature. The VSIX collected on 22 July 2026 is 17,647,582 bytes. [Exhibit E03](../../evidence/E03.pdf) records the package, nested archive and native-agent hashes:
 
 ```text
 SHA-256
@@ -57,7 +59,7 @@ googleUpdateSupport.companyWalletAgentToken
 
 The deployment reads server and client values from configuration, so the same VSIX can be reused with different workspace settings. Preserve the package and project configuration together: a VSIX hash identifies the archive but may not reveal where a particular installation was configured to send data.
 
-The nested agent archive contains Go binaries for macOS arm64, macOS amd64 and Linux amd64. Their hashes match samples identified in the case's comparison with prior reporting. The Windows branch does not depend on dropping those binaries.
+The nested agent archive contains Go binaries for macOS arm64, macOS amd64 and Linux amd64. Their hashes match samples identified in the case's comparison with prior reporting. The Windows branch does not depend on dropping those binaries. The encrypted Windows modules and their recovered hashes are documented in [E04](../../evidence/E04.pdf).
 
 ## Three encrypted files reveal the Windows path
 
@@ -71,7 +73,7 @@ The Node source describes a Windows route that does not depend on a Go executabl
 
 The recovered builder constructs a PowerShell script that requests an elevated COM object associated with CMSTPLUA and the ICMLuaUtil interface. The identifiers are assembled from numeric fields, so searching for a literal GUID is less useful than tracing how the script builds and calls them. It then creates a delegate at runtime to dispatch the shell-execution method.
 
-Similar builder code appears in the ClickFix stage-three script, linking the implementations across the two delivery routes. Their failure paths also show that elevation may not succeed: the VSIX pipeline can fall back to RunAs, which may display a consent prompt; ClickFix retries and uses a sentinel to check for completion. Whether elevation succeeds depends on Windows version, user privileges, policy and process context. These paths were analyzed statically; their runtime outcomes were not reproduced.
+Similar builder code appears in the ClickFix stage-three script, linking the implementations across the two delivery routes. [E19](../../evidence/E19.pdf) records the relevant source spans. Their failure paths also show that elevation may not succeed: the VSIX pipeline can fall back to RunAs, which may display a consent prompt; ClickFix retries and uses a sentinel to check for completion. Whether elevation succeeds depends on Windows version, user privileges, policy and process context. These paths were analyzed statically; their runtime outcomes were not reproduced.
 
 ### Why the elevated process can still be the editor
 
@@ -83,6 +85,6 @@ A process name or publisher check is incomplete here. A legitimate signature aut
 
 Repository-only review can miss the installed extension; a hunt limited to native binaries can miss the JavaScript Windows branch. Preserve task definitions, workspace settings, extension metadata, script arguments, process ancestry and any resulting persistence. The extension identifier and package hash provide exact selectors. The editor-to-interpreter transition gives responders a behavior to investigate when names or builds change.
 
-The companion repository adds focused selectors for [the editor spawning Node](https://github.com/KrasForge/unk-deaddrop-companion/blob/main/rules/sigma/windows_editor_node_collection.yml), [PowerShell using Electron's Node mode](https://github.com/KrasForge/unk-deaddrop-companion/blob/main/rules/sigma/windows_powershell_electron_node_mode.yml), [temporary elevation artifacts](https://github.com/KrasForge/unk-deaddrop-companion/blob/main/rules/sigma/windows_elevation_temp_artifacts.yml), and [installed VS Code extension artifacts](https://github.com/KrasForge/unk-deaddrop-companion/blob/main/rules/sigma/windows_vscode_extension_artifact.yml), plus a [YARA rule for the VSIX manifest](https://github.com/KrasForge/unk-deaddrop-companion/blob/main/rules/yara/deaddrop_vsix_manifest.yar). These are triage selectors: a match does not establish successful execution, elevation or collection.
+The companion repository includes a [YARA rule for the recovered VSIX manifest](https://github.com/KrasForge/unk-deaddrop-companion/blob/main/rules/yara/deaddrop_vsix_manifest.yar). It must be run against extracted archive members. The repository does not include process or file-event rules because the investigation did not retain authentic endpoint logs for replay. A manifest match also does not establish successful execution, elevation or collection.
 
 [Companion detections and static scanner](https://github.com/KrasForge/unk-deaddrop-companion).

@@ -13,7 +13,8 @@ tags:
 og_image_alt: "Inside the Collector: Browser Credentials and Wallet Files"
 ---
 
-The collection code reaches beyond browser passwords. Its third upload variant searches the home directory for filenames associated with seeds, recovery material, credentials and tokens, while another selector includes encrypted KeePass databases. The source also sets explicit traversal budgets and skips selected inaccessible directories. Access permissions, traversal limits and file encryption constrain what it can recover.
+
+The collection code reaches beyond browser passwords. Its third upload variant searches the home directory for filenames associated with seeds, recovery material, credentials and tokens, while another selector includes encrypted KeePass databases. The source also sets explicit traversal budgets and skips selected inaccessible directories. These conclusions come from the recovered scripts and the limits recorded in [E05](../preprint/evidence/E05.pdf) and [E17](../preprint/evidence/E17.pdf). Access permissions, traversal limits and file encryption constrain what it can recover.
 
 ## Browser collection has several steps
 

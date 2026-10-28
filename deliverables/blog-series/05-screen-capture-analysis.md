@@ -13,9 +13,10 @@ tags:
 og_image_alt: "Beyond Screenshot Strings: Reconstructing Screen Capture"
 ---
 
+
 The Go implant contains symbols for capturing a display, retaining a previous frame, comparing blocks and encoding JPEG data. A separate Windows bundle combines screen acquisition, JPEG encoding, MessagePack serialization and WebSocket transport. Together, these artifacts point to a design for repeatedly capturing and transmitting changes on a desktop.
 
-No capture session was recorded. The available evidence comes from the native binary, the Windows bundle and its installer, leaving achieved frame rate, bandwidth and desktop access unmeasured.
+No capture session was recorded. The available evidence comes from the native binary, the Windows bundle and its installer, leaving achieved frame rate, bandwidth and desktop access unmeasured. The symbol and dependency observations are recorded in [E05](../preprint/evidence/E05.pdf); [E18](../preprint/evidence/E18.pdf) explains why the earlier dependency-only assessment did not rule out capture code.
 
 ## Frame comparison in the Go agent
 

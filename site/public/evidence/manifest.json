@@ -19,8 +19,8 @@
         {
           "id": "S2",
           "title": "Edited preprint manuscript",
-          "sha256": "abe3d13783ab2860fd4a1c0f45546c8da610b6c5c67086d0687f8c321ed21562",
-          "bytes": 47690
+          "sha256": "dc5d8abe46fcd33e9a28ccc859778e22ced661beff2d559a072bfb04f9d131dc",
+          "bytes": 54752
         }
       ],
       "exhibits": 2,
@@ -107,7 +107,7 @@
         }
       ],
       "pdf": "E01.pdf",
-      "pdf_sha256": "7bd89ebdd78f66009f2367eb28b1e77228b5b5c672c09245542cfdb4378e5ee1"
+      "pdf_sha256": "a2ef7b22069a22fc29e7c53dda35e472819742dc2a783cc9bd0aa5de6b8be02f"
     },
     {
       "id": "E02",
@@ -124,8 +124,8 @@
         {
           "id": "S2",
           "title": "Companion validation record, 21 October 2026",
-          "sha256": "2a252efae1075c45709f131ddf58c6068720f9450d85c25c3572c85ef2495caf",
-          "bytes": 1873
+          "sha256": "613d16e0bed012c96e00a7db6e2f7260b263fa5cd3941d39d523a71dfc94a74d",
+          "bytes": 2562
         }
       ],
       "exhibits": 11,
@@ -157,7 +157,7 @@
         }
       ],
       "pdf": "E02.pdf",
-      "pdf_sha256": "267bcb7e8f21a064dbd27317d4b449655e98a6e067649824c74082861856032a"
+      "pdf_sha256": "5fa4ef6c13705d27cc1ab124ea41147e117447301c8e3892a5cd866fc769df55"
     },
     {
       "id": "E03",
@@ -174,8 +174,8 @@
         {
           "id": "S2",
           "title": "Edited preprint manuscript",
-          "sha256": "abe3d13783ab2860fd4a1c0f45546c8da610b6c5c67086d0687f8c321ed21562",
-          "bytes": 47690
+          "sha256": "dc5d8abe46fcd33e9a28ccc859778e22ced661beff2d559a072bfb04f9d131dc",
+          "bytes": 54752
         }
       ],
       "exhibits": 6,
@@ -227,7 +227,7 @@
         }
       ],
       "pdf": "E03.pdf",
-      "pdf_sha256": "1ec77fd5a6368b0e98a9a623fc772b6a5df9b3c76ed8a2a6ad96234857cbf396"
+      "pdf_sha256": "8190b5d40a461c3f7c63f79691ac1aa4a29016b2f19bb9a0639191c666b15954"
     },
     {
       "id": "E04",
@@ -276,7 +276,7 @@
         }
       ],
       "pdf": "E04.pdf",
-      "pdf_sha256": "0f52c3c0bcd7d46170281dcdea186c48a4858b9dc898f269f266296436db2768"
+      "pdf_sha256": "d137f0050777a53211765293bb915cd1cb836a1a68dcbff411e8898888b9a2c7"
     },
     {
       "id": "E05",
@@ -293,8 +293,8 @@
         {
           "id": "S2",
           "title": "Companion validation record, 21 October 2026",
-          "sha256": "2a252efae1075c45709f131ddf58c6068720f9450d85c25c3572c85ef2495caf",
-          "bytes": 1873
+          "sha256": "613d16e0bed012c96e00a7db6e2f7260b263fa5cd3941d39d523a71dfc94a74d",
+          "bytes": 2562
         }
       ],
       "exhibits": 8,
@@ -341,7 +341,7 @@
         }
       ],
       "pdf": "E05.pdf",
-      "pdf_sha256": "2c9af5dfc82802b805d16fdb176a3749e2dda7b483abca63bcd0c4486eab0a2d"
+      "pdf_sha256": "24049dd73145c2d7feca6f6b0d2ce233f5a63202e34a9011abd7c97f22caf547"
     },
     {
       "id": "E06",
@@ -405,13 +405,13 @@
         }
       ],
       "pdf": "E06.pdf",
-      "pdf_sha256": "69db41e161139e9caf92c7833f9a0374c68b9dee1a7cf577234ec2c4f6e851da"
+      "pdf_sha256": "a1d2ed14a819892d7a9af454d418000204d56eba826d68ee7d17bb5cf497664d"
     },
     {
       "id": "E07",
       "title": "E07. Configuration and infrastructure history",
       "markdown": "reports/E07.md",
-      "markdown_sha256": "4e4e0693f5b918ab3647156f74187aa7b5f928c1d512e3ebeb0d947237794b8a",
+      "markdown_sha256": "3339d559d8c377089cb513da99ccb48397d236241c9b6d8e23d5673c008cca3b",
       "sources": [
         {
           "id": "S1",
@@ -447,7 +447,7 @@
       "exhibit_files": [
         {
           "path": "exhibits/E07.md",
-          "sha256": "429c29c7a32d6dfc1c8599d2206a64db31cbacb23cc971e95feb02eafdafa675"
+          "sha256": "c65f356e89b0b54184ca57d644b2629158c66c9b98524382d107cc1bc7fd540b"
         },
         {
           "path": "exhibits/E07.artifacts.json",
@@ -455,7 +455,7 @@
         }
       ],
       "pdf": "E07.pdf",
-      "pdf_sha256": "1a40f9752779d7253e6aa75ffcf8700076797376106710d90a7e82ef10f29086"
+      "pdf_sha256": "9d85c71cef8082e473b97ecb1228a964cecc2017564452ca02f4ceff832711f0"
     },
     {
       "id": "E08",
@@ -472,14 +472,14 @@
         {
           "id": "S2",
           "title": "Edited preprint manuscript",
-          "sha256": "abe3d13783ab2860fd4a1c0f45546c8da610b6c5c67086d0687f8c321ed21562",
-          "bytes": 47690
+          "sha256": "dc5d8abe46fcd33e9a28ccc859778e22ced661beff2d559a072bfb04f9d131dc",
+          "bytes": 54752
         },
         {
           "id": "S3",
           "title": "Preprint validation record",
-          "sha256": "98611ddbba9d496852efab262532afcee4fba4d0954497947ecf6b66ec56da96",
-          "bytes": 6737
+          "sha256": "d73c43a5f61366ddf82a755fd473a0f72437731f9dee01ee325b0314e8c9d3e9",
+          "bytes": 10642
         },
         {
           "id": "S4",
@@ -548,7 +548,7 @@
         }
       ],
       "pdf": "E08.pdf",
-      "pdf_sha256": "4803fa98ec0e563a94ab805cfca651ae614230740ce501ab8b09d7d82d51caa1"
+      "pdf_sha256": "b7b4ce35b63d360d49f2387f9fb6a8f0dfd47034fd8b8d3e22d64ad4d65d48b8"
     },
     {
       "id": "E09",
@@ -587,7 +587,7 @@
         }
       ],
       "pdf": "E09.pdf",
-      "pdf_sha256": "2e1f14b9c20856b044a650e13ab20088017fc188bcd1216bc108f40317a3fda9"
+      "pdf_sha256": "76a57a616b42d547024490c1bb0fa56ca4649fde0e237495f67f204b3e4fbe46"
     },
     {
       "id": "E10",
@@ -615,7 +615,7 @@
         }
       ],
       "pdf": "E10.pdf",
-      "pdf_sha256": "95680eb67aa6583a3e356e0a963de1af25b00da2fb6ad7b3bbfef222c3c3d7f0"
+      "pdf_sha256": "c9d3615d89e7c558c34fb3cc44a37a1ad845e6c685961891cba5a558697e251d"
     },
     {
       "id": "E11",
@@ -704,7 +704,7 @@
         }
       ],
       "pdf": "E11.pdf",
-      "pdf_sha256": "6a2214cbf425f4b19ef9d3073844eee8de3ac4d1383afa1cd4eb3422b3bf0e23"
+      "pdf_sha256": "0a37a55c0c6464b1e804f171ec25e58aa132738677e603e6da4602f1ae64e919"
     },
     {
       "id": "E12",
@@ -775,7 +775,7 @@
         }
       ],
       "pdf": "E12.pdf",
-      "pdf_sha256": "112a4f7ee5c55c77dd39942cc973492d322b2e4d9526abbe1d185473a2d9573e"
+      "pdf_sha256": "b98bbca935092becb7c0310e8f9b1fc1c64a394e6e8773d16226b97b5b530af5"
     },
     {
       "id": "E13",
@@ -809,7 +809,7 @@
         }
       ],
       "pdf": "E13.pdf",
-      "pdf_sha256": "59776dad159506964c320d18fce5dc09182d75ff41b182ad2a27a778a8b26f1f"
+      "pdf_sha256": "0a147eea06cc3744b4019ed9019423a191c2e2b2840c9939cb1765d9391cea87"
     },
     {
       "id": "E14",
@@ -863,7 +863,7 @@
         }
       ],
       "pdf": "E14.pdf",
-      "pdf_sha256": "c0e99011d885d0416200be9ac3756ebb9c3c7b3bb271577a9428d7d0e3620c6c"
+      "pdf_sha256": "04379fa8895cbc4264c7b7e8ea9faeb5a9eb305049eedf5c4df9f579c30c69d8"
     },
     {
       "id": "E15",
@@ -874,8 +874,8 @@
         {
           "id": "S1",
           "title": "Companion validation record, 21 October 2026",
-          "sha256": "2a252efae1075c45709f131ddf58c6068720f9450d85c25c3572c85ef2495caf",
-          "bytes": 1873
+          "sha256": "613d16e0bed012c96e00a7db6e2f7260b263fa5cd3941d39d523a71dfc94a74d",
+          "bytes": 2562
         },
         {
           "id": "S2",
@@ -984,7 +984,7 @@
         }
       ],
       "pdf": "E15.pdf",
-      "pdf_sha256": "660ea12c252c5faa543159dc304488703c5a12d05bbb23b57fa252f619f807dd"
+      "pdf_sha256": "28504c74fdfbc29f0f546dc921eea6d336979a70a4df86443f36a4fd1aafaa5e"
     },
     {
       "id": "E16",
@@ -1023,7 +1023,7 @@
         }
       ],
       "pdf": "E16.pdf",
-      "pdf_sha256": "b1a4faa71f84237d0cb72bee8c055dc5d4da709ff2563beba29e56840c360d31"
+      "pdf_sha256": "1237045aeac74ef4465d09776b64718510ab8e35f5608cea6e3838c87b41f507"
     },
     {
       "id": "E17",
@@ -1040,8 +1040,8 @@
         {
           "id": "S2",
           "title": "Companion validation record, 21 October 2026",
-          "sha256": "2a252efae1075c45709f131ddf58c6068720f9450d85c25c3572c85ef2495caf",
-          "bytes": 1873
+          "sha256": "613d16e0bed012c96e00a7db6e2f7260b263fa5cd3941d39d523a71dfc94a74d",
+          "bytes": 2562
         }
       ],
       "exhibits": 4,
@@ -1063,7 +1063,7 @@
         }
       ],
       "pdf": "E17.pdf",
-      "pdf_sha256": "ea6fdbc133219eec6fa5edb7f25bc2baf2e502aa7e80334edfe58acf86f89245"
+      "pdf_sha256": "525e4080fb216535a62d9aa00d7b1228abd9bba73bed6be8f7d17797cf1f781d"
     },
     {
       "id": "E18",
@@ -1103,7 +1103,7 @@
         }
       ],
       "pdf": "E18.pdf",
-      "pdf_sha256": "1cb36229f8505ea3fb4ad1dd3502890f2620bd5c6c4a0a9398074e8ca5526c3f"
+      "pdf_sha256": "52aa8e2b904d0b80ffebdd90418b5704c0689f2ada9011929919394e0050edc2"
     },
     {
       "id": "E19",
@@ -1142,7 +1142,7 @@
         }
       ],
       "pdf": "E19.pdf",
-      "pdf_sha256": "876ba3e157955186c5be948b5af7f10434500630acd430b23ab6136deda549b1"
+      "pdf_sha256": "52df2d45e8d56c1908ecb04ddd348a13c8985ced0a44a45274fcacca0f5122ee"
     },
     {
       "id": "E20",
@@ -1181,7 +1181,7 @@
         }
       ],
       "pdf": "E20.pdf",
-      "pdf_sha256": "1945290c8262c2850c34bbf719c4dba2e27c5de29ae8202450c376f7457521b2"
+      "pdf_sha256": "dca7a5a3be9c0684e60a6a79926aca449c4ba8a3e2ff36a1c708f7eaf8bed972"
     },
     {
       "id": "E21",
@@ -1237,7 +1237,7 @@
         }
       ],
       "pdf": "E21.pdf",
-      "pdf_sha256": "b199bc0c6f6ead69892a901363c20f40f2cb18a0a01d86ee9ca436ca71cf197f"
+      "pdf_sha256": "6a692641fe601dbe2e93357db831f9656ea79dff7f36807cd3f21b5a14b39055"
     }
   ]
 }

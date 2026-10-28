@@ -1,13 +1,13 @@
 ---
 title: "Where Overlord Ends and the Collection Toolchain Begins"
 description: "Overlord build metadata, browser-store selectors, wallet-upload markers and capture components in the Linux agent."
-lastUpdated: 2026-10-25
+lastUpdated: 2026-10-28
 sidebar:
   order: 12
 ---
 
 
-The Linux Go agent embeds the module path `overlord-client/cmd/agent`, a WebAssembly runtime and SQLite dependencies. Its strings include browser database names, wallet-upload configuration and capture-related symbols. Those components connect a general remote-access framework to the collection functions found in this sample.
+The Linux Go agent embeds the module path `overlord-client/cmd/agent`, a WebAssembly runtime and SQLite dependencies. Its strings include browser database names, wallet-upload configuration and capture-related symbols. [E18](../../evidence/E18.pdf) documents the bounded comparison with selected upstream files, while [E05](../../evidence/E05.pdf) records the sample-specific capture findings. Those components connect a general remote-access framework to the collection functions found in this sample.
 
 ## Build metadata in the Linux agent
 

@@ -14,7 +14,12 @@ tags:
 og_image_alt: "Diagram of the four retained ECHOES archive revisions"
 ---
 
+
 The ECHOES lure paired an animation-project theme with a password-protected archive. Its repository history preserved four versions of the delivery kit. The artwork and staging structure remained recognizable as repository destinations changed. The third revision added a persistence-related script, which the fourth retained.
+
+The delivery repository was `github[.]com/Lyracartoon/Echoes-of-the-Unborn-Sun`, reported live on 23 July 2026. [Exhibit E11](../preprint/evidence/E11.pdf) records the retained archive revisions, but the final PowerShell resource was unavailable. I therefore keep its relationship to the ClickFix and VSIX branches unresolved.
+
+The retained current RAR has SHA-256 `7db6789c09e29305c728bf3d7b94c5ef1c3e13eef1b321ee52d3ae3997731f56`; its LNK member has SHA-256 `a44068e9758262a65861b91f2b00d0a3eca019d3b35543dd60c1c7f2e0ba1952`. The [artifact reference](artifact-reference.md) lists the earlier archive revisions, LNKs and analyst-decoded stage-two hashes as well.
 
 The final PowerShell payload was unavailable, leaving its capabilities unresolved. The retained archives preserve the staging scripts and a poster whose embedded C2PA metadata records an AI image pipeline.
 
@@ -41,7 +46,7 @@ Account status was less clear than a 404 suggested. One historical check found a
 
 ## The poster retained a C2PA structure
 
-The poster, identified in the case as `Post.png`, offered a very different kind of lead, because the recorded examination found a [C2PA](https://c2pa.org/specifications/) structure in its PNG `caBX` chunk, and extracting the metadata and parsing its JUMBF, CBOR and certificate structures exposed the following fields:
+The poster, identified in the case as `Post.png`, offered a very different kind of lead, because the recorded examination found a [C2PA](https://c2pa.org/specifications/) structure in its PNG `caBX` chunk. [Exhibit E14](../preprint/evidence/E14.pdf) records the retained metadata and signature examination. Extracting the metadata and parsing its JUMBF, CBOR and certificate structures exposed the following fields:
 
 ```text
 Claim generator:  ChatGPT

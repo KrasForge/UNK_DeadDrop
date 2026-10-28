@@ -1,5 +1,28 @@
 # Twelve-part edition, 26 October 2026
 
+## Evidence-source expansion, 28 October 2026
+
+Expanded the historical indicator reference with additional captured lure hosts,
+mail and certificate names, administration routes, dated IP observations,
+repository copies and source-labeled weak pivots. Added a separate artifact
+reference with exact hashes for selected payloads, URLScan response bodies, the
+ECHOES archive branch and exact repository-file variants. Added contextual
+evidence-PDF links across the related articles and updated the Markdown series
+archive and its hosted-download copy. The source pages and ZIP are updated; the
+Astro site was not rebuilt or deployed, and the older standalone previews were
+not regenerated in this step.
+
+## Indicator reference update, 28 October 2026
+
+Added an unnumbered historical-indicator reference covering retained lure bundles,
+route strings, both resolver generations, repository URLs, dated IP associations,
+passive-DNS leads and domains listed by Proofpoint. Parts 1, 2, 6, 8, 9 and 10 now point
+readers to the relevant indicators. The reference defangs URLs and separates direct
+sample content from scan-based or externally reported associations. Shared provider
+addresses, victim forks, personal email addresses, analyst network addresses and
+credentials are excluded. The late July droppers' SHA-256 values were checked against
+the retained files. The Astro site was not rebuilt and the edits have not been deployed.
+
 ## Preprint alignment update, 27 October 2026
 
 Updated Parts 3 and 11 to separate the public companion scanner and YARA

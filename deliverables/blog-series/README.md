@@ -1,6 +1,6 @@
-# UNK_DeadDrop: a twelve-part technical series
+# UNK_DeadDrop: a twelve-part series with indicator and artifact references
 
-Twelve articles by Ilja Krasnjanski, updated 27 October 2026.
+Twelve articles, a historical indicator appendix and a sample-artifact reference by Ilja Krasnjanski, updated 28 October 2026.
 Parts 10–12 add the investigative connections, detection engineering and framework
 comparison. Parts 4–5 and 7–8 are the split collection/capture and targeting/admin
 articles. The hosted edition is available at [krasforge.github.io/UNK_DeadDrop](https://krasforge.github.io/UNK_DeadDrop/).
@@ -18,14 +18,16 @@ articles. The hosted edition is available at [krasforge.github.io/UNK_DeadDrop](
 11. [Building and Testing Detections for UNK_DeadDrop](11-detection-engineering.md)
 12. [Where Overlord Ends and the Collection Toolchain Begins](12-framework-and-collection-boundary.md)
 
+[Historical indicators, artifacts and network evidence](historical-indicators.md) collects defanged lure URLs, payload hosts, resolver revisions, repository addresses and IP associations. It separates retained sample evidence from provider-based pivots and older public reporting. The [sample and repository artifact reference](artifact-reference.md) lists exact hashes for held payloads, recovered response bodies, repository files and the ECHOES archive lineage.
+
 [Download the series and linked supporting PDFs](UNK_DeadDrop-Blog-Series.zip).
 The archive preserves the relative links between articles, images and evidence.
 
-The numbered Markdown files, ZIP and hosted Pages site are the current twelve-part
-edition. Parts 3 and 11 were refreshed on 27 October. Standalone HTML/PDF files
-are generated for local review under `rendered/2026-10-27/`; the hosted Pages
-site is the public rendered edition. The ZIP contains the Markdown edition and
-linked evidence, not the standalone previews.
+The numbered Markdown files, indicator appendix and artifact reference contain
+the 28 October edition. The Astro source is current; the older standalone HTML/PDF
+previews under `rendered/2026-10-27/` do not include these changes and are not in
+the ZIP. The ZIP contains the Markdown edition and linked evidence. The hosted
+Pages site will reflect these edits after it is rebuilt and deployed.
 Each hosted article has a canonical GitHub Pages URL. Every article links to the
 [companion detections and static scanner](https://github.com/KrasForge/unk-deaddrop-companion).
 The preprint is published on Zenodo under CC BY 4.0:
@@ -69,8 +71,8 @@ series; the separate preprint has a Zenodo record.
 
 The supporting PDFs are edited reports derived from restricted evidence. They do
 not contain the raw databases or a complete forensic sample set. The ZIP includes
-the twelve articles, this index, validation notes, twelve diagrams, linked evidence
-PDFs, the preprint, and a checksum file. Current detection rules and tests are
-maintained in the companion repository.
+the twelve articles, this index, both reference pages, validation notes, diagrams,
+the preprint, evidence PDFs linked from the published material, and a checksum file. Current
+detection rules and tests are maintained in the companion repository.
 
 [Validation record](VALIDATION.md) · [Technical paper](../preprint/UNK_DeadDrop-Preprint.pdf)

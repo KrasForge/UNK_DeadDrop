@@ -11,6 +11,9 @@ hero:
     - text: Read the technical paper
       link: /UNK_DeadDrop/downloads/UNK_DeadDrop-Preprint.pdf
       variant: minimal
+    - text: Open Source Detection Rules
+      link: https://github.com/KrasForge/unk-deaddrop-companion
+      variant: minimal
 ---
 
 The series starts with three recruitment messages received in June and July 2026. It follows the evidence through clipboard substitution, a malicious editor extension, credential and wallet collection, mutable infrastructure, targeting databases, administration software, and experimental detections.
@@ -31,6 +34,8 @@ The underlying case evidence ends on 24 July 2026. Public reporting was checked 
 10. [From Three Phishing Emails to a Connected Investigation](/UNK_DeadDrop/articles/10-investigation-connections/)
 11. [Building and Testing Detections for UNK_DeadDrop](/UNK_DeadDrop/articles/11-detection-engineering/)
 12. [Where Overlord Ends and the Collection Toolchain Begins](/UNK_DeadDrop/articles/12-framework-and-collection-boundary/)
+
+The [historical indicator reference](/UNK_DeadDrop/indicators/) collects defanged URLs, domains, resolver values, paths and IP associations, with their evidence limits. A separate [artifact reference](/UNK_DeadDrop/artifacts/) lists exact hashes for selected samples, response bodies and repository files.
 
 ## Scope
 

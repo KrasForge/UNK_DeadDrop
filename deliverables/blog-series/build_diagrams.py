@@ -194,18 +194,18 @@ f.text(684,641,'Independent component evidence',17,color=MUTED)
 f.note(688,'What remains unmeasured','Display access, permissions, successful capture and transport require execution evidence.')
 f.save()
 
-# 6. Separate primary and fallback tracks avoid implying a client transition.
-f=Figure('05-resolver',6,'Two configuration files, separate histories','Dates describe retained configuration changes, not observed client connections.',630,['E07','E20','E21'],'The sequence does not establish fallback selection or client refresh behavior.')
-f.text(36,185,'PRIMARY FILE',19,bold=True,color=GREEN)
+# 6. Show the referenced config.json history and the separate, unreferenced file.
+f=Figure('05-resolver',6,'Referenced resolver file and separate config history','The payload references config.json. Dates describe file history, not observed client connections.',630,['E07','E20','E21'],'No retained payload references config-alt.json; endpoint records do not confirm a fetch of config.json.')
+f.text(36,185,'REFERENCED CLIENT FILE: CONFIG.JSON',19,bold=True,color=GREEN)
 f.line([(60,226),(940,226)],arrow=False)
 f.circle(95,226,9);f.circle(850,226,9)
 f.node(36,266,430,154,'26 May 2026','Final listed set:\napi.domatisc[.]ink\napi.coslyintra[.]online')
 f.node(534,266,430,154,'13 July 2026','Changed set:\napi.cklomino[.]ink\napi.dsfmot[.]xyz')
-f.text(36,476,'FALLBACK FILE',19,bold=True,color=GREEN)
+f.text(36,476,'SEPARATE FILE: CONFIG-ALT.JSON',19,bold=True,color=GREEN)
 f.line([(60,511),(940,511)],arrow=False)
 f.circle(410,511,9)
 f.node(200,546,600,110,'1 June 2026','api.onoplainai[.]ink   /   api.migadyn[.]info')
-f.text(36,708,'Primary and fallback are file roles. No switch between them is drawn.',19,color=MUTED)
+f.text(36,708,'No retained payload references config-alt.json.',19,color=MUTED)
 f.save()
 
 # 7. Address totals are measured; the repository overlap illustration is explicitly qualitative.
@@ -267,9 +267,9 @@ for i,(left,edge,right) in enumerate(rows):
 f.note(841,'What these edges do not establish','Infection, one integrated backend, successful transfers and operator identity require additional evidence.')
 f.save()
 
-# 11. A conjunction diagram plus telemetry lanes makes the selector boundary visible.
-f=Figure('11-detection-logic',11,'A YARA match requires the full conjunction','Each gate is necessary; matching bytes still need acquisition context.',835,['E15'],'Fixture results do not establish production precision, recall or alert delivery.')
-for i,(title,body) in enumerate([('File size','Less than 64 MiB'),('Framework marker','overlord-client/cmd/agent'),('Environment marker','OVERLORD_SERVER_RAW'),('Wallet context','At least 2 of 3 wallet markers')]):
+# 11. A conjunction diagram and two bounded corpus checks make the selector boundary visible.
+f=Figure('11-detection-logic',11,'A YARA match requires the full conjunction','Every gate is necessary; matching bytes still need acquisition context.',835,['E15'],'The software baseline is small; an ELF header does not prove code reachability or execution.')
+for i,(title,body) in enumerate([('ELF format and size','ELF magic at byte zero; under 64 MiB'),('Framework marker','overlord-client/cmd/agent'),('Environment marker','OVERLORD_SERVER_RAW'),('Wallet context','At least 2 of 3 wallet markers')]):
     yy=172+i*105
     f.node(36,yy,565,87,title,body)
     f.line([(601,yy+43),(675,yy+43),(675,367)],arrow=False)
@@ -277,11 +277,11 @@ f.circle(752,367,48)
 f.text(752,375,'AND',24,bold=True,anchor='middle',color=GREEN)
 f.line([(675,367),(704,367)])
 f.line([(800,367),(853,367),(853,476)])
-f.node(692,476,272,120,'Content match','Harmless research text can also satisfy the rule.',tone='amber')
-f.text(36,638,'Sigma rules use different telemetry',23,bold=True)
-f.node(36,665,446,143,'Linux / file event','System unit path OR user unit suffix.\nA file event does not prove a service ran.',tone='neutral')
-f.node(518,665,446,143,'Windows / process event','schtasks.exe suffix AND both command-line substrings.',tone='neutral')
-f.note(843,'Substring is not exact task-name equality','GoogleUpdateSupporterNode-Lab still contains the required Windows task marker.')
+f.node(692,476,272,120,'Content match','A match is not proof of execution.',tone='amber')
+f.text(36,638,'Replay results',23,bold=True)
+f.node(36,665,446,143,'Retained case artifacts','33 named rules matched artifacts.\n90/192 inputs hit; 395 raw/member views.',tone='neutral')
+f.node(518,665,446,143,'Local software baseline','Zero hits across 2,379 views of 1,914 files (59.2 MB).\nSmall and not independently curated.',tone='neutral')
+f.note(843,'False-positive boundary','Plain prose now misses; a marker-rich ELF can still match.')
 f.save()
 
 # 12. Separate positive sample evidence from an unpinned upstream comparison.

@@ -39,7 +39,9 @@ export default defineConfig({
             { label: '6. GitLab dead drop', link: '/articles/06-gitlab-dead-drop-infrastructure/' },
             { label: '7. Developer targeting', link: '/articles/07-developer-target-harvesting/' },
             { label: '8. Administration platform', link: '/articles/08-administration-platform/' },
-            { label: '9. ECHOES lineage', link: '/articles/09-echoes-lineage-image-provenance/' }
+            { label: '9. ECHOES lineage', link: '/articles/09-echoes-lineage-image-provenance/' },
+            { label: 'Historical indicators', link: '/indicators/' },
+            { label: 'Sample and repository artifacts', link: '/artifacts/' }
           ]
         },
         {

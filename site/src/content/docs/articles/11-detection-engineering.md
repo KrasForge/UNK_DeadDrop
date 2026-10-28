@@ -1,7 +1,7 @@
 ---
 title: "Building and Testing Detections for UNK_DeadDrop"
 description: "Thirty-three YARA rules replayed against retained artifacts, followed by a separate noise review and static scanner evaluation."
-lastUpdated: 2026-10-27
+lastUpdated: 2026-10-28
 sidebar:
   order: 11
 ---
@@ -23,7 +23,7 @@ The earlier rule version matched a harmless fixture with the complete marker set
 
 ## Replay against retained files
 
-The read-only replay covered 192 selected files: the 15 directories marked `DO-NOT-RUN`, compressed lure bundles, related web assets, extracted VSIX components and agent archives, source files, and six retained lure messages. The helper read ZIP, VSIX, TAR, gzip and nested ZIP content in memory without writing extracted files. It evaluated 395 raw or archive-member views totaling about 234 MB; all 33 named rules in 28 files matched at least once. At least one rule matched 90 input files, while 102 had no hits. Counts include copied variants and nested archive views, so they are not independent samples or incidents. No file was executed.
+The read-only replay covered 192 selected files: the 15 directories marked `DO-NOT-RUN`, compressed lure bundles, related web assets, extracted VSIX components and agent archives, source files, and six retained lure messages. The helper read ZIP, VSIX, TAR, gzip and nested ZIP content in memory without writing extracted files. It evaluated 395 raw or archive-member views totaling about 234 MB; all 33 named rules in 28 files matched at least once. At least one rule matched 90 input files, while 102 had no hits. Counts include copied variants and nested archive views, so they are not independent samples or incidents. [Exhibit E15](../../evidence/E15.pdf) records the companion snapshot and validation scope. No file was executed.
 
 Four ECHOES RAR archives require a password, so their members were not inspected; the separate sealed environment archive was scanned only as raw bytes. Exact hashes identify the four ECHOES containers without making claims about their contents. A separate exact-hash rule identifies the retained Surge Group message; the rule does not claim it shares control with UNK_DeadDrop. Other hash rules identify exact retained packages, launchers and messages; any modification or repackaging evades them. Most unmatched inputs were generic dashboard modules, web assets or research context without a distinctive file-content signature. They were reviewed in the coverage accounting, but weak rules that merely identify those records would not be useful detections.
 
