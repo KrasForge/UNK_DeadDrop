@@ -189,15 +189,17 @@ The reported sender IPs `170.205.29[.]83` and `170.205.30[.]227` are kept separa
 
 ## Post-cutoff public reporting leads
 
-These values were reported after the 24 July case cutoff. They are kept apart from the historical indicators above because the underlying resolver generation or sample was not independently recovered for this case. They are research leads, not a current blocklist.
+Later public reporting adds several leads for comparison with this case. The corresponding resolver generation or sample was not independently recovered, so these values remain separate from the historical indicators above.
 
-| Reported value | Source and relationship | Limit |
+The October report also describes four launcher markers found in the retained material: `deepfake_guard`, a POSIX double-fork, `/var/tmp/.kdm.XXXXXX` and `/guard-launcher-result`. That overlap supports further comparison, but does not verify the reported sample.
+
+| Reported value | Source | What remains unverified |
 | --- | --- | --- |
-| `api.chestsoi[.]ink` | The [August-updated passive-DNS investigation](https://brhopkins.uk/posts/foxtopia/) reports this hostname in the GitLab dead-drop sequence. | The retained local GitLab history does not preserve this generation. Direct-source report only; independent historical DNS or provider records would be needed to corroborate it. |
-| `taikotalent[.]xyz`, `api.gaganata[.]ink`, `api.fallgganata[.]ink` | The [October developer-lure report](https://dev.to/edison_flores_6d2cd381b13/a-fake-recruiter-sent-me-a-job-offer-that-ended-in-my-terminal-the-trojan-is-still-live-2okf) reports these names alongside launcher markers overlapping with retained material. | One reporting origin. The reported sample was not independently obtained in this investigation, and current domain activity was not tested. |
-| SHA-256 `c7c22e322c17bda8198257342d4034af6250a5c433242461b870879ba9aa285d` | Hash reported with the TaikoTalent article and its [structured IOC follow-up](https://gist.github.com/eddyflores100-lang/198d8a13ba5901ea8ed7c63d5292c6ff). | The article and follow-up share one origin. The sample was not independently recovered or hashed here. |
+| `api.chestsoi[.]ink` | [Hopkins's investigation](https://brhopkins.uk/posts/foxtopia/), updated in August, places it in the GitLab dead-drop sequence. | It is absent from the resolver history retained here. No independent historical DNS or provider record was recovered. |
+| `taikotalent[.]xyz`, `api.gaganata[.]ink`, `api.fallgganata[.]ink` | The [October developer-lure report](https://dev.to/edison_flores_6d2cd381b13/a-fake-recruiter-sent-me-a-job-offer-that-ended-in-my-terminal-the-trojan-is-still-live-2okf) names the lure and paired hosts. | The article and its follow-ups trace to one reporting chain. The domains were not checked for current activity. |
+| SHA-256 `c7c22e322c17bda8198257342d4034af6250a5c433242461b870879ba9aa285d` | The same report and its [structured IOC follow-up](https://gist.github.com/eddyflores100-lang/198d8a13ba5901ea8ed7c63d5292c6ff). | No sample was independently recovered or hashed here. Treat the value as a reported lead, not a verified sample hash. |
 
-The TaikoTalent report also names `deepfake_guard`, `/var/tmp/.kdm.XXXXXX` and `/guard-launcher-result`. The overlaps support comparison as a probable continuation lead, not independent confirmation of the sample or its infrastructure. See [Part 10](https://krasforge.github.io/UNK_DeadDrop/articles/10-investigation-connections/).
+See [Part 10](https://krasforge.github.io/UNK_DeadDrop/articles/10-investigation-connections/) for the comparison and its limits. These values are not a current blocklist.
 
 ## Delivery repository URLs
 
