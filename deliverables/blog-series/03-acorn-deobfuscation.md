@@ -94,20 +94,21 @@ With the corrected operation, all three payloads passed authentication: `detect_
 
 All three payloads decrypted to readable, commented source. Authentication tied each plaintext to its encrypted input under the recovered parameters, but did not establish that a payload ran or collected data. Those remain runtime questions.
 
-### Clipboard and marker triage with Acorn
+### From one recovery to a reusable scanner
 
-The companion scanner also uses Acorn, but for a narrower task: it locates selected clipboard-write calls and campaign markers, reports source locations with an input hash, and folds a limited set of literal strings. It can resolve literal additions but leaves variable references and function calls unresolved. It does not reproduce the wrapper mapping or rotated-array recovery described above.
+The manual recovery chose the rotation by comparing how many call sites decoded to printable text, which worked here but remained a heuristic, and obfuscator.io output in fact carries a better test of its own. Before the program runs, a small loop decodes a handful of numeric-looking strings, combines them with `parseInt` into a checksum and keeps shifting the array until that checksum equals a constant written into the file. Version 0.2.0 of the companion [`unk-scanner`](https://www.npmjs.com/package/unk-scanner) uses that loop as its stopping condition. It reads the decoder's syntax to identify the variant (here RC4 behind a shuffled base64 alphabet) and the index offset of 333, then reimplements the decoding in its own code. Finally it evaluates the checksum expression for each candidate rotation with a small evaluator that understands only side-effect-free expressions, and takes the first rotation that matches, exactly as the obfuscated program would. On the retained extension it arrives at rotation 391 and decodes 2,139 of 2,140 call sites in under a second, and on the bootstrap it arrives at 261. Those are the two offsets recorded by hand, reached this time by a different method, and the extension itself is never run.
 
-In the published repository snapshot, the scanner limits input to 8 MiB and bounds nested literal folding. Eight AST tests cover its parser behavior. Static spot checks found two clipboard-write sites in the lure and five campaign markers in the larger collector. These results support triage use, not general deobfuscation. Because parsing runs in process, the byte limit alone cannot prevent expensive adversarial syntax.
+The recovered strings then flow into the scanner's other rules, so a `require('child_process')` hidden behind a decoder call is reported as such. When a rotation loop exists but cannot be solved, the array is reported as unresolved rather than decoded under a guessed rotation, since a wrong rotation produces plausible-looking but false strings. The scanner does not rebuild the key or decrypt the payloads: the authenticated decryption above remains the step that turns recovered strings into evidence.
 
-The installable [`unk-scanner` package](https://www.npmjs.com/package/unk-scanner) adds bounded gzip decoding, worker deadlines and recognition of a specific encrypted-loader sequence. It is also available on [PyPI](https://pypi.org/project/unk-scanner/). With Node.js 22 or later, scan a retained JavaScript file using:
+The same scanner parses each file in a separate process under Node's permission model, with no file writes, child processes or network access, plus a capped heap and a per-file deadline, and on Linux an empty network namespace. It writes SARIF for code scanning, and it is also available on [PyPI](https://pypi.org/project/unk-scanner/). With Node.js 22 or later:
 
 ```sh
-npm install --global unk-scanner@0.1.1 --ignore-scripts
+npm install --global unk-scanner --ignore-scripts
 unk-scanner suspect.js > findings.json
+unk-scanner --format sarif --fail-on error ./extension/ > results.sarif
 ```
 
-Use `--gzip` for a compressed HTTP response body. The package reports linked loader syntax without recovering keys, decrypting payloads or executing input. Its CLI uses a worker deadline and heap limits; the synchronous JavaScript API runs in the caller's process without those protections. A successful exit means analysis completed, not that the file is safe. [Part 11](11-detection-engineering.md) describes the retained-input evaluation and the distinction between syntax findings and exact-source identity.
+A successful exit means the analysis finished, not that a file is safe. [Part 11](11-detection-engineering.md) covers the benchmark on popular packages and the evaluation against the retained inputs.
 
 ```text
 detect_malware.py
