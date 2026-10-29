@@ -1,3 +1,11 @@
+## Voice revision, 30 October 2026
+
+Reworked Parts 13 and 14 after reviewing their cadence. Replaced the mirrored
+section pattern and recurring lesson summaries with a concrete account of the
+reviewed false positives and the `splice` rotation defect. Added two small SVG
+diagrams tied directly to those results. This revision is in the Markdown source,
+ZIP and site build. Deployment status is available from the repository Actions history.
+
 # Scanner hardening update, 29 October 2026
 
 Part 14 now describes the hardened scanner engine in a new section, *Closing the variants,

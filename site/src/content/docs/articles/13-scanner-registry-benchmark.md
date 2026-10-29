@@ -7,70 +7,62 @@ sidebar:
 ---
 
 
-The scanner raised only two error-level findings across 2.4 million files from recently changed npm packages. Both were false positives. Against a separate collection of 2,122 known-malicious packages and extensions, it raised warnings on just 62 samples and no errors at all.
+The scanner raised two error-level findings among nearly 2.4 million files from recently changed npm packages. I read both. One came from an AI desktop application's local helper; the other from a setup guide whose `curl` command printed an HTTP status code. Neither was malicious.
 
-Those results belong together. A tool can produce very little noise because it recognises only a narrow set of structures. The larger benchmark made that trade-off visible: `unk-scanner` could expose commands and hidden strings in the UNK_DeadDrop artifacts that shaped its rules, yet miss ordinary credential theft written without those structures.
+The quieter surprise came from a different corpus. Among 2,122 known-malicious packages and extensions, the scanner flagged only 62 samples, all at warning level. It raised no errors. The benchmark had answered two different questions: how often did rules interrupt review with serious false alarms, and how often did they notice malware outside the structures they were built to recognise? The answers were low noise and low coverage.
 
-The [scanner paper](../../downloads/UNK-Scanner-Paper.pdf) records the evaluation and its limits. The runs described here used one fixed engine on an eight-vCPU virtual server on 29 October. They extend the smaller development checks described in [Part 11](../11-detection-engineering/); they do not turn the retained campaign samples into independent validation data.
+The results and sampling details are in the [scanner paper](../../downloads/UNK-Scanner-Paper.pdf). They come from fixed runs on 29 October, using one engine on an eight-vCPU virtual server. Part 11's [YARA replay](../11-detection-engineering/) covers a different system and different question.
 
-## Beyond the development corpus
+![Three scanner corpora with error and warning counts shown separately.](/UNK_DeadDrop/diagrams/13-benchmark-results.svg)
 
-The initial corpus contained 2,500 npm packages selected using the `npm-high-impact` ranking and 500 Open VSX extensions selected by downloads. Together they supplied 143,153 distinct files. Those files helped calibrate the rules, including when an Electron launch should be a warning rather than an error. A low alert count on that corpus was useful feedback, but the scanner had already benefited from seeing it.
+*The error count stays low on popular and recent code, while most known-malicious samples receive no warning. Counts are not directly comparable because the corpus units differ.*
 
-The expanded evaluation added three different views of the ecosystem:
+## From a development set to three corpora
 
-| Corpus | Acquired material | Distinct files within the corpus |
-| --- | --- | --- |
-| Popular software | 4,992 of the top 5,000 ranked npm packages, 967 of the top 1,000 Marketplace extensions by installs, and the calibration Open VSX set | 332,054 |
-| Recently changed npm packages | 19,976 of 20,000 selected package names from a registry changes window | 2,403,437 |
-| Public malware dataset | 122 IDE-extension samples and a seeded sample of 2,000 npm samples | 41,359 |
+The first check covered 2,500 npm packages ranked by `npm-high-impact` and 500 Open VSX extensions ranked by downloads. That produced 143,153 distinct files. I had already used this material to tune severity, so it was useful for finding noisy rules, but it could not tell me how the same choices would behave on other code.
 
-These are different sampling frames. A registry document change is not necessarily a new package, and popularity does not certify benignness. Deduplication removes repeated file bytes within a corpus; it does not make files from the same package independent observations. The malware selection came from the [Datadog dataset](https://github.com/DataDog/malicious-software-packages-dataset), pinned to commit `438afad`, with random seed `20261029` for the npm sample.
+The expanded run added three collections:
 
-Archives were inspected without installing packages or running lifecycle scripts. Download and extraction time were excluded from the throughput measurement.
+| Collection | Acquired | Files |
+| --- | ---: | ---: |
+| Top npm packages, Marketplace extensions and the Open VSX calibration set | 4,992 of 5,000 npm packages; 967 of 1,000 extensions | 332,054 |
+| Packages selected from the npm registry changes feed | 19,976 of 20,000 package names | 2,403,437 |
+| Datadog malicious-package dataset | 122 IDE extensions; seeded sample of 2,000 npm packages | 41,359 |
 
-Of the popular-software files, 188,901 were absent from the original calibration set. The final scan raised no errors and 12 warnings on these additional files. Eleven warnings concerned legitimate editor-as-Node launches; one concerned a commercial theme's RC4-obfuscated licence code.
+The first collection included 188,901 files absent from the calibration set. These make a useful comparison, with one qualification: the first scan raised four errors in Microsoft Live Share and GitHub Codespaces bundles. Both contained an editor-as-Node launch near code from a privilege-elevation library. The rule escalated from the hidden PowerShell anywhere in the bundle, although the operations were not part of the same launch path.
 
-That final result followed an adjustment. The first expanded run raised four errors in Live Share and Codespaces bundles. Their Electron launch code shared a file with a privilege-elevation library that used hidden PowerShell. The rule had combined those facts across the entire bundle, even though the suspicious operations did not belong to the same launch path. Restricting escalation to the launching function or a local helper removed those errors while preserving the retained artifacts' earlier severities.
+I changed escalation to require the hidden execution in the launching function or a local helper it calls. The change cleared those four findings and preserved the severities of the retained UNK_DeadDrop files. I then froze the engine for the reported scans. Because those Tier 1 files informed a rule change, the final result is disjoint from the original calibration corpus but is not an untouched held-out measurement.
 
-The engine was then fixed for the final runs. The additional files remained separate from the initial calibration set, but their results had influenced this one rule. Calling the final zero-error count an untouched held-out result would conceal that dependency.
+## Reading the two errors
 
-## The two errors worth reading
+The registry changes feed selected packages whose documents changed over a window of about 83,000 sequence positions. Most changes occurred on 29 October. The scan found 6,215 warnings and two errors among the 19,976 packages acquired.
 
-The registry changes window covered roughly 83,000 sequence positions and selected 20,000 package names, of which 19,976 were acquired. The scanner produced 6,215 warnings and two errors.
+The first error looked persuasive at a glance. A desktop application assembled an encoded PowerShell command, hid its window and set `ELECTRON_RUN_AS_NODE` for a helper. That combination triggered escalation. Reading the code showed the helper contacting `127.0.0.1` with a local password. In this application, the suspicious-looking launch was part of an ordinary local workflow.
 
-One error came from an AI desktop application. It constructed hidden, encoded PowerShell that set `ELECTRON_RUN_AS_NODE` for a local helper. That was the technique combination the rule considered serious, but the helper contacted `127.0.0.1` using a local password. Full review found a legitimate application workflow.
+The second came from a remote-access product's setup guide. It copied text containing “verify” and a `curl` command. The command printed an HTTP status code. The rule treated the verification wording as lure evidence and missed the difference between displaying a status and fetching a payload.
 
-The other came from a remote-access tool's setup guide. A copied passage contained the word "verify" and a `curl` command. The command printed an HTTP status code; it did not download and execute a payload. The rule had treated verification wording as evidence of a lure without adequately distinguishing what the command did.
+Warnings took longer to sort out. String-array obfuscation accounted for 6,142 findings across 153 packages. I screened the recovered strings for shells, processes, wallet terms, credential stores and exfiltration services. Seven packages matched those searches; their code fit their apparent roles, including bots, a workspace connector and agent command-line tools. Nine packages still had unresolved arrays, eight from one commercial product.
 
-The warnings were dominated by string arrays: 6,142 findings across 153 packages. Recovered strings were screened for shell, process, wallet, credential-store and exfiltration-service indicators. Seven packages warranted further examination, with the matches explained by their functions, including bots, connectors and agent command-line tools. Nine packages retained unresolved arrays, eight belonging to one commercial product.
+Clipboard and hidden-script warnings received code review. I also read five Electron findings whose package names did not suggest developer tooling. The remaining 39 were triaged from the recorded launch target and environment. This is enough to describe the review that took place, but not enough to label every flagged package benign. In particular, unresolved arrays leave work for an analyst.
 
-Review depth differed by warning type. Clipboard and hidden-script findings received code inspection. Five Electron packages also received code inspection; the other 39 were assessed from the recorded launch target and environment. This was triage, not a complete audit of every package. No package was classified as malicious, but unresolved code prevents treating that outcome as a clean bill of health.
+Two error findings in 19,976 packages amounts to about 0.01% of packages needing error review in this scan. That number describes this window and this rule set. It is not a fleet false-positive rate.
 
-At error level, two of 19,976 packages required reading, about 0.01%. That is the observed review burden in this window. It is not a fleet false-positive rate, and it says nothing by itself about how many malicious packages passed unnoticed.
+## What the malware set did to the result
 
-## Malware that passed quietly
+The public malware set changed the interpretation of the low alert count. I counted a sample as detected if any file in it raised a warning or error.
 
-The public malware corpus supplied the missing counterweight. A sample counted as detected if any file produced a warning or error.
+Of 122 IDE extensions, four raised warnings. Among 1,884 npm packages classified as malicious at creation, 44 raised warnings. Fourteen of 116 compromised npm libraries raised warnings. No sample reached error level.
 
-| Sample class | Samples | Samples with warnings | Samples with errors |
-| --- | --- | --- | --- |
-| IDE extensions | 122 | 4 | 0 |
-| npm packages created with malicious intent | 1,884 | 44 | 0 |
-| Compromised npm libraries | 116 | 14 | 0 |
+The warnings came from obfuscated string arrays and hidden-script launches. Most missed samples did not use the clipboard, Electron or encrypted-loader patterns represented in the rules. Parser failures explained 27 misses, leaving many readable samples outside the scanner's model. Screening the missed files found common access to environment variables and home-directory files, frequent use of `child_process` and network requests, and references to webhooks. Twenty-one missed IDE extensions contained variation-selector characters used to hide text. These counts describe what appeared in the missed code; each behaviour also occurs in legitimate programs.
 
-The 62 detections came from string-array obfuscation or hidden-script launches. None reached error level. Parser failures explained only 27 misses, so adding parser support alone would not close the gap.
+The retained campaign files show that the scanner recognises the structures it was built from. That is useful when the code is available and resembles the observed samples. It does not counter the broader malware result, because those retained files informed the rules. Even within the case, the Windows Node agent raised only notes. Its absence of a warning is a miss, not a change in what the agent does.
 
-Screening the remaining missed samples found abundant behaviours the rules did not model: environment-variable access, home-directory reads, child processes, network requests and webhook references. Among missed IDE extensions, 21 contained variation-selector code points, a different way of concealing content. These traits also occur in legitimate software, so they are descriptions of the missed code rather than standalone maliciousness tests.
+## Parsing and speed
 
-The result changes how a clean scan should be used. It can indicate that the scanner found none of its recognised structures. It cannot establish that a package lacks credential theft, install-time execution or another malicious path. The retained Windows Node agent makes the same point within this investigation: it produces notes, below the warning threshold, despite its collection functionality.
+The scanner tries Acorn first, then an AST-only Babel fallback for supported TypeScript and JSX syntax. In the popular-software collection it parsed 330,473 of 332,054 files. Of the 1,576 parse failures, most were TypeScript. None parsed under the independent Babel configuration we tested; that does not prove they are invalid in their original build toolchains. Five inputs were not valid UTF-8.
 
-## Parsing and throughput
+With four workers, the isolated command-line run processed 272 files per second on the calibration collection; the in-process worker-thread run processed 264. That one comparison showed no throughput penalty from isolation, but it was not a repeated performance study. The malware set ran at 325 files per second. The recent-package scan reached 848 with six workers and a different mix of mostly small files.
 
-The evaluated engine first tries Acorn, then uses an AST-only Babel fallback for supported TypeScript and JSX syntax. In the popular-software corpus it parsed 330,473 of 332,054 files, or 99.5%. There were 1,576 parse failures and five inputs that were not valid UTF-8. Most parse failures were TypeScript; failing both the scanner and the independent Babel configuration tested does not prove that a file is invalid in its original build toolchain.
-
-On the calibration files, the isolated command-line path processed 272 files per second with four workers, compared with 264 for the in-process worker-thread path. The comparison showed no slowdown in that run, but repeated trials would be needed to estimate overhead reliably. The malicious corpus ran at 325 files per second. Recently changed npm packages reached 848 files per second with six workers, reflecting a different mix of file sizes as well as the extra workers.
-
-The useful result is not a single throughput number. It is the combination of a workable analysis rate, a measured review burden and explicit blind spots. The next test asks how stable the detections remain when the code changes slightly. [Part 14](../14-scanner-recovery-and-bypasses/) follows those variants, including one that caused the scanner to return the wrong decoded strings, and the hardened engine that was afterwards rerun over these same 2.8 million files without raising a single new error.
+The scanner is useful for surfacing the behaviours it knows how to follow. Its low error count makes it practical to review; its malware misses mean a clean result cannot clear a package. Part 14 follows the less comfortable question: how little does an author need to change to avoid those findings?
 
 [Companion detections and static scanner](https://github.com/KrasForge/unk-deaddrop-companion).

@@ -34,7 +34,7 @@ for p in posts:
     words=len(re.findall(r"\b[\w'-]+\b",body))
     assert words > 0, p.name  # Splits have no arbitrary minimum word target.
     summary.append({'file':p.name,'words_excluding_code_and_evidence':words})
-assert len(figures)==12
+assert len(figures)==14
 # Parse all JavaScript examples; do not invoke the lure handler or file selectors.
 parser="""import { parse } from 'acorn';
 let text = ''; for await (const chunk of process.stdin) text += chunk;

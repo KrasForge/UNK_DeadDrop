@@ -11,3 +11,5 @@ Arrows describe the labeled code flow or relationship, not observed victim execu
 Amber annotations identify conditions and evidentiary limits. Dashed boundaries
 separate recovered material from unobserved behavior. The screen-block example
 is schematic, and the repository Venn diagram is not proportional to counts.
+
+Part 13 benchmark results and Part 14 rotation failure are compact data diagrams with their scope notes in the article captions. They are editable SVGs linked directly by the Markdown sources.

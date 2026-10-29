@@ -1,0 +1,17 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1000" height="430" viewBox="0 0 1000 430" role="img" aria-labelledby="t d"><title id="t">Three corpora, different results</title><desc id="d">Popular software: 188901 additional files, zero errors and twelve warnings. Recent npm changes: 2403437 files, two errors and 6215 warnings. Public malware: 2122 samples, zero errors, 62 warnings.</desc><defs><style>.h{font:700 23px sans-serif;fill:#202a26}.sub{font:18px sans-serif;fill:#53615a}.label{font:700 19px sans-serif;fill:#202a26}.body{font:17px sans-serif;fill:#53615a}.num{font:700 26px sans-serif;fill:#202a26}.green{fill:#17634f}.amber{fill:#8c5518}.muted{fill:#53615a}.line{stroke:#b9c8be;stroke-width:1.5}.box{fill:#fff;stroke:#b9c8be;stroke-width:1.5}.warn{fill:#fff4df;stroke:#8c5518;stroke-width:1.5}.ok{fill:#eaf3ee;stroke:#17634f;stroke-width:1.5}</style></defs>
+<rect width="1000" height="430" fill="white"/>
+<text x="40" y="48" class="h">What the scanner found</text>
+<text x="40" y="77" class="sub">Alert counts use different units: files in the first two rows, samples in the third.</text>
+<line x1="40" y1="104" x2="960" y2="104" class="line"/>
+<text x="40" y="143" class="label">Popular software</text><text x="40" y="172" class="body">188,901 additional files</text>
+<rect x="560" y="121" width="180" height="59" rx="4" class="ok"/><text x="580" y="146" class="body">Error</text><text x="716" y="161" class="num" text-anchor="end">0</text>
+<rect x="760" y="121" width="200" height="59" rx="4" class="box"/><text x="780" y="146" class="body">Warning</text><text x="935" y="161" class="num" text-anchor="end">12</text>
+<line x1="40" y1="197" x2="960" y2="197" class="line"/>
+<text x="40" y="237" class="label">Recent npm changes</text><text x="40" y="266" class="body">2,403,437 files</text>
+<rect x="560" y="215" width="180" height="59" rx="4" class="warn"/><text x="580" y="240" class="body">Error</text><text x="716" y="255" class="num" text-anchor="end">2</text>
+<rect x="760" y="215" width="200" height="59" rx="4" class="box"/><text x="780" y="240" class="body">Warning</text><text x="935" y="255" class="num" text-anchor="end">6,215</text>
+<line x1="40" y1="291" x2="960" y2="291" class="line"/>
+<text x="40" y="331" class="label">Known-malicious samples</text><text x="40" y="360" class="body">2,122 packages and extensions</text>
+<rect x="560" y="309" width="180" height="59" rx="4" class="ok"/><text x="580" y="334" class="body">Error</text><text x="716" y="349" class="num" text-anchor="end">0</text>
+<rect x="760" y="309" width="200" height="59" rx="4" class="warn"/><text x="780" y="334" class="body">Warning</text><text x="935" y="349" class="num" text-anchor="end">62</text>
+<text x="40" y="408" class="body">No shared denominator: these counts describe separate corpus scans.</text></svg>
