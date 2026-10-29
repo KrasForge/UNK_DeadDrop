@@ -1,7 +1,7 @@
 # UNK_DeadDrop: a fourteen-part series with indicator and artifact references
 
 Fourteen articles, a historical indicator appendix and a sample-artifact reference by Ilja Krasnjanski, updated 29 October 2026.
-Parts 13–14 cover the larger scanner benchmark and recovery/bypass results. Parts 3, 6, 9 and 11 have been expanded or updated to match the latest analysis.
+Parts 13–14 cover the larger scanner benchmark and recovery/bypass results, including the hardened engine that closed the bypasses. Parts 3, 6, 9 and 11 have been expanded or updated to match the latest analysis.
 Parts 10–12 add the investigative connections, detection engineering and framework
 comparison. Parts 4–5 and 7–8 are the split collection/capture and targeting/admin
 articles. The hosted edition is available at [krasforge.github.io/UNK_DeadDrop](https://krasforge.github.io/UNK_DeadDrop/).

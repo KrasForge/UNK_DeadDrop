@@ -71,6 +71,6 @@ The evaluated engine first tries Acorn, then uses an AST-only Babel fallback for
 
 On the calibration files, the isolated command-line path processed 272 files per second with four workers, compared with 264 for the in-process worker-thread path. The comparison showed no slowdown in that run, but repeated trials would be needed to estimate overhead reliably. The malicious corpus ran at 325 files per second. Recently changed npm packages reached 848 files per second with six workers, reflecting a different mix of file sizes as well as the extra workers.
 
-The useful result is not a single throughput number. It is the combination of a workable analysis rate, a measured review burden and explicit blind spots. The next test asks how stable the detections remain when the code changes slightly. [Part 14](../14-scanner-recovery-and-bypasses/) follows those variants, including one that caused the scanner to return the wrong decoded strings.
+The useful result is not a single throughput number. It is the combination of a workable analysis rate, a measured review burden and explicit blind spots. The next test asks how stable the detections remain when the code changes slightly. [Part 14](../14-scanner-recovery-and-bypasses/) follows those variants, including one that caused the scanner to return the wrong decoded strings, and the hardened engine that was afterwards rerun over these same 2.8 million files without raising a single new error.
 
 [Companion detections and static scanner](https://github.com/KrasForge/unk-deaddrop-companion).

@@ -122,8 +122,9 @@ def table(rows):
     cells = [[c.strip() for c in r.strip().strip('|').split('|')] for r in rows if not re.match(r'^\|\s*-', r)]
     data = [[Paragraph(markup(c), styles['head' if i == 0 else 'cell']) for c in row] for i, row in enumerate(cells)]
     n = len(cells[0])
-    # The corpus table has a wide description column; numeric tables get a wide first column.
-    widths = [62, 230, 159] if n == 3 else [151] + [300 / (n - 1)] * (n - 1)
+    # The corpus table has a wide description column, the hardening table a wide
+    # last column; other numeric tables get a wide first column.
+    widths = [62, 230, 159] if n == 3 else [66, 60, 50, 110, 165] if n == 5 else [151] + [300 / (n - 1)] * (n - 1)
     t = Table(data, colWidths=widths, repeatRows=1, hAlign='LEFT')
     t.setStyle(TableStyle([('VALIGN', (0, 0), (-1, -1), 'TOP'), ('LINEABOVE', (0, 0), (-1, 0), 0.8, colors.black),
                            ('LINEBELOW', (0, 0), (-1, 0), 0.5, colors.black), ('LINEBELOW', (0, -1), (-1, -1), 0.8, colors.black),

@@ -1,3 +1,14 @@
+# Scanner hardening update, 29 October 2026
+
+Part 14 now describes the hardened scanner engine in a new section, *Closing the variants,
+and what that does not prove*. It replaces the paragraph that proposed untested mitigations.
+Parts 3, 11 and 13 and the series index gain one cross-reference each. The figures come from
+Section 5.6 of the rebuilt scanner paper and `benchmark/mitigation/` in the companion
+repository (merged as PR #9): 18 of 19 variants handled, no new error-level finding on the
+calibration corpus or Tiers 1 to 3, new warnings in three benign packages, unresolved Tier 2
+arrays down from 1,387 to 16, artifacts 14 of 14, and throughput of 281 against 264 files/s.
+The site carries the rebuilt scanner PDF.
+
 # Fourteen-article edition, 29 October 2026
 
 Added Part 13 on the expanded scanner evaluation and Part 14 on recovery defects

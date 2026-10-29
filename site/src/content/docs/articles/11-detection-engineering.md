@@ -48,7 +48,7 @@ The expanded scanner evaluation now has its own [paper](../../downloads/UNK-Scan
 
 Sensitivity tells a different story. Only 62 of 2,122 known-malicious samples raised warnings, with none reaching error level. Most lacked the clipboard, Electron or encrypted-loader structures that the higher-severity rules recognise. The retained Windows Node agent also stays below warning level. Its known collection functionality does not become benign because this rule set misses it.
 
-[Part 13](../13-scanner-registry-benchmark/) covers corpus selection, review depth, parser coverage and throughput. [Part 14](../14-scanner-recovery-and-bypasses/) examines nineteen small variants, eighteen of which evaded a rule, lowered severity or defeated string recovery. These results concern the evaluated scanner, not the 33 YARA rules or their earlier control set.
+[Part 13](../13-scanner-registry-benchmark/) covers corpus selection, review depth, parser coverage and throughput. [Part 14](../14-scanner-recovery-and-bypasses/) examines nineteen small variants, eighteen of which evaded a rule, lowered severity or defeated string recovery, and a hardened engine that later closed all but one of them without adding error-level findings on the same corpora. These results concern the scanner, not the 33 YARA rules or their earlier control set.
 
 ## Supplying the bytes a rule expects
 
