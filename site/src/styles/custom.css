@@ -2,7 +2,8 @@
   --sl-color-accent-low: #e3eee9;
   --sl-color-accent: #17634f;
   --sl-color-accent-high: #0c352a;
-  --sl-color-white: #ffffff;
+  /* Starlight's highest-contrast text colour: near-black in the light theme. */
+  --sl-color-white: #121512;
   --sl-color-gray-1: #202320;
   --sl-color-gray-2: #424742;
   --sl-color-gray-3: #6d746e;
@@ -66,5 +67,22 @@
 @media (min-width: 72rem) {
   .main-pane {
     --sl-content-width: 50rem;
+  }
+}
+
+/* Landing page: the four hero links sit in one row on wide screens. The hero
+   has no image, so its text column takes the full width. */
+@media (min-width: 50rem) {
+  .hero:not(:has(> img, > .hero-html)) {
+    grid-template-columns: 100%;
+  }
+
+  .hero .actions {
+    flex-wrap: nowrap;
+    gap: 1rem 1.5rem;
+  }
+
+  .hero .actions .sl-link-button {
+    white-space: nowrap;
   }
 }
