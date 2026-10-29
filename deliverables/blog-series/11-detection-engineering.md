@@ -1,7 +1,7 @@
 ---
 title: "Building and Testing Detections for UNK_DeadDrop"
 description: "Thirty-three YARA rules replayed against retained artifacts, followed by a separate noise review and static scanner evaluation."
-date: "2026-10-27"
+date: "2026-10-29"
 author: "Ilja Krasnjanski"
 canonical: "https://krasforge.github.io/UNK_DeadDrop/articles/11-detection-engineering/"
 kicker: "UNK_DeadDrop · Part 11"
@@ -45,32 +45,17 @@ The prose fixture remains important alongside that zero-hit result. It records a
 
 A later local review covered 177 case inputs, 380 views and 344 distinct objects. Seven source rules were narrowed after collisions in selected research, dual-use tooling, ordinary software, installed software and upstream-fork controls. Every previous case-artifact match was preserved, and the seven revised forms had no hits in the external controls scanned. This bounded control set does not estimate a production false-positive rate; the revisions remain separate from the public companion snapshot.
 
-The [preprint](../preprint/UNK_DeadDrop-Preprint.pdf) also evaluates `unk-scanner` against 31 selected JavaScript inputs from the case material, producing 27 syntax-based findings and four identity-only records covering three distinct hashes. Of 500 local JavaScript baseline files, all parsed; one legitimate clipboard operation produced a syntax finding, and none matched an identity record. These 31 inputs were accounted for, not all identified as malicious. Exact identity of a login interface or shared web component is contextual information, not a malware verdict.
+## The scanner needs a different evaluation
 
-Version 0.2.0 of the scanner, published on [npm](https://www.npmjs.com/package/unk-scanner) and [PyPI](https://pypi.org/project/unk-scanner/) on 29 October, goes considerably further than the version the preprint evaluated:
+The YARA replay measures whether particular bytes match the signatures. `unk-scanner` instead parses JavaScript and follows selected expressions, string decoders and launch structures. A file can match a content signature while the scanner misses its behaviour, or produce a scanner warning because it uses obfuscation that also appears in legitimate software.
 
-- **Hidden strings:** it recovers obfuscator.io string arrays by solving their rotation from the obfuscator's own checksum loop ([Part 3](03-acorn-deobfuscation.md)).
-- **ClickFix:** it follows a copied value back through the command builder that assembles it ([Part 1](01-clickfix-clipboard-manipulation.md)).
-- **Electron:** it distinguishes reading, setting and launching with `ELECTRON_RUN_AS_NODE` ([Part 2](02-vsix-editor-execution.md)).
-- **Severity:** it gives every finding an error, warning or note level, writes SARIF for code scanning, and parses each file in an isolated process.
+The expanded scanner evaluation now has its own [paper](../scanner-paper/UNK-Scanner-Paper.pdf). It covers popular npm packages and editor extensions, recently changed npm packages, and a separate public malware dataset. The final popular-software scan raised no errors in 188,901 files outside the initial calibration corpus, although an earlier run on those files informed one escalation-rule adjustment. In the registry changes corpus, two of 19,976 packages raised errors; full review classified both as false positives.
 
-Every retained ClickFix lure, encrypted loader, decrypted collector and the Windows pipeline now reaches error level, and the two obfuscated extension files are recovered and flagged. Because those files also shaped the rules, this shows that the rules fire on their targets, not how they would fare against variants nobody has seen yet.
+Sensitivity tells a different story. Only 62 of 2,122 known-malicious samples raised warnings, with none reaching error level. Most lacked the clipboard, Electron or encrypted-loader structures that the higher-severity rules recognise. The retained Windows Node agent also stays below warning level. Its known collection functionality does not become benign because this rule set misses it.
 
-The more useful question was what the rules do on ordinary code, so the [benchmark](https://github.com/KrasForge/unk-deaddrop-companion/blob/main/BENCHMARK.md) ran them over the 2,500 most downloaded npm packages and the 500 most downloaded Open VSX extensions, 143,153 distinct files in all. Not one error-level finding appeared. Each of the 107 warnings was read in context:
+[Part 13](13-scanner-registry-benchmark.md) covers corpus selection, review depth, parser coverage and throughput. [Part 14](14-scanner-recovery-and-bypasses.md) examines nineteen small variants, eighteen of which evaded a rule, lowered severity or defeated string recovery. These results concern the evaluated scanner, not the 33 YARA rules or their earlier control set.
 
-- 90 were commercial extensions shipped through an obfuscator, which the scanner decoded (486,208 of 486,601 decoder call sites);
-- 16 were legitimate launches of the editor binary as Node;
-- 1 was an installer's "copy command" button.
-
-The run also exposed problems in my own rules before release. Lookup tables in PDF.js had looked like string-array decoders, and a minified rotation loop had been missed, which briefly decoded one vendor's strings under the wrong rotation. Both were fixed, and the fixes are recorded with the results.
-
-The limits are as plain as the numbers:
-
-- Popular packages are a convenience sample, not proof that code is benign, and files inside one package are not independent.
-- TypeScript is not parsed.
-- Nineteen arrays reached through reassignable `var` aliases are reported as unresolved rather than guessed.
-
-Through the isolated command-line path, the scanner processed about 412 files a second on a four-process workstation run. The [rule reference](https://github.com/KrasForge/unk-deaddrop-companion/blob/main/docs/rules.md) and [CI guide](https://github.com/KrasForge/unk-deaddrop-companion/blob/main/docs/ci.md) explain each rule's escalation conditions and how to wire the SARIF output into a pipeline.
+## Supplying the bytes a rule expects
 
 YARA input representation matters just as much. A rule for decrypted JavaScript needs those plaintext bytes; a rule for a VSIX member needs the member supplied to the engine. Scanning an outer compressed package alone is not equivalent to the archive-member replay above. Consult each rule's target and match conditions before choosing a sample. Uploading a custom rule to a hunting service also does not prove that its separate manual file-scan feature uses that rule set.
 

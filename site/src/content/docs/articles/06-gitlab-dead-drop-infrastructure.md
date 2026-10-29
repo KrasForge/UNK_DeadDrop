@@ -1,17 +1,18 @@
 ---
 title: "Following the GitLab Dead Drop: Configuration Changes and C2 History"
 description: "How a GitLab-hosted configuration file let the UNK_DeadDrop operators change servers without new payloads, and what its revision history reveals."
-lastUpdated: 2026-10-28
+lastUpdated: 2026-10-29
 sidebar:
   order: 6
 ---
+
 
 
 On 13 July 2026, a GitLab commit replaced a list of server names with `api.cklomino[.]ink` and `api.dsfmot[.]xyz`. The retained repository bundle and file history are documented in [E07](../../evidence/E07.pdf). The file held configuration, not a payload; its significance came from the client code that read it. A client consulting this resource could obtain its destination without carrying a fixed address in the deployed file. The configuration could therefore change without requiring a new payload hash.
 
 The configuration history records the changing destinations. Certificate and panel observations connect one of those domains to a historical origin address.
 
-The [historical indicator reference](../indicators/) lists every recorded resolver value, the separate unreferenced file, related lure hosts and the limits on each IP association.
+The [historical indicator reference](../../indicators/) lists every recorded resolver value, the separate unreferenced file, related lure hosts and the limits on each IP association.
 
 The later July installer family used a separate mechanism. Its `upd_m`, `upd_w`, `upda_m` and `upda_w` droppers embedded `api.aazdias[.]ink` as the primary store and `api.fallaazdis[.]ink` as the fallback. Those values came from the recovered dropper configuration, not from the GitLab `config.json` history. The origin association to `207.241.172[.]222` came from dated certificate and passive-scan observations, not a direct fetch from that address.
 
@@ -47,7 +48,7 @@ Blocking a destination can interrupt traffic, while a client that consults this 
 
 ## From the host list to the origin
 
-The July analysis associated `207.241.172[.]222` with C2 and administration services. A certificate observed at that address named `api.cklomino[.]ink`. A third-party scan of the bare IP also returned a Subtensor sign-in panel, providing application content to compare with related panel observations.
+The July analysis associated `207.241.172[.]222` with C2 and administration services. The analysis notes report a certificate naming `api.cklomino[.]ink` and a third-party bare-IP scan returning a Subtensor sign-in panel. The raw scan responses and certificate were not retained. The panel HTML and JavaScript available for inspection were retrieved from `api.domatisc[.]ink`, so they cannot independently reproduce the reported response from the bare IP.
 
 The panel adds an application-level association to the certificate evidence. Further relationships came from certificate facets, passive DNS and reverse-DNS fields. These observations came from research-service records; the origin analysis did not directly scan the server or log in. [E20](../../evidence/E20.pdf) and [E21](../../evidence/E21.pdf) record the source and limits of those historical associations.
 
@@ -57,7 +58,19 @@ The July observations associated `207.241.172[.]222` with C2 and administration,
 
 The saved service enumeration listed SSH, HTTP and HTTPS. Its SSH profile included a host key, banner and handshake information, but these had different value as search pivots. The common OpenSSH banner and handshake fingerprint matched broad populations of hosts. The more selective host key returned only the address already known. That negative search result does not prove the operation had no backup host.
 
-The scan exposed a panel on the bare IP but did not enumerate every tenant. Other services may have shared the address, so an IP block could affect unrelated traffic.
+The reported panel response did not enumerate every tenant at the address. Other services may have shared the address, so an IP block could affect unrelated traffic.
+
+### Certificates as a maintenance log
+
+The 23 July certificate enumeration added names that were absent from the inspected payloads: a `dashboard` host on the cklomino base, `dev` and `hr` mail subdomains on lure domains, and a `hiring` host alongside a career-themed API. The [indicator reference](../../indicators/) records the names and first-issuance dates. These records identify certificate names, not proof that each host served a malicious application.
+
+The certificates did not provide a cross-domain link. Subject alternative names stayed within individual registered bases, with combinations of the base, wildcards and subdomains such as `api.`, `www.` and `email.`. No retained enumeration entry combined two bases in one certificate. Wildcards also mean that a new subdomain can appear without a new certificate-log entry.
+
+Timing offered more context. Certificates for four bases were first issued on 13 July, the date of the resolver's change to `api.cklomino[.]ink` and `api.dsfmot[.]xyz`. On 23 July, `aazdias[.]ink` and `fallaazdis[.]ink` were registered about six minutes apart through the same registrar and privacy service, with the same Cloudflare nameserver pair. Their primary-and-fallback naming repeats the earlier `aavzx[.]ink` and `fallbaav[.]ink` arrangement. The current stores, a new dashboard host and several older lure domains also received certificates that day.
+
+Shared panels and certificate automation can produce this cadence across unrelated customers. The timing therefore supplements the code and configuration relationships; it cannot establish a cluster on its own. These registration and enumeration observations come from restricted 23 July records and are discussed in the [paper](../../downloads/UNK_DeadDrop-Preprint.pdf), but are not independently reproduced in the public evidence exhibits.
+
+A sweep of the hosting provider's two /23 ranges, about a thousand addresses of which 291 exposed services, showed why ports were a poor discriminator. The provider is ordinary shared hosting, about twenty unrelated tenants ran something on port 3000, and the free scan dataset returned nothing on the agent's port 5173 for either range, so a port-based hunt could neither separate the campaign hosts from their neighbors nor reach the one port that mattered. These are dated observations from research services, and none of them has been refreshed since 24 July.
 
 Part 7 follows the target-acquisition tooling behind the two SQLite pools.
 

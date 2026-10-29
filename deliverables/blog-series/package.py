@@ -7,7 +7,7 @@ import zipfile
 BASE=Path(__file__).resolve().parent
 ROOT=BASE.parent
 posts=sorted(BASE.glob('[0-9][0-9]-*.md'))
-assert len(posts)==12
+assert len(posts)==14
 references=[BASE/'historical-indicators.md',BASE/'artifact-reference.md']
 files=set(posts+references+[BASE/'README.md',BASE/'VALIDATION.md',BASE/'build_diagrams.py',BASE/'assets/diagrams.json',BASE/'assets/DIAGRAMS.md'])
 files.update((BASE/'assets').glob('*.svg'))
@@ -33,7 +33,7 @@ with zipfile.ZipFile(output,'w',zipfile.ZIP_DEFLATED) as z:
         z.writestr(relative,data)
         checks.append(hashlib.sha256(data).hexdigest()+'  '+relative)
     z.writestr('SHA256SUMS','\n'.join(checks)+'\n')
-    z.writestr('README.md','# UNK_DeadDrop technical blog series\n\nStart with [the series index](blog-series/README.md).\n\nTwelve articles with their diagrams and supporting PDFs. The hosted edition is at https://krasforge.github.io/UNK_DeadDrop/.\n')
+    z.writestr('README.md','# UNK_DeadDrop technical blog series\n\nStart with [the series index](blog-series/README.md).\n\nFourteen articles with their diagrams and supporting PDFs. The hosted edition is at https://krasforge.github.io/UNK_DeadDrop/.\n')
 with zipfile.ZipFile(output) as z:
     assert z.testzip() is None
     for line in z.read('SHA256SUMS').decode().splitlines():

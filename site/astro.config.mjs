@@ -15,7 +15,7 @@ export default defineConfig({
   integrations: [
     starlight({
       title: 'UNK_DeadDrop',
-      description: 'A twelve-part technical investigation of developer-targeted phishing, collection tooling, infrastructure, and detection engineering.',
+      description: 'A technical investigation of developer-targeted phishing, collection tooling, infrastructure, and detection engineering.',
       favicon: 'favicon.svg',
       customCss: ['./src/styles/custom.css'],
       tableOfContents: { minHeadingLevel: 2, maxHeadingLevel: 2 },
@@ -50,6 +50,13 @@ export default defineConfig({
             { label: '10. Investigation connections', link: '/articles/10-investigation-connections/' },
             { label: '11. Detection engineering', link: '/articles/11-detection-engineering/' },
             { label: '12. Framework boundary', link: '/articles/12-framework-and-collection-boundary/' }
+          ]
+        },
+        {
+          label: 'Scanner evaluation',
+          items: [
+            { label: '13. Registry benchmark', link: '/articles/13-scanner-registry-benchmark/' },
+            { label: '14. Recovery and bypasses', link: '/articles/14-scanner-recovery-and-bypasses/' }
           ]
         },
         { label: 'Research materials', link: '/research-materials/' }

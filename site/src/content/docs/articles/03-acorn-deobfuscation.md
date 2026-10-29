@@ -1,10 +1,11 @@
 ---
 title: "Parsing Without Executing: JavaScript Deobfuscation with Acorn"
 description: "Rebuilding an AES key from sixteen obfuscated fragments with Acorn, and proving it with authenticated decryption without ever running the malicious extension."
-lastUpdated: 2026-10-28
+lastUpdated: 2026-10-29
 sidebar:
   order: 3
 ---
+
 
 
 The VSIX loader assembled one AES key from sixteen fragments: nine decoder calls and seven literals. Recovering it required mapping wrapper functions and a rotated string table. A simple regex missed a wrapper that declared an intermediate value before returning, and five plausible rotations failed checks across the call sites.
@@ -86,13 +87,19 @@ With the corrected operation, all three payloads passed authentication: `detect_
 
 All three payloads decrypted to readable, commented source. Authentication tied each plaintext to its encrypted input under the recovered parameters, but did not establish that a payload ran or collected data. Those remain runtime questions.
 
-### Clipboard and marker triage with Acorn
+### From one recovery to a reusable scanner
 
-The companion scanner also uses Acorn, but for a narrower task: it locates selected clipboard-write calls and campaign markers, reports source locations with an input hash, and folds a limited set of literal strings. It can resolve literal additions but leaves variable references and function calls unresolved. It does not reproduce the wrapper mapping or rotated-array recovery described above.
+The manual analysis selected a rotation by comparing printable output across call sites. The later scanner uses another feature of the same obfuscation: a loop that decodes numeric-looking strings, combines them with `parseInt` and shifts the array until the checksum equals an embedded constant.
 
-In the published repository snapshot, the scanner limits input to 8 MiB and bounds nested literal folding. Eight AST tests cover its parser behavior. Static spot checks found two clipboard-write sites in the lure and five campaign markers in the larger collector. These results support triage use, not general deobfuscation. Because parsing runs in process, the byte limit alone cannot prevent expensive adversarial syntax.
+The evaluated engine identifies the decoder variant from its syntax, reimplements decoding and evaluates that checksum for candidate rotations. For this extension the variant is RC4 behind a shuffled base64 alphabet, with an index offset of 333. It reaches rotation 391 and decodes 2,139 of 2,140 call sites. For the bootstrap it reaches rotation 261 and decodes 15 of 17. These agree with the manually established rotations without executing the extension.
 
-A separate local package, `unk-scanner` 0.1.0, adds bounded gzip decoding, worker deadlines and recognition of encrypted-loader syntax. Its evaluation is summarized in [Part 11](../11-detection-engineering/) and the [preprint](https://doi.org/10.5281/zenodo.23696198). The package and evaluation were not part of the public companion snapshot.
+Recovered strings become available to other rules, including calls whose module names are hidden behind decoders. An unresolved checksum can sometimes be handled by a printable-consensus heuristic; otherwise the recognised array remains unresolved. Neither outcome is a universal safeguard. A later test replaced `push(shift())` rotation with `splice`, and the scanner failed to recognise the loop, incorrectly accepting rotation zero. [Part 14](../14-scanner-recovery-and-bypasses/) examines that defect and the variants that bypassed other rules.
+
+The scanner does not assemble the AES key or decrypt the payloads. Authenticated decryption remains a separate check on the recovered fragments, and partial string recovery must be read alongside the unresolved call sites.
+
+The [scanner paper](../../downloads/UNK-Scanner-Paper.pdf) describes the evaluated implementation, including its per-process restrictions, resource limits and AST-only TypeScript/JSX fallback. The command-line output records which isolation controls were applied; Linux network-namespace isolation depends on host support. Installation and current release instructions are maintained in the [companion repository](https://github.com/KrasForge/unk-deaddrop-companion), with packages on [npm](https://www.npmjs.com/package/unk-scanner) and [PyPI](https://pypi.org/project/unk-scanner/).
+
+The larger registry evaluation is in [Part 13](../13-scanner-registry-benchmark/). Its low error-level alert count accompanies poor detection of generic package malware, so a completed scan does not establish that an input is safe.
 
 ```text
 detect_malware.py

@@ -1,6 +1,6 @@
 # UNK_DeadDrop website
 
-Astro + Starlight site for the twelve-part technical series. The editable article sources remain in `deliverables/blog-series/`; the site generates its article collection from them before every local or CI build.
+Astro + Starlight site for the fourteen-part technical series. The editable article sources remain in `deliverables/blog-series/`; the site generates its article collection from them before every local or CI build.
 
 ## Local preview
 

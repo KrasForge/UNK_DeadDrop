@@ -41,6 +41,9 @@ const rewriteLinks = (body) => body
   .replaceAll('](assets/', '](../assets/')
   .replaceAll('](../preprint/evidence/', '](../../evidence/')
   .replaceAll('](../preprint/UNK_DeadDrop-Preprint.pdf)', '](../../downloads/UNK_DeadDrop-Preprint.pdf)')
+  .replaceAll('](../scanner-paper/UNK-Scanner-Paper.pdf)', '](../../downloads/UNK-Scanner-Paper.pdf)')
+  .replaceAll('](historical-indicators.md)', '](../../indicators/)')
+  .replaceAll('](artifact-reference.md)', '](../../artifacts/)')
   .replaceAll('](../public-repository/', '](../../companion/')
   .replaceAll('```yara', '```text')
   .replace(/\]\((\d{2}-[a-z0-9-]+)\.md\)/g, '](../$1/)')
@@ -86,6 +89,10 @@ await cp(resolve(workspaceRoot, 'deliverables/preprint/evidence'), resolve(publi
 await copyFile(
   resolve(workspaceRoot, 'deliverables/preprint/UNK_DeadDrop-Preprint.pdf'),
   resolve(publicRoot, 'downloads/UNK_DeadDrop-Preprint.pdf')
+);
+await copyFile(
+  resolve(workspaceRoot, 'deliverables/scanner-paper/UNK-Scanner-Paper.pdf'),
+  resolve(publicRoot, 'downloads/UNK-Scanner-Paper.pdf')
 );
 await copyFile(
   resolve(seriesRoot, 'UNK_DeadDrop-Blog-Series.zip'),

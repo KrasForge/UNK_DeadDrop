@@ -1,0 +1,20 @@
+{
+  "authors": [
+    {
+      "name": "Ilja Krasnjanski",
+      "affiliation": "Independent researcher",
+      "orcid": "0009-0007-1039-5930"
+    }
+  ],
+  "date": "29 October 2026",
+  "license": "CC-BY-4.0",
+  "keywords": [
+    "static analysis",
+    "JavaScript deobfuscation",
+    "software supply chain",
+    "ClickFix",
+    "editor extensions",
+    "developer security"
+  ],
+  "suggested_arxiv_category": "cs.CR"
+}

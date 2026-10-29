@@ -1,10 +1,11 @@
 ---
 title: "Inside rms-platform: Delivery Monitoring and Wallet Administration"
 description: "What seventy recovered frontend modules reveal about repository monitoring, wallet workflows and authorization limits."
-lastUpdated: 2026-10-28
+lastUpdated: 2026-10-25
 sidebar:
   order: 8
 ---
+
 
 
 A development deployment at `dashboard.cklomino[.]ink` exposed seventy frontend modules for an application called rms-platform. The recovered client combined mail views, repository availability checks and wallet-management controls. Its wallet views include mnemonic and ColdKey fields, plus import, preview and claim actions. The backend implementation and its stored records were not recovered.
@@ -13,7 +14,7 @@ A development deployment at `dashboard.cklomino[.]ink` exposed seventy frontend 
 
 The administration recovery followed imports exposed by a Vite development server. It preserved seventy frontend modules, whose embedded source maps included the original TypeScript comments. The recovered application calls itself `rms-platform`; its client contains mail metrics, inbox and outbox views, templates, auto-reply controls, a task board, database tables and wallet-management components.
 
-The acquisition followed only modules loaded by the application. It involved no login or call to the authenticated data API. The source references `/api/github-jobs-check/`, `/api/db/...` and `/api/admin/wallets/{refresh,preview,claim,claim-all}/`; these are strings in the client, not observed requests. The related [historical indicator reference](../indicators/) records the exact route forms and the [evidence index](../artifacts/) lists hashes for the recovered modules and related samples. The retained client excerpts are in [E06](/UNK_DeadDrop/evidence/E06.pdf) and [E09](/UNK_DeadDrop/evidence/E09.pdf).
+The acquisition followed only modules loaded by the application. It involved no login or call to the authenticated data API. The source references `/api/github-jobs-check/`, `/api/db/...` and `/api/admin/wallets/{refresh,preview,claim,claim-all}/`; these are strings in the client, not observed requests. The related [historical indicator reference](../../indicators/) records the exact route forms and the [evidence index](../../artifacts/) lists hashes for the recovered modules and related samples. The retained client excerpts are in [E06](../../evidence/E06.pdf) and [E09](../../evidence/E09.pdf).
 
 ![What the recovered client makes visible](../assets/06-administration.png)
 
@@ -34,7 +35,7 @@ The wallet interface contains import, refresh, preview, claim and bulk-claim act
 /api/admin/wallets/claim-all/
 ```
 
-The collection paths and their relationship to the dynamically selected server are listed in the [historical indicator reference](../indicators/).
+The collection paths and their relationship to the dynamically selected server are listed in the [historical indicator reference](../../indicators/).
 
 Mnemonic and ColdKey fields, Bittensor-related interface language, and references to EVM and Aptos connect the intended wallet workflow to material targeted by the collectors. The collectors select wallet material that corresponds to these interface fields.
 

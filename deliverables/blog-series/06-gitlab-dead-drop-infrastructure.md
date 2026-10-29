@@ -1,7 +1,7 @@
 ---
 title: "Following the GitLab Dead Drop: Configuration Changes and C2 History"
 description: "How a GitLab-hosted configuration file let the UNK_DeadDrop operators change servers without new payloads, and what its revision history reveals."
-date: "2026-10-25"
+date: "2026-10-29"
 author: "Ilja Krasnjanski"
 canonical: "https://krasforge.github.io/UNK_DeadDrop/articles/06-gitlab-dead-drop-infrastructure/"
 kicker: "UNK_DeadDrop · Part 6"
@@ -55,7 +55,7 @@ Blocking a destination can interrupt traffic, while a client that consults this 
 
 ## From the host list to the origin
 
-The July analysis associated `207.241.172[.]222` with C2 and administration services. A certificate observed at that address named `api.cklomino[.]ink`. A third-party scan of the bare IP also returned a Subtensor sign-in panel, providing application content to compare with related panel observations.
+The July analysis associated `207.241.172[.]222` with C2 and administration services. The analysis notes report a certificate naming `api.cklomino[.]ink` and a third-party bare-IP scan returning a Subtensor sign-in panel. The raw scan responses and certificate were not retained. The panel HTML and JavaScript available for inspection were retrieved from `api.domatisc[.]ink`, so they cannot independently reproduce the reported response from the bare IP.
 
 The panel adds an application-level association to the certificate evidence. Further relationships came from certificate facets, passive DNS and reverse-DNS fields. These observations came from research-service records; the origin analysis did not directly scan the server or log in. [E20](../preprint/evidence/E20.pdf) and [E21](../preprint/evidence/E21.pdf) record the source and limits of those historical associations.
 
@@ -65,11 +65,17 @@ The July observations associated `207.241.172[.]222` with C2 and administration,
 
 The saved service enumeration listed SSH, HTTP and HTTPS. Its SSH profile included a host key, banner and handshake information, but these had different value as search pivots. The common OpenSSH banner and handshake fingerprint matched broad populations of hosts. The more selective host key returned only the address already known. That negative search result does not prove the operation had no backup host.
 
-The scan exposed a panel on the bare IP but did not enumerate every tenant. Other services may have shared the address, so an IP block could affect unrelated traffic.
+The reported panel response did not enumerate every tenant at the address. Other services may have shared the address, so an IP block could affect unrelated traffic.
 
 ### Certificates as a maintenance log
 
-Certificate transparency was more informative than port scanning, and it read better as a maintenance record than as a list of names. A backward enumeration of issuances for the known base domains on 23 July turned up subdomains that the payloads never mentioned: an administration `dashboard` host on the cklomino base, two mail subdomains themed `dev` and `hr` on lure domains, and a `hiring` host beside a career-themed API. They are listed with their first-issuance dates in the [indicator reference](historical-indicators.md). Most of the C2 and store bases also carried wildcard certificates, so new subdomains could be brought up without leaving a fresh certificate log entry. Watching subdomain names alone would therefore miss part of the estate. The same pull showed that on 23 July, the day of the query, fresh certificates were issued for the current store pair, the new dashboard host and several older lure domains such as `d2saitrade[.]ink`, `joincategory[.]xyz` and `surgecareer[.]ink`. Renewals on one day across both generations suggest that one administrator was still tending both, although a certificate proves only that someone controlled the name's validation at that moment, not that a lure was being served.
+The 23 July certificate enumeration added names that were absent from the inspected payloads: a `dashboard` host on the cklomino base, `dev` and `hr` mail subdomains on lure domains, and a `hiring` host alongside a career-themed API. The [indicator reference](historical-indicators.md) records the names and first-issuance dates. These records identify certificate names, not proof that each host served a malicious application.
+
+The certificates did not provide a cross-domain link. Subject alternative names stayed within individual registered bases, with combinations of the base, wildcards and subdomains such as `api.`, `www.` and `email.`. No retained enumeration entry combined two bases in one certificate. Wildcards also mean that a new subdomain can appear without a new certificate-log entry.
+
+Timing offered more context. Certificates for four bases were first issued on 13 July, the date of the resolver's change to `api.cklomino[.]ink` and `api.dsfmot[.]xyz`. On 23 July, `aazdias[.]ink` and `fallaazdis[.]ink` were registered about six minutes apart through the same registrar and privacy service, with the same Cloudflare nameserver pair. Their primary-and-fallback naming repeats the earlier `aavzx[.]ink` and `fallbaav[.]ink` arrangement. The current stores, a new dashboard host and several older lure domains also received certificates that day.
+
+Shared panels and certificate automation can produce this cadence across unrelated customers. The timing therefore supplements the code and configuration relationships; it cannot establish a cluster on its own. These registration and enumeration observations come from restricted 23 July records and are discussed in the [paper](../preprint/UNK_DeadDrop-Preprint.pdf), but are not independently reproduced in the public evidence exhibits.
 
 A sweep of the hosting provider's two /23 ranges, about a thousand addresses of which 291 exposed services, showed why ports were a poor discriminator. The provider is ordinary shared hosting, about twenty unrelated tenants ran something on port 3000, and the free scan dataset returned nothing on the agent's port 5173 for either range, so a port-based hunt could neither separate the campaign hosts from their neighbors nor reach the one port that mattered. These are dated observations from research services, and none of them has been refreshed since 24 July.
 

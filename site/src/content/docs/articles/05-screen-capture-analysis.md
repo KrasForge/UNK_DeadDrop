@@ -1,10 +1,11 @@
 ---
 title: "Beyond Screenshot Strings: Reconstructing Screen Capture"
 description: "Frame-comparison symbols in the Linux Go agent, a Windows capture bundle, and the desktop access each requires."
-lastUpdated: 2026-10-28
+lastUpdated: 2026-10-25
 sidebar:
   order: 5
 ---
+
 
 
 The Go implant contains symbols for capturing a display, retaining a previous frame, comparing blocks and encoding JPEG data. A separate Windows bundle combines screen acquisition, JPEG encoding, MessagePack serialization and WebSocket transport. Together, these artifacts point to a design for repeatedly capturing and transmitting changes on a desktop.

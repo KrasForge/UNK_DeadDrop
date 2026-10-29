@@ -1,7 +1,7 @@
 ---
 title: "Parsing Without Executing: JavaScript Deobfuscation with Acorn"
 description: "Rebuilding an AES key from sixteen obfuscated fragments with Acorn, and proving it with authenticated decryption without ever running the malicious extension."
-date: "2026-10-27"
+date: "2026-10-29"
 author: "Ilja Krasnjanski"
 canonical: "https://krasforge.github.io/UNK_DeadDrop/articles/03-acorn-deobfuscation/"
 kicker: "UNK_DeadDrop · Part 3"
@@ -96,19 +96,17 @@ All three payloads decrypted to readable, commented source. Authentication tied 
 
 ### From one recovery to a reusable scanner
 
-The manual recovery chose the rotation by comparing how many call sites decoded to printable text, which worked here but remained a heuristic, and obfuscator.io output in fact carries a better test of its own. Before the program runs, a small loop decodes a handful of numeric-looking strings, combines them with `parseInt` into a checksum and keeps shifting the array until that checksum equals a constant written into the file. Version 0.2.0 of the companion [`unk-scanner`](https://www.npmjs.com/package/unk-scanner) uses that loop as its stopping condition. It reads the decoder's syntax to identify the variant (here RC4 behind a shuffled base64 alphabet) and the index offset of 333, then reimplements the decoding in its own code. Finally it evaluates the checksum expression for each candidate rotation with a small evaluator that understands only side-effect-free expressions, and takes the first rotation that matches, exactly as the obfuscated program would. On the retained extension it arrives at rotation 391 and decodes 2,139 of 2,140 call sites in under a second, and on the bootstrap it arrives at 261. Those are the two offsets recorded by hand, reached this time by a different method, and the extension itself is never run.
+The manual analysis selected a rotation by comparing printable output across call sites. The later scanner uses another feature of the same obfuscation: a loop that decodes numeric-looking strings, combines them with `parseInt` and shifts the array until the checksum equals an embedded constant.
 
-The recovered strings then flow into the scanner's other rules, so a `require('child_process')` hidden behind a decoder call is reported as such. When a rotation loop exists but cannot be solved, the array is reported as unresolved rather than decoded under a guessed rotation, since a wrong rotation produces plausible-looking but false strings. The scanner does not rebuild the key or decrypt the payloads: the authenticated decryption above remains the step that turns recovered strings into evidence.
+The evaluated engine identifies the decoder variant from its syntax, reimplements decoding and evaluates that checksum for candidate rotations. For this extension the variant is RC4 behind a shuffled base64 alphabet, with an index offset of 333. It reaches rotation 391 and decodes 2,139 of 2,140 call sites. For the bootstrap it reaches rotation 261 and decodes 15 of 17. These agree with the manually established rotations without executing the extension.
 
-The same scanner parses each file in a separate process under Node's permission model, with no file writes, child processes or network access, plus a capped heap and a per-file deadline, and on Linux an empty network namespace. It writes SARIF for code scanning, and it is also available on [PyPI](https://pypi.org/project/unk-scanner/). With Node.js 22 or later:
+Recovered strings become available to other rules, including calls whose module names are hidden behind decoders. An unresolved checksum can sometimes be handled by a printable-consensus heuristic; otherwise the recognised array remains unresolved. Neither outcome is a universal safeguard. A later test replaced `push(shift())` rotation with `splice`, and the scanner failed to recognise the loop, incorrectly accepting rotation zero. [Part 14](14-scanner-recovery-and-bypasses.md) examines that defect and the variants that bypassed other rules.
 
-```sh
-npm install --global unk-scanner --ignore-scripts
-unk-scanner suspect.js > findings.json
-unk-scanner --format sarif --fail-on error ./extension/ > results.sarif
-```
+The scanner does not assemble the AES key or decrypt the payloads. Authenticated decryption remains a separate check on the recovered fragments, and partial string recovery must be read alongside the unresolved call sites.
 
-A successful exit means the analysis finished, not that a file is safe. [Part 11](11-detection-engineering.md) covers the benchmark on popular packages and the evaluation against the retained inputs.
+The [scanner paper](../scanner-paper/UNK-Scanner-Paper.pdf) describes the evaluated implementation, including its per-process restrictions, resource limits and AST-only TypeScript/JSX fallback. The command-line output records which isolation controls were applied; Linux network-namespace isolation depends on host support. Installation and current release instructions are maintained in the [companion repository](https://github.com/KrasForge/unk-deaddrop-companion), with packages on [npm](https://www.npmjs.com/package/unk-scanner) and [PyPI](https://pypi.org/project/unk-scanner/).
+
+The larger registry evaluation is in [Part 13](13-scanner-registry-benchmark.md). Its low error-level alert count accompanies poor detection of generic package malware, so a completed scan does not establish that an input is safe.
 
 ```text
 detect_malware.py

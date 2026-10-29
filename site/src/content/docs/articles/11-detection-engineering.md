@@ -1,10 +1,11 @@
 ---
 title: "Building and Testing Detections for UNK_DeadDrop"
 description: "Thirty-three YARA rules replayed against retained artifacts, followed by a separate noise review and static scanner evaluation."
-lastUpdated: 2026-10-28
+lastUpdated: 2026-10-29
 sidebar:
   order: 11
 ---
+
 
 
 The published companion snapshot contains 33 named YARA rules in 28 files. Every rule matched at least one object in the saved investigation material, and none matched the small local software baseline. A later, separate local review narrowed seven source rules after selected controls produced collisions. The revisions preserved all earlier artifact matches, but are not part of the published snapshot. The wallet-agent rule initially matched marker-rich research prose; requiring ELF magic at byte zero makes that text fixture negative, though it does not validate the file's code or prove execution.
@@ -39,7 +40,19 @@ The prose fixture remains important alongside that zero-hit result. It records a
 
 A later local review covered 177 case inputs, 380 views and 344 distinct objects. Seven source rules were narrowed after collisions in selected research, dual-use tooling, ordinary software, installed software and upstream-fork controls. Every previous case-artifact match was preserved, and the seven revised forms had no hits in the external controls scanned. This bounded control set does not estimate a production false-positive rate; the revisions remain separate from the public companion snapshot.
 
-The [preprint on Zenodo](https://doi.org/10.5281/zenodo.23696198) also evaluates a separate local `unk-scanner` 0.1.0 package. It parsed 31 selected JavaScript inputs from the case material, producing 27 syntax-based findings and four identity-only records covering three distinct hashes. Of 500 local JavaScript baseline files, all parsed; one legitimate clipboard operation produced a syntax finding, and none matched an identity record. These 31 inputs were accounted for, not all identified as malicious. The package and evaluation were not part of the public companion commit.
+## The scanner needs a different evaluation
+
+The YARA replay measures whether particular bytes match the signatures. `unk-scanner` instead parses JavaScript and follows selected expressions, string decoders and launch structures. A file can match a content signature while the scanner misses its behaviour, or produce a scanner warning because it uses obfuscation that also appears in legitimate software.
+
+The expanded scanner evaluation now has its own [paper](../../downloads/UNK-Scanner-Paper.pdf). It covers popular npm packages and editor extensions, recently changed npm packages, and a separate public malware dataset. The final popular-software scan raised no errors in 188,901 files outside the initial calibration corpus, although an earlier run on those files informed one escalation-rule adjustment. In the registry changes corpus, two of 19,976 packages raised errors; full review classified both as false positives.
+
+Sensitivity tells a different story. Only 62 of 2,122 known-malicious samples raised warnings, with none reaching error level. Most lacked the clipboard, Electron or encrypted-loader structures that the higher-severity rules recognise. The retained Windows Node agent also stays below warning level. Its known collection functionality does not become benign because this rule set misses it.
+
+[Part 13](../13-scanner-registry-benchmark/) covers corpus selection, review depth, parser coverage and throughput. [Part 14](../14-scanner-recovery-and-bypasses/) examines nineteen small variants, eighteen of which evaded a rule, lowered severity or defeated string recovery. These results concern the evaluated scanner, not the 33 YARA rules or their earlier control set.
+
+## Supplying the bytes a rule expects
+
+YARA input representation matters just as much. A rule for decrypted JavaScript needs those plaintext bytes; a rule for a VSIX member needs the member supplied to the engine. Scanning an outer compressed package alone is not equivalent to the archive-member replay above. Consult each rule's target and match conditions before choosing a sample. Uploading a custom rule to a hunting service also does not prove that its separate manual file-scan feature uses that rule set.
 
 The repository includes inert [YARA boundary tests](https://github.com/KrasForge/unk-deaddrop-companion/blob/main/tests/test_detections.py), a [prose false-positive test](https://github.com/KrasForge/unk-deaddrop-companion/blob/main/tests/test_blog_boundaries.py), and the [test requirements](https://github.com/KrasForge/unk-deaddrop-companion/blob/main/requirements-dev.txt). Run the checks using the instructions in its README. These tests are repeatable checks of rule behavior, not malware execution or production validation.
 

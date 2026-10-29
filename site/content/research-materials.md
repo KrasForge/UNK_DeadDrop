@@ -7,9 +7,12 @@ The site ships with the public materials needed to review the series without dep
 
 ## Paper and source edition
 
+- [Scanner evaluation paper (PDF)](__BASE_PATH__/downloads/UNK-Scanner-Paper.pdf)
 - [Technical paper (PDF)](__BASE_PATH__/downloads/UNK_DeadDrop-Preprint.pdf)
 - [Zenodo preprint](https://doi.org/10.5281/zenodo.23696198) · [Concept DOI](https://doi.org/10.5281/zenodo.23652297) · CC BY 4.0.
 - [Blog series source package](__BASE_PATH__/downloads/UNK_DeadDrop-Blog-Series.zip)
+
+The local paper downloads include the 29 October editorial revisions. The Zenodo link identifies the deposited record, which has not been updated by these site changes.
 
 ## Evidence reports
 
@@ -45,8 +48,8 @@ The [historical indicator reference](__BASE_PATH__/indicators/) collects defange
 
 ## Detection companion
 
-The [companion repository](https://github.com/KrasForge/unk-deaddrop-companion) contains the parse-only AST scanner and 33 named YARA rules across 28 files. A read-only replay matched every rule against retained case artifacts; a separate scan of 1,914 local software files produced no hits. The paper distinguishes the published rule snapshot from a later local YARA noise review. The installable scanner is now available on [npm](https://www.npmjs.com/package/unk-scanner) and [PyPI](https://pypi.org/project/unk-scanner/); its retained-input evaluation is described in Part 11. The rules remain experimental and the small baselines do not establish fleet-wide false-positive rates. Sigma rules are omitted because authentic endpoint event logs were unavailable for replay.
+The [companion repository](https://github.com/KrasForge/unk-deaddrop-companion) contains the parse-only AST scanner and 33 named YARA rules across 28 files. A read-only replay matched every rule against retained case artifacts; a separate scan of 1,914 local software files produced no hits. The paper distinguishes the published rule snapshot from a later local YARA noise review. The installable scanner is now available on [npm](https://www.npmjs.com/package/unk-scanner) and [PyPI](https://pypi.org/project/unk-scanner/); its expanded registry evaluation and bypass study are described in [Part 13](__BASE_PATH__/articles/13-scanner-registry-benchmark/) and [Part 14](__BASE_PATH__/articles/14-scanner-recovery-and-bypasses/). The rules remain experimental and the small baselines do not establish fleet-wide false-positive rates. Sigma rules are omitted because authentic endpoint event logs were unavailable for replay.
 
 ## Citation boundary
 
-The case evidence runs through 24 July 2026. The public-literature refresh runs through 25 October 2026. Later reporting is used to assess context and novelty, while case-specific technical claims remain tied to retained evidence.
+The scanner experiments are dated 29 October 2026. The case evidence runs through 24 July 2026. The public-literature refresh runs through 25 October 2026. Later reporting is used to assess context and novelty, while case-specific technical claims remain tied to retained evidence.

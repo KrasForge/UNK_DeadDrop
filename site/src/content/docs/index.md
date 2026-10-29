@@ -1,9 +1,9 @@
 ---
 title: UNK_DeadDrop technical series
-description: Twelve articles tracing developer-targeted phishing from delivery artifacts through collection, infrastructure, administration tooling, and detection engineering.
+description: Fourteen articles tracing developer-targeted phishing from delivery artifacts through collection, infrastructure, administration tooling, and detection engineering.
 template: splash
 hero:
-  tagline: A twelve-part, artifact-led investigation of developer-targeted phishing and its supporting collection infrastructure.
+  tagline: An artifact-led investigation of developer-targeted phishing and its supporting collection infrastructure.
   actions:
     - text: Start with Part 1
       link: /UNK_DeadDrop/articles/01-clickfix-clipboard-manipulation/
@@ -35,7 +35,14 @@ The underlying case evidence ends on 24 July 2026. Public reporting was checked 
 11. [Building and Testing Detections for UNK_DeadDrop](/UNK_DeadDrop/articles/11-detection-engineering/)
 12. [Where Overlord Ends and the Collection Toolchain Begins](/UNK_DeadDrop/articles/12-framework-and-collection-boundary/)
 
-The [historical indicator reference](/UNK_DeadDrop/indicators/) collects defanged URLs, domains, resolver values, paths and IP associations, with their evidence limits. A separate [artifact reference](/UNK_DeadDrop/artifacts/) lists exact hashes for selected samples, response bodies and repository files.
+## Scanner follow-ups
+
+The October evaluation extends the investigation into static-analysis tooling. These articles cover a larger registry corpus, the alerts that survived review, missed malware and incorrect string recovery.
+
+13. [What 2.8 Million Files Revealed About unk-scanner](/UNK_DeadDrop/articles/13-scanner-registry-benchmark/)
+14. [When a Decoder Returns the Wrong Strings](/UNK_DeadDrop/articles/14-scanner-recovery-and-bypasses/)
+
+[Read the scanner paper (PDF)](/UNK_DeadDrop/downloads/UNK-Scanner-Paper.pdf).
 
 ## Scope
 

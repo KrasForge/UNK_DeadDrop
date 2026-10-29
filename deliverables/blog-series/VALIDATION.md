@@ -1,3 +1,32 @@
+# Fourteen-article edition, 29 October 2026
+
+Added Part 13 on the expanded scanner evaluation and Part 14 on recovery defects
+and single-change bypass fixtures. Both draw on the completed scanner manuscript
+and retained evaluation results. They preserve the distinction between calibration,
+Tier 1 feedback, the registry changes window and the public malware dataset.
+
+Updated Parts 3 and 11 to remove obsolete parser and benchmark claims and separate
+YARA validation from scanner results. Expanded Part 6 with certificate and registration
+context and the missing raw-scan evidence. Expanded Part 9 with delivery-repository
+relationships and corrected the C2PA verification qualification against E14.
+No new historical collection, sample execution or external publication was performed.
+
+Updated the series index, sidebar, research-materials page and source archive.
+The site now includes the revised scanner PDF as well as the revised investigation
+PDF. Added link rewriting for the scanner PDF and the indicator/artifact references.
+
+Validation: all 14 article sources pass `verify.py`, including local source links,
+frontmatter, sensitive-string checks, absence of em dashes and JavaScript syntax.
+The inert Acorn example still returns its expected output. The production Astro
+build passed using the installed Node.js 22.23.4 runtime; the default 22.22.2 runtime
+was below Astro's required version. Checked 862 local rendered-page links with no
+missing targets, canonical URLs for both new articles, and byte equality of the
+paper downloads. The ZIP integrity and all packaged checksums pass. The source
+archive includes both new articles and their linked scanner paper.
+
+Build output: `site/dist/`. This update has not been deployed. Older standalone
+HTML/PDF previews under `rendered/` remain historical and were not regenerated.
+
 # Twelve-part edition, 26 October 2026
 
 ## Evidence-source expansion, 28 October 2026

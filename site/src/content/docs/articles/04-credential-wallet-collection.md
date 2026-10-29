@@ -1,10 +1,11 @@
 ---
 title: "Inside the Collector: Browser Credentials and Wallet Files"
 description: "How the collector selects browser stores, wallet material and recovery files, and what limits its reach."
-lastUpdated: 2026-10-28
+lastUpdated: 2026-10-25
 sidebar:
   order: 4
 ---
+
 
 
 The collection code reaches beyond browser passwords. Its third upload variant searches the home directory for filenames associated with seeds, recovery material, credentials and tokens, while another selector includes encrypted KeePass databases. The source also sets explicit traversal budgets and skips selected inaccessible directories. These conclusions come from the recovered scripts and the limits recorded in [E05](../../evidence/E05.pdf) and [E17](../../evidence/E17.pdf). Access permissions, traversal limits and file encryption constrain what it can recover.
