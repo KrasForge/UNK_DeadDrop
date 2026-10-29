@@ -11,6 +11,9 @@ hero:
     - text: Read the technical paper
       link: __BASE_PATH__/downloads/UNK_DeadDrop-Preprint.pdf
       variant: minimal
+    - text: Read the scanner paper
+      link: __BASE_PATH__/downloads/UNK-Scanner-Paper.pdf
+      variant: minimal
     - text: Open Source Detection Rules
       link: https://github.com/KrasForge/unk-deaddrop-companion
       variant: minimal
@@ -34,15 +37,8 @@ The underlying case evidence ends on 24 July 2026. Public reporting was checked 
 10. [From Three Phishing Emails to a Connected Investigation](__BASE_PATH__/articles/10-investigation-connections/)
 11. [Building and Testing Detections for UNK_DeadDrop](__BASE_PATH__/articles/11-detection-engineering/)
 12. [Where Overlord Ends and the Collection Toolchain Begins](__BASE_PATH__/articles/12-framework-and-collection-boundary/)
-
-## Scanner follow-ups
-
-The October evaluation extends the investigation into static-analysis tooling. These articles cover a larger registry corpus, the alerts that survived review, missed malware and incorrect string recovery.
-
 13. [What 2.8 Million Files Revealed About unk-scanner](__BASE_PATH__/articles/13-scanner-registry-benchmark/)
 14. [When a Decoder Returns the Wrong Strings](__BASE_PATH__/articles/14-scanner-recovery-and-bypasses/)
-
-[Read the scanner paper (PDF)](__BASE_PATH__/downloads/UNK-Scanner-Paper.pdf).
 
 ## Scope
 
