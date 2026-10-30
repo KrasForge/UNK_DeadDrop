@@ -6,6 +6,8 @@ Split from the UNK_DeadDrop preprint on 29 October 2026; that paper is now threa
 
 Editorial revision on 29 October: `UNK-Scanner-Paper.pdf` is rebuilt from revised source. See `VALIDATION.md` for writing changes, evaluation qualifications and PDF checks.
 
+Decoder-coverage revision on 30 October: Section 5.7 adds a revised engine (`ba4d1468…`) that recognises two further decoder shapes, a held-out set of five obfuscator releases, and a rerun of every corpus (companion PR #11).
+
 Expansion on 30 October: Figure 1, Algorithm 1 with a worked example, an expanded implementation section, an artifact table, and Section 5.7, a controlled string-array recovery experiment against three deobfuscators (data in `../unk-scanner/benchmark/rotation/`). See `VALIDATION.md`.
 
 Hardening revision on 29 October: Sections 5.1 to 5.5 still report the frozen engine (source SHA-256 `caf3f552…`). The new Section 5.6 reports the hardened engine (`202f56f2…`), rescanned on the netcup server against the bypass fixtures, the 14 artifacts and all four corpora; data in `../unk-scanner/benchmark/mitigation/`.
