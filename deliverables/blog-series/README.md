@@ -6,20 +6,20 @@ Parts 10–12 add the investigative connections, detection engineering and frame
 comparison. Parts 4–5 and 7–8 are the split collection/capture and targeting/admin
 articles. The hosted edition is available at [krasforge.github.io/UNK_DeadDrop](https://krasforge.github.io/UNK_DeadDrop/).
 
-1. [The copy button changes the command](01-clickfix-clipboard-manipulation.md)
-2. [A folder-open task in the VS Code project](02-vsix-editor-execution.md)
-3. [Recovering the VS Code extension's AES key without running it](03-acorn-deobfuscation.md)
-4. [Browser credentials, wallet material, and private-key files](04-credential-wallet-collection.md)
-5. [Screen capture in the Go agent and Windows bundle](05-screen-capture-analysis.md)
-6. [GitLab's resolver changed the server list](06-gitlab-dead-drop-infrastructure.md)
-7. [Two SQLite pools held 142,365 address strings](07-developer-target-harvesting.md)
-8. [Seventy modules from the rms-platform frontend](08-administration-platform.md)
-9. [Four ECHOES revisions, no final PowerShell payload](09-echoes-lineage-image-provenance.md)
-10. [Three phishing lures and their different delivery paths](10-investigation-connections.md)
-11. [Testing 33 YARA rules against the retained artifacts](11-detection-engineering.md)
-12. [Overlord markers in the Linux agent's collection code](12-framework-and-collection-boundary.md)
-13. [Two false alarms, low coverage of public malware](13-scanner-registry-benchmark.md)
-14. [Array splicing broke string recovery](14-scanner-recovery-and-bypasses.md)
+1. [Anatomy of a Developer Lure: ClickFix Clipboard Manipulation](01-clickfix-clipboard-manipulation.md)
+2. [How a Malicious VSIX Uses the Signed Editor Runtime](02-vsix-editor-execution.md)
+3. [Parsing Without Executing: JavaScript Deobfuscation with Acorn](03-acorn-deobfuscation.md)
+4. [Inside the Collector: Browser Credentials and Wallet Files](04-credential-wallet-collection.md)
+5. [Beyond Screenshot Strings: Reconstructing Screen Capture](05-screen-capture-analysis.md)
+6. [Following the GitLab Dead Drop: Configuration Changes and C2 History](06-gitlab-dead-drop-infrastructure.md)
+7. [From Commit Metadata to a Developer Target List](07-developer-target-harvesting.md)
+8. [Inside rms-platform: Delivery Monitoring and Wallet Administration](08-administration-platform.md)
+9. [Tracing the ECHOES Archive: Payload Lineage and Image Provenance](09-echoes-lineage-image-provenance.md)
+10. [From Three Phishing Emails to a Connected Investigation](10-investigation-connections.md)
+11. [Building and Testing Detections for UNK_DeadDrop](11-detection-engineering.md)
+12. [Where Overlord Ends and the Collection Toolchain Begins](12-framework-and-collection-boundary.md)
+13. [What 2.8 Million Files Revealed About unk-scanner](13-scanner-registry-benchmark.md)
+14. [When a Decoder Returns the Wrong Strings](14-scanner-recovery-and-bypasses.md)
 
 [Historical indicators, artifacts and network evidence](historical-indicators.md) collects defanged lure URLs, payload hosts, resolver revisions, repository addresses and IP associations. It separates retained sample evidence from provider-based pivots and older public reporting. The [sample and repository artifact reference](artifact-reference.md) lists exact hashes for held payloads, recovered response bodies, repository files and the ECHOES archive lineage.
 

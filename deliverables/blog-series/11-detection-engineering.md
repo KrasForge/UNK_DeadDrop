@@ -1,5 +1,5 @@
 ---
-title: "Testing 33 YARA rules against the retained artifacts"
+title: "Building and Testing Detections for UNK_DeadDrop"
 description: "Thirty-three YARA rules replayed against retained artifacts, followed by a separate noise review and static scanner evaluation."
 date: "2026-10-29"
 author: "Ilja Krasnjanski"

@@ -1,5 +1,5 @@
 ---
-title: "A folder-open task in the VS Code project"
+title: "How a Malicious VSIX Uses the Signed Editor Runtime"
 description: "How a fake Google Update Support extension installs collection components and turns the editor's own Electron binary into a Node interpreter on Windows."
 date: "2026-10-25"
 author: "Ilja Krasnjanski"

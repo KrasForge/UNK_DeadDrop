@@ -1,5 +1,5 @@
 ---
-title: "Two false alarms, low coverage of public malware"
+title: "What 2.8 Million Files Revealed About unk-scanner"
 description: "Two false alarms in recently changed npm packages, low coverage of public malware, and what a larger static-analysis benchmark actually measures."
 date: "2026-10-29"
 author: "Ilja Krasnjanski"

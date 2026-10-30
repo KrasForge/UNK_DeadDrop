@@ -1,5 +1,5 @@
 ---
-title: "GitLab's resolver changed the server list"
+title: "Following the GitLab Dead Drop: Configuration Changes and C2 History"
 description: "How a GitLab-hosted configuration file let the UNK_DeadDrop operators change servers without new payloads, and what its revision history reveals."
 lastUpdated: 2026-10-29
 sidebar:

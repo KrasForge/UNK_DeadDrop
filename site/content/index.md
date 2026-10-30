@@ -25,20 +25,20 @@ The underlying case evidence ends on 24 July 2026. Public reporting was checked 
 
 ## Read the investigation
 
-1. [The copy button changes the command](__BASE_PATH__/articles/01-clickfix-clipboard-manipulation/)
-2. [A folder-open task in the VS Code project](__BASE_PATH__/articles/02-vsix-editor-execution/)
-3. [Recovering the VS Code extension's AES key without running it](__BASE_PATH__/articles/03-acorn-deobfuscation/)
-4. [Browser credentials, wallet material, and private-key files](__BASE_PATH__/articles/04-credential-wallet-collection/)
-5. [Screen capture in the Go agent and Windows bundle](__BASE_PATH__/articles/05-screen-capture-analysis/)
-6. [GitLab's resolver changed the server list](__BASE_PATH__/articles/06-gitlab-dead-drop-infrastructure/)
-7. [Two SQLite pools held 142,365 address strings](__BASE_PATH__/articles/07-developer-target-harvesting/)
-8. [Seventy modules from the rms-platform frontend](__BASE_PATH__/articles/08-administration-platform/)
-9. [Four ECHOES revisions, no final PowerShell payload](__BASE_PATH__/articles/09-echoes-lineage-image-provenance/)
-10. [Three phishing lures and their different delivery paths](__BASE_PATH__/articles/10-investigation-connections/)
-11. [Testing 33 YARA rules against the retained artifacts](__BASE_PATH__/articles/11-detection-engineering/)
-12. [Overlord markers in the Linux agent's collection code](__BASE_PATH__/articles/12-framework-and-collection-boundary/)
-13. [Two false alarms, low coverage of public malware](__BASE_PATH__/articles/13-scanner-registry-benchmark/)
-14. [Array splicing broke string recovery](__BASE_PATH__/articles/14-scanner-recovery-and-bypasses/)
+1. [Anatomy of a Developer Lure: ClickFix Clipboard Manipulation](__BASE_PATH__/articles/01-clickfix-clipboard-manipulation/)
+2. [How a Malicious VSIX Uses the Signed Editor Runtime](__BASE_PATH__/articles/02-vsix-editor-execution/)
+3. [Parsing Without Executing: JavaScript Deobfuscation with Acorn](__BASE_PATH__/articles/03-acorn-deobfuscation/)
+4. [Inside the Collector: Browser Credentials and Wallet Files](__BASE_PATH__/articles/04-credential-wallet-collection/)
+5. [Beyond Screenshot Strings: Reconstructing Screen Capture](__BASE_PATH__/articles/05-screen-capture-analysis/)
+6. [Following the GitLab Dead Drop](__BASE_PATH__/articles/06-gitlab-dead-drop-infrastructure/)
+7. [From Commit Metadata to a Developer Target List](__BASE_PATH__/articles/07-developer-target-harvesting/)
+8. [Inside rms-platform](__BASE_PATH__/articles/08-administration-platform/)
+9. [Tracing the ECHOES Archive](__BASE_PATH__/articles/09-echoes-lineage-image-provenance/)
+10. [From Three Phishing Emails to a Connected Investigation](__BASE_PATH__/articles/10-investigation-connections/)
+11. [Building and Testing Detections for UNK_DeadDrop](__BASE_PATH__/articles/11-detection-engineering/)
+12. [Where Overlord Ends and the Collection Toolchain Begins](__BASE_PATH__/articles/12-framework-and-collection-boundary/)
+13. [What 2.8 Million Files Revealed About unk-scanner](__BASE_PATH__/articles/13-scanner-registry-benchmark/)
+14. [When a Decoder Returns the Wrong Strings](__BASE_PATH__/articles/14-scanner-recovery-and-bypasses/)
 
 ## Scope
 

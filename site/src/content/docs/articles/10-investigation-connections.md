@@ -1,5 +1,5 @@
 ---
-title: "Three phishing lures and their different delivery paths"
+title: "From Three Phishing Emails to a Connected Investigation"
 description: "The pivots linking recruitment messages, delivery artifacts, payload configuration and supporting software."
 lastUpdated: 2026-10-25
 sidebar:

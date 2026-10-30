@@ -1,5 +1,5 @@
 ---
-title: "Browser credentials, wallet material, and private-key files"
+title: "Inside the Collector: Browser Credentials and Wallet Files"
 description: "How the collector selects browser stores, wallet material and recovery files, and what limits its reach."
 date: "2026-10-25"
 author: "Ilja Krasnjanski"

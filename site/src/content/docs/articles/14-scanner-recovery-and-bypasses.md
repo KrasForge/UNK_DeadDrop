@@ -1,5 +1,5 @@
 ---
-title: "Array splicing broke string recovery"
+title: "When a Decoder Returns the Wrong Strings"
 description: "A changed array-rotation loop exposed incorrect recovery, while eighteen of nineteen small variants evaded a rule, lowered severity or defeated decoding."
 lastUpdated: 2026-10-29
 sidebar:
@@ -89,7 +89,7 @@ The `splice` failure raised a practical question: were the recovered strings cor
 
 The scanner returned no misplaced strings, but coverage was weaker. The engines missed the older release's decoder and lost most strings when function wrappers met one option. Fixes for those two cases raised recovery to 99.8% on both releases.
 
-To check those fixes on unseen inputs, I generated a held-out set from twenty new files and three obfuscator releases. Recovery was 99.7% for each release, with no misplaced strings.
+To check those fixes on unseen inputs, I generated a held-out set from twenty new files and five obfuscator releases, three of which the fixes had never seen. Recovery was 99.7% for each release, with no misplaced strings.
 
 The same change also mattered for real malware. On the public dataset from [Part 13](../13-scanner-registry-benchmark/), samples producing a warning doubled from 64 to 128 because many used the older decoder shape. None reached error level. A warning means the scanner found and decoded obfuscation; it does not identify a sample as malicious.
 

@@ -1,5 +1,5 @@
 ---
-title: "Four ECHOES revisions, no final PowerShell payload"
+title: "Tracing the ECHOES Archive: Payload Lineage and Image Provenance"
 description: "Four revisions of the ECHOES lure archive, a final payload that was never recovered, and C2PA data in its poster that records an AI image pipeline."
 lastUpdated: 2026-10-29
 sidebar:

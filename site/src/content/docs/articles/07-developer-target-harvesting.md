@@ -1,5 +1,5 @@
 ---
-title: "Two SQLite pools held 142,365 address strings"
+title: "From Commit Metadata to a Developer Target List"
 description: "Reconstructing the harvester, sender configuration and aggregate counts behind two SQLite targeting pools."
 lastUpdated: 2026-10-25
 sidebar:

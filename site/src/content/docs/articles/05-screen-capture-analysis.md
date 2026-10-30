@@ -1,5 +1,5 @@
 ---
-title: "Screen capture in the Go agent and Windows bundle"
+title: "Beyond Screenshot Strings: Reconstructing Screen Capture"
 description: "Frame-comparison symbols in the Linux Go agent, a Windows capture bundle, and the desktop access each requires."
 lastUpdated: 2026-10-25
 sidebar:

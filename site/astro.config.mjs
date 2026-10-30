@@ -26,20 +26,20 @@ export default defineConfig({
         {
           label: 'Delivery and collection',
           items: [
-            { label: '1. Clipboard substitution', link: '/articles/01-clickfix-clipboard-manipulation/' },
-            { label: '2. VS Code task', link: '/articles/02-vsix-editor-execution/' },
-            { label: '3. AES key recovery', link: '/articles/03-acorn-deobfuscation/' },
-            { label: '4. Browser and wallet files', link: '/articles/04-credential-wallet-collection/' },
+            { label: '1. ClickFix clipboard lure', link: '/articles/01-clickfix-clipboard-manipulation/' },
+            { label: '2. Malicious VSIX', link: '/articles/02-vsix-editor-execution/' },
+            { label: '3. Static deobfuscation', link: '/articles/03-acorn-deobfuscation/' },
+            { label: '4. Credential and wallet collection', link: '/articles/04-credential-wallet-collection/' },
             { label: '5. Screen capture', link: '/articles/05-screen-capture-analysis/' }
           ]
         },
         {
           label: 'Infrastructure and operations',
           items: [
-            { label: '6. GitLab resolver', link: '/articles/06-gitlab-dead-drop-infrastructure/' },
-            { label: '7. Target pools', link: '/articles/07-developer-target-harvesting/' },
-            { label: '8. rms-platform', link: '/articles/08-administration-platform/' },
-            { label: '9. ECHOES archives', link: '/articles/09-echoes-lineage-image-provenance/' },
+            { label: '6. GitLab dead drop', link: '/articles/06-gitlab-dead-drop-infrastructure/' },
+            { label: '7. Developer targeting', link: '/articles/07-developer-target-harvesting/' },
+            { label: '8. Administration platform', link: '/articles/08-administration-platform/' },
+            { label: '9. ECHOES lineage', link: '/articles/09-echoes-lineage-image-provenance/' },
             { label: 'Historical indicators', link: '/indicators/' },
             { label: 'Sample and repository artifacts', link: '/artifacts/' }
           ]
@@ -47,11 +47,11 @@ export default defineConfig({
         {
           label: 'Synthesis and defense',
           items: [
-            { label: '10. Three lure paths', link: '/articles/10-investigation-connections/' },
-            { label: '11. YARA replay', link: '/articles/11-detection-engineering/' },
-            { label: '12. Overlord markers', link: '/articles/12-framework-and-collection-boundary/' },
-            { label: '13. Scanner benchmark', link: '/articles/13-scanner-registry-benchmark/' },
-            { label: '14. Recovery variants', link: '/articles/14-scanner-recovery-and-bypasses/' }
+            { label: '10. Investigation connections', link: '/articles/10-investigation-connections/' },
+            { label: '11. Detection engineering', link: '/articles/11-detection-engineering/' },
+            { label: '12. Framework boundary', link: '/articles/12-framework-and-collection-boundary/' },
+            { label: '13. Registry benchmark', link: '/articles/13-scanner-registry-benchmark/' },
+            { label: '14. Recovery and bypasses', link: '/articles/14-scanner-recovery-and-bypasses/' }
           ]
         },
         { label: 'Research materials', link: '/research-materials/' }

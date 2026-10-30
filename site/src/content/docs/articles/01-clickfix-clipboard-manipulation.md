@@ -1,5 +1,5 @@
 ---
-title: "The copy button changes the command"
+title: "Anatomy of a Developer Lure: ClickFix Clipboard Manipulation"
 description: "How a fake recruitment verification page replaces a copied command with one that also runs an installer, and what that means for detection."
 lastUpdated: 2026-10-24
 sidebar:

@@ -1,5 +1,5 @@
 ---
-title: "Seventy modules from the rms-platform frontend"
+title: "Inside rms-platform: Delivery Monitoring and Wallet Administration"
 description: "What seventy recovered frontend modules reveal about repository monitoring, wallet workflows and authorization limits."
 lastUpdated: 2026-10-25
 sidebar:

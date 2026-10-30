@@ -1,5 +1,5 @@
 ---
-title: "Overlord markers in the Linux agent's collection code"
+title: "Where Overlord Ends and the Collection Toolchain Begins"
 description: "Overlord build metadata, browser-store selectors, wallet-upload markers and capture components in the Linux agent."
 lastUpdated: 2026-10-25
 sidebar:

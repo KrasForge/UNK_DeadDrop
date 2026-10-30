@@ -1,11 +1,20 @@
+# Controlled recovery test, 30 October 2026
+
+Part 14 gains a section, *Comparing decoded strings with their originals*, summarising Section 5.7 of the rebuilt
+scanner paper. It covers the 7,200-sample controlled experiment, the two decoder fixes and the
+held-out check across five obfuscator releases, and the rise in Tier 3 detection from 64 to 128
+samples, all at warning level. Figures come from companion PRs #10 and #11. `verify.py` passes.
+
 ## Voice revision, 30 October 2026
 
 Reworked Parts 13 and 14 after reviewing their cadence. Replaced the mirrored
 section pattern and recurring lesson summaries with a concrete account of the
 reviewed false positives and the `splice` rotation defect. Added two small SVG
-diagrams tied directly to those results. Revised the titles and section headings
-across all fourteen articles to name the artifacts, code paths, and results each
-article examines. Split dense passages across Parts 1 to 4, 6 to 7, 10 to 11,
+diagrams tied directly to those results. Revised the section headings across all
+fourteen articles to name the artifacts, code paths, and results each article
+examines. Restored the more descriptive main titles in the articles,
+landing page, sidebar and archive index while retaining the revised section
+headings. Split dense passages across Parts 1 to 4, 6 to 7, 10 to 11,
 and 13 to 14 at changes in evidence or argument, and clarified the indicator
 reference. Converted the repository paths and email steps in Part 2 into lists.
 Updated the landing page, sidebar, and downloadable archive to match. The Astro
