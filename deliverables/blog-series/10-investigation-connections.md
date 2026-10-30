@@ -62,7 +62,7 @@ The [historical indicator reference](historical-indicators.md) collects the exac
 
 ## Separate contact pools and wallet fields
 
-The [harvester](07-developer-target-harvesting.md) searches repositories by star range and extracts author and committer addresses from branch histories. Sender configuration names two SQLite pools containing 142,365 distinct stored address strings associated with 27,698 repository values ([E08](../preprint/evidence/E08.pdf)). The counts quantify the available targeting material. Missing send logs and endpoint records prevent a count of recipients contacted or systems compromised.
+The delivery and infrastructure records trace the path toward collection. Separately recovered targeting tools and wallet interfaces describe the activities on either side of that path, although their integration is not fully established. The [harvester](07-developer-target-harvesting.md) searches repositories by star range and extracts author and committer addresses from branch histories. Sender configuration names two SQLite pools containing 142,365 distinct stored address strings associated with 27,698 repository values ([E08](../preprint/evidence/E08.pdf)). The counts quantify the available targeting material. Missing send logs and endpoint records prevent a count of recipients contacted or systems compromised.
 
 The separately recovered [rms-platform frontend](08-administration-platform.md) contains mail views, repository availability monitoring and wallet import, preview and claim controls. Its mnemonic and ColdKey fields correspond to material selected by the collectors. That connection describes compatible data and functions; no recovered backend establishes that the targeting pools, mail system and wallet workflow were integrated or used successfully.
 
@@ -90,7 +90,7 @@ The broader repository sweep returned two signature matches. Reading the files s
 
 ## The July report and an October continuation lead
 
-Ben Hopkins's [UNK_DeadDrop investigation](https://brhopkins.uk/posts/foxtopia/) first appeared on 23 July, before this case's evidence cutoff, and was updated in August. The update places `api.chestsoi[.]ink` in the GitLab dead-drop sequence. That hostname does not appear in the resolver history retained here, so it remains a reported lead rather than a captured indicator.
+The rejected leads narrow the historical case. Later public reporting offers additional relationships to assess against that retained evidence. Ben Hopkins's [UNK_DeadDrop investigation](https://brhopkins.uk/posts/foxtopia/) first appeared on 23 July, before this case's evidence cutoff, and was updated in August. The update places `api.chestsoi[.]ink` in the GitLab dead-drop sequence. That hostname does not appear in the resolver history retained here, so it remains a reported lead rather than a captured indicator.
 
 An [October developer-lure report](https://dev.to/edison_flores_6d2cd381b13/a-fake-recruiter-sent-me-a-job-offer-that-ended-in-my-terminal-the-trojan-is-still-live-2okf) describes a launcher with four markers also found in this corpus: `deepfake_guard`, a POSIX double-fork, `/var/tmp/.kdm.XXXXXX` and `/guard-launcher-result`. It names `taikotalent[.]xyz`, the paired hosts `api.gaganata[.]ink` and `api.fallgganata[.]ink`, and sample SHA-256 `c7c22e322c17bda8198257342d4034af6250a5c433242461b870879ba9aa285d`.
 

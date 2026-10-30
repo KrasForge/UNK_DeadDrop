@@ -103,7 +103,7 @@ A process name or publisher check is incomplete here. A legitimate signature aut
 
 ## Recruitment email in the clean repository
 
-The weaponised `predict-together` copy has a clean twin. An email template stored beside the clean version shows that the operators also addressed designers, project managers, founders and builders. It invites them to review an open-source market-analysis platform in Cursor.
+The execution chain explains what the installed extension can do. The recruitment material explains how someone would be persuaded to open the project in the first place. The weaponised `predict-together` copy has a clean twin. An email template stored beside the clean version shows that the operators also addressed designers, project managers, founders and builders. It invites them to review an open-source market-analysis platform in Cursor.
 
 The template describes four steps, taking "about 30 minutes":
 

@@ -48,7 +48,7 @@ Account status was less clear than a 404 suggested. One historical check found a
 
 ## C2PA metadata in the poster
 
-The poster, identified in the case as `Post.png`, offered a very different kind of lead, because the recorded examination found a [C2PA](https://c2pa.org/specifications/) structure in its PNG `caBX` chunk. [Exhibit E14](../preprint/evidence/E14.pdf) records the retained metadata and signature examination. Extracting the metadata and parsing its JUMBF, CBOR and certificate structures exposed the following fields:
+With the final payload unavailable, the retained decoy artwork remained another source of evidence about the lure. The poster, identified in the case as `Post.png`, contained a [C2PA](https://c2pa.org/specifications/) structure in its PNG `caBX` chunk. [Exhibit E14](../preprint/evidence/E14.pdf) records the retained metadata and signature examination. Extracting the metadata and parsing its JUMBF, CBOR and certificate structures exposed the following fields:
 
 ```text
 Claim generator:  ChatGPT

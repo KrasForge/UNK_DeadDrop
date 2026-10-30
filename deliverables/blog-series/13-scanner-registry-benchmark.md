@@ -67,7 +67,7 @@ The retained campaign files show that the scanner recognises the structures it w
 
 ## Acorn and Babel parsed 330,473 files
 
-The scanner tries Acorn first, then an AST-only Babel fallback for supported TypeScript and JSX syntax. In the popular-software collection it parsed 330,473 of 332,054 files. Of the 1,576 parse failures, most were TypeScript. None parsed under the independent Babel configuration we tested; that does not prove they are invalid in their original build toolchains. Five inputs were not valid UTF-8.
+The missed malware samples also raise a parsing question: how often did analysis fail before a rule could inspect the code? Parser coverage was measured separately. The scanner tries Acorn first, then an AST-only Babel fallback for supported TypeScript and JSX syntax. In the popular-software collection it parsed 330,473 of 332,054 files. Of the 1,576 parse failures, most were TypeScript. None parsed under the independent Babel configuration we tested; that does not prove they are invalid in their original build toolchains. Five inputs were not valid UTF-8.
 
 With four workers, the isolated command-line run processed 272 files per second on the calibration collection; the in-process worker-thread run processed 264. That one comparison showed no throughput penalty from isolation, but it was not a repeated performance study. The malware set ran at 325 files per second. The recent-package scan reached 848 with six workers and a different mix of mostly small files.
 

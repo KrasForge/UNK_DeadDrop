@@ -71,7 +71,7 @@ Sensitivity tells a different story. Only 62 of 2,122 known-malicious samples ra
 
 ## Rule matches depend on the bytes given to YARA
 
-YARA input representation matters. A rule for decrypted JavaScript needs those plaintext bytes; a rule for a VSIX member needs the member supplied to the engine. Scanning an outer compressed package alone is not equivalent to the archive-member replay above. Consult each rule's target and match conditions before choosing a sample.
+The scanner comparison concerns how source code is interpreted. For the YARA results, an earlier practical choice also matters: which bytes the engine receives. A rule for decrypted JavaScript needs those plaintext bytes; a rule for a VSIX member needs the member supplied to the engine. Scanning an outer compressed package alone is not equivalent to the archive-member replay above. Consult each rule's target and match conditions before choosing a sample.
 
 Uploading a custom rule to a hunting service also does not prove that its separate manual file-scan feature uses that rule set.
 

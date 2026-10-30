@@ -79,7 +79,7 @@ This selector can collect an encrypted KeePass database without a dedicated KeeP
 
 ## Uploads use 2 MiB chunks and disable certificate checks
 
-The transfer code uses a default 2 MiB chunk size and a five-retry setting. A separate upload-until-success routine repeats attempts with delays capped at 120 seconds. The inspected HTTPS request path also disables certificate verification. These settings describe intended delivery behavior; retries do not guarantee transfer if the destination is unreachable.
+The filename selectors determine which files enter the collection path. The upload routines then determine how the agent attempts to send those files. The transfer code uses a default 2 MiB chunk size and a five-retry setting. A separate upload-until-success routine repeats attempts with delays capped at 120 seconds. The inspected HTTPS request path also disables certificate verification. These settings describe intended delivery behavior; retries do not guarantee transfer if the destination is unreachable.
 
 The Go agent carries the Overlord module path, WebAssembly runtime and transport features alongside SQLite dependencies and wallet/browser markers. The [framework analysis](12-framework-and-collection-boundary.md) examines these components and the limits of the available upstream comparison. The companion's [wallet-agent YARA rule](https://github.com/KrasForge/unk-deaddrop-companion/blob/main/rules/yara/deaddrop_wallet_agent.yar) combines framework and environment markers with wallet-related strings, while its [stage-three collector rule](https://github.com/KrasForge/unk-deaddrop-companion/blob/main/rules/yara/deaddrop_stage3_collector.yar) targets the recovered source. A match does not establish that the collector ran or completed an upload.
 

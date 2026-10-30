@@ -49,7 +49,7 @@ No transaction records accompanied the frontend. The sender and harvester tools 
 
 ### The `SuperAdmin` check lives in the client
 
-The client helper grants super-administrator treatment when either a user flag is set or an email comparison matches. These checks control frontend navigation and protected routes; without the backend authorization logic, they do not establish which accounts could execute a server-side claim.
+The wallet controls raise a further question: which accounts could use them? The recovered frontend exposes part of the access check. The client helper grants super-administrator treatment when either a user flag is set or an email comparison matches. These checks control frontend navigation and protected routes; without the backend authorization logic, they do not establish which accounts could execute a server-side claim.
 
 The signup route displays a disabled-signup message, so the client does not establish an active account-creation workflow. The interface supports roles but does not reveal how many people used them.
 

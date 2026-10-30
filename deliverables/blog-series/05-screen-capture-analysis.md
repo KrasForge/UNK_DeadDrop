@@ -37,6 +37,10 @@ The symbols do not establish exact block dimensions or how often the capture loo
 
 *Figure 1. Previous-frame storage and block comparison suggest transmission of changed regions between captures.*
 
+### The Go symbols identify TLS key logging
+
+Three other matches in the Go binary were `writeKeyLog`, `KeyLogWriter` and `crypto/tls.(*Config).writeKeyLog`. Their surrounding names identify TLS key logging. None of those matches provides evidence of keyboard interception; no keyboard hook was established by this search.
+
 ## Screen-capture components in the Windows bundle
 
 The Windows bundle supplies a separate set of components:
@@ -49,10 +53,6 @@ The Windows bundle supplies a separate set of components:
 The installer checks for the capture files and raises an error if they are missing. The associated scheduled task is named `GoogleUpdateSupporterNode`. These checks make the capture component an explicit installation requirement.
 
 The Windows dependencies and Go symbols come from different artifacts. They suggest similar capture and transfer functions, but do not establish a shared implementation across operating systems. For the Windows branch, investigators would start with the installed bundle, task action and process session to determine whether capture ran.
-
-### The Go symbols identify TLS key logging
-
-Three other matches in the Go binary were `writeKeyLog`, `KeyLogWriter` and `crypto/tls.(*Config).writeKeyLog`. Their surrounding names identify TLS key logging. None of those matches provides evidence of keyboard interception; no keyboard hook was established by this search.
 
 ## The capture rule requires Overlord and four symbols
 

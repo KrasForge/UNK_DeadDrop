@@ -59,7 +59,7 @@ Blocking a destination can interrupt traffic, while a client that consults this 
 
 ## A July hostname linked to a reported origin
 
-July scan notes associate `207.241.172[.]222` with C2 and administration services. They record a certificate naming `api.cklomino[.]ink` and a third-party bare-IP scan that returned a Subtensor sign-in panel. The raw scan responses and certificate were not retained. The panel HTML and JavaScript available for inspection were retrieved from `api.domatisc[.]ink`, so they cannot independently reproduce the reported response from the bare IP.
+The resolver history identifies the hostnames supplied to clients. Historical scan records provide a separate view of the services behind those names. July scan notes associate `207.241.172[.]222` with C2 and administration services. They record a certificate naming `api.cklomino[.]ink` and a third-party bare-IP scan that returned a Subtensor sign-in panel. The raw scan responses and certificate were not retained. The panel HTML and JavaScript available for inspection were retrieved from `api.domatisc[.]ink`, so they cannot independently reproduce the reported response from the bare IP.
 
 The panel adds an application-level association to the certificate evidence. Further relationships came from certificate facets, passive DNS and reverse-DNS fields. These observations came from research-service records; the origin analysis did not directly scan the server or log in. [E20](../preprint/evidence/E20.pdf) and [E21](../preprint/evidence/E21.pdf) record the source and limits of those historical associations.
 

@@ -76,7 +76,7 @@ Of the 27,698 repository values, 595 (2.1 percent) have names suggesting 3D or g
 
 ## Three repositories carried delivery kits
 
-The five accounts active in July held 172 public repositories. I reviewed cached metadata and file trees, then classified repositories by language, project type and apparent role. Twelve repositories had directly evidenced operational roles:
+The harvested repository values describe where the toolkit found potential recipients. A separate repository survey examined the accounts supplying the recruitment material itself. Those five accounts active in July held 172 public repositories. I reviewed cached metadata and file trees, then classified repositories by language, project type and apparent role. Twelve repositories had directly evidenced operational roles:
 
 - Three repositories carried delivery kits: two weaponised project copies in [Part 2](02-vsix-editor-execution.md) and the ECHOES branch in [Part 9](09-echoes-lineage-image-provenance.md).
 - Three were clean take-home assignments whose weaponised versions were delivered separately.
@@ -116,7 +116,7 @@ The link supports contract work for the launchpad, not ownership of it. The doma
 
 ## No message logs or endpoint records were recovered
 
-The code and configuration connect harvesting to message preparation. The databases quantify the stored contact material. Neither supplies the missing send logs, delivery outcomes or endpoint evidence needed to count people contacted or compromised. Even the repository total describes stored values rather than a fresh verification of repository existence or ownership.
+The harvester and the public contract projects offered two ways to reach developers: collecting addresses for messages and drawing interested developers into private conversations. The code and configuration connect harvesting to message preparation. The databases quantify the stored contact material. Neither supplies the missing send logs, delivery outcomes or endpoint evidence needed to count people contacted or compromised. Even the repository total describes stored values rather than a fresh verification of repository existence or ownership.
 
 The [administration frontend](08-administration-platform.md) contains mail and wallet views, but its connection to these particular SQLite pools remains unverified.
 
