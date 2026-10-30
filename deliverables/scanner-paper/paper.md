@@ -1,6 +1,6 @@
 # Static AST-Based Triage of Socially-Engineered Developer Lures: Proving Obfuscator Rotations Without Execution
 
-Draft, 29 October 2026.
+Preprint, 31 October 2026.
 
 ## Abstract
 

@@ -11,3 +11,9 @@ Decoder-coverage revision on 30 October: Section 5.7 adds a revised engine (`ba4
 Expansion on 30 October: Figure 1, Algorithm 1 with a worked example, an expanded implementation section, an artifact table, and Section 5.7, a controlled string-array recovery experiment against three deobfuscators (data in `../unk-scanner/benchmark/rotation/`). See `VALIDATION.md`.
 
 Hardening revision on 29 October: Sections 5.1 to 5.5 still report the frozen engine (source SHA-256 `caf3f552…`). The new Section 5.6 reports the hardened engine (`202f56f2…`), rescanned on the netcup server against the bypass fixtures, the 14 artifacts and all four corpora; data in `../unk-scanner/benchmark/mitigation/`.
+
+
+Zenodo preparation, 31 October 2026: the final PDF is dated 31 October and has SHA-256 `5c1dbf32898275bc48e7191f8a2d49501539c6a1b049aca574838c9aec7a4553`. The separate record metadata is in `zenodo-metadata.json`; deposit status and required next step are in `ZENODO-RECORD.md`. It has not been uploaded.
+
+
+Zenodo: the scanner preprint is published at [10.5281/zenodo.23823716](https://doi.org/10.5281/zenodo.23823716), concept DOI [10.5281/zenodo.23823715](https://doi.org/10.5281/zenodo.23823715). The deposited PDF fingerprint and related links are in `ZENODO-RECORD.md`.

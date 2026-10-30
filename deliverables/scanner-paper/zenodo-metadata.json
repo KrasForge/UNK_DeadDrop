@@ -1,0 +1,53 @@
+{
+  "upload_type": "publication",
+  "publication_type": "preprint",
+  "publication_date": "2026-10-31",
+  "title": "Static AST-Based Triage of Socially-Engineered Developer Lures: Proving Obfuscator Rotations Without Execution",
+  "creators": [
+    {
+      "name": "Krasnjanski, Ilja",
+      "affiliation": "Independent researcher",
+      "orcid": "0009-0007-1039-5930"
+    }
+  ],
+  "description": "Developer recruitment attacks hide executable commands in verification pages, assessment repositories and editor extensions. Static inspection is difficult when clipboard handlers assemble commands through helper functions and obfuscators replace configuration strings with calls into encoded, rotated arrays. We built `unk-scanner` to recover these structures without executing the submitted code. It follows clipboard values through the abstract syntax tree and evaluates a restricted subset of expressions. For recognised obfuscator loops, it recovers array order by reproducing the checksum condition in a restricted evaluator, with explicit assumptions governing the correctness of the recovered rotation. Detection rules combine indicators to distinguish suspicious execution paths from techniques also used by legitimate developer tools.  The evaluation covers approximately 2.8 million files from software registries and a public malware dataset, retained UNK_DeadDrop artifacts, controlled obfuscation experiments and evasion fixtures. The isolated scanner processed 272 calibration files per second. Two error-level alerts among 19,976 recently changed npm packages were false positives. Controlled experiments across five obfuscator releases reached 99.7 to 99.8 percent string recovery with the revised engine; every decoded call site matched its original value. Detection coverage remained limited: that engine warned on 128 of 2,122 public malware samples. Small source rewrites also exposed missed behaviours and an incorrect rotation assumption. Recovered strings made hidden code inspectable. Accurate recovery nevertheless coexisted with low malware coverage and easily evaded rules.",
+  "access_right": "open",
+  "license": "cc-by-4.0",
+  "keywords": [
+    "Static Analysis",
+    "JavaScript Deobfuscation",
+    "Software Supply Chain Security",
+    "ClickFix",
+    "Editor Extensions",
+    "Developer Security",
+    "Malware Analysis"
+  ],
+  "language": "eng",
+  "related_identifiers": [
+    {
+      "identifier": "10.5281/zenodo.23652297",
+      "relation": "references",
+      "resource_type": "publication-preprint"
+    },
+    {
+      "identifier": "https://github.com/KrasForge/unk-deaddrop-companion/commit/d54e06dbceb4bb4b2a7b27427246cafda83136e5",
+      "relation": "isSupplementedBy",
+      "resource_type": "software"
+    }
+  ],
+  "references": [
+    "[R1] Ilja Krasnjanski. UNK_DeadDrop: An Artifact-Based Study of Recruitment Malware, Credential Collection, and Operator Infrastructure. Zenodo preprint. https://doi.org/10.5281/zenodo.23652297",
+    "[R2] KrasForge. `unk-deaddrop-companion` and `unk-scanner`. https://github.com/KrasForge/unk-deaddrop-companion",
+    "[R3] Datadog Security Labs. Open-Source Dataset of Malicious Software Packages. https://github.com/DataDog/malicious-software-packages-dataset (Apache-2.0).",
+    "[R4] MITRE ATT&CK. Contagious Interview, G1052. The MITRE Corporation, 2025. https://attack.mitre.org/groups/G1052/",
+    "[R5] DataDog. GuardDog. GitHub, Apache-2.0. https://github.com/DataDog/guarddog",
+    "[R6] Adriana Sejfia and Max Schäfer. Practical Automated Detection of Malicious npm Packages. In Proceedings of the 44th International Conference on Software Engineering (ICSE '22), ACM, 2022, pp. 1681–1692. https://doi.org/10.1145/3510003.3510104",
+    "[R7] Marc Ohm, Henrik Plate, Arnold Sykosch, and Michael Meier. Backstabber's Knife Collection: A Review of Open Source Software Supply Chain Attacks. In Detection of Intrusions and Malware, and Vulnerability Assessment (DIMVA 2020), LNCS 12223, Springer, 2020, pp. 23–43. https://doi.org/10.1007/978-3-030-52683-2_2",
+    "[R8] relative. synchrony: javascript-obfuscator cleaner and deobfuscator. GitHub, GPL-3.0. https://github.com/relative/synchrony",
+    "[R9] j4k0xb. webcrack. GitHub, MIT. https://github.com/j4k0xb/webcrack",
+    "[R10] ben-sb. obfuscator-io-deobfuscator. GitHub, Apache-2.0. https://github.com/ben-sb/obfuscator-io-deobfuscator",
+    "[R11] Tommy Madjar, Selena Larson, and the Proofpoint Threat Research Team. Security Brief: ClickFix Social Engineering Technique Floods Threat Landscape. Proofpoint, 18 November 2024. https://www.proofpoint.com/us/blog/threat-insight/security-brief-clickfix-social-engineering-technique-floods-threat-landscape",
+    "[R12] Unit 42. Hacking Employers and Seeking Employment: Two Job-Related Campaigns Bear Hallmarks of North Korean Threat Actors. Palo Alto Networks, 21 November 2023. https://unit42.paloaltonetworks.com/two-campaigns-by-north-korea-bad-actors-target-job-hunters/",
+    "[R13] Microsoft Threat Intelligence and Microsoft Defender Experts. Think before you Click(Fix): Analyzing the ClickFix social engineering technique. Microsoft Security Blog, 21 August 2025. https://www.microsoft.com/en-us/security/blog/2025/08/21/think-before-you-clickfix-analyzing-the-clickfix-social-engineering-technique/"
+  ]
+}
