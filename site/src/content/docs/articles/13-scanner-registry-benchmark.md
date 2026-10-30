@@ -53,7 +53,9 @@ The public malware set changed the interpretation of the low alert count. I coun
 
 Of 122 IDE extensions, four raised warnings. Among 1,884 npm packages classified as malicious at creation, 44 raised warnings. Fourteen of 116 compromised npm libraries raised warnings. No sample reached error level.
 
-The warnings came from obfuscated string arrays and hidden-script launches. Most missed samples did not use the clipboard, Electron or encrypted-loader patterns represented in the rules. Parser failures explained 27 misses, leaving many readable samples outside the scanner's model. Screening the missed files found common access to environment variables and home-directory files, frequent use of `child_process` and network requests, and references to webhooks. Twenty-one missed IDE extensions contained variation-selector characters used to hide text. These counts describe what appeared in the missed code; each behaviour also occurs in legitimate programs.
+The warnings came from obfuscated string arrays and hidden-script launches. Most missed samples did not use the clipboard, Electron or encrypted-loader patterns represented in the rules. Parser failures explained 27 misses, leaving many readable samples outside the scanner's model.
+
+Screening the missed files found common access to environment variables and home-directory files, frequent use of `child_process` and network requests, and references to webhooks. Twenty-one missed IDE extensions contained variation-selector characters used to hide text. These counts describe what appeared in the missed code; each behaviour also occurs in legitimate programs.
 
 The retained campaign files show that the scanner recognises the structures it was built from. That is useful when the code is available and resembles the observed samples. It does not counter the broader malware result, because those retained files informed the rules. Even within the case, the Windows Node agent raised only notes. Its absence of a warning is a miss, not a change in what the agent does.
 

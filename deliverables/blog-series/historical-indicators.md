@@ -10,7 +10,9 @@ tags:
   - "indicators"
 ---
 
-The entries below are historical. Case observations run through 24 July 2026, and current availability has not been rechecked. URLs and hostnames are defanged. A value in source code, a message or a configuration file shows what that artifact contained; it does not by itself prove that a victim requested it. The tables distinguish held samples, recovered response bodies, third-party scan or DNS observations, and analyst inferences. Private contact databases, credentials, tokens and wallet material are excluded.
+The entries below are historical. Case observations run through 24 July 2026, and current availability has not been rechecked. URLs and hostnames are defanged.
+
+A value in source code, a message or a configuration file shows what that artifact contained; it does not by itself prove that a victim requested it. The tables distinguish held samples, recovered response bodies, third-party scan or DNS observations, and analyst inferences. Private contact databases, credentials, tokens and wallet material are excluded.
 
 ## Lure hosts and captured URLs
 
@@ -160,7 +162,9 @@ The mail-sender review also used retained message headers and DNS/MX/SPF records
 
 ## Other domains from public reporting
 
-Proofpoint's 8 June 2026 indicator table labels the following as sender or related infrastructure domains. They are included here as reported pivots, not as hostnames independently recovered from the held samples. A local analyst note records a 22 July DNS review of 47 domains, with 46 returning NXDOMAIN or no A record and `nemesis[.]work` resolving to shared registrar parking. That review may overlap with locally held names and does not establish the state of every domain below. It is not a current check. See [Proofpoint's indicator table](https://www.proofpoint.com/us/blog/threat-insight/dont-fear-repo-unkdeaddrop-phishing-campaign-targets-developers-steal).
+Proofpoint's 8 June 2026 indicator table labels the following as sender or related infrastructure domains. They are included here as reported pivots, not as hostnames independently recovered from the held samples.
+
+A local analyst note records a 22 July DNS review of 47 domains, with 46 returning NXDOMAIN or no A record and `nemesis[.]work` resolving to shared registrar parking. That review may overlap with locally held names and does not establish the state of every domain below. It is not a current check. See [Proofpoint's indicator table](https://www.proofpoint.com/us/blog/threat-insight/dont-fear-repo-unkdeaddrop-phishing-campaign-targets-developers-steal).
 
 ```text
 Reported sender domains:
@@ -214,7 +218,9 @@ hxxps://gitlab[.]com/stefan[.]kano/forge-4626-invariants
 hxxps://gitlab[.]com/predicttogether/forge-4626-invariants
 ```
 
-The July inspection recorded five repositories with weaponized content. `lautaro19/rekt-db` is listed separately because coordinated creation timing and matching payload markers make operator control plausible, but do not prove it; the original repository snapshots and platform API responses were not retained. This is an ownership hypothesis, not a confirmed attribution. These are dated observations, not statements about present availability. The GitLab group copy `pulsynk-org/rekt-db` was reported removed by GitLab in May; it is distinct from the separate `pulsynk/rekt-db` path above.
+The July inspection recorded five repositories with weaponized content. `lautaro19/rekt-db` is listed separately because coordinated creation timing and matching payload markers make operator control plausible, but do not prove it; the original repository snapshots and platform API responses were not retained. This is an ownership hypothesis, not a confirmed attribution.
+
+These are dated observations, not statements about present availability. The GitLab group copy `pulsynk-org/rekt-db` was reported removed by GitLab in May; it is distinct from the separate `pulsynk/rekt-db` path above.
 
 The case notes also record exact SHA-256 values for `tasks.json` (`c935808147f0236c81483d7bbeda4b9d602f3595d5d4057f8115d39e222d1c4b`) and `settings.json` (`35813f4401d3ad77b618275473a556eb47bfa6f4b7439dd8943b19f81aa7252e`) from specific repository variants. A file-hash match applies only to byte-identical files; it does not cover other task or settings variants. The limitations of this ownership reassessment are described in [E10](../preprint/evidence/E10.pdf).
 
@@ -222,4 +228,6 @@ The separate ECHOES delivery branch was recorded at `hxxps://github[.]com/Lyraca
 
 ## What this list excludes
 
-Cloudflare anycast addresses, Mailgun and Private Email infrastructure, and SimpleLogin relay addresses are shared services, not campaign-exclusive indicators. The legitimate `nodit[.]io` domain is not malicious. The earlier `foxtopia[.]xyz` parking subdomains `yandex-staff` and `rustore` were retracted as false associations. Persona-associated domains, private email addresses, account identifiers, wallet addresses and credentials are omitted. The separate ECHOES archive branch is not assigned these resolver destinations because its final payload and relationship to this activity were not established.
+Cloudflare anycast addresses, Mailgun and Private Email infrastructure, and SimpleLogin relay addresses are shared services, not campaign-exclusive indicators. The legitimate `nodit[.]io` domain is not malicious. The earlier `foxtopia[.]xyz` parking subdomains `yandex-staff` and `rustore` were retracted as false associations.
+
+Persona-associated domains, private email addresses, account identifiers, wallet addresses and credentials are omitted. The separate ECHOES archive branch is not assigned these resolver destinations because its final payload and relationship to this activity were not established.

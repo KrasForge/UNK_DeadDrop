@@ -13,7 +13,11 @@ og_image_alt: "YARA matching conditions and results from case-artifact and softw
 ---
 
 
-The published companion snapshot contains 33 named YARA rules in 28 files. Every rule matched at least one object in the saved investigation material, and none matched the small local software baseline. A later, separate local review narrowed seven source rules after selected controls produced collisions. The revisions preserved all earlier artifact matches, but are not part of the published snapshot. The wallet-agent rule initially matched marker-rich research prose; requiring ELF magic at byte zero makes that text fixture negative, though it does not validate the file's code or prove execution.
+The published companion snapshot contains 33 named YARA rules in 28 files. Every rule matched at least one object in the saved investigation material, and none matched the small local software baseline.
+
+A later, separate local review narrowed seven source rules after selected controls produced collisions. The revisions preserved all earlier artifact matches, but are not part of the published snapshot.
+
+The wallet-agent rule initially matched marker-rich research prose. Requiring ELF magic at byte zero makes that text fixture negative, though it does not validate the file's code or prove execution.
 
 The [companion repository](https://github.com/KrasForge/unk-deaddrop-companion) contains file-content rules and a parse-only JavaScript scanner. It no longer includes the event rules or workspace-configuration rules: authentic endpoint logs and the original `.vscode` task and settings files were not available for replay. Synthetic event records and invented configuration files would show how a rule behaves, not whether it matches the collected targets.
 
@@ -21,7 +25,9 @@ The [companion repository](https://github.com/KrasForge/unk-deaddrop-companion) 
 
 The wallet-agent rule is a useful example. It now requires ELF magic at byte zero, a file smaller than 64 MiB, an Overlord module path, a server-environment marker and at least two wallet-collection strings. The combination matched the held Go agent. Removing the header or one required marker category gives a negative result in the inert boundary tests.
 
-The earlier rule version matched a harmless fixture with the complete marker set in research prose. Requiring the ELF header at offset zero prevents that ordinary text collision, but YARA does not validate the rest of the executable or determine whether the strings are reachable code. A marker-rich ELF can still match. A file signature can help identify an artifact for review, but it cannot establish that the file ran, that data left the host or that the activity belongs to a particular operator.
+The earlier rule version matched a harmless fixture with the complete marker set in research prose. Requiring the ELF header at offset zero prevents that ordinary text collision. YARA does not validate the rest of the executable or determine whether the strings are reachable code, so a marker-rich ELF can still match.
+
+A file signature can help identify an artifact for review. It cannot establish that the file ran, that data left the host or that the activity belongs to a particular operator.
 
 ![YARA conditions and validation results](assets/11-detection-logic.svg)
 
@@ -29,9 +35,15 @@ The earlier rule version matched a harmless fixture with the complete marker set
 
 ## The replay covered 192 files and 395 views
 
-The read-only replay covered 192 selected files: the 15 directories marked `DO-NOT-RUN`, compressed lure bundles, related web assets, extracted VSIX components and agent archives, source files, and six retained lure messages. The helper read ZIP, VSIX, TAR, gzip and nested ZIP content in memory without writing extracted files. It evaluated 395 raw or archive-member views totaling about 234 MB; all 33 named rules in 28 files matched at least once. At least one rule matched 90 input files, while 102 had no hits. Counts include copied variants and nested archive views, so they are not independent samples or incidents. [Exhibit E15](../preprint/evidence/E15.pdf) records the companion snapshot and validation scope. No file was executed.
+The read-only replay covered 192 selected files: the 15 directories marked `DO-NOT-RUN`, compressed lure bundles, web assets, extracted VSIX components and agent archives, source files, and six retained lure messages. The helper read ZIP, VSIX, TAR, gzip and nested ZIP content in memory without writing extracted files.
 
-Four ECHOES RAR archives require a password, so their members were not inspected; the separate sealed environment archive was scanned only as raw bytes. Exact hashes identify the four ECHOES containers without making claims about their contents. A separate exact-hash rule identifies the retained Surge Group message; the rule does not claim it shares control with UNK_DeadDrop. Other hash rules identify exact retained packages, launchers and messages; any modification or repackaging evades them. Most unmatched inputs were generic dashboard modules, web assets or research context without a distinctive file-content signature. They were reviewed in the coverage accounting, but weak rules that merely identify those records would not be useful detections.
+It evaluated 395 raw or archive-member views totaling about 234 MB. All 33 named rules in 28 files matched at least once. At least one rule matched 90 input files; 102 had no hits. The totals include copied variants and nested archive views, so they are not independent samples or incidents. [Exhibit E15](../preprint/evidence/E15.pdf) records the companion snapshot and validation scope. No file was executed.
+
+Four ECHOES RAR archives require a password, so their members were not inspected. The separate sealed-environment archive was scanned only as raw bytes. Exact hashes identify the four ECHOES containers without making claims about their contents.
+
+A separate exact-hash rule identifies the retained Surge Group message. It does not claim the message shares control with UNK_DeadDrop. Other hash rules identify exact retained packages, launchers and messages; modification or repackaging evades them.
+
+Most unmatched inputs were generic dashboard modules, web assets or research context without a distinctive file-content signature. They were included in the coverage accounting, but weak rules that only identify those records would not be useful detections.
 
 Workspace-file signatures remain absent because neither the original `.vscode/tasks.json` nor `.vscode/settings.json` appears in the saved repository archive or its commit history. Event rules were removed because there are no authentic Windows process, Linux audit or comparable endpoint logs in the retained set. The companion therefore has no Sigma rules. The two SQLite databases containing target addresses were also excluded from scanning.
 
@@ -39,7 +51,9 @@ The companion's [artifact-validation report](https://github.com/KrasForge/unk-de
 
 ## No matches in 1,914 local software files
 
-The second scan covered 1,914 files and about 59.2 MB across 2,379 raw and nested object views from the local CPython standard library, installed Python packages, global npm packages and Acorn. No retained rule matched. The 19 Markdown articles and companion notes also produced no hits after source-oriented conditions were narrowed to avoid prose collisions. This is a small local baseline, not a representative or independently curated clean endpoint corpus, so it does not provide a fleet false-positive rate or a production precision estimate.
+The second scan covered 1,914 files and about 59.2 MB across 2,379 raw and nested object views from the local CPython standard library, installed Python packages, global npm packages and Acorn. No retained rule matched. The 19 Markdown articles and companion notes also produced no hits after source-oriented conditions were narrowed to avoid prose collisions.
+
+This is a small local baseline, not a representative or independently curated clean endpoint corpus. It does not provide a fleet false-positive rate or a production precision estimate.
 
 The prose fixture remains important alongside that zero-hit result. It records a false-positive case from the rule's earlier form and confirms the current ELF-header check rejects plain text. Analysts should still review file type, acquisition context and matched bytes before treating a hit as suspicious. For process and persistence behavior, collect authentic endpoint logs first; this repository does not publish event rules without them.
 
@@ -57,7 +71,9 @@ Sensitivity tells a different story. Only 62 of 2,122 known-malicious samples ra
 
 ## Rule matches depend on the bytes given to YARA
 
-YARA input representation matters just as much. A rule for decrypted JavaScript needs those plaintext bytes; a rule for a VSIX member needs the member supplied to the engine. Scanning an outer compressed package alone is not equivalent to the archive-member replay above. Consult each rule's target and match conditions before choosing a sample. Uploading a custom rule to a hunting service also does not prove that its separate manual file-scan feature uses that rule set.
+YARA input representation matters. A rule for decrypted JavaScript needs those plaintext bytes; a rule for a VSIX member needs the member supplied to the engine. Scanning an outer compressed package alone is not equivalent to the archive-member replay above. Consult each rule's target and match conditions before choosing a sample.
+
+Uploading a custom rule to a hunting service also does not prove that its separate manual file-scan feature uses that rule set.
 
 The repository includes inert [YARA boundary tests](https://github.com/KrasForge/unk-deaddrop-companion/blob/main/tests/test_detections.py), a [prose false-positive test](https://github.com/KrasForge/unk-deaddrop-companion/blob/main/tests/test_blog_boundaries.py), and the [test requirements](https://github.com/KrasForge/unk-deaddrop-companion/blob/main/requirements-dev.txt). Run the checks using the instructions in its README. These tests are repeatable checks of rule behavior, not malware execution or production validation.
 

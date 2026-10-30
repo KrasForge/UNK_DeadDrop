@@ -100,7 +100,9 @@ The manual analysis selected a rotation by comparing printable output across cal
 
 The evaluated engine identifies the decoder variant from its syntax, reimplements decoding and evaluates that checksum for candidate rotations. For this extension the variant is RC4 behind a shuffled base64 alphabet, with an index offset of 333. It reaches rotation 391 and decodes 2,139 of 2,140 call sites. For the bootstrap it reaches rotation 261 and decodes 15 of 17. These agree with the manually established rotations without executing the extension.
 
-Recovered strings become available to other rules, including calls whose module names are hidden behind decoders. An unresolved checksum can sometimes be handled by a printable-consensus heuristic; otherwise the recognised array remains unresolved. Neither outcome is a universal safeguard. A later test replaced `push(shift())` rotation with `splice`, and the evaluated engine failed to recognise the loop, incorrectly accepting rotation zero; a hardened engine now recognises such steps and accepts the stored order only when the decoded call sites read as text. [Part 14](14-scanner-recovery-and-bypasses.md) examines that defect, the variants that bypassed other rules and how they were closed.
+Recovered strings become available to other rules, including calls whose module names are hidden behind decoders. If the checksum cannot be solved, a printable-consensus heuristic may help. Otherwise the array remains unresolved.
+
+Neither result is a universal safeguard. A later test replaced `push(shift())` rotation with `splice`. The evaluated engine missed the loop and incorrectly accepted rotation zero. A hardened engine now recognizes more rotation steps and accepts stored order only when the decoded call sites read as text. [Part 14](14-scanner-recovery-and-bypasses.md) covers the defect and subsequent tests.
 
 The scanner does not assemble the AES key or decrypt the payloads. Authenticated decryption remains a separate check on the recovered fragments, and partial string recovery must be read alongside the unresolved call sites.
 

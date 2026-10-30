@@ -8,7 +8,9 @@ sidebar:
 
 
 
-On 13 July 2026, a GitLab commit replaced a list of server names with `api.cklomino[.]ink` and `api.dsfmot[.]xyz`. The retained repository bundle and file history are documented in [E07](../../evidence/E07.pdf). The file held configuration, not a payload; its significance came from the client code that read it. A client consulting this resource could obtain its destination without carrying a fixed address in the deployed file. The configuration could therefore change without requiring a new payload hash.
+On 13 July 2026, a GitLab commit replaced a list of server names with `api.cklomino[.]ink` and `api.dsfmot[.]xyz`. The retained repository bundle and file history are documented in [E07](../../evidence/E07.pdf). The file held configuration, not a payload.
+
+Its significance came from the client code that read it. A client consulting this resource could obtain its destination without carrying a fixed address in the deployed file. The configuration could therefore change without requiring a new payload hash.
 
 The configuration history records the changing destinations. Certificate and panel observations connect one of those domains to a historical origin address.
 
@@ -24,7 +26,9 @@ The payload references this resource:
 gitlab[.]com/drop-indexing/tasks/-/raw/main/config.json
 ```
 
-The repository also contains a separate `config-alt.json` file with another pair of destination strings. Neither retained payload references that file, so its name and contents do not show that a client used it. The recovered JavaScript has its own hard-coded fallback, `api.domatisc[.]ink`, and a resolver function that requests the raw GitLab `config.json` resource. No retained endpoint log confirms that a victim fetched either file. This code pattern is relevant to MITRE ATT&CK's [dead drop resolver technique (T1102.001)](https://attack.mitre.org/techniques/T1102/001/).
+The repository also contains a separate `config-alt.json` file with another pair of destination strings. Neither retained payload references it, so its name and contents do not show that a client used it.
+
+The recovered JavaScript has its own hard-coded fallback, `api.domatisc[.]ink`, and a resolver function that requests the raw GitLab `config.json` resource. No retained endpoint log confirms that a victim fetched either file. This code pattern is relevant to MITRE ATT&CK's [dead drop resolver technique (T1102.001)](https://attack.mitre.org/techniques/T1102/001/).
 
 A payload with the same hash can receive different destinations depending on when it fetches this resource.
 
@@ -66,11 +70,15 @@ The 23 July certificate enumeration added names that were absent from the inspec
 
 The certificates did not provide a cross-domain link. Subject alternative names stayed within individual registered bases, with combinations of the base, wildcards and subdomains such as `api.`, `www.` and `email.`. No retained enumeration entry combined two bases in one certificate. Wildcards also mean that a new subdomain can appear without a new certificate-log entry.
 
-Timing offered more context. Certificates for four bases were first issued on 13 July, the date of the resolver's change to `api.cklomino[.]ink` and `api.dsfmot[.]xyz`. On 23 July, `aazdias[.]ink` and `fallaazdis[.]ink` were registered about six minutes apart through the same registrar and privacy service, with the same Cloudflare nameserver pair. Their primary-and-fallback naming repeats the earlier `aavzx[.]ink` and `fallbaav[.]ink` arrangement. The current stores, a new dashboard host and several older lure domains also received certificates that day.
+Timing offered more context. Certificates for four bases were first issued on 13 July, the date of the resolver's change to `api.cklomino[.]ink` and `api.dsfmot[.]xyz`.
+
+On 23 July, `aazdias[.]ink` and `fallaazdis[.]ink` were registered about six minutes apart through the same registrar and privacy service, with the same Cloudflare nameserver pair. Their primary-and-fallback naming repeats the earlier `aavzx[.]ink` and `fallbaav[.]ink` arrangement. The current stores, a new dashboard host and several older lure domains also received certificates that day.
 
 Shared panels and certificate automation can produce this cadence across unrelated customers. The timing therefore supplements the code and configuration relationships; it cannot establish a cluster on its own. These registration and enumeration observations come from restricted 23 July records and are discussed in the [paper](../../downloads/UNK_DeadDrop-Preprint.pdf), but are not independently reproduced in the public evidence exhibits.
 
-A sweep of the hosting provider's two /23 ranges, about a thousand addresses of which 291 exposed services, showed why ports were a poor discriminator. The provider is ordinary shared hosting, about twenty unrelated tenants ran something on port 3000, and the free scan dataset returned nothing on the agent's port 5173 for either range, so a port-based hunt could neither separate the campaign hosts from their neighbors nor reach the one port that mattered. These are dated observations from research services, and none of them has been refreshed since 24 July.
+A sweep of two /23 ranges belonging to the hosting provider covered about a thousand addresses; 291 exposed services. The provider used ordinary shared hosting. About twenty unrelated tenants ran services on port 3000, while the free scan dataset returned no results for the agent's port 5173 in either range.
+
+Those observations make port-based hunting a poor discriminator: port 3000 was common among unrelated tenants, and the dataset did not cover the agent's port. The results come from research services and have not been refreshed since 24 July.
 
 Part 7 follows the target-acquisition tooling behind the two SQLite pools.
 

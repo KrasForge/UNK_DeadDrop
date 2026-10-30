@@ -5,9 +5,12 @@ section pattern and recurring lesson summaries with a concrete account of the
 reviewed false positives and the `splice` rotation defect. Added two small SVG
 diagrams tied directly to those results. Revised the titles and section headings
 across all fourteen articles to name the artifacts, code paths, and results each
-article examines. Updated the landing page, sidebar, and downloadable Markdown
-archive to match. The Astro build and archive checks passed locally; Pages status
-is recorded in the repository Actions history.
+article examines. Split dense passages across Parts 1 to 4, 6 to 7, 10 to 11,
+and 13 to 14 at changes in evidence or argument, and clarified the indicator
+reference. Converted the repository paths and email steps in Part 2 into lists.
+Updated the landing page, sidebar, and downloadable archive to match. The Astro
+build and archive checks passed locally; Pages status is recorded in the
+repository Actions history.
 
 # Scanner hardening update, 29 October 2026
 

@@ -77,7 +77,11 @@ For array rotation, the scanner now recognises additional mutations such as `pus
 
 The same nineteen fixtures were run again. Eighteen now match their baseline severity and recovery, including the `splice` fixture, whose strings match the checksum-proven rotation. The remaining case fetches the clipboard command at run time. That command text is absent from the file, so static inspection has nothing to recover.
 
-I rescanned the earlier corpora on the same server. The hardened engine produced no new error-level findings. It added three warnings: two packages containing obfuscator arrays declared with `var`, and a copy button for a `curl` installer. On the recently changed npm corpus, unresolved arrays dropped from 1,387 to 16. Nine packages whose arrays had been completely unresolved now exposed licence and service endpoints. Two newly decoded packages imported `child_process`; static review found ordinary housekeeping in a developer CLI and licence configuration handling in an SAP framework plugin. Neither passed downloaded data to a code-execution sink, and neither was classified as malicious. I did not fetch the remote address found in one package.
+I rescanned the earlier corpora on the same server. The hardened engine produced no new error-level findings and added three warnings: two packages with obfuscator arrays declared using `var`, and a copy button for a `curl` installer.
+
+On the recently changed npm corpus, unresolved arrays dropped from 1,387 to 16. Nine packages whose arrays had been entirely unresolved now exposed licence and service endpoints.
+
+Two newly decoded packages imported `child_process`. Static review found ordinary housekeeping in a developer CLI and licence-configuration handling in an SAP framework plugin. Neither passed downloaded data to a code-execution sink, and neither was classified as malicious. I did not fetch the remote address found in one package.
 
 One escalation needed to be narrowed during this pass. A first version treated any detached, hidden-window editor relaunch as an error. An AI coding extension uses that shape to start its helper server, so it remains a warning. A malicious extension using the same launch would also receive a warning.
 
@@ -87,8 +91,12 @@ The new fixtures are regression tests in the [companion repository](https://gith
 
 ## Comparing decoded strings with their originals
 
-The `splice` failure raised a broader question: when the scanner reports a decoded string, how do I know it is the right one? Real obfuscated code has no answer key, so I made one. I took fifty harmless files from the popular-software corpus and obfuscated each under 72 combinations of javascript-obfuscator's string-array options, using the current release and an older one. That gave 7,200 samples in which every hidden string has a known original. I scored the scanner and three published deobfuscators the same way. The scanner was also checked call site by call site, because a wrong rotation can hide behind strings that are genuine but misplaced.
+The `splice` failure raised a practical question: were the recovered strings correct? I tested the scanner on fifty harmless files, obfuscated under 72 combinations of javascript-obfuscator's string-array options across a current and an older release. Each hidden string had a known original, giving 7,200 samples for comparison with three published deobfuscators.
 
-Every string the scanner decoded was the program's own and in its place, across all samples and engine versions. Coverage was weaker. The engines missed the older release's decoder entirely, and lost most strings when function wrappers met one particular option. I fixed both shapes, which raised recovery to 99.8% for both releases. Because those fixes were designed against the same samples, I then generated a held-out set from twenty new files and three obfuscator releases the fixes had never seen. Recovery there was 99.7% for every release, still with no misplaced string.
+The scanner returned no misplaced strings, but coverage was weaker. The engines missed the older release's decoder and lost most strings when function wrappers met one option. Fixes for those two cases raised recovery to 99.8% on both releases.
 
-The same change also mattered for real malware. Rerun over the public malware dataset from [Part 13](13-scanner-registry-benchmark.md), it doubled the number of samples that raise a warning, from 64 to 128, because much of that malware uses the older decoder shape. None reaches error level, and the warnings mean obfuscation was found and decoded, not that the sample was identified as malicious. The [scanner paper](../scanner-paper/UNK-Scanner-Paper.pdf) describes the experiment, and the scripts and results are in the [companion repository](https://github.com/KrasForge/unk-deaddrop-companion).
+To check those fixes on unseen inputs, I generated a held-out set from twenty new files and three obfuscator releases. Recovery was 99.7% for each release, with no misplaced strings.
+
+The same change also mattered for real malware. On the public dataset from [Part 13](13-scanner-registry-benchmark.md), samples producing a warning doubled from 64 to 128 because many used the older decoder shape. None reached error level. A warning means the scanner found and decoded obfuscation; it does not identify a sample as malicious.
+
+The [scanner paper](../scanner-paper/UNK-Scanner-Paper.pdf) describes the experiment. Scripts and results are in the [companion repository](https://github.com/KrasForge/unk-deaddrop-companion).

@@ -20,7 +20,9 @@ The collection code reaches beyond browser passwords. Its third upload variant s
 
 The Windows collection path splits across a Node agent, a coordinator and a Python browser-decryption component. Copying a browser database is one step; recovering its encryption material and extracting usable credentials is another. MITRE ATT&CK classifies this activity as [Credentials from Web Browsers (T1555.003)](https://attack.mitre.org/techniques/T1555/003/).
 
-The Python source handles DPAPI-related key recovery and browser elevation services associated with App-Bound Encryption. Its comments and staging logic describe caller-path requirements, helping explain why the pipeline attempts elevation and prepares a particular execution environment. But a copied `Login Data` file is not a set of plaintext passwords, and an elevated process does not prove browser decryption succeeded. The investigation found no endpoint telemetry showing what the attempts yielded. Wallet selectors extend the scope beyond browser stores; Part 8 examines corresponding mnemonic and ColdKey fields in the administration frontend.
+The Python source handles DPAPI-related key recovery and browser elevation services associated with App-Bound Encryption. Its comments and staging logic describe caller-path requirements, helping explain why the pipeline attempts elevation and prepares a particular execution environment.
+
+A copied `Login Data` file is not a set of plaintext passwords, and an elevated process does not prove browser decryption succeeded. The investigation found no endpoint telemetry showing what the attempts yielded. Wallet selectors extend the scope beyond browser stores; Part 8 examines corresponding mnemonic and ColdKey fields in the administration frontend.
 
 ![A selected file is only the first step](assets/04-collection.png)
 

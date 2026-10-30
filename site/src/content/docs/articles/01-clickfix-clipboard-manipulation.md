@@ -20,7 +20,9 @@ The recovered lures use recruitment and technical-assessment themes. Their verif
 
 The analysis found two frontend variants. Lighter bundles show an access-key or anti-spam panel. Larger ones load TensorFlow.js face-detection models and activate the camera for a more elaborate device-check presentation. Three.js appears only in a separate design-challenge lure. Across these interfaces, the clipboard substitution is the behavior that changes the command.
 
-The retained lure material includes builds associated with `joincategory[.]xyz` and `d2saitrade[.]ink`, plus heavier captures from `dscufo[.]xyz` and `nemesistrade[.]work`. Later URLScan response-body recovery found the same kit on `discufo[.]xyz`, `trixauvex[.]org`, `nodit[.]org`, `surgecareer[.]ink`, `calendly[.]foxtopia[.]xyz` and `calendly[.]optixauvex[.]us`. That expands the set of captured lure pages, but does not establish that candidates visited them. The [historical indicator reference](../../indicators/) lists their URLs and evidence class; the [artifact reference](../../artifacts/) records the response hashes.
+The retained lure material includes builds associated with `joincategory[.]xyz` and `d2saitrade[.]ink`, plus heavier captures from `dscufo[.]xyz` and `nemesistrade[.]work`. Later URLScan response-body recovery found the same kit on `discufo[.]xyz`, `trixauvex[.]org`, `nodit[.]org`, `surgecareer[.]ink`, `calendly[.]foxtopia[.]xyz` and `calendly[.]optixauvex[.]us`.
+
+These captures expand the set of known lure pages. They do not establish that candidates visited them. The [historical indicator reference](../../indicators/) lists their URLs and evidence class; the [artifact reference](../../artifacts/) records the response hashes.
 
 The same clipboard kit appeared under later covers. July captures preserve an Almanac-themed page at `validator.aavzx[.]ink` and a 3D box-preview lure at `3dscenebox[.]online`; the latter's `check_3d_m` and `check_3d_w` files matched the `upd_m` and `upd_w` droppers from the `api.aazdias[.]ink` store by SHA-256. These are dated sample and page observations. They do not show that a visitor copied the command or ran a dropper.
 
@@ -75,7 +77,9 @@ The useful browser-side signal is the combination of a verification interface, a
 
 Endpoint hunting should follow the command's actual destination. Here the candidate pastes into a terminal, so a rule requiring an editor-to-shell process chain would miss the intended behavior. Follow the copied command, its child processes, downloaded scripts, persistence and outbound connections. For static triage, ask three questions: what text is displayed, what value is copied, and how does the command builder choose its download location? Those answers expose the deception without executing the bundle.
 
-Because the first-stage download comes from the lure page's own origin, one concrete hunt follows directly from the code: look for a shell or PowerShell download, shortly after a terminal paste, from a host the browser had just been visiting. The [technical paper](../../downloads/UNK_DeadDrop-Preprint.pdf) also records that some copied strings end in a trailing newline, so depending on how a terminal handles pasted text, the command may run the moment it is pasted, although identical behavior across terminals was not tested.
+Because the first-stage download comes from the lure page's own origin, one concrete hunt follows directly from the code: look for a shell or PowerShell download shortly after a terminal paste, from a host the browser had just been visiting.
+
+The [technical paper](../../downloads/UNK_DeadDrop-Preprint.pdf) also records that some copied strings end in a trailing newline. Depending on terminal behavior, the command may run as soon as it is pasted. This was not tested across terminals.
 
 On the static side, a later scan of a held lure bundle found two clipboard-write sites in a sample of 73,545 bytes, with the following SHA-256:
 
@@ -83,7 +87,13 @@ On the static side, a later scan of a held lure bundle found two clipboard-write
 5ee915bb8d0363bd92176cc595d7425fd7e7830508d8824d90b5285a3d2b11bd
 ```
 
-The copied value in this bundle is never a literal, because the page assembles it at the moment of copying from a nonce, a phrase and the visitor's operating system, so a scanner that only reads string arguments sees nothing more than a clipboard call with an unresolved argument. Version 0.2.0 of the companion scanner therefore follows the argument back into the code that builds it, through the command builder, the per-platform helpers and the wrapper that detaches the process, harvesting their text without evaluating any of it, and in this bundle it reports a `clickfix-clipboard-command` error that names the `perl -MPOSIX` double-fork wrapper, the verification wording and the fact that the write happens inside a copy handler that replaces whatever the visitor selected. The same rule, applied to the later Scene Box lure, traces a generic `copyText(text)` helper back to the `curl -ks … && nohup bash` command its callers pass in, so all three retained lure generations reach error level. Across 3,000 popular npm packages and Open VSX extensions the rule produced no error at all and a single warning, for an installer's "copy command" button, which is the distinction it is meant to draw. What the scanner still cannot show is the visual deception itself, because that needs the rendered instruction compared with the generated command, and only a browser can render it.
+The copied value in this bundle is generated when someone clicks. It combines a nonce, a phrase and the visitor's operating system. A scanner that reads only literal string arguments sees a clipboard call with an unresolved value.
+
+Version 0.2.0 of the companion scanner follows that value through the command builder, platform helpers and process-detaching wrapper. It extracts their text without evaluating the code. In this bundle, the `clickfix-clipboard-command` rule reports an error and identifies the `perl -MPOSIX` double-fork wrapper, the verification wording and the copy handler that replaces the selected text.
+
+The same rule follows the later Scene Box lure's generic `copyText(text)` helper to the `curl -ks … && nohup bash` command supplied by its callers. All three retained lure generations reach error level.
+
+Across 3,000 popular npm packages and Open VSX extensions, the rule raised no errors and one warning for an installer's "copy command" button. Static analysis still cannot show the visual deception. That requires comparing the rendered instruction with the command placed on the clipboard in a browser.
 
 The [repository branch](../02-vsix-editor-execution/) uses a different entry point: a package calling itself Google Update Support installs collection components through the code editor.
 
