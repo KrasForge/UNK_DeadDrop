@@ -62,7 +62,7 @@ console.log(fn.type, returned.argument.type);
 
 `decode` is undefined, but parsing does not require it to exist. Acorn reads the program as a string and returns the structure of declarations and expressions; it does not resolve or run them.
 
-The analysis reconstructed the wrappers' index and key transformations from their syntax trees, then implemented those transformations separately. It did not import or execute the extension.
+I reconstructed the wrappers' index and key transformations from their syntax trees, then implemented those transformations separately. The extension was never imported or executed.
 
 ![From obfuscated syntax to authenticated files](assets/03-deobfuscation.png)
 

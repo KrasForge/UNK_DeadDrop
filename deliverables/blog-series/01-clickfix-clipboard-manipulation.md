@@ -25,7 +25,7 @@ That is the ClickFix technique: a web page persuades someone to paste and run a 
 
 The recovered lures use recruitment and technical-assessment themes. Their verification flow asks the candidate to copy a command, enter or use an access phrase, and return the terminal's output. The command does print the promised verification result while also attempting to install a payload. That makes the exchange more convincing than a page that asks someone to run an unexplained command: the page and terminal appear to agree, and the candidate gets the expected output to submit.
 
-The analysis found two frontend variants. Lighter bundles show an access-key or anti-spam panel. Larger ones load TensorFlow.js face-detection models and activate the camera for a more elaborate device-check presentation. Three.js appears only in a separate design-challenge lure. Across these interfaces, the clipboard substitution is the behavior that changes the command.
+The captured pages fall into two frontend groups. Lighter bundles show an access-key or anti-spam panel. Larger ones load TensorFlow.js face-detection models and activate the camera for a more elaborate device-check presentation. Three.js appears only in a separate design-challenge lure. Across these interfaces, the clipboard substitution is the behavior that changes the command.
 
 The retained lure material includes builds associated with `joincategory[.]xyz` and `d2saitrade[.]ink`, plus heavier captures from `dscufo[.]xyz` and `nemesistrade[.]work`. Later URLScan response-body recovery found the same kit on `discufo[.]xyz`, `trixauvex[.]org`, `nodit[.]org`, `surgecareer[.]ink`, `calendly[.]foxtopia[.]xyz` and `calendly[.]optixauvex[.]us`.
 

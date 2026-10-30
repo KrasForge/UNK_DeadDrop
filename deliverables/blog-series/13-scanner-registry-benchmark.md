@@ -1,6 +1,6 @@
 ---
 title: "What 2.8 Million Files Revealed About unk-scanner"
-description: "Two false alarms in recently changed npm packages, low coverage of public malware, and what a larger static-analysis benchmark actually measures."
+description: "Two false alarms in recently changed npm packages, low coverage of public malware, and the limits of a larger static-analysis benchmark."
 date: "2026-10-29"
 author: "Ilja Krasnjanski"
 canonical: "https://krasforge.github.io/UNK_DeadDrop/articles/13-scanner-registry-benchmark/"

@@ -4,7 +4,24 @@ Draft, 29 October 2026.
 
 ## Abstract
 
-Recruitment lures can conceal malicious JavaScript in clipboard commands, assessment repositories and editor extensions. Their commands are assembled at copy time, strings are encoded in rotated arrays, and process launches resemble those of legitimate developer tools. We present `unk-scanner`, a static triage tool that combines bounded partial evaluation, checksum-based string-array recovery and clipboard-value tracing without executing the input. Rules assign severity from combinations of techniques, and the command-line interface isolates analysis processes and emits SARIF. Evaluation covers 2.8 million files across popular software, recently changed npm packages and known-malicious packages. After one rule adjustment informed by the popular-software corpus, the final scan raised no error-level findings in its 188,901 files outside the original calibration set. A scan of 2.4 million files from 19,976 recently changed npm packages raised two errors, both false positives. Sensitivity was limited: only 62 of 2,122 public malware samples raised warnings, and none raised errors. Retained UNK_DeadDrop artifacts reproduce the expected outputs, including a known missed agent, but they also informed rule design. In a separate bypass test, 18 of 19 single-change variants evaded detection, reduced severity or defeated recovery; one caused incorrect string decoding. On 7,200 samples obfuscated with two javascript-obfuscator releases, every call site the scanner decoded matched the original program. The evaluated engines recovered up to 87% of hidden strings from the current release and none from the older one, whose decoder shape they did not recognise; a sandboxed deobfuscator recovered 98% of both. A revision covering the two decoder shapes this exposed recovered 99.7–99.8% across five releases, three of them held out from the fixes. It also doubled detection on the public malware samples to 128, all at warning level. A hardened engine, evaluated afterwards on the same corpora, handles all but one of those variants without new error-level findings, but the variants were written by the authors and do not measure resistance to an adaptive adversary. The results establish low error-level alert volume in the evaluated corpora, alongside substantial coverage and evasion limits. The scanner assists inspection of the delivery structures it recognises; it does not provide a general malware verdict.
+Recruitment lures hide malicious JavaScript in clipboard commands, assessment repositories
+and editor extensions. `unk-scanner` traces clipboard values, recovers rotated arrays by
+checksum and evaluates selected code without execution. Combined indicators set severity;
+isolated workers emit JSON and SARIF. We evaluated 2.8 million files. After one rule
+adjustment, the final engine produced no error-level findings in 188,901 popular-software
+files outside calibration. Two errors among 2.4 million files from 19,976 recently changed
+npm packages were false positives. The scanner warned on 62 of 2,122 public malware samples.
+Retained UNK_DeadDrop artifacts reproduced expected findings but also informed the rules.
+
+In 19 author-created variants, 18 evaded a rule, lowered severity or broke string recovery;
+one returned incorrect strings. In a 7,200-sample known-answer test, every string the
+scanner decoded matched its original call site. A revised engine reached 99.7 to 99.8
+percent recovery across five obfuscator releases, three held out during development, and
+doubled malware warnings from 64 to 128. A hardened engine handled 18 variants without new
+errors in the tested corpora. These variants do not measure adaptive evasion. The results
+show low error-level alert volume within the evaluated corpora, alongside limited coverage.
+The scanner exposes recognised structures for triage; it does not provide a general malware
+verdict.
 
 ## 1. Introduction
 
@@ -12,7 +29,7 @@ Supply-chain defences commonly examine packages that execute malicious code at i
 
 Three features complicate static inspection. First, the studied ClickFix lures construct commands when the user copies them, combining platform checks, helper functions and command fragments. Reading clipboard-call literals alone misses this construction. Second, obfuscator.io-style extensions replace module names, URLs and configuration strings with decoder calls into encoded, rotated arrays. Third, suspicious process-launch techniques also occur in legitimate tools. Both malware and language clients use `ELECTRON_RUN_AS_NODE` to run helpers through an editor binary, while commercial extensions also use string-array obfuscation.
 
-Dynamic analysis can reveal execution behaviour, but it requires running hostile code and may leave platform-, session- or server-dependent branches unexplored. This paper examines how much of the command construction and hidden configuration can be recovered statically, and how reliably those structures distinguish malicious artifacts from ordinary developer software.
+Dynamic analysis can reveal execution behaviour, but running hostile code may leave platform-, session- or server-dependent branches unexplored. We ask how much command construction and hidden configuration static analysis can recover, and how well those structures distinguish malicious artifacts from ordinary developer software.
 
 The approach combines a bounded evaluator for a side-effect-free expression subset, string-array recovery using the obfuscator's checksum, and tracing from clipboard writes into local builders and caller arguments. Checksum-based recovery is also used by synchrony [R8]; here it shares an evaluator with the detection rules. Severity depends on combinations of techniques rather than obfuscation or Electron use alone. The implementation adds process isolation and SARIF output.
 
@@ -35,7 +52,12 @@ The analyst holds a file, an unpacked package or an extension, and wants to know
 
 ## 3. Design
 
-Figure 1 shows the analysis path. Each file is parsed once. An index pass records parent links and function scopes. String-array recovery runs before the rules, so every rule sees recovered values in place of decoder calls, and recovery and rules share one pure evaluator. Parsing, recovery and rules run inside an isolated analysis process (Section 3.6), and only the report leaves it. This section describes the engine evaluated in Sections 5.1 to 5.5 (source hash prefix `caf3f552`). Section 5.6 lists the later changes to evaluation, clipboard sinks, launch escalation, loader linking and rotation recognition, and Section 5.7 two changes to decoder recognition; they are not repeated here.
+Figure 1 gives the analysis path. The engine parses each file once, indexes parent links and
+function scopes, then recovers string arrays before applying the rules. Recovery and
+detection share a pure evaluator. Parsing, recovery and rules run inside an isolated process;
+only the report leaves it (Section 3.6). Baseline results use source hash `caf3f552`. Later
+hardening and decoder-recognition changes appear separately in Sections 5.6 and 5.7 and do
+not alter those baseline measurements.
 
 ![Figure 1. Analysis pipeline. A file is parsed and indexed; obfuscated string arrays are recovered before the rules run; recovery and rules share a step- and depth-capped evaluator that never calls into the input. The dashed boundary is the isolated analysis process; only the report leaves it.](figure:pipeline)
 
@@ -82,7 +104,19 @@ for each assignment of variants to D (at most 16):
 return none                                      -- consensus or unresolved, below
 ```
 
-The procedure rests on three conditions: the decoder is identified with its correct variant and offset; the restricted evaluator computes `E` and the target as JavaScript would; and each failed iteration of the loop performs exactly one left rotation. Under these conditions, the loop and Algorithm 1 compute the same sequence of values. The loop rotates the stored array one step after each mismatch, and it also rotates when the body throws. The algorithm evaluates the same expression in the same order for `r = 0, 1, …` and stops at the same first match. Rotations are equivalent modulo `n`, so if no `r < n` matches, the loop never terminates and the algorithm returns none. The conditions can fail. An unrecognised rotation step breaks the third condition (Section 5.4), and an expression the evaluator cannot compute is treated as a mismatch, so the program's rotation may be skipped. A skipped rotation yields none unless a later rotation also matches. A wrong rotation rarely produces a number: it places non-numeric strings at the positions `parseInt` reads, and the sum becomes NaN. The cost is at most 16·n evaluations of `E`, each capped at 20,000 evaluator steps; in obfuscator output, `E` contains six to twelve decoder calls.
+The proof requires a recognised decoder with the correct variant and offset, an evaluator
+that computes `E` and the target as JavaScript would, and one left rotation per failed
+iteration. Under those conditions, Algorithm 1 and the loop evaluate the same values in the
+same order. The loop rotates the array after each mismatch, including thrown errors. The
+algorithm stops at the same first match. Rotations repeat modulo `n`; if no `r < n` matches,
+the loop never terminates and the algorithm returns none.
+
+An unrecognised rotation step or unsupported expression breaks these assumptions. The
+evaluator treats an unknown expression as a mismatch, which can skip a rotation. Recovery
+then returns none unless a later rotation matches. A wrong rotation rarely yields a number:
+it places non-numeric strings where `parseInt` reads them, so `E` becomes NaN. The algorithm
+evaluates `E` at most `16·n` times, with each evaluation capped at 20,000 steps. In
+obfuscator output, `E` contains six to twelve decoder calls.
 
 A worked example shows the procedure on a three-line program obfuscated by javascript-obfuscator 5.9.0 with rotation enabled (seed 19, plain strings; reformatted, with the declarations reordered for reading):
 
@@ -105,7 +139,17 @@ const cp=require(f(0x109)),url=f(0x112);
 console[f(0x108)](url,typeof cp[f(0x10c)]);
 ```
 
-`W` is a self-redefining array source with 13 strings. Eight of them are numeric tokens that the obfuscator added for the checksum. `f` indexes `W` after subtracting `0x107` (263) and has no alphabet or key, so the variant is plain. The immediately invoked function receives `W`, contains `t['push'](t['shift']())`, and its `try` block declares `E` and tests `E === d`. Binding `d` to the call argument gives the target 717,217. For `r = 0 … 9`, at least one `parseInt` call reads a non-numeric string and `E` is NaN. At `r = 10` every `parseInt` call reads a numeric token, and `E` equals 717,217 exactly; no later rotation matches. With `r = 10`, `f(0x109)` decodes to `child_process`, `f(0x112)` to the URL, and `f(0x108)` and `f(0x10c)` to `log` and `spawn`, which restores the original program. An independent reimplementation of the checksum in Python gives the same single solution.
+The example's `W` is a self-redefining array with 13 strings. The obfuscator added eight
+numeric tokens for the checksum. Function `f` indexes `W` after subtracting `0x107` (263);
+it uses no alphabet or key, so this variant is plain. The immediately invoked function
+receives `W`, contains `t['push'](t['shift']())`, and tests `E === d` inside a `try` block.
+Binding `d` to the call argument gives the target 717,217.
+
+For rotations `r = 0 … 9`, at least one `parseInt` call reads a non-numeric string and `E`
+becomes NaN. At `r = 10`, every call reads a numeric token and `E` equals 717,217; no later
+rotation matches. This rotation decodes `f(0x109)` to `child_process`, `f(0x112)` to the
+URL, and `f(0x108)` and `f(0x10c)` to `log` and `spawn`. A separate Python implementation of
+the checksum returns the same single solution.
 
 When the checksum cannot establish a rotation, recovery follows three rules:
 
@@ -148,9 +192,31 @@ The applied controls are recorded in the output. A hostile rule module that atte
 
 ## 4. Implementation
 
-`unk-scanner` is written in JavaScript for Node.js 22 or later, with Acorn 8.17.0 and `@babel/parser` 8.0.8 pinned. It is MIT licensed and published on npm and PyPI; the Python wheel bundles the engine. The engine has about 2,500 lines in fifteen modules: the parser front end, evaluator, string-array recovery, loader recognition, isolation pool, command-line interface, SARIF writer and the rule modules. Rules are modules with an identifier, default severity, ATT&CK mapping and a `create(context)` function returning visitors, in the style of ESLint. All visitors are dispatched in one pass over the indexed tree. The nine built-in rules are grouped in four modules: clipboard, Electron launch, obfuscation and loaders, and campaign markers. A custom rule receives the same context, including resolved values, harvested fragments and recovered strings, and loads through `--rule` or the library interface.
+`unk-scanner` runs on Node.js 22 or later. It pins Acorn 8.17.0 and `@babel/parser` 8.0.8,
+uses the MIT license, and is published on npm and PyPI. The Python wheel bundles the engine.
+The JavaScript implementation has about 2,500 lines across fifteen modules for parsing,
+evaluation, string-array recovery, loader recognition, isolation, the CLI, SARIF output and
+rules.
 
-The scanner's own tree walks are iterative with explicit stacks and node budgets, so deeply nested input exhausts a budget rather than the call stack. Only the parsers recurse, and a parser stack overflow is reported as a failed file. Positions are computed on demand from a line index rather than from Acorn location objects, which reduced peak memory on a 7.9 MB bundle from 462 MB to 399 MB. A report records which parser accepted the file, each recovered array (variant, offset, rotation, method, decoded and total call sites), the isolation controls applied, and a fixed list of limitations, so a reader can see what was attempted as well as what was found. Output is JSON (schema 2) or SARIF 2.1.0 with `security-severity` properties, so findings appear as code-scanning alerts. The current test suite has 69 cases, including the bypass fixtures of Section 5.4 as regression tests, and runs on Linux, macOS and Windows with Node.js 22 and 24. The accompanying repository records the evaluated source fingerprints, package metadata and test suite [R2].
+Each rule module defines an identifier, default severity, ATT&CK mapping and a
+`create(context)` function that returns visitors, following ESLint's model. The engine
+dispatches visitors in one pass over the indexed tree. Its nine built-in rules cover
+clipboard use, Electron launches, obfuscation and loaders, and campaign markers. Custom
+rules receive the same context, including resolved values, harvested fragments and recovered
+strings, and load through `--rule` or the library interface.
+
+The scanner uses explicit stacks and node budgets for its tree walks. Deeply nested input
+exhausts a budget instead of the call stack. The parsers still recurse; the engine reports
+parser stack overflow as a failed file. To reduce memory use, it computes positions on
+demand from a line index rather than storing Acorn location objects. That change lowered
+peak memory on a 7.9 MB bundle from 462 MB to 399 MB.
+
+Each report records the accepted parser, every recovered array's variant, offset, rotation
+method and decoded versus total call sites, the isolation controls, and a fixed list of
+limitations. Output uses JSON schema 2 or SARIF 2.1.0 with `security-severity` properties
+for code-scanning alerts. The test suite has 69 cases, including the Section 5.4 bypass
+fixtures, and runs on Linux, macOS and Windows with Node.js 22 and 24. The companion
+repository records the evaluated source fingerprints, package metadata and tests [R2].
 
 ## 5. Evaluation
 
@@ -195,7 +261,24 @@ Tier 2 is the unvetted stream: every package whose registry document changed in 
 | `electron-run-as-node` | error | 1 | 1 |
 | `clickfix-clipboard-command` | error | 1 | 1 |
 
-Full review classified both error-level findings as false positives. An AI desktop application builds a hidden, encoded PowerShell command that sets `ELECTRON_RUN_AS_NODE` for its own helper, which only contacts `127.0.0.1` with a local password: the technique combination the rule escalates on, used for a legitimate purpose. A remote-access tool copies a setup guide whose only `curl` call prints an HTTP status code; the word "verify" in the guide supplied the lure indicator. The clipboard, hidden-script and Electron warnings were all reviewed: the code was read for the clipboard and hidden-script warnings and for five Electron packages whose names did not suggest developer tooling, and the remaining 39 Electron packages were triaged from the recorded launch target and environment. The reviewed contexts were consistent with legitimate helper relays, licence checks, launcher shims, desktop-app smoke tests and bundled TypeScript. For the 153 obfuscated packages, the strings recovered from their arrays were screened for process, shell, exfiltration-service, wallet and credential-store indicators: seven packages matched, and each is explained by its function (a Telegram and Discord bot, an OAuth-based workspace connector, agent CLIs); nine packages kept unresolved arrays, eight of them modules of one commercial product. No package was classified as malicious or reported to the registry. This triage outcome does not establish that every package is benign, particularly where arrays remain unresolved.
+Full review classified both error-level findings as false positives. An AI desktop
+application builds a hidden, encoded PowerShell command to set `ELECTRON_RUN_AS_NODE` for
+its helper. The helper contacts `127.0.0.1` and uses a local password. A remote-access tool
+copies a setup guide whose only `curl` call prints an HTTP status code. The word “verify” in
+the guide triggered the lure indicator.
+
+We reviewed the code behind every clipboard and hidden-script warning. For Electron
+launches, we inspected five packages whose names did not suggest developer tooling and
+triaged 39 others from their recorded launch target and environment. Their contexts fit
+helper relays, licence checks, launcher shims, desktop-app smoke tests and bundled
+TypeScript.
+
+We screened recovered strings from 153 obfuscated packages for process, shell,
+exfiltration-service, wallet and credential-store indicators. Seven packages matched; their
+code served a Telegram and Discord bot, an OAuth workspace connector or agent CLIs. Nine
+packages retained unresolved arrays, eight from one commercial product. The review
+classified no package as malicious and produced no registry report. Unresolved arrays leave
+some package behavior unknown.
 
 Weekly downloads were retrieved in bulk for unscoped names and individually for every flagged scoped package and a seeded sample of 500 other scoped packages. Flagged packages are not concentrated in the long tail: of the 168 flagged scoped packages, 7 had fewer than 100 weekly downloads and 65 had 10,000 or more, against 80 and 87 in the 500-package sample. These counts show that alerts also arise in widely used tooling. At error level, 2 of 19,976 packages (0.01%) required review. This is the observed package-level review rate, not a population false-positive estimate.
 
@@ -215,7 +298,23 @@ Tier 3 measures sensitivity on malware outside the campaign, and the result boun
 | npm, malicious intent | 1,884 | 0 | 44 | 1,550 | 290 |
 | npm, compromised library | 116 | 0 | 14 | 102 | 0 |
 
-Detections came from string-array obfuscation (55 samples) and hidden-script launches (7); no sample reached error level, and none used the ClickFix, Electron or encrypted-loader structures the higher-severity rules describe. Parser failure explains only 27 misses. To characterise the remaining 1,738, their files were screened for common static traits (these traits also occur in benign code, so the counts describe the misses rather than establish causes). Among missed npm samples, 900 read environment variables or home-directory files, 873 use `child_process`, 871 make network requests and 397 reference a webhook or messaging exfiltration service. Among missed IDE extensions, 81 use `child_process` and 21 contain variation-selector code points of the kind used to hide payloads in invisible Unicode. The missed samples expose a major coverage gap: credential-access and install-time behaviours can appear without the clipboard, Electron or encrypted-loader structures modelled here. The retained campaign artifacts demonstrate recognition of the structures used to design the rules, but cannot establish generalisation even within recruitment campaigns. Their 14 expected outputs include both the missed Windows agent and the context-only login interface.
+String-array obfuscation produced 55 detections and hidden-script launches produced seven.
+No sample reached error level. None used the ClickFix, Electron or encrypted-loader
+structures covered by the higher-severity rules. Parser failures account for 27 of the
+misses.
+
+We screened the remaining 1,738 samples for common static traits. These traits also appear
+in benign code, so the counts describe the misses rather than explain them. Among missed npm
+samples, 900 read environment variables or home-directory files, 873 use `child_process`,
+871 make network requests and 397 reference a webhook or messaging exfiltration service.
+Among missed IDE extensions, 81 use `child_process` and 21 contain variation-selector code
+points that can hide text.
+
+This screening exposes a coverage gap: credential access and install-time behaviors can
+occur without the clipboard, Electron or encrypted-loader patterns modeled here. The
+retained UNK_DeadDrop artifacts reproduce expected outputs, including the missed Windows
+agent and a context-only login interface. Those artifacts helped shape the rules, so they do
+not establish generalization across recruitment campaigns.
 
 To measure how easily the rules are evaded by an adversary who knows them, we wrote inert variants of the demonstration fixtures and of the loader test fixture, each changing one thing, and scanned them with the CLI on the evaluation server:
 
@@ -229,11 +328,37 @@ To measure how easily the rules are evaded by an adversary who knows them, we wr
 | String array (warning, recovered) | checksum target not foldable | recovered by printable consensus |
 | String array (warning, recovered) | rotation moves elements with `splice` instead of `push(shift())` | incorrect: rotator not recognised, decoded under rotation 0 |
 
-Eighteen of nineteen variants evade the rule they target, lower its severity or defeat string recovery; only the unfoldable checksum target is handled, by the consensus fallback. The clipboard, Electron and loader rules recognise observed structures but remain sensitive to small rewrites. The last row is a defect: the design rule of Section 3.3 holds only for rotation code the scanner recognises, and an unrecognised rotator falls back to the unrotated decoding the rule exists to prevent. The results in this section use the unchanged engine; Section 5.6 evaluates a hardened engine against the same variants and corpora. Partial recovery is reported as recovered, so an analyst must compare decoded with total call sites.
+Eighteen of nineteen variants evade the targeted rule, lower its severity or defeat string
+recovery. The consensus fallback handles only the unfoldable-checksum target. The clipboard,
+Electron and loader rules recognise observed structures but remain sensitive to small
+rewrites. One variant exposed a defect: the rotation rule assumes the scanner recognises the
+loop. An unknown rotator triggers stored-order decoding, which the rule was designed to
+avoid.
+
+These results use the unchanged engine. Section 5.6 evaluates a hardened engine against the
+same variants and corpora. Because the scanner reports partial recovery, analysts must
+compare decoded and total call sites.
 
 ### 5.5 Throughput and parser coverage
 
-All measurements in this paper were taken on one machine, an eight-vCPU virtual server with 15 GiB of memory, with the frozen engine and four analysis workers unless stated. On the calibration corpus the isolated CLI path processed 272 files/s (7.4 MB/s) and in-process worker threads 264 files/s; the isolated run was slightly faster in this comparison. Repeated trials would be needed to estimate the overhead and its variance. Median analysis time per parsed file was 1.6 ms, p99 207 ms and the maximum 12.5 s, for an 8 MB bundle. Malicious Tier 3 samples, scanned only on the isolated path, ran at 325 files/s, and Tier 2 at 848 files/s with six workers, reflecting its many small files. Before TypeScript support, Acorn rejected 31,964 calibration files; with the Babel fallback 352 remain. Tier 1 parsed 330,473 of 332,054 files (99.5%): 251,593 by Acorn, 77,521 as TypeScript, 668 as TSX, 572 as Flow with JSX and 119 as JSX. Of the 1,576 failures, 1,305 are TypeScript files, including legacy `module X {}` namespace syntax. None of the failed inputs parsed under the independent Babel configuration tested; this does not establish that all are invalid in their original toolchains. Five files are not valid UTF-8. Tier 2 parsed 2,398,405 of 2,403,437 files (99.8%).
+We ran the measurements on one eight-vCPU virtual server with 15 GiB of memory. Unless
+noted, each run used the frozen engine and four analysis workers. On the calibration corpus,
+the isolated CLI processed 272 files per second (7.4 MB/s); in-process workers processed
+264. The isolated run was slightly faster in this comparison. Repeated trials would be
+needed to estimate the difference and its variance. Median analysis time per parsed file was
+1.6 ms, the 99th percentile was 207 ms, and the maximum was 12.5 seconds for an 8 MB bundle.
+
+The isolated path processed malicious Tier 3 samples at 325 files per second. Tier 2 reached
+848 files per second with six workers, reflecting its many small files. Before TypeScript
+support, Acorn rejected 31,964 calibration files; the Babel fallback reduced that count to
+352.
+
+Tier 1 parsed 330,473 of 332,054 files (99.5%): Acorn parsed 251,593, TypeScript 77,521, TSX
+668, Flow with JSX 572, and JSX 119. Of 1,576 failures, 1,305 were TypeScript files,
+including legacy `module X {}` namespace syntax. None parsed under the independent Babel
+configuration we tested. That result does not establish that every failure is invalid in its
+original toolchain. Five files were not valid UTF-8. Tier 2 parsed 2,398,405 of 2,403,437
+files (99.8%).
 
 ### 5.6 Hardening after the evaluation
 
@@ -262,9 +387,41 @@ These figures show that the evaluated bypasses were shallow and can be closed wi
 
 ### 5.7 Controlled string-array recovery
 
-The corpus figures count decoded call sites but cannot say whether a decoded string is the one the program would use, because real obfuscated code has no ground truth. A controlled test supplies one. Fifty benign files were drawn from the calibration corpus by seeded sample, one per package, each a script of 3–30 KB with at least 15 distinct strings and no findings. Each file was obfuscated with javascript-obfuscator under 72 string-array configurations: three encodings (none, base64, RC4), rotation on or off, no wrappers or two variable or function wrappers, calls transform on or off, and index shift on or off. Each sample has its own seed. Two obfuscator releases were used: 5.9.0, current at the time of the test, and 4.1.1, current when the newest baseline below was last updated. Only string-array transforms were enabled, so each hidden string (a string literal, template text or property name of the original that no longer appears outside the obfuscator's array) has a known original.
+The corpus counts decoded call sites, but real obfuscated code has no known answer key. We
+built a controlled test from 50 benign calibration files, one per package. Each file was a 3
+to 30 KB script with at least 15 distinct strings and no findings. We obfuscated each file
+under 72 string-array configurations: three encodings (none, base64 and RC4), rotation on or
+off, no wrapper or two variable or function wrappers, calls transform on or off, and index
+shift on or off. Each sample used its own seed. The test used javascript-obfuscator 5.9.0,
+current at the time, and 4.1.1, current when the newest baseline was updated. We enabled
+only string-array transforms, so every hidden string has a known original.
 
-The frozen and hardened scanner engines processed all 7,200 samples, as did the revised engine introduced below. Three deobfuscators were run for comparison on a stratified subset of 1,440 samples (every configuration and both releases, first ten inputs), one process per sample with a 60 s limit: webcrack 2.16.0 [R9], which runs the decoder in a sandbox, and the static tools synchrony 2.4.6 [R8] and obfuscator-io-deobfuscator 1.0.6 [R10]. Scoring is identical for every tool. A hidden string is recovered when it appears in the tool's output, or, for the scanner, among its decoded call-site values. An output string counts as unexplained when neither the original nor the obfuscated sample contains it, either whole or as a concatenation of their strings; deobfuscators legitimately fold `'a' + 'b'`. Set scoring cannot detect a wrong rotation of a plain or base64 array, because every call site would then decode to another genuine string of the same program. The scanner's results are therefore also checked site by site. The obfuscator replaces each string occurrence in place, so the decoded call sites, read in source order, must align with the original's sequence of strings, and sites outside the longest common subsequence count as misplaced. As a validation, decoding 25 unencoded samples correctly gives no misplaced sites, while shifting every decoded value by one array position, as a wrong rotation would, misplaces 4,240 of 4,903 sites.
+A string counted as recovered when it appeared in a tool's output or, for the scanner, among
+decoded call-site values. We counted output as unexplained when neither the original nor
+obfuscated input contained it whole or as a concatenation; deobfuscators can fold `'a' +
+'b'`. Set-level scoring cannot detect a wrong rotation of a plain or base64 array because
+each call site would decode to another real string from the same program. We therefore
+compared call sites in source order. The obfuscator replaces each occurrence in place, so
+the decoded sequence should match the original. We counted sites outside the longest common
+subsequence as misplaced. The check passed on 25 unencoded samples. Shifting each decoded
+value one array position misplaced 4,240 of 4,903 sites.
+
+The frozen, hardened and revised scanner engines processed all 7,200 samples. We compared
+three deobfuscators on a stratified subset of 1,440 samples: ten inputs for each
+configuration and release. Each tool ran in a separate process with a 60-second limit. The
+tools were webcrack 2.16.0 [R9], which runs the decoder in a sandbox, and the static tools
+synchrony 2.4.6 [R8] and obfuscator-io-deobfuscator 1.0.6 [R10].
+
+We applied the same scoring to each tool. A hidden string counted as recovered when it
+appeared in output or, for the scanner, among decoded call-site values. We marked a string
+unexplained when neither source sample contained it whole or as a concatenation. Set-level
+scores can miss a wrong rotation because it may return other valid strings from the same
+program. We therefore compared the scanner's decoded values with the original call sites in
+source order and marked values outside the longest common subsequence as misplaced.
+
+The obfuscator replaces each occurrence in place. As a validation, the scanner placed all
+strings correctly in 25 unencoded samples. Shifting every decoded value one array position
+misplaced 4,240 of 4,903 sites.
 
 | Tool (samples) | Recall, 5.9.0 | Recall, 4.1.1 | Samples with unexplained strings |
 | --- | --- | --- | --- |
@@ -277,13 +434,80 @@ The frozen and hardened scanner engines processed all 7,200 samples, as did the 
 | synchrony (1,440) | 0% | 98.2% | 144, one input |
 | obfuscator-io-deobfuscator (1,440; 144 timed out) | 0% | 98.0% | 144, one input |
 
-The scanner never produced an unexplained string in any engine. The site-level check also passed throughout. All 638,574 call sites decoded by the hardened engine, and all 492,474 decoded by the frozen engine, align with the original program in source order. Every string it reported was the program's own and in its place. Its misses were reported as unresolved call sites or no recovered array. On 5.9.0 output, the hardened engine solved the rotation by checksum in all 1,800 rotated samples, against 1,344 for the frozen engine. Without rotation code, it accepted the stored order in 1,602 of 1,800 samples and left the rest unresolved. Recall was at least 99.7% in every configuration except one combination. When function wrappers are combined with the calls transform, recall falls to 24%: each wrapper then declares a local offset object before returning, which falls outside the single-return helper model of Section 3.2, so call sites through those wrappers stay unresolved. The frozen engine's lower recall comes from wrapper aliases declared with `var` (64%) and from the rotations it could not solve. Neither engine recovers anything from 4.1.1 output. That release's decoder replaces itself with an inner function, which rebases the index rather than the outer decoder's parameter (Section 3.3), so no decoder is identified, and the scanner reports no string array rather than guessing.
+No scanner engine produced an unexplained string, and every decoded call site passed the
+site-level check. The hardened engine decoded 638,574 call sites in source order; the frozen
+engine decoded 492,474. Both left misses unresolved rather than inventing values.
 
-**Closing the recognition gaps.** Both gaps were then fixed in a revised engine (source hash prefix `ba4d1468`). A helper may now declare locals before its `return` when their initialisers cannot change state: no calls, assignments, updates or functions. Such locals are resolved through scopes only when the returned expression reads them. When a function has no rebasing of its own but assigns its own name a function expression that has one, that inner function supplies the offset and key parameter. On the 7,200 samples, the revised engine recovers 99.8% of hidden strings from both releases. It solved every rotated sample by checksum and accepted the stored order of every unrotated one. The fixes were designed against these samples, so the measurement was repeated on a held-out set generated after the code was written. It contains 20 further inputs from the same seeded order, obfuscated under the same 72 configurations by 5.9.0, 4.1.1 and three releases the fixes had not seen: 5.0.0, 4.2.2 and 3.2.7. These are 7,200 more samples. The revised engine recovers 99.7% of hidden strings for every release, against 85.0% (5.x and 4.2.2) or none (4.1.1, 3.2.7) for the hardened engine. Across both sets, all 3,265,560 call sites it decoded align with the original programs, and it produced no unexplained string. The held-out set also exposed a gap in the reference sequence, which lacked class field names, rather than in the scanner. With them added, every engine has no misplaced site.
+On version 5.9.0 output, the hardened engine solved rotation by checksum in all 1,800
+rotated samples, compared with 1,344 for the frozen engine. With rotation code disabled, it
+accepted stored order in 1,602 of 1,800 samples and left the rest unresolved. Recall reached
+at least 99.7% in every configuration except one: function wrappers combined with the calls
+transform fell to 24%. Each wrapper declared a local offset object before returning, outside
+the single-return helper model in Section 3.2, so the scanner left those call sites
+unresolved.
 
-The revised engine was run again over every corpus on the evaluation server, for comparison with the hardened engine of Section 5.6. On the calibration corpus, 15 more files in two commercial extensions warn. On Tier 1, 19 more files warn; four of them, in three extensions, lie outside the calibration set. On Tier 2, 917 more files warn, in five packages, including a Salesforce DevOps tool and a browser-testing SDK. The newly decoded Tier 2 strings were screened as in Section 5.3. Four packages newly revealed a `child_process` import: the testing SDK, the DevOps tool, a design company's command-line tool and a self-hosted AI gateway. The first three decode to their vendors' own service endpoints. The gateway's import is the bundler's standard stub for an external module, and none of its 162 decoded chunks launches a process; its hidden strings are a licence server and an update check. None was classified as malicious. In these benign corpora, every new warning is a string array solved by checksum, or accepted as stored after the readability check, with all call sites decoded. No new error-level finding appeared in any corpus. The retained artifacts and bypass fixtures give the same results as before. Sensitivity on the public malware dataset doubles: 128 of 2,122 samples now raise warnings, against 64 for the hardened engine. These include 101 npm malicious-intent samples (previously 46) and 12 IDE extensions (previously 4), still none at error level. The recognition gap in older obfuscator output had been hiding a large share of the obfuscated malware.
+The frozen engine's lower recall came from wrapper aliases declared with `var` (64%) and
+rotations it could not solve. Neither engine recovered strings from version 4.1.1. That
+release replaces its decoder with an inner function, which rebases the index on a different
+parameter. The engines did not recognise that decoder and reported no array.
 
-The baselines show complementary failures. On 5.9.0 output, synchrony locates the array but stops with "no decoder", and obfuscator-io-deobfuscator returns the code with the array in place; both recover over 98% of 4.1.1 output. webcrack recovers 98% of both releases, because it executes the decoder instead of matching its shape. Its remaining misses are rewrites, not failed decodings: strings folded into longer literals, a constant `JSON.parse` turned into an object literal, and an empty string. The unexplained strings of each baseline come from a single input. webcrack's are the keys of that rewritten JSON object. synchrony turns an obfuscator variable name into a property name. obfuscator-io-deobfuscator's constant propagation replaced a variable with `undefined` and folded it into an error message, which changes the program's output. The synchrony and obfuscator-io-deobfuscator misses were not inspected string by string. The median time per sample, including parsing and scoring, was 30–61 ms for the scanner engines (the last runs shared the server with other benchmarks) and 290–1,045 ms for the baselines, which also regenerate code.
+The revised engine (source hash prefix `ba4d1468`) addresses both gaps. A helper can now
+declare side-effect-free locals before its `return`; the evaluator resolves a local only
+when the returned expression reads it. When a function assigns its own name to an inner
+function with index rebasing, the engine uses the inner function's offset and key
+parameters.
+
+On the original 7,200 samples, the revised engine recovered 99.8% of hidden strings from
+both releases. It solved every rotated sample by checksum and accepted the stored order of
+every unrotated sample. Because the fixes were designed against this set, we generated a
+held-out set after changing the code. It contains 20 new inputs, the same 72 configurations
+and five obfuscator releases: 5.9.0, 4.1.1, 5.0.0, 4.2.2 and 3.2.7. Three releases were
+unseen during development. The set adds 7,200 samples.
+
+The revised engine recovered 99.7% of hidden strings in each held-out release. The hardened
+engine recovered 85.0% on 5.x and 4.2.2, and none on 4.1.1 or 3.2.7. Across both sets, the
+revised engine decoded 3,265,560 call sites, all aligned with their original programs, and
+produced no unexplained string. The held-out set also revealed a gap in our reference
+sequence: it lacked class-field names. After we added them, every engine had zero misplaced
+sites.
+
+We reran the revised engine on every corpus on the evaluation server and compared it with
+the hardened engine in Section 5.6. The calibration corpus produced 15 additional warnings
+in two commercial extensions. Tier 1 produced 19 additional warnings; four came from three
+extensions outside the calibration set. Tier 2 produced 917 additional warnings in five
+packages, including a Salesforce DevOps tool and a browser-testing SDK.
+
+We screened the newly decoded Tier 2 strings as in Section 5.3. Four packages revealed a
+`child_process` import: the testing SDK, the DevOps tool, a design company's CLI and a
+self-hosted AI gateway. The first three used their vendors' service endpoints. The gateway
+contained the bundler's standard stub for an external module; none of its 162 decoded chunks
+launched a process. Its hidden strings named a licence server and update check. We
+classified none of the packages as malicious. In these benign corpora, every added warning
+came from an array solved by checksum or accepted in stored order after the readability
+check. The engine added no error-level findings. Results on retained artifacts and bypass
+fixtures stayed the same.
+
+On the public malware dataset, warning detections doubled from 64 to 128 of 2,122 samples.
+The revised engine warned on 101 npm samples with malicious intent, up from 46, and 12 IDE
+extensions, up from four. None reached error level. The older decoder shape had hidden many
+obfuscated samples from the earlier engine.
+
+The three deobfuscators failed on different shapes. On version 5.9.0 output, synchrony found
+the array but reported “no decoder”; obfuscator-io-deobfuscator returned the array in place.
+Both recovered more than 98% of version 4.1.1 output. webcrack recovered 98% from both
+releases by executing the decoder rather than matching its shape.
+
+webcrack's remaining misses involved rewrites: strings folded into longer literals, a
+constant `JSON.parse` replaced by an object literal, and an empty string. Each baseline's
+unexplained strings came from one input. webcrack returned the keys of the rewritten JSON
+object. synchrony turned an obfuscator variable name into a property name.
+obfuscator-io-deobfuscator propagated a variable as `undefined` and folded it into an error
+message, changing the program's output. We did not inspect every missed string from
+synchrony and obfuscator-io-deobfuscator.
+
+Median time per sample, including parsing and scoring, ranged from 30 to 61 ms for the
+scanner engines. The last runs shared a server with other benchmarks. The baselines took 290
+to 1,045 ms and also regenerated code.
 
 The test supports the title's claim within its scope. Every engine reported only correct, correctly placed strings when it identified the decoder and rotation loop, and reported unresolved sites when it did not. Coverage depended on recognising decoder shapes. Two shapes defeated the evaluated engines entirely, and the fixes that closed them came from this experiment. The held-out releases indicate that the fixes generalise across the obfuscator's versions; they do not test other obfuscator families. The sandboxed approach covers new shapes without such fixes, at the cost of executing input-derived code and rewriting the program. The test uses one obfuscator family on benign inputs. Malware authors also apply control-flow flattening and dead-code injection, which were disabled here, and custom obfuscators.
 
@@ -319,7 +543,19 @@ Samples were parsed without execution or installation, and acquisition did not r
 
 GuardDog [R5] combines Semgrep and YARA rules over package source with metadata heuristics across ecosystems, including npm and VS Code extensions. Amalfi [R6] classifies npm packages using code, metadata and change features. Ohm et al. [R7] catalogue software supply-chain attacks and their injection and execution techniques. These approaches address behaviours prominent in the public malware corpus, where the rules evaluated here have low sensitivity. Combining delivery-specific inspection with install-script and credential-access analysis is therefore more plausible than treating either as complete coverage.
 
-JavaScript deobfuscators differ in how they recover string arrays. webcrack [R9] regenerates the sample's array, decoder and rotation code and runs it in an `isolated-vm` sandbox. synchrony [R8] and obfuscator-io-deobfuscator [R10] instead match decoder templates and reimplement them; synchrony also evaluates the `parseInt` checksum chain to determine rotation. Our recovery follows this static approach, sharing a restricted evaluator with the detection rules and presenting recovered values as triage evidence rather than rewriting the file. Section 5.7 compares all four on the same obfuscated samples. Each static tool covers a different set of decoder shapes and fails on the others. webcrack's sandboxed execution covers both obfuscator releases tested. The scanner produced no unexplained strings, but its recognition limits are material. Section 5.4 demonstrates incorrect recovery when a rotator falls outside the supported syntax. Section 5.7 shows decoder shapes that the evaluated engines did not identify at all, and that a revision then covered.
+webcrack [R9] regenerates the sample's array, decoder and rotation code, then runs it in an
+`isolated-vm` sandbox. synchrony [R8] and obfuscator-io-deobfuscator [R10] match decoder
+templates and reimplement them. synchrony also evaluates the `parseInt` checksum chain to
+determine rotation.
+
+Our scanner follows the static approach. It shares a restricted evaluator between detection
+rules and presents recovered values as triage evidence instead of rewriting the file.
+Section 5.7 compares the four tools on the same samples. Each static tool recognises
+different decoder shapes; webcrack's sandbox covered both tested releases.
+
+The scanner produced no unexplained strings, but its recognition limits matter. Section 5.4
+shows incorrect recovery when a rotator falls outside the supported syntax. Section 5.7
+shows decoder shapes the evaluated engines missed and the later revision recognised.
 
 Proofpoint [R11] and Microsoft Threat Intelligence [R13] describe ClickFix lures that induce users to paste commands into a terminal or run dialog. Unit 42 [R12] reported developer targeting through fake interviews and npm-based tasks under Contagious Interview, now tracked as ATT&CK G1052 [R4]. The present work studies static inspection of related delivery mechanisms; it does not resolve the attribution of UNK_DeadDrop to that group.
 
@@ -327,7 +563,19 @@ Proofpoint [R11] and Microsoft Threat Intelligence [R13] describe ClickFix lures
 
 `unk-scanner` recovers commands and configuration from recognised JavaScript structures without executing the input. Its bounded evaluator supports clipboard tracing and checksum-based string-array recovery, while combined indicators reduce error-level alerts on ordinary developer tooling. The evaluated CLI processed 272 calibration files per second with process isolation.
 
-Low alert volume comes with substantial limits. The scanner flagged only 62 of 2,122 public malware samples, and 18 of 19 single-change variants evaded a rule, lowered severity or defeated recovery. One variant produced incorrect decoded strings. In a controlled test with known originals, the scanner's decoded strings were always the program's own and in place. The evaluated engines recognised the decoders of only one of two obfuscator releases; a revision recognises all five releases tested and raises warnings on 128 malware samples. A hardened engine closes all but one of those variants without new error-level findings on 2.8 million files, but that measures the absorbed variants, not an adaptive adversary. These results support using the tool to expose evidence for further inspection, alongside broader package and credential-access analysis. They do not support using a clean scan as a safety decision. Published manifests, review records and bypass fixtures make those limits reproducible and provide a basis for testing future changes.
+The scanner warned on 62 of 2,122 public malware samples, and 18 of 19 single-change
+variants evaded a rule, lowered severity or defeated recovery. One variant returned
+incorrect strings. In the known-answer test, every string the scanner decoded belonged to
+the original program and appeared at the correct call site. The evaluated engines recognised
+decoders from one of two obfuscator releases; the revised engine recognised all five
+releases tested and warned on 128 malware samples.
+
+The hardened engine handled 18 of the 19 variants without adding error-level findings across
+2.8 million tested files. The variants came from the authors and do not measure resistance
+to an adaptive adversary. The scanner exposes evidence for further inspection alongside
+package and credential-access analysis. A clean scan cannot establish that an artifact is
+safe. Published manifests, review records and bypass fixtures let others reproduce the
+stated limits and test future changes.
 
 ## Artifact availability
 

@@ -48,7 +48,7 @@ The Windows bundle supplies a separate set of components:
 
 The installer checks for the capture files and raises an error if they are missing. The associated scheduled task is named `GoogleUpdateSupporterNode`. These checks make the capture component an explicit installation requirement.
 
-The Windows dependencies and Go symbols come from different artifacts. They suggest similar capture and transfer functions, but do not establish a shared implementation across operating systems. For the Windows branch, the installed bundle, task action and process session would be the starting points for determining whether capture actually ran.
+The Windows dependencies and Go symbols come from different artifacts. They suggest similar capture and transfer functions, but do not establish a shared implementation across operating systems. For the Windows branch, investigators would start with the installed bundle, task action and process session to determine whether capture ran.
 
 ### The Go symbols identify TLS key logging
 

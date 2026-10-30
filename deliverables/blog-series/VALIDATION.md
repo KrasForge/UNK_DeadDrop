@@ -1,3 +1,9 @@
+# Stop Slop editorial pass, 30 October 2026
+
+Reviewed all fourteen current article sources using the [Stop Slop writing checks](https://github.com/hardikpandya/stop-slop). Replaced several document-centered phrases with direct descriptions of the analysis, tightened wording in Parts 1, 3 and 6, and retained attribution, dates and limits on what artifacts establish. The descriptive article titles and revised section headings remain in place.
+
+Packaged the 14-post archive with the updated sources and validation record. The local Astro production build completed with Node.js 22.23.4. Its downloadable preprint and scanner PDFs match the rebuilt manuscript files byte for byte. The existing non-blocking Starlight warning for the `/404` content entry remains.
+
 # Controlled recovery test, 30 October 2026
 
 Part 14 gains a section, *Comparing decoded strings with their originals*, summarising Section 5.7 of the rebuilt

@@ -6,7 +6,7 @@ Preprint · 27 October 2026 · Evidence cutoff: 24 July 2026
 
 ## Abstract
 
-Three recruitment-themed phishing messages led to a collection of UNK_DeadDrop delivery code, payloads, configuration history, administration interfaces and targeting databases. This study reconstructs their relationships through static analysis, recorded authenticated decryption, repository history and read-only database queries. The artifacts show a mutable command-and-control resolver, implementations of screen-capture streaming, and frontend workflows connecting delivery maintenance with intended wallet operations. Two databases contain 142,365 distinct stored address strings associated with 27,698 repository values, measuring harvested targeting material rather than infections. The editor-extension and Windows execution branches corroborate prior reporting; the resolver history, capture artifacts, administration source and database aggregates extend the five public analyses examined. Historical evidence is bounded at 24 July 2026, with later public reporting assessed separately. Restricted inputs and missing endpoint and backend telemetry prevent confirmation of execution, financial loss or operator identity. The findings nevertheless identify concrete dependencies for investigation and detection, including configuration resources that can redirect clients without changing payload hashes and collection paths beyond the native agent.
+Three recruitment-themed phishing messages led to UNK_DeadDrop delivery code, payloads, configuration history, administration interfaces and targeting databases. Static analysis, authenticated decryption records, repository histories and read-only database queries connect these artifacts. They show a mutable command-and-control resolver, screen-capture implementations and frontend workflows linking delivery maintenance with intended wallet operations. The two databases contain 142,365 distinct address strings across 27,698 repository values. These totals measure collected targeting material, not infections. The editor-extension and Windows execution branches corroborate prior reports; resolver history, capture artifacts, administration source and database aggregates add detail to five public analyses reviewed. Historical evidence ends on 24 July 2026. Later reporting is assessed separately. Missing endpoint and backend telemetry leaves execution, financial loss and operator identity unconfirmed. The artifacts identify dependencies and collection paths relevant to investigation and detection.
 
 Keywords: malware analysis; recruitment phishing; developer security; credential theft; threat intelligence; UNK_DeadDrop.
 
@@ -22,7 +22,7 @@ A bounded public-source refresh through 25 October added an UNK_DeadDrop-specifi
 
 The additional findings concern configuration resolution, capture implementation, administration interfaces and targeting databases. The contribution comparison is limited to details absent from those five publications. Proofpoint retains UNK_DeadDrop as a distinct cluster, and this study does not establish equivalence with G1052. Behavioural similarities support comparison without resolving attribution. [E03–E08; R1]
 
-The analysis follows the recovered links from developer targeting through delivery and collection to administration infrastructure. It reconstructs implementation and dependencies from artifacts; it does not estimate campaign prevalence or effectiveness.
+The recovered links connect developer targeting, delivery, collection and administration infrastructure. Artifact analysis reconstructs implementation and dependencies, but cannot estimate campaign prevalence or effectiveness.
 
 ## 2. Materials and methods
 
@@ -64,7 +64,13 @@ The recovered harvester queries repositories by star range, visits branches and 
 
 The analysis note describes sender configurations referencing both databases, with different intervals, cooldowns and warm-up settings. It also records Ondo and NXLog message templates. Those sender configurations are not retained among the exhibit inputs, so their relationship to harvesting remains a reported code observation. Actual delivery volume requires mail records. [E08]
 
-The safe pool contains 79,698 rows and the antispam pool 62,667. Their address fields have no exact overlap under the tested comparison. Their union contains 142,365 distinct address strings and 27,698 distinct repository values. Repository values overlap between the two pools, so their distinct counts cannot simply be added. The union measures targeting material, not unique people, delivered messages or compromised endpoints. The three received messages provide separate evidence of delivery. [E01, E08]
+The safe pool contains 79,698 rows and the antispam pool 62,667. Their address fields have
+no exact overlap under the tested comparison. Their union contains 142,365 distinct address
+strings and 27,698 distinct repository values. Repository values overlap between the pools,
+so adding the separate repository counts would overstate the union.
+
+The union measures targeting material, not unique people, delivered messages or compromised
+endpoints. The three received messages provide separate evidence of delivery. [E01, E08]
 
 Mail-provider relationships derive from configured hosts and message headers rather than variable names. The guide describes Namecheap Private Email settings, while the analysis record reports Mailgun-related evidence in later messages. The retained guide also discusses spam filtering and a shared outbound relay. That relay supports a provider association without linking unrelated tenants to the campaign. [E09]
 
@@ -250,7 +256,19 @@ These findings give defenders concrete objects to investigate: resolver resource
 
 ## Data availability and ethical handling
 
-The underlying archive is restricted because it contains malware, harvested contact data, credentials, provider identifiers and unverified identity leads. It is not deposited with this preprint. Supporting reports E01–E21 present edited observations, selected exhibits, methods, limitations and source fingerprints; Appendix B lists their roles. They are distinct from the public references R1–R18 and do not constitute independent replication. The public companion repository contains inert fixtures and 33 experimental YARA rules; this paper pins that source snapshot to the commit cited in [R17]. Later local rule refinements are distinguished in Appendix D and are not represented as published in that commit. The static scanner in the same repository is described and evaluated in the companion paper [R18]. No software archival DOI was verified for this revision. The restricted case archive and targeting databases are not included.
+The underlying archive contains malware, harvested contact data, credentials, provider
+identifiers and unverified identity leads, so it is not deposited with this preprint.
+Supporting reports E01 to E21 contain edited observations, selected exhibits, methods,
+limitations and source fingerprints. Appendix B lists their roles. These reports differ from
+the public references R1 to R18 and do not provide independent replication.
+
+The public companion repository contains inert fixtures and 33 experimental YARA rules. This
+paper pins the source snapshot to the commit cited in [R17]. Appendix D distinguishes later
+local rule refinements from that published commit.
+
+The companion paper [R18] describes and evaluates the static scanner in the same repository.
+No software archival DOI was verified for this revision. The restricted case archive and
+targeting databases are not included.
 
 Public materials include aggregate counts, sample hashes, defanged historical indicators and analytical descriptions. Raw contact rows, usable credentials and personal attribution leads are excluded. Public-interface collection does not itself establish consent from people represented in the recovered data. No sample execution or recovered-credential use occurred during this editorial revision.
 
