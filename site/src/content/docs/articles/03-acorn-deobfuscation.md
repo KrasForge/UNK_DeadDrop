@@ -8,13 +8,13 @@ sidebar:
 
 
 
-The VSIX loader assembled one AES key from sixteen fragments: nine decoder calls and seven literals. Recovering it required mapping wrapper functions and a rotated string table. A simple regex missed a wrapper that declared an intermediate value before returning, and five plausible rotations failed checks across the call sites.
+The VSIX loader assembled one AES key from sixteen fragments: nine decoder calls and seven literals. Recovering it required mapping wrapper functions and a rotated string table, and my first regex missed a wrapper that declared an intermediate value before returning, while five plausible rotations then failed checks across the call sites.
 
 All three encrypted payloads passed GCM authentication under the reconstructed key. The recovered components and authentication procedure are recorded in [Exhibit E04](../../evidence/E04.pdf). [Proofpoint's report](https://www.proofpoint.com/us/blog/threat-insight/dont-fear-repo-unkdeaddrop-phishing-campaign-targets-developers-steal) also documents the key and Windows architecture.
 
 ## Wrapper calls hide the key's construction
 
-The key assignment combines literals with calls to several wrapper functions. A wrapper may change the index, reorder its arguments or add an offset before invoking the underlying decoder, so each call must be traced through its wrapper. The July analysis identified seven wrappers in the bootstrap and five in `extension.js`. Each needed three fields mapped:
+The key assignment combines literals with calls to several wrapper functions, and a wrapper may change the index, reorder its arguments or add an offset before invoking the underlying decoder, so each call must be traced through its wrapper. The July analysis identified seven wrappers in the bootstrap and five in `extension.js`. Each needed three fields mapped:
 
 ```text
 Which argument supplies the string-table index?
@@ -22,7 +22,7 @@ Which argument supplies the decoder key?
 What offset is applied before the underlying call?
 ```
 
-A regex that expects every wrapper to return a decoder call immediately can miss a function that first declares an intermediate value. [Acorn](https://github.com/acornjs/acorn) represents both statements in the syntax tree. It does not solve the decoder automatically, but it provides a more reliable structure to inspect than text patterns.
+A regex that expects every wrapper to return a decoder call immediately can miss a function that first declares an intermediate value, while [Acorn](https://github.com/acornjs/acorn) represents both statements in the syntax tree. It does not solve the decoder automatically, but it provides a more reliable structure to inspect than text patterns.
 
 ### One wrapper assigns a temporary value
 
@@ -53,23 +53,19 @@ console.log(fn.type, returned.argument.type);
 // FunctionDeclaration CallExpression
 ```
 
-`decode` is undefined, but parsing does not require it to exist. Acorn reads the program as a string and returns the structure of declarations and expressions; it does not resolve or run them.
-
-The analysis reconstructed the wrappers' index and key transformations from their syntax trees, then implemented those transformations separately. It did not import or execute the extension.
+`decode` is undefined. But parsing does not require it to exist; Acorn reads the program as a string and returns its syntax tree. Parsing leaves the declarations and expressions unevaluated. I reconstructed the wrappers' index and key transformations from their syntax trees, then implemented those transformations separately. The extension was never imported or executed.
 
 ![From obfuscated syntax to authenticated files](../assets/03-deobfuscation.png)
 
 *Figure 1. Wrapper mapping and string-table recovery supply the key fragments; GCM authentication checks the reconstructed key against the payloads.*
 
-The string array had been rotated, so a valid-looking index could point to the wrong encoded element until the array order was resolved. Searching from one expected `crypt` anchor yielded five plausible rotations. Comparing each rotation against all resolved call sites narrowed the candidates.
+The string array had been rotated, so a valid-looking index could point to the wrong encoded element until the array order was resolved, and searching from one expected `crypt` anchor yielded five plausible rotations. Comparing each rotation against all resolved call sites narrowed the candidates.
 
-The recorded offsets were 391 for the extension and 261 for the bootstrap. The selected candidate produced printable decodes at 15 of 15 tested sites; the runner-up produced 3 of 15. That gap was useful, but printability remained a heuristic. The next checks were whether each string fit its call context and whether the key fragments could be reconstructed in source order. The encrypted payloads would provide a stronger validation.
+The recorded offsets were 391 for the extension and 261 for the bootstrap. The selected candidate produced printable decodes at 15 of 15 tested sites. The runner-up produced 3 of 15. That gap was useful. But printability remained a heuristic; the next checks were whether each string fit its call context and whether the key fragments could be reconstructed in source order. The encrypted payloads would provide a stronger validation.
 
 ### Putting the sixteen fragments back in order
 
-The key expression combined nine decoder results with seven literal fragments. Recovering their values was only half the work; the fragments also had to be concatenated in the original order, including values nested inside parenthesized additions.
-
-A small bounded evaluator concatenated string literals and already-decoded values in source order. The recovered key could then be checked against the encrypted payloads.
+The key expression combined nine decoder results with seven literal fragments. Recovering their values was only half the work. The fragments also had to be concatenated in the original order, including values nested inside parenthesized additions, and a small bounded evaluator concatenated string literals and already-decoded values in source order. The recovered key could then be checked against the encrypted payloads.
 
 ## Authenticated decryption verifies all three payloads
 
@@ -81,27 +77,27 @@ bytes 12–27    authentication tag
 bytes 28–end   ciphertext
 ```
 
-The initial `openssl enc` attempt failed because that command did not provide the required GCM authentication check. Switching to [Node's cryptographic library](https://nodejs.org/api/crypto.html) allowed the stored tag to be verified. The failed command did not show that the key, rotation or field boundaries were wrong.
+My initial `openssl enc` attempt failed: that command lacked the required GCM authentication check, so I switched to [Node's cryptographic library](https://nodejs.org/api/crypto.html) to verify the stored tag. The failure was in the chosen tool.
 
 With the corrected operation, all three payloads passed authentication: `detect_malware.py` (60,054 bytes), the browser-related decryption component; `windows-agent-node.js` (56,093 bytes), the Windows collection agent; and `windows-js-pipeline.js` (32,324 bytes), the collection and elevation coordinator.
 
-All three payloads decrypted to readable, commented source. Authentication tied each plaintext to its encrypted input under the recovered parameters, but did not establish that a payload ran or collected data. Those remain runtime questions.
+All three payloads decrypted to readable, commented source. Authentication tied each plaintext to its encrypted input under the recovered parameters. Execution and collection outcomes require endpoint evidence.
 
 ### The scanner uses the checksum loop to find the rotation
 
-The manual analysis selected a rotation by comparing printable output across call sites. The later scanner uses another feature of the same obfuscation: a loop that decodes numeric-looking strings, combines them with `parseInt` and shifts the array until the checksum equals an embedded constant.
+The manual analysis selected a rotation by comparing printable output across call sites, while the later scanner uses another feature of the same obfuscation: a loop that decodes numeric-looking strings, combines them with `parseInt` and shifts the array until the checksum equals an embedded constant.
 
-The evaluated engine identifies the decoder variant from its syntax, reimplements decoding and evaluates that checksum for candidate rotations. For this extension the variant is RC4 behind a shuffled base64 alphabet, with an index offset of 333. It reaches rotation 391 and decodes 2,139 of 2,140 call sites. For the bootstrap it reaches rotation 261 and decodes 15 of 17. These agree with the manually established rotations without executing the extension.
+The evaluated engine identifies the decoder variant from its syntax, reimplements decoding and evaluates that checksum for candidate rotations. For this extension the variant is RC4 behind a shuffled base64 alphabet, with an index offset of 333, and it reaches rotation 391 and decodes 2,139 of 2,140 call sites, while for the bootstrap it reaches rotation 261 and decodes 15 of 17. These agree with the manually established rotations without executing the extension.
 
-Recovered strings become available to other rules, including calls whose module names are hidden behind decoders. If the checksum cannot be solved, a printable-consensus heuristic may help. Otherwise the array remains unresolved.
+Recovered strings become available to other rules, including calls whose module names are hidden behind decoders, and if the checksum cannot be solved, a printable-consensus heuristic may help. Otherwise the array remains unresolved.
 
-Neither result is a universal safeguard. A later test replaced `push(shift())` rotation with `splice`. The evaluated engine missed the loop and incorrectly accepted rotation zero. A hardened engine now recognizes more rotation steps and accepts stored order only when the decoded call sites read as text. [Part 14](../14-scanner-recovery-and-bypasses/) covers the defect and subsequent tests.
+A later test replaced `push(shift())` rotation with `splice`. The evaluated engine missed the loop and incorrectly accepted rotation zero, and a hardened engine now recognizes more rotation steps and accepts stored order only when the decoded call sites read as text. [Part 14](../14-scanner-recovery-and-bypasses/) covers the defect and subsequent tests.
 
 The scanner does not assemble the AES key or decrypt the payloads. Authenticated decryption remains a separate check on the recovered fragments, and partial string recovery must be read alongside the unresolved call sites.
 
-The [scanner paper](../../downloads/UNK-Scanner-Paper.pdf) describes the evaluated implementation, including its per-process restrictions, resource limits and AST-only TypeScript/JSX fallback. The command-line output records which isolation controls were applied; Linux network-namespace isolation depends on host support. Installation and current release instructions are maintained in the [companion repository](https://github.com/KrasForge/unk-deaddrop-companion), with packages on [npm](https://www.npmjs.com/package/unk-scanner) and [PyPI](https://pypi.org/project/unk-scanner/).
+The [scanner paper](../../downloads/UNK-Scanner-Paper.pdf) describes the evaluated implementation, including its per-process restrictions, resource limits and AST-only TypeScript/JSX fallback, and the command-line output records which isolation controls were applied (Linux network-namespace isolation depends on host support). Installation and current release instructions are maintained in the [companion repository](https://github.com/KrasForge/unk-deaddrop-companion), with packages on [npm](https://www.npmjs.com/package/unk-scanner) and [PyPI](https://pypi.org/project/unk-scanner/).
 
-The larger registry evaluation is in [Part 13](../13-scanner-registry-benchmark/). Its low error-level alert count accompanies poor detection of generic package malware, so a completed scan does not establish that an input is safe.
+The larger registry evaluation is in [Part 13](../13-scanner-registry-benchmark/). It found few error-level alerts and missed most generic package malware. A completed scan is a pattern check, not a safety verdict.
 
 ```text
 detect_malware.py
@@ -114,4 +110,3 @@ windows-js-pipeline.js
 bf820623e8deaa37092650c7fae594e56b8d81c27b541419006cca2d0536353b
 ```
 
-[Companion detections and static scanner](https://github.com/KrasForge/unk-deaddrop-companion).

@@ -1,3 +1,14 @@
+# Sentence-rhythm pass, 30 October 2026
+
+Varied sentence length across all fourteen articles without changing word choice: adjacent
+sentences were joined into longer ones and others split into short ones, using only
+punctuation, paragraph breaks and a fixed list of connectives (and, but, which, while and
+similar). A checker confirmed for every article that the sequence of content words is
+unchanged, that front matter, headings, code, tables, captions and link targets are
+byte-identical, and that no em dashes were introduced. The coefficient of variation of prose
+sentence length rose from 0.31-0.49 to 0.65-0.76 per article. Long joins and new short
+sentences were reviewed by hand; one 59-word join in Part 6 was split again.
+
 # Stop Slop editorial pass, 30 October 2026
 
 Reviewed all fourteen current article sources using the [Stop Slop writing checks](https://github.com/hardikpandya/stop-slop). Replaced several document-centered phrases with direct descriptions of the analysis, tightened wording in Parts 1, 3 and 6, and retained attribution, dates and limits on what artifacts establish. The descriptive article titles and revised section headings remain in place.

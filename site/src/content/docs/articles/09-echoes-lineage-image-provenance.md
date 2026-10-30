@@ -8,26 +8,24 @@ sidebar:
 
 
 
-The ECHOES lure paired an animation-project theme with a password-protected archive. Its repository history preserved four versions of the delivery kit. The artwork and staging structure remained recognizable as repository destinations changed. The third revision added a persistence-related script, which the fourth retained.
-
-The delivery repository was `github[.]com/Lyracartoon/Echoes-of-the-Unborn-Sun`, reported live on 23 July 2026. [Exhibit E11](../../evidence/E11.pdf) records the retained archive revisions, but the final PowerShell resource was unavailable. Its final payload cannot be compared with the ClickFix or VSIX payloads.
+The ECHOES lure paired an animation-project theme with a password-protected archive. Its repository history preserved four versions of the delivery kit, and the artwork and staging structure remained recognizable as repository destinations changed (the third revision added a persistence-related script, which the fourth retained). The delivery repository was `github[.]com/Lyracartoon/Echoes-of-the-Unborn-Sun`, reported live on 23 July 2026, and [Exhibit E11](../../evidence/E11.pdf) records the retained archive revisions, but the final PowerShell resource was unavailable, so its final payload cannot be compared with the ClickFix or VSIX payloads.
 
 The retained current RAR has SHA-256 `7db6789c09e29305c728bf3d7b94c5ef1c3e13eef1b321ee52d3ae3997731f56`; its LNK member has SHA-256 `a44068e9758262a65861b91f2b00d0a3eca019d3b35543dd60c1c7f2e0ba1952`. The [artifact reference](../../artifacts/) lists the earlier archive revisions, LNKs and analyst-decoded stage-two hashes as well.
 
-The delivery repositories do have a documented connection. The restricted catalogue of 172 public repositories examined on 24 July placed ECHOES and the weaponised `predict-together` copy under the same account. Those two and one further assessment repository were the only three catalogued repositories carrying delivery kits. The catalogue is discussed in the [paper](../../downloads/UNK_DeadDrop-Preprint.pdf) but is not reproduced in the public evidence exhibits.
+The delivery repositories do have a documented connection. The restricted catalogue of 172 public repositories examined on 24 July placed ECHOES and the weaponised `predict-together` copy under the same account, and those two and one further assessment repository were the only three catalogued repositories carrying delivery kits; the catalogue is discussed in the [paper](../../downloads/UNK_DeadDrop-Preprint.pdf) but is not reproduced in the public evidence exhibits.
 
-That connects account control and delivery staging, not the missing final payload. ECHOES contributes a distinct entry route: a password-protected archive and shortcut lead to PowerShell, while repository-held retrieval settings change across revisions. ClickFix instead relies on a pasted command, and the VSIX route relies on editor tasks and extension installation. Their shared use of repository staging does not make their downstream capabilities interchangeable.
+That connects account control and delivery staging. Not the missing final payload. ECHOES contributes a distinct entry route: a password-protected archive and shortcut lead to PowerShell, while repository-held retrieval settings change across revisions; ClickFix instead relies on a pasted command, and the VSIX route relies on editor tasks and extension installation, yet their shared use of repository staging does not make their downstream capabilities interchangeable.
 
 ## Four archive revisions from March
 
-The repository history records archive changes on 5 March, on 17 March and twice on 25 March 2026, and the retained analysis compares the repeated decoy images, encoding structure, retrieval configuration and task tags across all four. In order, with all times in UTC:
+I compared four archive revisions: one from 5 March, one from 17 March and two from 25 March 2026, and the comparison followed the decoy images and encoding structure, then checked retrieval settings and task tags. In order, with all times in UTC:
 
 1. `03f1795d`, 5 March, 06:17: the earliest retained retrieval configuration, with a DDD task tag.
 2. `ded13153`, 17 March, 05:14: a different account and repository destination.
 3. `b209f365`, 25 March, 03:54: another repository destination, with the tag changed to WORD and a VBS persistence layer added.
 4. `4b6ea6b2`, 25 March, 13:29: a further destination change and a new access token, with the staging otherwise unchanged.
 
-The third revision changed both retrieval and persistence; the fourth retained that staging while replacing the destination and access token. The embedded tokens were not used to retrieve the final stage, and their values are withheld.
+The third revision changed both retrieval and persistence; the fourth retained that staging while replacing the destination and access token. The embedded tokens were not used to retrieve the final stage. Their values are withheld.
 
 ![Four retained ECHOES archive revisions](../assets/07-echoes.png)
 
@@ -37,11 +35,11 @@ The third revision changed both retrieval and persistence; the fourth retained t
 
 The staging references led to final PowerShell resources unavailable through the unauthenticated routes. No final payload was available for capability analysis.
 
-Account status was less clear than a 404 suggested. One historical check found an unavailable account whose name was also unavailable for registration. That supports a suspension hypothesis, but does not confirm it with the platform. Neighboring numeric identifiers showed no distinctive batch-registration pattern. Consecutive IDs can belong to unrelated signups; proving common registration control would require unavailable platform data.
+Account status was less clear than a 404 suggested. One historical check found an unavailable account whose name was also unavailable for registration, which supports a suspension hypothesis but does not confirm it with the platform. Neighboring numeric identifiers showed no distinctive batch-registration pattern, and consecutive IDs can belong to unrelated signups; proving common registration control would require unavailable platform data.
 
 ## C2PA metadata in the poster
 
-The poster, identified in the case as `Post.png`, offered a very different kind of lead, because the recorded examination found a [C2PA](https://c2pa.org/specifications/) structure in its PNG `caBX` chunk. [Exhibit E14](../../evidence/E14.pdf) records the retained metadata and signature examination. Extracting the metadata and parsing its JUMBF, CBOR and certificate structures exposed the following fields:
+I also examined the retained decoy artwork. The poster, identified in the case as `Post.png`, contained a [C2PA](https://c2pa.org/specifications/) structure in its PNG `caBX` chunk, and [Exhibit E14](../../evidence/E14.pdf) records the retained metadata and signature examination; I extracted the metadata and parsed its JUMBF and CBOR structures, including the embedded certificates. The fields read:
 
 ```text
 Claim generator:  ChatGPT
@@ -52,18 +50,13 @@ Recorded certificate subject fields:
 OpenAI / Sora signing-pipeline references
 ```
 
-The manifest history records creation, conversion and ingredient-opening actions across two manifests. Its embedded thumbnail was described as a lower-resolution version of the poster.
+The manifest history records creation, conversion and ingredient-opening actions across two manifests, and its embedded thumbnail was described as a lower-resolution version of the poster. The original note reports successful signature validation. But the retained record lacks independent verifier output and certificate-status or trust-list checks, and an embedded ingredient-validation assertion is not independent verification of the later manifest. The fields describe an image pipeline. They contain no identity for the person who generated or distributed the poster.
 
-The original note reports successful signature validation, but no independent verifier output, certificate-status check or trust-list result is retained. An embedded ingredient-validation assertion is not independent verification of the later manifest. The fields describe an image pipeline; they contain no identity for the person who generated or distributed the poster.
-
-The manifest contains no prompt or user identifier, and its redacted-assertions array is empty. Those fields may never have been included; an empty redaction list is not evidence that information was removed.
-
-Other portraits examined in the case lacked the poster's C2PA structure. Re-encoding could explain that difference, but it does not prove intentional provenance removal; different export paths or source histories could produce the same result.
+The manifest contains no prompt or user identifier, and its redacted-assertions array is empty; those fields may never have been included, and an empty redaction list is not evidence that information was removed. Other portraits lacked the poster's C2PA structure. Re-encoding or a different export path could explain the difference, as could a different source image. Intentional metadata removal remains unverified.
 
 ### C2PA certificate validity ran from April 2025 to April 2026
 
-The leaf certificate was valid from 15 April 2025 to 15 April 2026, and the examination found no trusted timestamp token. Certificate validity does not establish when an artifact was signed or generated. Repository commits date when the image appears in preserved history, not when it was created.
+The leaf certificate was valid from 15 April 2025 to 15 April 2026, and the examination found no trusted timestamp token. Signing and generation times remain unknown. Repository commits date when the image appears in preserved history, not when it was created.
 
-The PNG examination found no data appended after the end marker; other forms of hidden content were not ruled out.
+The PNG examination found no bytes after the end marker, though other hiding methods were outside that check.
 
-[Companion detections and static scanner](https://github.com/KrasForge/unk-deaddrop-companion).

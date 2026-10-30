@@ -43,3 +43,7 @@ The underlying case evidence ends on 24 July 2026. Public reporting was checked 
 ## Scope
 
 The published material excludes raw contact databases, credentials, and a complete forensic sample set. Supporting PDFs are edited evidence reports derived from the restricted case material. The series does not claim successful compromise, financial loss, or real-world attribution where the artifacts do not establish those outcomes.
+
+## About the author
+
+Ilja Krasnjanski is an independent security researcher publishing as KrasForge. He studies developer recruitment lures, malware and detection methods. [More about the author](/UNK_DeadDrop/about/).
