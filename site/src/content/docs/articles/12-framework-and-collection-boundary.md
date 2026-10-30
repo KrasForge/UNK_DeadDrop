@@ -1,5 +1,5 @@
 ---
-title: "Where Overlord Ends and the Collection Toolchain Begins"
+title: "Overlord markers in the Linux agent's collection code"
 description: "Overlord build metadata, browser-store selectors, wallet-upload markers and capture components in the Linux agent."
 lastUpdated: 2026-10-25
 sidebar:
@@ -10,7 +10,7 @@ sidebar:
 
 The Linux Go agent embeds the module path `overlord-client/cmd/agent`, a WebAssembly runtime and SQLite dependencies. Its strings include browser database names, wallet-upload configuration and capture-related symbols. [E18](../../evidence/E18.pdf) documents the bounded comparison with selected upstream files, while [E05](../../evidence/E05.pdf) records the sample-specific capture findings. Those components connect a general remote-access framework to the collection functions found in this sample.
 
-## Build metadata in the Linux agent
+## The Go build records an Overlord module path
 
 The Linux amd64 artifact is 15,790,242 bytes and has this SHA-256:
 
@@ -40,13 +40,13 @@ The [Go build-setting documentation](https://go.dev/pkg/runtime/debug/?m=old) de
 
 *Figure 1. The agent combines Overlord framework markers with browser, wallet and capture-related components.*
 
-### What the upstream comparison covered
+### The upstream files shared generic framework features
 
 The July comparison inspected selected client module and configuration files. It found the shared module path, plugin support and generic transport configuration. It also recorded a newer wazero version in the examined upstream module file than the sample's v1.7.0. That difference establishes a dependency mismatch, but cannot date a fork or deployment.
 
 SQLite-related dependencies and wallet/browser markers were absent from the selected upstream files. Those files were not retained at a pinned revision, preventing a reproducible source diff. Other versions, forks and plugins were not exhaustively compared, and the authorship of these components remains unresolved.
 
-## Browser, wallet and capture components
+## Browser stores, wallet selectors, and capture symbols
 
 String examinations found `Login Data`, `Local State`, `logins.json` and `key4.db`, along with wallet names and extension identifiers. These are browser-store and collection selectors. Their presence alongside SQLite is more informative than a database dependency alone, although it does not demonstrate a successful read or decryption on a victim host.
 

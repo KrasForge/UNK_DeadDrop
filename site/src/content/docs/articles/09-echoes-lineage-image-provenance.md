@@ -1,5 +1,5 @@
 ---
-title: "Tracing the ECHOES Archive: Payload Lineage and Image Provenance"
+title: "Four ECHOES revisions, no final PowerShell payload"
 description: "Four revisions of the ECHOES lure archive, a final payload that was never recovered, and C2PA data in its poster that records an AI image pipeline."
 lastUpdated: 2026-10-29
 sidebar:
@@ -18,7 +18,7 @@ The delivery repositories do have a documented connection. The restricted catalo
 
 That connects account control and delivery staging, not the missing final payload. ECHOES contributes a distinct entry route: a password-protected archive and shortcut lead to PowerShell, while repository-held retrieval settings change across revisions. ClickFix instead relies on a pasted command, and the VSIX route relies on editor tasks and extension installation. Their shared use of repository staging does not make their downstream capabilities interchangeable.
 
-## Four versions of the same lure
+## Four archive revisions from March
 
 The repository history records archive changes on 5 March, on 17 March and twice on 25 March 2026, and the retained analysis compares the repeated decoy images, encoding structure, retrieval configuration and task tags across all four. In order, with all times in UTC:
 
@@ -33,13 +33,13 @@ The third revision changed both retrieval and persistence; the fourth retained t
 
 *Figure 1. ECHOES changed retrieval destinations across four revisions and added a VBS persistence layer in the third.*
 
-## Where the payload trail stopped
+## The final PowerShell payload was not recovered
 
 The staging references led to final PowerShell resources unavailable through the unauthenticated routes. No final payload was available for capability analysis.
 
 Account status was less clear than a 404 suggested. One historical check found an unavailable account whose name was also unavailable for registration. That supports a suspension hypothesis, but does not confirm it with the platform. Neighboring numeric identifiers showed no distinctive batch-registration pattern. Consecutive IDs can belong to unrelated signups; proving common registration control would require unavailable platform data.
 
-## The poster retained a C2PA structure
+## C2PA metadata in the poster
 
 The poster, identified in the case as `Post.png`, offered a very different kind of lead, because the recorded examination found a [C2PA](https://c2pa.org/specifications/) structure in its PNG `caBX` chunk. [Exhibit E14](../../evidence/E14.pdf) records the retained metadata and signature examination. Extracting the metadata and parsing its JUMBF, CBOR and certificate structures exposed the following fields:
 
@@ -60,7 +60,7 @@ The manifest contains no prompt or user identifier, and its redacted-assertions 
 
 Other portraits examined in the case lacked the poster's C2PA structure. Re-encoding could explain that difference, but it does not prove intentional provenance removal; different export paths or source histories could produce the same result.
 
-### Certificate validity and image dates
+### C2PA certificate validity ran from April 2025 to April 2026
 
 The leaf certificate was valid from 15 April 2025 to 15 April 2026, and the examination found no trusted timestamp token. Certificate validity does not establish when an artifact was signed or generated. Repository commits date when the image appears in preserved history, not when it was created.
 

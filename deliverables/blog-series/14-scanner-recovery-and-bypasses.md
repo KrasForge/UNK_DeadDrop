@@ -1,5 +1,5 @@
 ---
-title: "When a Decoder Returns the Wrong Strings"
+title: "Array splicing broke string recovery"
 description: "A changed array-rotation loop exposed incorrect recovery, while eighteen of nineteen small variants evaded a rule, lowered severity or defeated decoding."
 date: "2026-10-29"
 author: "Ilja Krasnjanski"
@@ -23,7 +23,7 @@ It was one of nineteen single-change variants tested against the evaluated engin
 
 *The failing variant bypassed checksum evaluation because its array mutation was not recognized. The returned strings were wrong, not unresolved.*
 
-## Following the checksum
+## The loader rotates its string array before decoding
 
 The extension analysed in [Part 3](03-acorn-deobfuscation.md) hides strings behind decoder calls into an encoded array. The program reorders that array before using it. If an analyst decodes the calls against the original order, the output may still look plausible while pointing to a false module name or URL.
 
@@ -35,7 +35,7 @@ If the loop is recognised but the checksum cannot be solved, the scanner can com
 
 The `splice` fixture revealed a different problem. The scanner never identified its loop as rotation code, so the unresolved-checksum path never ran. It fell through to the no-rotation case. The mistake was in the scanner's view of the code, before checksum evaluation began.
 
-## What the other changes broke
+## Clipboard, Electron, loader, and rotation variants
 
 I also changed aliases, bindings and API shapes in the test fixtures. The table gives the result from the frozen engine:
 
@@ -55,7 +55,7 @@ Some misses are deliberate limits. The evaluator leaves reassignable `var` and `
 
 The pattern-specific findings are still useful when the observed code is reused. They do not make the behaviour hard to rewrite. The companion scanner's broader benchmark in [Part 13](13-scanner-registry-benchmark.md) puts this in context: low alert volume on ordinary packages coexists with poor coverage of generic malware.
 
-## A wrong answer needs a different response
+## A `splice` loop returned strings from rotation zero
 
 When a decoder remains unresolved, the gap is visible. When it returns a plausible but incorrect string, an analyst may follow the wrong lead. The `splice` result therefore deserves its own regression test and a fix that covers additional rotation operations.
 
@@ -67,7 +67,7 @@ For now, treat recovered strings as leads to inspect against their call sites, a
 
 [Companion detections and static scanner](https://github.com/KrasForge/unk-deaddrop-companion).
 
-## What changed after the frozen run
+## Eighteen variants now match their baseline results
 
 After recording those results, I changed the engine to cover the structures the fixtures exposed. The evaluator now follows `var` and `let` bindings when it can show they are never reassigned in the declaring scope. It also handles constant `atob` and `Buffer.from` calls, known-array spreads into functions such as `String.fromCharCode`, and `eval` when the argument is a constant function name. It still leaves other dynamic text unevaluated.
 

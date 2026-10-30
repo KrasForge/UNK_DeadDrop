@@ -1,5 +1,5 @@
 ---
-title: "Beyond Screenshot Strings: Reconstructing Screen Capture"
+title: "Screen capture in the Go agent and Windows bundle"
 description: "Frame-comparison symbols in the Linux Go agent, a Windows capture bundle, and the desktop access each requires."
 lastUpdated: 2026-10-25
 sidebar:
@@ -12,7 +12,7 @@ The Go implant contains symbols for capturing a display, retaining a previous fr
 
 No capture session was recorded. The available evidence comes from the native binary, the Windows bundle and its installer, leaving achieved frame rate, bandwidth and desktop access unmeasured. The symbol and dependency observations are recorded in [E05](../../evidence/E05.pdf); [E18](../../evidence/E18.pdf) explains why the earlier dependency-only assessment did not rule out capture code.
 
-## Frame comparison in the Go agent
+## Frame comparison in the Linux Go agent
 
 The Go symbols included the following group:
 
@@ -31,7 +31,7 @@ The symbols do not establish exact block dimensions or how often the capture loo
 
 *Figure 1. Previous-frame storage and block comparison suggest transmission of changed regions between captures.*
 
-## The Windows capture bundle
+## Screen-capture components in the Windows bundle
 
 The Windows bundle supplies a separate set of components:
 
@@ -44,11 +44,11 @@ The installer checks for the capture files and raises an error if they are missi
 
 The Windows dependencies and Go symbols come from different artifacts. They suggest similar capture and transfer functions, but do not establish a shared implementation across operating systems. For the Windows branch, the installed bundle, task action and process session would be the starting points for determining whether capture actually ran.
 
-### The TLS key-log strings
+### The Go symbols identify TLS key logging
 
 Three other matches in the Go binary were `writeKeyLog`, `KeyLogWriter` and `crypto/tls.(*Config).writeKeyLog`. Their surrounding names identify TLS key logging. None of those matches provides evidence of keyboard interception; no keyboard hook was established by this search.
 
-## Hunting for the capture component
+## The capture rule requires Overlord and four symbols
 
 The [capture-agent YARA rule](https://github.com/KrasForge/unk-deaddrop-companion/blob/main/rules/yara/deaddrop_capture_agent.yar) requires an Overlord environment marker and four capture-related symbol strings. It can locate files containing that combination for further inspection. Its match does not establish that a desktop was accessed or that frames reached a server.
 

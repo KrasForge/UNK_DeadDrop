@@ -1,5 +1,5 @@
 ---
-title: "Parsing Without Executing: JavaScript Deobfuscation with Acorn"
+title: "Recovering the VS Code extension's AES key without running it"
 description: "Rebuilding an AES key from sixteen obfuscated fragments with Acorn, and proving it with authenticated decryption without ever running the malicious extension."
 lastUpdated: 2026-10-29
 sidebar:
@@ -12,7 +12,7 @@ The VSIX loader assembled one AES key from sixteen fragments: nine decoder calls
 
 All three encrypted payloads passed GCM authentication under the reconstructed key. The recovered components and authentication procedure are recorded in [Exhibit E04](../../evidence/E04.pdf). [Proofpoint's report](https://www.proofpoint.com/us/blog/threat-insight/dont-fear-repo-unkdeaddrop-phishing-campaign-targets-developers-steal) also documents the key and Windows architecture.
 
-## Start with the calls around the key expression
+## Wrapper calls hide the key's construction
 
 The key assignment combines literals with calls to several wrapper functions. A wrapper may change the index, reorder its arguments or add an offset before invoking the underlying decoder, so each call must be traced through its wrapper. The July analysis identified seven wrappers in the bootstrap and five in `extension.js`. Each needed three fields mapped:
 
@@ -24,7 +24,7 @@ What offset is applied before the underlying call?
 
 A regex that expects every wrapper to return a decoder call immediately can miss a function that first declares an intermediate value. [Acorn](https://github.com/acornjs/acorn) represents both statements in the syntax tree. It does not solve the decoder automatically, but it provides a more reliable structure to inspect than text patterns.
 
-### Parsing an obfuscated wrapper
+### One wrapper assigns a temporary value
 
 This synthetic example parses a wrapper containing a declaration before its return statement:
 
@@ -65,13 +65,13 @@ The string array had been rotated, so a valid-looking index could point to the w
 
 The recorded offsets were 391 for the extension and 261 for the bootstrap. The selected candidate produced printable decodes at 15 of 15 tested sites; the runner-up produced 3 of 15. That gap was useful, but printability remained a heuristic. The next checks were whether each string fit its call context and whether the key fragments could be reconstructed in source order. The encrypted payloads would provide a stronger validation.
 
-### Rebuilding the sixteen fragments
+### Putting the sixteen fragments back in order
 
 The key expression combined nine decoder results with seven literal fragments. Recovering their values was only half the work; the fragments also had to be concatenated in the original order, including values nested inside parenthesized additions.
 
 A small bounded evaluator concatenated string literals and already-decoded values in source order. The recovered key could then be checked against the encrypted payloads.
 
-## From authenticated payloads to triage
+## Authenticated decryption verifies all three payloads
 
 The loader specified the encrypted blob layout directly:
 
@@ -87,7 +87,7 @@ With the corrected operation, all three payloads passed authentication: `detect_
 
 All three payloads decrypted to readable, commented source. Authentication tied each plaintext to its encrypted input under the recovered parameters, but did not establish that a payload ran or collected data. Those remain runtime questions.
 
-### From one recovery to a reusable scanner
+### The scanner uses the checksum loop to find the rotation
 
 The manual analysis selected a rotation by comparing printable output across call sites. The later scanner uses another feature of the same obfuscation: a loop that decodes numeric-looking strings, combines them with `parseInt` and shifts the array until the checksum equals an embedded constant.
 

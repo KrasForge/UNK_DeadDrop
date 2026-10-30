@@ -1,5 +1,5 @@
 ---
-title: "Building and Testing Detections for UNK_DeadDrop"
+title: "Testing 33 YARA rules against the retained artifacts"
 description: "Thirty-three YARA rules replayed against retained artifacts, followed by a separate noise review and static scanner evaluation."
 lastUpdated: 2026-10-29
 sidebar:
@@ -12,7 +12,7 @@ The published companion snapshot contains 33 named YARA rules in 28 files. Every
 
 The [companion repository](https://github.com/KrasForge/unk-deaddrop-companion) contains file-content rules and a parse-only JavaScript scanner. It no longer includes the event rules or workspace-configuration rules: authentic endpoint logs and the original `.vscode` task and settings files were not available for replay. Synthetic event records and invented configuration files would show how a rule behaves, not whether it matches the collected targets.
 
-## A content match is not an execution finding
+## The wallet-agent rule matched the held Go binary
 
 The wallet-agent rule is a useful example. It now requires ELF magic at byte zero, a file smaller than 64 MiB, an Overlord module path, a server-environment marker and at least two wallet-collection strings. The combination matched the held Go agent. Removing the header or one required marker category gives a negative result in the inert boundary tests.
 
@@ -22,7 +22,7 @@ The earlier rule version matched a harmless fixture with the complete marker set
 
 *Figure 1. Every wallet-agent condition is required. The retained rules matched case artifacts, while the local software baseline and marker-rich prose fixture had no hits.*
 
-## Replay against retained files
+## The replay covered 192 files and 395 views
 
 The read-only replay covered 192 selected files: the 15 directories marked `DO-NOT-RUN`, compressed lure bundles, related web assets, extracted VSIX components and agent archives, source files, and six retained lure messages. The helper read ZIP, VSIX, TAR, gzip and nested ZIP content in memory without writing extracted files. It evaluated 395 raw or archive-member views totaling about 234 MB; all 33 named rules in 28 files matched at least once. At least one rule matched 90 input files, while 102 had no hits. Counts include copied variants and nested archive views, so they are not independent samples or incidents. [Exhibit E15](../../evidence/E15.pdf) records the companion snapshot and validation scope. No file was executed.
 
@@ -32,7 +32,7 @@ Workspace-file signatures remain absent because neither the original `.vscode/ta
 
 The companion's [artifact-validation report](https://github.com/KrasForge/unk-deaddrop-companion/blob/main/docs/actual-artifact-validation.md) lists per-rule match counts and corpus limits. Its [detection notes](https://github.com/KrasForge/unk-deaddrop-companion/blob/main/docs/detection-notes.md) document what each condition does and does not establish.
 
-## A limited software baseline
+## No matches in 1,914 local software files
 
 The second scan covered 1,914 files and about 59.2 MB across 2,379 raw and nested object views from the local CPython standard library, installed Python packages, global npm packages and Acorn. No retained rule matched. The 19 Markdown articles and companion notes also produced no hits after source-oriented conditions were narrowed to avoid prose collisions. This is a small local baseline, not a representative or independently curated clean endpoint corpus, so it does not provide a fleet false-positive rate or a production precision estimate.
 
@@ -40,7 +40,7 @@ The prose fixture remains important alongside that zero-hit result. It records a
 
 A later local review covered 177 case inputs, 380 views and 344 distinct objects. Seven source rules were narrowed after collisions in selected research, dual-use tooling, ordinary software, installed software and upstream-fork controls. Every previous case-artifact match was preserved, and the seven revised forms had no hits in the external controls scanned. This bounded control set does not estimate a production false-positive rate; the revisions remain separate from the public companion snapshot.
 
-## The scanner needs a different evaluation
+## YARA matches byte patterns; unk-scanner parses JavaScript
 
 The YARA replay measures whether particular bytes match the signatures. `unk-scanner` instead parses JavaScript and follows selected expressions, string decoders and launch structures. A file can match a content signature while the scanner misses its behaviour, or produce a scanner warning because it uses obfuscation that also appears in legitimate software.
 
@@ -50,7 +50,7 @@ Sensitivity tells a different story. Only 62 of 2,122 known-malicious samples ra
 
 [Part 13](../13-scanner-registry-benchmark/) covers corpus selection, review depth, parser coverage and throughput. [Part 14](../14-scanner-recovery-and-bypasses/) examines nineteen small variants, eighteen of which evaded a rule, lowered severity or defeated string recovery, and a hardened engine that later closed all but one of them without adding error-level findings on the same corpora. These results concern the scanner, not the 33 YARA rules or their earlier control set.
 
-## Supplying the bytes a rule expects
+## Rule matches depend on the bytes given to YARA
 
 YARA input representation matters just as much. A rule for decrypted JavaScript needs those plaintext bytes; a rule for a VSIX member needs the member supplied to the engine. Scanning an outer compressed package alone is not equivalent to the archive-member replay above. Consult each rule's target and match conditions before choosing a sample. Uploading a custom rule to a hunting service also does not prove that its separate manual file-scan feature uses that rule set.
 

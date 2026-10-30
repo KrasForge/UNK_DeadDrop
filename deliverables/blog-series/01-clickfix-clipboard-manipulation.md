@@ -1,5 +1,5 @@
 ---
-title: "Anatomy of a Developer Lure: ClickFix Clipboard Manipulation"
+title: "The copy button changes the command"
 description: "How a fake recruitment verification page replaces a copied command with one that also runs an installer, and what that means for detection."
 date: "2026-10-24"
 author: "Ilja Krasnjanski"
@@ -21,7 +21,7 @@ That is the ClickFix technique: a web page persuades someone to paste and run a 
 
 [Proofpoint tracks the cluster as UNK_DeadDrop](https://www.proofpoint.com/us/blog/threat-insight/dont-fear-repo-unkdeaddrop-phishing-campaign-targets-developers-steal). Its reporting, together with [Denys Vitali's earlier investigation](https://blog.denv.it/posts/i-was-likely-targeted-by-dprk-in-a-sophisticated-developer-malware-campaign/), provides context for the editor-based branch in the next post. Unit 42's [research on fake-recruiter campaigns delivering BeaverTail and InvisibleFerret](https://unit42.paloaltonetworks.com/north-korean-threat-actors-lure-tech-job-seekers-as-fake-recruiters/) describes the wider pattern of job-themed lures aimed at developers. The W3C [Clipboard API specification](https://www.w3.org/TR/clipboard-apis/) defines the copy event that allows a page to replace selected text.
 
-## The verification page
+## The command shown to candidates
 
 The recovered lures use recruitment and technical-assessment themes. Their verification flow asks the candidate to copy a command, enter or use an access phrase, and return the terminal's output. The command does print the promised verification result while also attempting to install a payload. That makes the exchange more convincing than a page that asks someone to run an unexplained command: the page and terminal appear to agree, and the candidate gets the expected output to submit.
 
@@ -35,7 +35,7 @@ The same clipboard kit appeared under later covers. July captures preserve an Al
 
 *Figure 1. The copied command combines the verification output with an installation attempt.*
 
-### The command changes on copy
+### Copying changes the terminal command
 
 The copy handler served by `d2saitrade[.]ink` replaces the clipboard contents in a few lines. Only line breaks have been added to this excerpt:
 
@@ -59,7 +59,7 @@ The generated command differs by platform. On macOS and Linux, it starts a backg
 
 The verification result is part of the lure's feedback loop. A candidate who checks only for the expected prefix can miss the second behavior in the same command. The nonce and phrase may distinguish one verification exchange from another, but the frontend does not show what the backend accepts. A returned code therefore does not prove that installation succeeded.
 
-## The first payload comes from the lure's own origin
+## The installer uses the lure site's origin
 
 Rather than embedding a single fixed download hostname, the URL builder uses `window.location.origin`, which means the first-stage URL is constructed relative to whichever site happens to be serving the lure. The recorded names include:
 
@@ -76,7 +76,7 @@ The bundle references `/device-check`, `/verify`, `/complete` and `/track-activi
 
 The telemetry records a copy action before any terminal execution. Neither that event nor the verification output confirms installation; no backend infection log was recovered.
 
-## Detection opportunities
+## Signals in the page's JavaScript
 
 The useful browser-side signal is the combination of a verification interface, a copy handler and an argument that leads to installation logic. The word “verify,” a clipboard API or a download helper alone is weak evidence.
 

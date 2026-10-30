@@ -1,5 +1,5 @@
 ---
-title: "Inside the Collector: Browser Credentials and Wallet Files"
+title: "Browser credentials, wallet material, and private-key files"
 description: "How the collector selects browser stores, wallet material and recovery files, and what limits its reach."
 lastUpdated: 2026-10-25
 sidebar:
@@ -10,7 +10,7 @@ sidebar:
 
 The collection code reaches beyond browser passwords. Its third upload variant searches the home directory for filenames associated with seeds, recovery material, credentials and tokens, while another selector includes encrypted KeePass databases. The source also sets explicit traversal budgets and skips selected inaccessible directories. These conclusions come from the recovered scripts and the limits recorded in [E05](../../evidence/E05.pdf) and [E17](../../evidence/E17.pdf). Access permissions, traversal limits and file encryption constrain what it can recover.
 
-## Browser collection has several steps
+## Browser databases and saved credentials
 
 The Windows collection path splits across a Node agent, a coordinator and a Python browser-decryption component. Copying a browser database is one step; recovering its encryption material and extracting usable credentials is another. MITRE ATT&CK classifies this activity as [Credentials from Web Browsers (T1555.003)](https://attack.mitre.org/techniques/T1555/003/).
 
@@ -20,7 +20,7 @@ The Python source handles DPAPI-related key recovery and browser elevation servi
 
 *Figure 1. Filename selection, file access, decryption and upload form separate stages of collection.*
 
-### Phase three searches filenames
+### Phase 3 searches filenames under the home directory
 
 The large JavaScript collector accepts three upload variants, `main`, `pass` and `phase3`, and it is the third of these that walks the home directory looking for candidate files whose names and extensions match its selection logic. The recorded filename expression includes:
 
@@ -56,7 +56,7 @@ Is this a protected top-level directory on macOS?
 
 The walker skips protected directories when its readability probe fails or times out. Access still depends on the process's existing permissions and may produce a privacy prompt; no TCC bypass was established.
 
-### KeePass is caught by an extension selector
+### `.kdbx` appears in the generic file selector
 
 Two of the larger JavaScript payloads include `.kdbx` in a generic set of private-key extensions:
 
@@ -69,13 +69,13 @@ const KEY_EXTENSIONS = new Set([
 
 This selector can collect an encrypted KeePass database without a dedicated KeePass module. The examined code does not establish a KDBX parser, master-password recovery routine or in-malware unlock operation.
 
-## Uploads and the framework boundary
+## Uploads use 2 MiB chunks and disable certificate checks
 
 The transfer code uses a default 2 MiB chunk size and a five-retry setting. A separate upload-until-success routine repeats attempts with delays capped at 120 seconds. The inspected HTTPS request path also disables certificate verification. These settings describe intended delivery behavior; retries do not guarantee transfer if the destination is unreachable.
 
 The Go agent carries the Overlord module path, WebAssembly runtime and transport features alongside SQLite dependencies and wallet/browser markers. The [framework analysis](../12-framework-and-collection-boundary/) examines these components and the limits of the available upstream comparison. The companion's [wallet-agent YARA rule](https://github.com/KrasForge/unk-deaddrop-companion/blob/main/rules/yara/deaddrop_wallet_agent.yar) combines framework and environment markers with wallet-related strings, while its [stage-three collector rule](https://github.com/KrasForge/unk-deaddrop-companion/blob/main/rules/yara/deaddrop_stage3_collector.yar) targets the recovered source. A match does not establish that the collector ran or completed an upload.
 
-## From selected files to exposure
+## No victim-side upload inventory was recovered
 
 For response, the useful questions are which component ran, which phase it reached, and which files were accessible in that execution context. The source does not provide a victim-side inventory or a record of completed uploads.
 

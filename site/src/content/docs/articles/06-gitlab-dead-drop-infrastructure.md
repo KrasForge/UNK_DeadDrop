@@ -1,5 +1,5 @@
 ---
-title: "Following the GitLab Dead Drop: Configuration Changes and C2 History"
+title: "GitLab's resolver changed the server list"
 description: "How a GitLab-hosted configuration file let the UNK_DeadDrop operators change servers without new payloads, and what its revision history reveals."
 lastUpdated: 2026-10-29
 sidebar:
@@ -16,7 +16,7 @@ The [historical indicator reference](../../indicators/) lists every recorded res
 
 The later July installer family used a separate mechanism. Its `upd_m`, `upd_w`, `upda_m` and `upda_w` droppers embedded `api.aazdias[.]ink` as the primary store and `api.fallaazdis[.]ink` as the fallback. Those values came from the recovered dropper configuration, not from the GitLab `config.json` history. The origin association to `207.241.172[.]222` came from dated certificate and passive-scan observations, not a direct fetch from that address.
 
-## The resolver
+## The payload fetches `config.json` from GitLab
 
 The payload references this resource:
 
@@ -32,7 +32,7 @@ A payload with the same hash can receive different destinations depending on whe
 
 *Figure 1. The referenced configuration changed in May and July. A separate file was added in June, but no retained payload references it.*
 
-### Reconstructing the changes
+### Five May revisions, then a new server pair in July
 
 The primary file has five recorded revisions on 26 May, beginning with an initial set of `domatisc[.]ink`, `coslyintra[.]online` and `valorecuiting[.]online`, after which subsequent edits remove and restore an entry, introduce `api.` prefixes, and finally leave a set of two hosts. The recorded states after that, in order, are:
 
@@ -46,7 +46,7 @@ The configuration resource lets a destination change independently of the payloa
 
 Blocking a destination can interrupt traffic, while a client that consults this configuration resource may receive another address. Connection records are needed to establish which destination an affected client actually used.
 
-## From the host list to the origin
+## A July hostname linked to a reported origin
 
 The July analysis associated `207.241.172[.]222` with C2 and administration services. The analysis notes report a certificate naming `api.cklomino[.]ink` and a third-party bare-IP scan returning a Subtensor sign-in panel. The raw scan responses and certificate were not retained. The panel HTML and JavaScript available for inspection were retrieved from `api.domatisc[.]ink`, so they cannot independently reproduce the reported response from the bare IP.
 
@@ -54,13 +54,13 @@ The panel adds an application-level association to the certificate evidence. Fur
 
 The July observations associated `207.241.172[.]222` with C2 and administration, `170.205.31[.]182` with lure hosting, and `23.137.105[.]75` with earlier C2 infrastructure. These roles describe the recorded periods; current availability and ownership were not checked.
 
-### SSH fingerprints and hosting scope
+### The SSH host-key search found no new address
 
 The saved service enumeration listed SSH, HTTP and HTTPS. Its SSH profile included a host key, banner and handshake information, but these had different value as search pivots. The common OpenSSH banner and handshake fingerprint matched broad populations of hosts. The more selective host key returned only the address already known. That negative search result does not prove the operation had no backup host.
 
 The reported panel response did not enumerate every tenant at the address. Other services may have shared the address, so an IP block could affect unrelated traffic.
 
-### Certificates as a maintenance log
+### The 23 July certificates added hostnames
 
 The 23 July certificate enumeration added names that were absent from the inspected payloads: a `dashboard` host on the cklomino base, `dev` and `hr` mail subdomains on lure domains, and a `hiring` host alongside a career-themed API. The [indicator reference](../../indicators/) records the names and first-issuance dates. These records identify certificate names, not proof that each host served a malicious application.
 

@@ -1,5 +1,5 @@
 ---
-title: "What 2.8 Million Files Revealed About unk-scanner"
+title: "Two false alarms, low coverage of public malware"
 description: "Two false alarms in recently changed npm packages, low coverage of public malware, and what a larger static-analysis benchmark actually measures."
 date: "2026-10-29"
 author: "Ilja Krasnjanski"
@@ -23,7 +23,7 @@ The results and sampling details are in the [scanner paper](../scanner-paper/UNK
 
 *The error count stays low on popular and recent code, while most known-malicious samples receive no warning. Counts are not directly comparable because the corpus units differ.*
 
-## From a development set to three corpora
+## npm, Open VSX, and public malware corpora
 
 The first check covered 2,500 npm packages ranked by `npm-high-impact` and 500 Open VSX extensions ranked by downloads. That produced 143,153 distinct files. I had already used this material to tune severity, so it was useful for finding noisy rules, but it could not tell me how the same choices would behave on other code.
 
@@ -39,7 +39,7 @@ The first collection included 188,901 files absent from the calibration set. The
 
 I changed escalation to require the hidden execution in the launching function or a local helper it calls. The change cleared those four findings and preserved the severities of the retained UNK_DeadDrop files. I then froze the engine for the reported scans. Because those Tier 1 files informed a rule change, the final result is disjoint from the original calibration corpus but is not an untouched held-out measurement.
 
-## Reading the two errors
+## Two benign packages triggered error alerts
 
 The registry changes feed selected packages whose documents changed over a window of about 83,000 sequence positions. Most changes occurred on 29 October. The scan found 6,215 warnings and two errors among the 19,976 packages acquired.
 
@@ -53,7 +53,7 @@ Clipboard and hidden-script warnings received code review. I also read five Elec
 
 Two error findings in 19,976 packages amounts to about 0.01% of packages needing error review in this scan. That number describes this window and this rule set. It is not a fleet false-positive rate.
 
-## What the malware set did to the result
+## Alerts reached 62 of 2,122 malware samples
 
 The public malware set changed the interpretation of the low alert count. I counted a sample as detected if any file in it raised a warning or error.
 
@@ -63,7 +63,7 @@ The warnings came from obfuscated string arrays and hidden-script launches. Most
 
 The retained campaign files show that the scanner recognises the structures it was built from. That is useful when the code is available and resembles the observed samples. It does not counter the broader malware result, because those retained files informed the rules. Even within the case, the Windows Node agent raised only notes. Its absence of a warning is a miss, not a change in what the agent does.
 
-## Parsing and speed
+## Acorn and Babel parsed 330,473 files
 
 The scanner tries Acorn first, then an AST-only Babel fallback for supported TypeScript and JSX syntax. In the popular-software collection it parsed 330,473 of 332,054 files. Of the 1,576 parse failures, most were TypeScript. None parsed under the independent Babel configuration we tested; that does not prove they are invalid in their original build toolchains. Five inputs were not valid UTF-8.
 

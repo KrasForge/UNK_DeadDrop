@@ -1,5 +1,5 @@
 ---
-title: "How a Malicious VSIX Uses the Signed Editor Runtime"
+title: "A folder-open task in the VS Code project"
 description: "How a fake Google Update Support extension installs collection components and turns the editor's own Electron binary into a Node interpreter on Windows."
 date: "2026-10-25"
 author: "Ilja Krasnjanski"
@@ -23,7 +23,7 @@ The July repository review identified weaponized copies at `github[.]com/Lyracar
 
 [Proofpoint's UNK_DeadDrop analysis](https://www.proofpoint.com/us/blog/threat-insight/dont-fear-repo-unkdeaddrop-phishing-campaign-targets-developers-steal) documents the VSIX route and Windows architecture also present in this package. Jamf Threat Labs has separately documented [threat actors abusing Visual Studio Code](https://www.jamf.com/blog/threat-actors-expand-abuse-of-visual-studio-code/), and the editor's own [task documentation](https://code.visualstudio.com/docs/debugtest/tasks) and Electron's [environment-variable reference](https://www.electronjs.org/docs/latest/api/environment-variables) describe the two legitimate features this chain repurposes.
 
-## The project is the installer
+## A `folderOpen` task points to the installer
 
 The repository task uses `runOn: folderOpen` and points into an ordinary-looking project directory. Workspace trust and task permissions still apply, so its presence does not mean every editor runs it automatically.
 
@@ -69,7 +69,7 @@ The deployment reads server and client values from configuration, so the same VS
 
 The nested agent archive contains Go binaries for macOS arm64, macOS amd64 and Linux amd64. Their hashes match samples identified in the case's comparison with prior reporting. The Windows branch does not depend on dropping those binaries. The encrypted Windows modules and their recovered hashes are documented in [E04](../preprint/evidence/E04.pdf).
 
-## Three encrypted files reveal the Windows path
+## Three encrypted scripts inside the VSIX
 
 Static deobfuscation recovered three readable components from the package:
 
@@ -83,13 +83,13 @@ The recovered builder constructs a PowerShell script that requests an elevated C
 
 Similar builder code appears in the ClickFix stage-three script, linking the implementations across the two delivery routes. [E19](../preprint/evidence/E19.pdf) records the relevant source spans. Their failure paths also show that elevation may not succeed: the VSIX pipeline can fall back to RunAs, which may display a consent prompt; ClickFix retries and uses a sentinel to check for completion. Whether elevation succeeds depends on Windows version, user privileges, policy and process context. These paths were analyzed statically; their runtime outcomes were not reproduced.
 
-### Why the elevated process can still be the editor
+### The extension launches the editor binary as Node
 
 The source sets `ELECTRON_RUN_AS_NODE` and invokes the editor executable with an agent-script path. `process.execPath` supplies the executable location from inside the extension. The code uses the editor binary as a Node interpreter for collection code supplied by the chain, rather than its normal startup code. MITRE ATT&CK tracks this behavior as [Electron Applications (T1218.015)](https://attack.mitre.org/techniques/T1218/015/).
 
 A process name or publisher check is incomplete here. A legitimate signature authenticates the editor executable, not every script passed to it. On an endpoint, investigate the transition: the editor launching an elevation helper, then an unexpectedly elevated interpreter with a collection-script argument, then access to browser or wallet data. Decryption remains a separate condition; elevation alone does not prove that a password was recovered.
 
-## The same project, pitched to people who do not write code
+## Recruitment email in the clean repository
 
 The weaponised `predict-together` copy has a clean twin, and the email template stored beside that twin shows that the operators were not only writing to developers. The template, kept in the clean repository on the operators' main GitHub account, invites "designers, project managers, founders, and builders" to review an open-source market-analysis platform in Cursor, and it reduces the task to four steps that take "about 30 minutes": clone the repository, open it in Cursor and analyze it with AI, write a few prompts, and send them back. "No coding needed," the message says, "just use the AI to read the code," and it offers payment, a Cursor Ultra license or a place on the team to anyone whose feedback is good enough. The repository link in the template is a placeholder, which fits a message designed to be filled in with a different repository for each send. The placeholder does not show which copy any particular recipient received.
 
@@ -97,7 +97,7 @@ The public repository is convincing on its own terms, a working FastAPI and Reac
 
 What makes this framing different from the take-home test is who it is aimed at and what it asks them to hand over. A developer told to run a coding exercise still reads the project and might notice a strange task or install hook, but a designer told that no coding is needed has been asked, in effect, to let the editor and its agent act without reading anything at all. In the weaponised copy, the folder-open task is the mechanism this case actually retained. The other paths an agentic editor offers, such as devcontainer hooks, rule files or injected instructions the agent obeys, a workspace MCP server, or a poisoned dependency installed when the agent is asked to "get it running", are plausible variants and are not observed here. The review used the public repository and the retained weaponised copy, not a message received by a target, so the exact copy and configuration sent to any individual remain unknown. I have not seen this non-coder framing in the public reporting cited in this series. The defensive conclusion is that an unsolicited request to open a repository in an AI editor deserves the same suspicion as a request to paste a command into a terminal. Untrusted workspaces should be opened with automatic task execution, agent auto-run modes and workspace-supplied MCP configuration turned off, preferably in a disposable machine that holds no wallet keys, SSH keys, browser profiles or `.env` secrets.
 
-## What to preserve on an endpoint
+## Inspect the extension path and process arguments
 
 Repository-only review can miss the installed extension; a hunt limited to native binaries can miss the JavaScript Windows branch. Preserve task definitions, editor and agent configuration directories, workspace settings, extension metadata, script arguments, process ancestry and any resulting persistence. The extension identifier and package hash provide exact selectors. The editor-to-interpreter transition gives responders a behavior to investigate when names or builds change.
 

@@ -1,5 +1,5 @@
 ---
-title: "From Three Phishing Emails to a Connected Investigation"
+title: "Three phishing lures and their different delivery paths"
 description: "The pivots linking recruitment messages, delivery artifacts, payload configuration and supporting software."
 lastUpdated: 2026-10-25
 sidebar:
@@ -12,7 +12,7 @@ Three recruitment messages started the investigation: a Nodit-themed lure receiv
 
 Several connections are explicit in the code: a copy handler calls a command builder, a task invokes an installer, and sender configuration names database files. Other relationships rely on historical infrastructure observations or compatible functions in separately recovered software. No endpoint or backend record reconstructs a complete infection and collection sequence.
 
-## Two delivery routes
+## A copy handler, an editor task, and a passworded archive
 
 In the [browser route](../01-clickfix-clipboard-manipulation/), a verification page changes the command placed on the clipboard. Its copy handler passes a nonce, phrase and operating-system value to a builder that adds installation logic while preserving the promised `VERIFY-` output. The first-stage download location comes from the page's origin, allowing the same frontend to work on different lure hosts.
 
@@ -28,7 +28,7 @@ The message-header review also identified Mailgun VERP envelope behavior for the
 
 *Figure 1. Code references, configuration values and historical observations connect the recovered components.*
 
-## Configuration and infrastructure
+## Resolver edits point to two July server generations
 
 The [GitLab resolver](../06-gitlab-dead-drop-infrastructure/) separates destination settings from deployed payloads. The retained history records changes to `config.json` and a separate `config-alt.json` file, but no retained payload references the latter. On 13 July, the referenced `config.json` set changed to `api.cklomino[.]ink` and `api.dsfmot[.]xyz` ([E07](../../evidence/E07.pdf)). A payload hash alone cannot identify which configuration a client fetched.
 
@@ -50,7 +50,7 @@ The main connections are:
 
 The [historical indicator reference](../../indicators/) collects the exact hostnames, paths and IP observations behind these links, with the evidence type and uncertainty recorded for each. The [artifact reference](../../artifacts/) gives file hashes for the samples and archive revisions used in the pivots.
 
-## Targeting data and administration software
+## Separate contact pools and wallet fields
 
 The [harvester](../07-developer-target-harvesting/) searches repositories by star range and extracts author and committer addresses from branch histories. Sender configuration names two SQLite pools containing 142,365 distinct stored address strings associated with 27,698 repository values ([E08](../../evidence/E08.pdf)). The counts quantify the available targeting material. Missing send logs and endpoint records prevent a count of recipients contacted or systems compromised.
 
@@ -58,7 +58,7 @@ The separately recovered [rms-platform frontend](../08-administration-platform/)
 
 [ECHOES](../09-echoes-lineage-image-provenance/) preserves a different delivery branch. Four archive revisions show repeated artwork and staging, changing retrieval destinations and a VBS persistence addition. Its final PowerShell payload was unavailable through the unauthenticated routes examined. The retained stages therefore cannot establish whether it deployed the Go agent, JavaScript collector or another payload.
 
-## Leads that did not survive
+## Three leads that fell apart on review
 
 Several connections that looked strong in the middle of the investigation fell apart when they were checked properly. They are recorded here because each one, if left alone, would have put somebody else's infrastructure or somebody else's name into the indicator set.
 
@@ -68,7 +68,7 @@ A family of domains, most of them registered in September 2025 and hosted with t
 
 The 3D-artist lead, described in [Part 7](../07-developer-target-harvesting/), turned out to be a new cover story rather than a new target community. A trace of the operator-associated Solana wallets that stayed active into 2026 ended, after a single throwaway pass-through account, in a program-owned account holding thousands of SOL and handling hundreds of transactions a day. That is the signature of a shared service rather than a person, and the trace found no victim funds. The broader repository sweep produced two signature matches that reading the files showed to be benign. Each of these negative results narrowed what the remaining positive findings can be taken to mean.
 
-## Related public reporting
+## The July report and an October continuation lead
 
 Ben Hopkins's [UNK_DeadDrop investigation](https://brhopkins.uk/posts/foxtopia/) first appeared on 23 July, before this case's evidence cutoff, and was updated in August. The update places `api.chestsoi[.]ink` in the GitLab dead-drop sequence. That hostname does not appear in the resolver history retained here, so it remains a reported lead rather than a captured indicator.
 

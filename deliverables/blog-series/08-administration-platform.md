@@ -1,5 +1,5 @@
 ---
-title: "Inside rms-platform: Delivery Monitoring and Wallet Administration"
+title: "Seventy modules from the rms-platform frontend"
 description: "What seventy recovered frontend modules reveal about repository monitoring, wallet workflows and authorization limits."
 date: "2026-10-25"
 author: "Ilja Krasnjanski"
@@ -16,7 +16,7 @@ og_image_alt: "Inside rms-platform: Delivery Monitoring and Wallet Administratio
 
 A development deployment at `dashboard.cklomino[.]ink` exposed seventy frontend modules for an application called rms-platform. The recovered client combined mail views, repository availability checks and wallet-management controls. Its wallet views include mnemonic and ColdKey fields, plus import, preview and claim actions. The backend implementation and its stored records were not recovered.
 
-## Seventy modules from a development deployment
+## The Vite server exposed seventy frontend modules
 
 The administration recovery followed imports exposed by a Vite development server. It preserved seventy frontend modules, whose embedded source maps included the original TypeScript comments. The recovered application calls itself `rms-platform`; its client contains mail metrics, inbox and outbox views, templates, auto-reply controls, a task board, database tables and wallet-management components.
 
@@ -30,7 +30,7 @@ One view tracks repositories by `clone_url`, displays availability labels and of
 
 No backend event history was recovered to show whether a repository suspension triggered an alert or a replacement.
 
-### Wallet management beside mail operations
+### Mail, tasks, and wallet controls
 
 The wallet interface contains import, refresh, preview, claim and bulk-claim actions, and the client references routes including:
 
@@ -47,7 +47,7 @@ Mnemonic and ColdKey fields, Bittensor-related interface language, and reference
 
 No transaction records accompanied the frontend. The sender and harvester tools were recovered separately, and their integration with this application remains unverified.
 
-### The SuperAdmin check
+### The `SuperAdmin` check lives in the client
 
 The client helper grants super-administrator treatment when either a user flag is set or an email comparison matches. These checks control frontend navigation and protected routes; without the backend authorization logic, they do not establish which accounts could execute a server-side claim.
 
