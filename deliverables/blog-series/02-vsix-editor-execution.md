@@ -35,9 +35,9 @@ The [historical indicator reference](historical-indicators.md) records the dated
 
 ## A `folderOpen` task points to the installer
 
-The repository task uses `runOn: folderOpen` and points into an ordinary-looking project directory. Workspace trust and task permissions still apply, so its presence does not mean every editor runs it automatically.
+The repository task uses `runOn: folderOpen` and points into an ordinary-looking project directory. Editor trust and task permissions gate execution.
 
-After installation, the extension is no longer confined to the project. It declares startup activation, while surrounding scripts clean up the task and staging files. Deleting the clone therefore does not establish that the extension or anything it launched has been removed.
+After installation, the extension is no longer confined to the project. It declares startup activation, while surrounding scripts clean up the task and staging files. Deleting the clone leaves the installed extension outside that cleanup.
 
 ![How the editor becomes an interpreter](assets/02-vsix.png)
 
@@ -63,7 +63,7 @@ SHA-256
 52886aab179f26421678ff23af1b0fabf0a17ffbb534369cdbbac8008cbed8e7
 ```
 
-The `onStartupFinished` declaration gives the extension an opportunity to activate after the original workspace is gone. It does not prove that every payload runs on every startup or platform.
+The `onStartupFinished` declaration gives the extension an opportunity to activate after the original workspace is gone. Payload startup still depends on the platform-specific code path.
 
 The extension exposes its settings under the `googleUpdateSupport` namespace:
 
@@ -103,7 +103,7 @@ A process name or publisher check is incomplete here. A legitimate signature aut
 
 ## Recruitment email in the clean repository
 
-The execution chain explains what the installed extension can do. The recruitment material explains how someone would be persuaded to open the project in the first place. The weaponised `predict-together` copy has a clean twin. An email template stored beside the clean version shows that the operators also addressed designers, project managers, founders and builders. It invites them to review an open-source market-analysis platform in Cursor.
+The weaponised `predict-together` copy has a clean twin with its own recruitment material. An email template stored beside the clean version shows that the operators also addressed designers, project managers, founders and builders. It invites them to review an open-source market-analysis platform in Cursor.
 
 The template describes four steps, taking "about 30 minutes":
 
@@ -112,9 +112,9 @@ The template describes four steps, taking "about 30 minutes":
 3. Write a few prompts.
 4. Send the prompts back.
 
-The message says, "No coding needed," and offers payment, a Cursor Ultra license or a place on the team for useful feedback. Its repository link is a placeholder, so the template does not show which copy any particular recipient received.
+The message says, "No coding needed," and offers payment, a Cursor Ultra license or a place on the team for useful feedback. Its repository link is a placeholder. The copy sent to any particular recipient remains unknown.
 
-The public repository is a working FastAPI and React application, with seeded demo users and green test and coverage badges. A static review of its full tree, including dot-directories, found no code that would run on its own.
+The public repository is a working FastAPI and React application, with seeded demo users and green test and coverage badges. I reviewed its full tree, including dot-directories, and found no code that would run on its own.
 
 The review found no `.vscode/tasks.json`, `.cursor/` rules, `mcp.json`, `.devcontainer/` hooks or workflows. The Python and npm dependencies came from ordinary package registries and had no install scripts. The documentation showed standard install, test and run commands.
 
@@ -143,6 +143,5 @@ The companion scanner covers JavaScript. Its `electron-run-as-node` rule reports
 
 Setting the variable alone is not enough to raise an error. In a benchmark of 3,000 popular packages and extensions, TypeScript's language server, SSH proxy shims and local helper servers launched the editor binary as Node in sixteen places. None hid the launch.
 
-The repository has no process or file-event rules because authentic endpoint logs were not retained for replay. A manifest match does not establish execution, elevation or collection.
+The repository has no process or file-event rules because authentic endpoint logs were not retained for replay. The manifest rule identifies package metadata. Confirming execution and subsequent collection requires endpoint records.
 
-[Companion detections and static scanner](https://github.com/KrasForge/unk-deaddrop-companion).

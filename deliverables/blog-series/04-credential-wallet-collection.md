@@ -14,7 +14,7 @@ og_image_alt: "Inside the Collector: Browser Credentials and Wallet Files"
 ---
 
 
-The collection code reaches beyond browser passwords. Its third upload variant searches the home directory for filenames associated with seeds, recovery material, credentials and tokens, while another selector includes encrypted KeePass databases. The source also sets explicit traversal budgets and skips selected inaccessible directories. These conclusions come from the recovered scripts and the limits recorded in [E05](../preprint/evidence/E05.pdf) and [E17](../preprint/evidence/E17.pdf). Access permissions, traversal limits and file encryption constrain what it can recover.
+Following the collection code took me beyond browser passwords. Its third upload variant searches the home directory for filenames associated with seeds, recovery material, credentials and tokens, while another selector includes encrypted KeePass databases. The source also sets explicit traversal budgets and skips selected inaccessible directories. These conclusions come from the recovered scripts and the limits recorded in [E05](../preprint/evidence/E05.pdf) and [E17](../preprint/evidence/E17.pdf). Access permissions, traversal limits and file encryption constrain what it can recover.
 
 ## Browser databases and saved credentials
 
@@ -30,7 +30,7 @@ A copied `Login Data` file is not a set of plaintext passwords, and an elevated 
 
 ### Phase 3 searches filenames under the home directory
 
-The large JavaScript collector accepts three upload variants, `main`, `pass` and `phase3`, and it is the third of these that walks the home directory looking for candidate files whose names and extensions match its selection logic. The recorded filename expression includes:
+The large JavaScript collector accepts `main`, `pass` and `phase3` upload variants. The `phase3` branch walks the home directory, selecting files by name and extension. The recorded filename expression includes:
 
 ```text
 key / private / wallet / phrase / passphrase
@@ -52,7 +52,7 @@ The search also runs within explicit budgets, which in the inspected source defa
 
 Environment variables can override several budgets. The skip list excludes selected system locations, dependency trees, caches and cloud-storage directories.
 
-A helper checks whether selected protected top-level directories are readable, and the walker skips any that fail the probe, caches the results, and has a timeout path. The control flow is effectively:
+On macOS, a helper probes selected protected top-level directories and caches the results. A failure or timeout makes the walker skip the directory:
 
 ```text
 Is this a protected top-level directory on macOS?
@@ -62,7 +62,7 @@ Is this a protected top-level directory on macOS?
               failure or timeout -> skip
 ```
 
-The walker skips protected directories when its readability probe fails or times out. Access still depends on the process's existing permissions and may produce a privacy prompt; no TCC bypass was established.
+Access depends on the process's existing permissions and may produce a privacy prompt. The reviewed code uses readability probes; I found no TCC bypass.
 
 ### `.kdbx` appears in the generic file selector
 
@@ -75,17 +75,17 @@ const KEY_EXTENSIONS = new Set([
 ]);
 ```
 
-This selector can collect an encrypted KeePass database without a dedicated KeePass module. The examined code does not establish a KDBX parser, master-password recovery routine or in-malware unlock operation.
+This selector can collect an encrypted KeePass database without a dedicated KeePass module. I found no KDBX parser or code to recover the master password. The collector takes the encrypted file as it is.
 
 ## Uploads use 2 MiB chunks and disable certificate checks
 
-The filename selectors determine which files enter the collection path. The upload routines then determine how the agent attempts to send those files. The transfer code uses a default 2 MiB chunk size and a five-retry setting. A separate upload-until-success routine repeats attempts with delays capped at 120 seconds. The inspected HTTPS request path also disables certificate verification. These settings describe intended delivery behavior; retries do not guarantee transfer if the destination is unreachable.
+For selected files, the transfer code uses a default 2 MiB chunk size and a five-retry setting. A separate upload-until-success routine repeats attempts with delays capped at 120 seconds. The inspected HTTPS request path also disables certificate verification. These settings describe intended delivery behavior; retries do not guarantee transfer if the destination is unreachable.
 
-The Go agent carries the Overlord module path, WebAssembly runtime and transport features alongside SQLite dependencies and wallet/browser markers. The [framework analysis](12-framework-and-collection-boundary.md) examines these components and the limits of the available upstream comparison. The companion's [wallet-agent YARA rule](https://github.com/KrasForge/unk-deaddrop-companion/blob/main/rules/yara/deaddrop_wallet_agent.yar) combines framework and environment markers with wallet-related strings, while its [stage-three collector rule](https://github.com/KrasForge/unk-deaddrop-companion/blob/main/rules/yara/deaddrop_stage3_collector.yar) targets the recovered source. A match does not establish that the collector ran or completed an upload.
+The Go agent carries the Overlord module path, WebAssembly runtime and transport features alongside SQLite dependencies and wallet/browser markers. The [framework analysis](12-framework-and-collection-boundary.md) examines these components and the limits of the available upstream comparison. The companion's [wallet-agent YARA rule](https://github.com/KrasForge/unk-deaddrop-companion/blob/main/rules/yara/deaddrop_wallet_agent.yar) combines framework and environment markers with wallet-related strings, while its [stage-three collector rule](https://github.com/KrasForge/unk-deaddrop-companion/blob/main/rules/yara/deaddrop_stage3_collector.yar) targets the recovered source. These rules identify file contents. Execution and completed uploads need host or server records.
 
 ## No victim-side upload inventory was recovered
 
-For response, the useful questions are which component ran, which phase it reached, and which files were accessible in that execution context. The source does not provide a victim-side inventory or a record of completed uploads.
+Scoping an incident starts with the component that ran and the phase it reached. File permissions then bound its reach. The recovered source contains neither a victim-side inventory nor completed-upload records.
 
 The [screen-capture components](05-screen-capture-analysis.md) extend potential exposure to information displayed on the desktop.
 
@@ -96,4 +96,3 @@ Large JavaScript payload SHA-256:
 694626bed2df1f0d0026a3f7ead7692b44c7e73041cdd799b79a025335533cdc
 ```
 
-[Companion detections and static scanner](https://github.com/KrasForge/unk-deaddrop-companion).

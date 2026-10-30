@@ -27,7 +27,7 @@ That connects account control and delivery staging, not the missing final payloa
 
 ## Four archive revisions from March
 
-The repository history records archive changes on 5 March, on 17 March and twice on 25 March 2026, and the retained analysis compares the repeated decoy images, encoding structure, retrieval configuration and task tags across all four. In order, with all times in UTC:
+I compared four archive revisions: one from 5 March, one from 17 March and two from 25 March 2026. The comparison followed the decoy images and encoding structure, then checked retrieval settings and task tags. In order, with all times in UTC:
 
 1. `03f1795d`, 5 March, 06:17: the earliest retained retrieval configuration, with a DDD task tag.
 2. `ded13153`, 17 March, 05:14: a different account and repository destination.
@@ -48,7 +48,7 @@ Account status was less clear than a 404 suggested. One historical check found a
 
 ## C2PA metadata in the poster
 
-With the final payload unavailable, the retained decoy artwork remained another source of evidence about the lure. The poster, identified in the case as `Post.png`, contained a [C2PA](https://c2pa.org/specifications/) structure in its PNG `caBX` chunk. [Exhibit E14](../preprint/evidence/E14.pdf) records the retained metadata and signature examination. Extracting the metadata and parsing its JUMBF, CBOR and certificate structures exposed the following fields:
+I also examined the retained decoy artwork. The poster, identified in the case as `Post.png`, contained a [C2PA](https://c2pa.org/specifications/) structure in its PNG `caBX` chunk. [Exhibit E14](../preprint/evidence/E14.pdf) records the retained metadata and signature examination. I extracted the metadata and parsed its JUMBF and CBOR structures, including the embedded certificates. The fields read:
 
 ```text
 Claim generator:  ChatGPT
@@ -61,16 +61,15 @@ OpenAI / Sora signing-pipeline references
 
 The manifest history records creation, conversion and ingredient-opening actions across two manifests. Its embedded thumbnail was described as a lower-resolution version of the poster.
 
-The original note reports successful signature validation, but no independent verifier output, certificate-status check or trust-list result is retained. An embedded ingredient-validation assertion is not independent verification of the later manifest. The fields describe an image pipeline; they contain no identity for the person who generated or distributed the poster.
+The original note reports successful signature validation. The retained record lacks independent verifier output and certificate-status or trust-list checks. An embedded ingredient-validation assertion is not independent verification of the later manifest. The fields describe an image pipeline; they contain no identity for the person who generated or distributed the poster.
 
 The manifest contains no prompt or user identifier, and its redacted-assertions array is empty. Those fields may never have been included; an empty redaction list is not evidence that information was removed.
 
-Other portraits examined in the case lacked the poster's C2PA structure. Re-encoding could explain that difference, but it does not prove intentional provenance removal; different export paths or source histories could produce the same result.
+Other portraits lacked the poster's C2PA structure. Re-encoding or a different export path could explain the difference, as could a different source image. Intentional metadata removal remains unverified.
 
 ### C2PA certificate validity ran from April 2025 to April 2026
 
-The leaf certificate was valid from 15 April 2025 to 15 April 2026, and the examination found no trusted timestamp token. Certificate validity does not establish when an artifact was signed or generated. Repository commits date when the image appears in preserved history, not when it was created.
+The leaf certificate was valid from 15 April 2025 to 15 April 2026, and the examination found no trusted timestamp token. Signing and generation times remain unknown. Repository commits date when the image appears in preserved history, not when it was created.
 
-The PNG examination found no data appended after the end marker; other forms of hidden content were not ruled out.
+The PNG examination found no bytes after the end marker. Other hiding methods were outside that check.
 
-[Companion detections and static scanner](https://github.com/KrasForge/unk-deaddrop-companion).

@@ -17,7 +17,7 @@ og_image_alt: "Diagram of the config.json history and separate config-alt.json r
 
 On 13 July 2026, a GitLab commit replaced a list of server names with `api.cklomino[.]ink` and `api.dsfmot[.]xyz`. The retained repository bundle and file history are documented in [E07](../preprint/evidence/E07.pdf). The file held configuration, not a payload.
 
-Its significance came from the client code that read it. A client consulting this resource could obtain its destination without carrying a fixed address in the deployed file. The configuration could therefore change without requiring a new payload hash.
+The client reads its destination from this resource. Changing the server list therefore changes where an unchanged payload can connect. The payload hash stays the same.
 
 The configuration history records the changing destinations. Certificate and panel observations connect one of those domains to a historical origin address.
 
@@ -33,7 +33,7 @@ The payload references this resource:
 gitlab[.]com/drop-indexing/tasks/-/raw/main/config.json
 ```
 
-The repository also contains a separate `config-alt.json` file with another pair of destination strings. Neither retained payload references it, so its name and contents do not show that a client used it.
+The repository also contains a separate `config-alt.json` file with another pair of destination strings. Neither retained payload references it. Client use of this second file remains unknown.
 
 The recovered JavaScript has its own hard-coded fallback, `api.domatisc[.]ink`, and a resolver function that requests the raw GitLab `config.json` resource. No retained endpoint log confirms that a victim fetched either file. This code pattern is relevant to MITRE ATT&CK's [dead drop resolver technique (T1102.001)](https://attack.mitre.org/techniques/T1102/001/).
 
@@ -53,13 +53,13 @@ The primary file has five recorded revisions on 26 May, beginning with an initia
 
 Commit `c3c71d65` replaces the primary destination set left by the May revisions. The retained history contains six commits to `config.json` and one to `config-alt.json`. The latter is a separately recorded resource, not an evidenced client fallback.
 
-The configuration resource lets a destination change independently of the payload. It does not show how each client handles that change. A client that fetches the file again may receive a new address, while one using a cached destination may continue trying the old server. The retained history contains no client execution trace to resolve that behavior.
+Client refresh behavior determines when a configuration change takes effect. A client that fetches the file again may receive a new address, while one using a cached destination may continue trying the old server. The retained history contains no client execution trace to resolve that behavior.
 
 Blocking a destination can interrupt traffic, while a client that consults this configuration resource may receive another address. Connection records are needed to identify the destination each client used.
 
 ## A July hostname linked to a reported origin
 
-The resolver history identifies the hostnames supplied to clients. Historical scan records provide a separate view of the services behind those names. July scan notes associate `207.241.172[.]222` with C2 and administration services. They record a certificate naming `api.cklomino[.]ink` and a third-party bare-IP scan that returned a Subtensor sign-in panel. The raw scan responses and certificate were not retained. The panel HTML and JavaScript available for inspection were retrieved from `api.domatisc[.]ink`, so they cannot independently reproduce the reported response from the bare IP.
+I compared the resolver hostnames with historical scan records to investigate the services behind them. July scan notes associate `207.241.172[.]222` with C2 and administration services. They record a certificate naming `api.cklomino[.]ink` and a third-party bare-IP scan that returned a Subtensor sign-in panel. The raw scan responses and certificate were not retained. The panel HTML and JavaScript available for inspection were retrieved from `api.domatisc[.]ink`, so they cannot independently reproduce the reported response from the bare IP.
 
 The panel adds an application-level association to the certificate evidence. Further relationships came from certificate facets, passive DNS and reverse-DNS fields. These observations came from research-service records; the origin analysis did not directly scan the server or log in. [E20](../preprint/evidence/E20.pdf) and [E21](../preprint/evidence/E21.pdf) record the source and limits of those historical associations.
 
@@ -67,7 +67,7 @@ The July observations associated `207.241.172[.]222` with C2 and administration,
 
 ### The SSH host-key search found no new address
 
-The saved service enumeration listed SSH, HTTP and HTTPS. Its SSH profile included a host key, banner and handshake information, but these had different value as search pivots. The common OpenSSH banner and handshake fingerprint matched broad populations of hosts. The more selective host key returned only the address already known. That negative search result does not prove the operation had no backup host.
+The saved service enumeration listed SSH, HTTP and HTTPS. Its SSH profile included a host key, banner and handshake information, but these had different value as search pivots. The common OpenSSH banner and handshake fingerprint matched broad populations of hosts. The more selective host key returned only the address already known. The search found no backup address; hosts absent from that dataset remain outside its coverage.
 
 The reported panel response did not enumerate every tenant at the address. Other services may have shared the address, so an IP block could affect unrelated traffic.
 
@@ -81,7 +81,7 @@ Timing offered more context. Certificates for four bases were first issued on 13
 
 On 23 July, `aazdias[.]ink` and `fallaazdis[.]ink` were registered about six minutes apart through the same registrar and privacy service, with the same Cloudflare nameserver pair. Their primary-and-fallback naming repeats the earlier `aavzx[.]ink` and `fallbaav[.]ink` arrangement. The current stores, a new dashboard host and several older lure domains also received certificates that day.
 
-Shared panels and certificate automation can produce this cadence across unrelated customers. The timing therefore supplements the code and configuration relationships; it cannot establish a cluster on its own. These registration and enumeration observations come from restricted 23 July records and are discussed in the [paper](../preprint/UNK_DeadDrop-Preprint.pdf), but are not independently reproduced in the public evidence exhibits.
+Shared panels and certificate automation can produce this cadence across unrelated customers. I used the timing to check code and configuration relationships, rather than to assign hosts to the cluster. These registration and enumeration observations come from restricted 23 July records and are discussed in the [paper](../preprint/UNK_DeadDrop-Preprint.pdf), but are not independently reproduced in the public evidence exhibits.
 
 A sweep of two /23 ranges belonging to the hosting provider covered about a thousand addresses; 291 exposed services. The provider used ordinary shared hosting. About twenty unrelated tenants ran services on port 3000, while the free scan dataset returned no results for the agent's port 5173 in either range.
 
@@ -89,4 +89,3 @@ Those observations make port-based hunting a poor discriminator: port 3000 was c
 
 Part 7 follows the target-acquisition tooling behind the two SQLite pools.
 
-[Companion detections and static scanner](https://github.com/KrasForge/unk-deaddrop-companion).

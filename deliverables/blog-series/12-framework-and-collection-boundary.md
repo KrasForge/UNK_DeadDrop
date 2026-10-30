@@ -24,7 +24,7 @@ The Linux amd64 artifact is 15,790,242 bytes and has this SHA-256:
 ef183bbb40f4c7c3f4b52994cdba3295f3eab2604fdad99eefa3b67b8d966e8d
 ```
 
-Reading its Go build information yielded these fields:
+I read these fields from its Go build information:
 
 ```text
 path                 overlord-client/cmd/agent
@@ -42,19 +42,19 @@ The module path connects the binary to the Overlord agent codebase. The `wazero`
 
 The [Go build-setting documentation](https://go.dev/pkg/runtime/debug/?m=old) defines `vcs.revision` as the checkout revision and `vcs.time` as its associated modification time. The timestamp is version-control metadata; the binary's compilation time remains unverified. The recorded repository lookup did not locate the embedded revision, leaving the corresponding source checkout unresolved.
 
-![Framework lineage and collection evidence](assets/12-framework-boundary.png)
+![Overlord framework and collection components](assets/12-framework-boundary.png)
 
 *Figure 1. The agent combines Overlord framework markers with browser, wallet and capture-related components.*
 
 ### The upstream files shared generic framework features
 
-The July comparison inspected selected client module and configuration files. It found the shared module path, plugin support and generic transport configuration. It also recorded a newer wazero version in the examined upstream module file than the sample's v1.7.0. That difference establishes a dependency mismatch, but cannot date a fork or deployment.
+The July comparison inspected selected client module and configuration files. It found the shared module path, plugin support and generic transport configuration. It also recorded a newer wazero version in the examined upstream module file than the sample's v1.7.0. The dependency versions differ. Dating the fork or deployment requires additional records.
 
 SQLite-related dependencies and wallet/browser markers were absent from the selected upstream files. Those files were not retained at a pinned revision, preventing a reproducible source diff. Other versions, forks and plugins were not exhaustively compared, and the authorship of these components remains unresolved.
 
 ## Browser stores, wallet selectors, and capture symbols
 
-String examinations found `Login Data`, `Local State`, `logins.json` and `key4.db`, along with wallet names and extension identifiers. These are browser-store and collection selectors. Their presence alongside SQLite is more informative than a database dependency alone, although it does not demonstrate a successful read or decryption on a victim host.
+String examinations found `Login Data`, `Local State`, `logins.json` and `key4.db`, along with wallet names and extension identifiers. These are browser-store and collection selectors. Together with SQLite, these selectors identify what the agent is built to read. Successful access and decryption on a victim host remain unmeasured.
 
 The wallet-related markers include an endpoint setting, a client header and an upload path. The companion's [wallet-agent YARA rule](https://github.com/KrasForge/unk-deaddrop-companion/blob/main/rules/yara/deaddrop_wallet_agent.yar) combines these with the Overlord module and server-environment markers. A generic framework match would also identify unrelated Overlord deployments; requiring wallet context narrows the search to files carrying that additional combination.
 
@@ -64,4 +64,3 @@ The phased JavaScript collection, GUS-prefixed configuration and Windows Node/Py
 
 For file hunting, the wallet-agent rule and [capture-agent rule](https://github.com/KrasForge/unk-deaddrop-companion/blob/main/rules/yara/deaddrop_capture_agent.yar) select different marker combinations. Both remain experimental. A hit identifies content for inspection, and can include source or research material containing those strings. For an unexpected installed agent, preserve its hash, configuration, launch mechanism and outbound destinations alongside the matching offsets.
 
-[Companion detections and static scanner](https://github.com/KrasForge/unk-deaddrop-companion).

@@ -14,11 +14,11 @@ og_image_alt: "From Commit Metadata to a Developer Target List"
 ---
 
 
-The sender configuration pointed to two SQLite databases. Following those references led to harvesting code and pools containing 79,698 and 62,667 rows. Together they contain 142,365 distinct stored address strings associated with 27,698 repository values. The worker, configuration and read-only count records are summarized in [E08](../preprint/evidence/E08.pdf). The harvesting code collected those addresses from public commit metadata for use by the sender tooling.
+The sender configuration pointed to two SQLite databases. I followed those references to the harvesting code and pools containing 79,698 and 62,667 rows. Together they contain 142,365 distinct stored address strings associated with 27,698 repository values. The worker, configuration and read-only count records are summarized in [E08](../preprint/evidence/E08.pdf). The harvesting code collected those addresses from public commit metadata for use by the sender tooling.
 
 ## One harvester fed two address pools
 
-The harvester searches repositories by star range, walks their branches and extracts author and committer addresses. It lowercases and trims them before filtering, and visits up to twenty branches per repository in the recorded implementation. Worker configurations partition the search; scheduler and merge code consolidate results into two master pools. MITRE ATT&CK classifies this reconnaissance as [gathering victim email addresses (T1589.002)](https://attack.mitre.org/techniques/T1589/002/). The SQLite relation is simple:
+The harvester selects repositories by star range. It walks their branches to extract author and committer addresses. It lowercases and trims them before filtering, and visits up to twenty branches per repository in the recorded implementation. Worker configurations partition the search; scheduler and merge code consolidate results into two master pools. MITRE ATT&CK classifies this reconnaissance as [gathering victim email addresses (T1589.002)](https://attack.mitre.org/techniques/T1589/002/). The SQLite relation is simple:
 
 ```text
 emails
@@ -76,7 +76,7 @@ Of the 27,698 repository values, 595 (2.1 percent) have names suggesting 3D or g
 
 ## Three repositories carried delivery kits
 
-The harvested repository values describe where the toolkit found potential recipients. A separate repository survey examined the accounts supplying the recruitment material itself. Those five accounts active in July held 172 public repositories. I reviewed cached metadata and file trees, then classified repositories by language, project type and apparent role. Twelve repositories had directly evidenced operational roles:
+I also examined the accounts supplying the recruitment material, separate from the repositories harvested for addresses. Those five accounts active in July held 172 public repositories. I reviewed cached metadata and file trees, then classified repositories by language, project type and apparent role. Twelve repositories had directly evidenced operational roles:
 
 - Three repositories carried delivery kits: two weaponised project copies in [Part 2](02-vsix-editor-execution.md) and the ECHOES branch in [Part 9](09-echoes-lineage-image-provenance.md).
 - Three were clean take-home assignments whose weaponised versions were delivered separately.
@@ -116,8 +116,7 @@ The link supports contract work for the launchpad, not ownership of it. The doma
 
 ## No message logs or endpoint records were recovered
 
-The harvester and the public contract projects offered two ways to reach developers: collecting addresses for messages and drawing interested developers into private conversations. The code and configuration connect harvesting to message preparation. The databases quantify the stored contact material. Neither supplies the missing send logs, delivery outcomes or endpoint evidence needed to count people contacted or compromised. Even the repository total describes stored values rather than a fresh verification of repository existence or ownership.
+The harvester collected addresses for messages; the public contract projects drew developers toward private conversations. Sender configuration connects the databases to message preparation. Counting people contacted or compromised would require send logs and endpoint records, which were not recovered. The repository total also counts stored values. I did not reverify each repository's existence or ownership.
 
 The [administration frontend](08-administration-platform.md) contains mail and wallet views, but its connection to these particular SQLite pools remains unverified.
 
-[Companion detections and static scanner](https://github.com/KrasForge/unk-deaddrop-companion).

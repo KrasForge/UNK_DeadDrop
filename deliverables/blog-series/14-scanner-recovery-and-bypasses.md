@@ -37,7 +37,7 @@ The `splice` fixture revealed a different problem. The scanner never identified 
 
 ## Clipboard, Electron, loader, and rotation variants
 
-I also changed aliases, bindings and API shapes in the test fixtures. The table gives the result from the frozen engine:
+I tested the frozen engine against changes to API shapes and variable bindings, including aliases:
 
 | Change in the fixture | Result |
 | --- | --- |
@@ -61,11 +61,10 @@ When a decoder remains unresolved, the gap is visible. When it returns a plausib
 
 There is an independent check for the specific extension: the manually reconstructed key authenticated three encrypted payloads. That confirms the recovered key and ciphertext relationship in those files. The scanner does not perform this decryption, and the authentication result cannot be transferred to another sample merely because its string array looks similar.
 
-Potential fixes include recognising additional array mutations and refusing to accept an apparently unrotated result for a keyed decoder without supporting evidence. They are ideas to test, not fixes already proven to close the gap. Any change needs to be checked against the failing fixture, retained artifacts and benign obfuscated software. I kept the engine fixed for these reported results.
+Potential fixes include recognising additional array mutations and refusing to accept an apparently unrotated result for a keyed decoder without supporting evidence. At this stage of the evaluation, those changes were still untested. Any change needs to be checked against the failing fixture, retained artifacts and benign obfuscated software. I kept the engine fixed for these reported results.
 
 For now, treat recovered strings as leads to inspect against their call sites, and check how many sites remain unresolved. A clean scan means the evaluated rules did not find their patterns. It does not mean that the input is safe.
 
-[Companion detections and static scanner](https://github.com/KrasForge/unk-deaddrop-companion).
 
 ## Eighteen variants now match their baseline results
 
@@ -87,7 +86,7 @@ One escalation needed to be narrowed during this pass. A first version treated a
 
 Throughput was 281 files per second on the calibration corpus after hardening, compared with 264 in the earlier run. That's one measurement on one host, so it cannot show whether the change affected performance. The three added warnings and zero additional errors describe the reviewed corpora only.
 
-The new fixtures are regression tests in the [companion repository](https://github.com/KrasForge/unk-deaddrop-companion), and the [scanner paper](../scanner-paper/UNK-Scanner-Paper.pdf) reports the frozen and hardened runs separately. Passing these known variants shows the changes cover the cases used to guide them. It does not show how the scanner will handle a different rewrite.
+The new fixtures are regression tests in the [companion repository](https://github.com/KrasForge/unk-deaddrop-companion), and the [scanner paper](../scanner-paper/UNK-Scanner-Paper.pdf) reports the frozen and hardened runs separately. These fixtures guided the fixes and now guard against regressions. Coverage of unseen rewrites remains an open test.
 
 ## Comparing decoded strings with their originals
 
@@ -97,6 +96,6 @@ The scanner returned no misplaced strings, but coverage was weaker. The engines 
 
 To check those fixes on unseen inputs, I generated a held-out set from twenty new files and five obfuscator releases, three of which the fixes had never seen. Recovery was 99.7% for each release, with no misplaced strings.
 
-The same change also mattered for real malware. On the public dataset from [Part 13](13-scanner-registry-benchmark.md), samples producing a warning doubled from 64 to 128 because many used the older decoder shape. None reached error level. A warning means the scanner found and decoded obfuscation; it does not identify a sample as malicious.
+The same change also mattered for real malware. On the public dataset from [Part 13](13-scanner-registry-benchmark.md), samples producing a warning doubled from 64 to 128 because many used the older decoder shape. None reached error level. The warning reports recovered obfuscation. Maliciousness requires examining what the decoded code does.
 
 The [scanner paper](../scanner-paper/UNK-Scanner-Paper.pdf) describes the experiment. Scripts and results are in the [companion repository](https://github.com/KrasForge/unk-deaddrop-companion).

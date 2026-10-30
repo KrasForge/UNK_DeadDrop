@@ -4,34 +4,21 @@ Draft, 29 October 2026.
 
 ## Abstract
 
-Recruitment lures hide malicious JavaScript in clipboard commands, assessment repositories
-and editor extensions. `unk-scanner` traces clipboard values, recovers rotated arrays by
-checksum and evaluates selected code without execution. Combined indicators set severity;
-isolated workers emit JSON and SARIF. We evaluated 2.8 million files. After one rule
-adjustment, the final engine produced no error-level findings in 188,901 popular-software
-files outside calibration. Two errors among 2.4 million files from 19,976 recently changed
-npm packages were false positives. The scanner warned on 62 of 2,122 public malware samples.
-Retained UNK_DeadDrop artifacts reproduced expected findings but also informed the rules.
+Developer recruitment attacks hide executable commands in verification pages, assessment repositories and editor extensions. Static inspection is difficult when clipboard handlers assemble commands through helper functions and obfuscators replace configuration strings with calls into encoded, rotated arrays. We built `unk-scanner` to recover these structures without executing the submitted code. It follows clipboard values through the abstract syntax tree and evaluates a restricted subset of expressions. For recognised obfuscator loops, it recovers array order by reproducing the checksum condition in a restricted evaluator, with explicit assumptions governing the correctness of the recovered rotation. Detection rules combine indicators to distinguish suspicious execution paths from techniques also used by legitimate developer tools.
 
-In 19 author-created variants, 18 evaded a rule, lowered severity or broke string recovery;
-one returned incorrect strings. In a 7,200-sample known-answer test, every string the
-scanner decoded matched its original call site. A revised engine reached 99.7 to 99.8
-percent recovery across five obfuscator releases, three held out during development, and
-doubled malware warnings from 64 to 128. A hardened engine handled 18 variants without new
-errors in the tested corpora. These variants do not measure adaptive evasion. The results
-show low error-level alert volume within the evaluated corpora, alongside limited coverage.
-The scanner exposes recognised structures for triage; it does not provide a general malware
-verdict.
+The evaluation covers approximately 2.8 million files from software registries and a public malware dataset, retained UNK_DeadDrop artifacts, controlled obfuscation experiments and evasion fixtures. The isolated scanner processed 272 calibration files per second. Two error-level alerts among 19,976 recently changed npm packages were false positives. Controlled experiments across five obfuscator releases reached 99.7 to 99.8 percent string recovery with the revised engine; every decoded call site matched its original value. Detection coverage remained limited: that engine warned on 128 of 2,122 public malware samples. Small source rewrites also exposed missed behaviours and an incorrect rotation assumption. Recovered strings made hidden code inspectable. Accurate recovery nevertheless coexisted with low malware coverage and easily evaded rules.
 
 ## 1. Introduction
 
 Supply-chain defences commonly examine packages that execute malicious code at installation or import, including typosquats and compromised dependencies. Recruitment campaigns introduce another route: an assessment page persuades a developer to paste a verification command, or a take-home repository configures the editor to install an extension. The malicious code may run only after this interaction, and its purpose can be difficult to determine from a brief source review.
 
-Three features complicate static inspection. First, the studied ClickFix lures construct commands when the user copies them, combining platform checks, helper functions and command fragments. Reading clipboard-call literals alone misses this construction. Second, obfuscator.io-style extensions replace module names, URLs and configuration strings with decoder calls into encoded, rotated arrays. Third, suspicious process-launch techniques also occur in legitimate tools. Both malware and language clients use `ELECTRON_RUN_AS_NODE` to run helpers through an editor binary, while commercial extensions also use string-array obfuscation.
+The studied ClickFix lures construct commands when the user copies them. Platform checks select helper functions that assemble the command; reading clipboard-call literals misses that construction. Obfuscated extensions hide configuration and module names behind decoder calls into rotated arrays.
+
+Recovering those values is only part of the problem. Legitimate tools use the same techniques: language clients run helpers through the editor binary with `ELECTRON_RUN_AS_NODE`, and commercial extensions use string-array obfuscation.
 
 Dynamic analysis can reveal execution behaviour, but running hostile code may leave platform-, session- or server-dependent branches unexplored. We ask how much command construction and hidden configuration static analysis can recover, and how well those structures distinguish malicious artifacts from ordinary developer software.
 
-The approach combines a bounded evaluator for a side-effect-free expression subset, string-array recovery using the obfuscator's checksum, and tracing from clipboard writes into local builders and caller arguments. Checksum-based recovery is also used by synchrony [R8]; here it shares an evaluator with the detection rules. Severity depends on combinations of techniques rather than obfuscation or Electron use alone. The implementation adds process isolation and SARIF output.
+The scanner traces clipboard writes into local builders and caller arguments. A bounded evaluator resolves supported expressions and solves string-array rotations from the obfuscator's checksum. Checksum-based recovery is also used by synchrony [R8]; here it shares an evaluator with the detection rules. Severity depends on combinations of techniques rather than obfuscation or Electron use alone. The implementation adds process isolation and SARIF output.
 
 The evaluation measures alert volume, parser coverage, throughput and sensitivity on three registry-derived corpora, then tests recovery and bypasses using retained artifacts and inert variants. A controlled experiment with 7,200 obfuscated samples of known content measures whether recovered strings are correct, and compares recovery with three published deobfuscators. It shows both the practical value of exposing hidden commands and the fragility of structural rules: low error-level alert volume does not imply broad detection coverage.
 
@@ -52,8 +39,8 @@ The analyst holds a file, an unpacked package or an extension, and wants to know
 
 ## 3. Design
 
-Figure 1 gives the analysis path. The engine parses each file once, indexes parent links and
-function scopes, then recovers string arrays before applying the rules. Recovery and
+The engine parses each file once and indexes parent links and function scopes (Figure 1).
+It recovers string arrays before applying the rules. Recovery and
 detection share a pure evaluator. Parsing, recovery and rules run inside an isolated process;
 only the report leaves it (Section 3.6). Baseline results use source hash `caf3f552`. Later
 hardening and decoder-recognition changes appear separately in Sections 5.6 and 5.7 and do
@@ -76,11 +63,11 @@ The evaluator interprets the following:
 - `parseInt`, `String.fromCharCode` and a fixed list of string methods;
 - functions whose body is a single `return` of a supported expression, with parameters bound to argument values.
 
-Any other construct yields *unknown*, which propagates. This includes calls on unknown values, `let`/`var`, assignments, loops, getters, spreads and regular expressions. Each evaluation is capped at 20,000 steps and depth 48, strings at 1 MiB and arrays at 10,000 elements. Scopes are function-level, and a name declared twice in one scope becomes unknown. Unsupported operations remain unknown rather than being delegated to the JavaScript runtime. This restriction prevents the evaluator from executing input-supplied functions; it does not establish that every supported expression is interpreted correctly.
+Any other construct yields *unknown*, which propagates. This includes calls on unknown values, `let`/`var`, assignments, loops, getters, spreads and regular expressions. Each evaluation is capped at 20,000 steps and depth 48, strings at 1 MiB and arrays at 10,000 elements. Scopes are function-level, and a name declared twice in one scope becomes unknown. Unsupported operations remain unknown rather than being delegated to the JavaScript runtime. Input-supplied functions never execute. Correct interpretation of the supported subset is a separate requirement, tested by the recovery experiments.
 
 ### 3.3 Proving the rotation of string arrays
 
-An array source is a self-redefining function that holds a string-array literal, or an array variable that rotation code shifts. A decoder is the innermost function that references the source, indexes it and rebases its first parameter (`i = i - OFFSET`). The offset is evaluated. Candidate variants come from the decoder's syntax:
+An array source is a self-redefining function that holds a string-array literal, or an array variable that rotation code shifts. A decoder rebases its first parameter (`i = i - OFFSET`) before indexing the source. The scanner selects the innermost function that performs these operations. The offset is evaluated. Candidate variants come from the decoder's syntax:
 
 - a 65-character alphabet literal indicates base64;
 - a used key parameter indicates RC4;
@@ -88,7 +75,7 @@ An array source is a self-redefining function that holds a string-array literal,
 
 The scanner then decodes in its own code; the input's decoder is never run.
 
-The rotation loop is found as an immediately invoked function that receives the array or fetches it by name and contains `x.push(x.shift())`. Within its `try` block, the stopping condition is either `if (v === target) break` with `const v = EXPR`, or `if (TARGET == EXPR) break`. Loop parameters are bound to the call's arguments. For each candidate rotation `r = 0 … n−1`, the evaluator computes the checksum expression through the same wrappers and decoders, and takes the first `r` that equals the target. When several decoders share one array, as with a base64 decoder and an RC4 decoder over the same strings, all combinations of their candidate variants are tried under one shared rotation. Algorithm 1 summarises the procedure.
+The rotation loop is found as an immediately invoked function that receives the array or fetches it by name and contains `x.push(x.shift())`. Within its `try` block, the stopping condition is either `if (v === target) break` with `const v = EXPR`, or `if (TARGET == EXPR) break`. Loop parameters are bound to the call's arguments. For each candidate rotation `r = 0 … n−1`, the evaluator computes the checksum expression through the same wrappers and decoders, and takes the first `r` that equals the target. When several decoders share one array, as with a base64 decoder and an RC4 decoder over the same strings, all combinations of their candidate variants are tried under one shared rotation.
 
 ```
 Algorithm 1. Rotation by checksum, without executing the input
@@ -118,44 +105,104 @@ it places non-numeric strings where `parseInt` reads them, so `E` becomes NaN. T
 evaluates `E` at most `16·n` times, with each evaluation capped at 20,000 steps. In
 obfuscator output, `E` contains six to twelve decoder calls.
 
-A worked example shows the procedure on a three-line program obfuscated by javascript-obfuscator 5.9.0 with rotation enabled (seed 19, plain strings; reformatted, with the declarations reordered for reading):
+The input program imports `child_process` and prints a URL alongside the type of `spawn`:
 
-```
-const cp = require("child_process");             // input
+```javascript
+const cp = require("child_process");
 const url = "https://example.invalid/setup";
 console.log(url, typeof cp.spawn);
-
-function W(){const a=['416VKoFbO','68MVpWjx','spawn','3664340cHkggg','272844EERGGb',
-  '2935488qIidkn','28811hhXjYz','2767497Wyegbc','https://example.invalid/setup',
-  '3715170urlFCz','5448065HFAxTT','log','child_process'];W=function(){return a;};return W();}
-function f(G,d){G=G-0x107;const t=W();let E=t[G];return E;}
-(function(G,d){const t=G();while(!![]){try{
-  const E=-parseInt(f(0x110))/0x1*(-parseInt(f(0x10b))/0x2)+parseInt(f(0x111))/0x3
-    +parseInt(f(0x10d))/0x4+parseInt(f(0x113))/0x5+-parseInt(f(0x10f))/0x6
-    +-parseInt(f(0x107))/0x7+parseInt(f(0x10a))/0x8*(-parseInt(f(0x10e))/0x9);
-  if(E===d)break;else t['push'](t['shift']());
-}catch(L){t['push'](t['shift']());}}}(W,0xaf1a1));
-const cp=require(f(0x109)),url=f(0x112);
-console[f(0x108)](url,typeof cp[f(0x10c)]);
 ```
 
-The example's `W` is a self-redefining array with 13 strings. The obfuscator added eight
-numeric tokens for the checksum. Function `f` indexes `W` after subtracting `0x107` (263);
-it uses no alphabet or key, so this variant is plain. The immediately invoked function
-receives `W`, contains `t['push'](t['shift']())`, and tests `E === d` inside a `try` block.
-Binding `d` to the call argument gives the target 717,217.
+The program never calls `spawn`. Its URL uses the reserved `.invalid` domain.
 
-For rotations `r = 0 … 9`, at least one `parseInt` call reads a non-numeric string and `E`
-becomes NaN. At `r = 10`, every call reads a numeric token and `E` equals 717,217; no later
-rotation matches. This rotation decodes `f(0x109)` to `child_process`, `f(0x112)` to the
-URL, and `f(0x108)` and `f(0x10c)` to `log` and `spawn`. A separate Python implementation of
-the checksum returns the same single solution.
+With rotation enabled, javascript-obfuscator 5.9.0 (seed 19, plain strings) replaces the four application strings with decoder calls. The output contains thirteen array entries. Nine are numeric-prefix strings used by the startup checksum.
 
-When the checksum cannot establish a rotation, recovery follows three rules:
+The generated program is shown in two blocks below, with declarations placed before their callers. It is separate from the input program above.
+
+```javascript
+function W() {
+    const a = [
+        "416VKoFbO", "68MVpWjx", "spawn",
+        "3664340cHkggg", "272844EERGGb",
+        "2935488qIidkn", "28811hhXjYz", "2767497Wyegbc",
+        "https://example.invalid/setup",
+        "3715170urlFCz", "5448065HFAxTT", "log", "child_process"
+    ];
+    W = function () {
+        return a;
+    };
+    return W();
+}
+
+function f(G, d) {
+    G = G - 0x107;
+    const t = W();
+    let E = t[G];
+    return E;
+}
+```
+
+`W()` allocates the array on its first call, then replaces itself with a closure that returns the same object. Subsequent calls share that array. The startup loop therefore mutates the array that `f()` reads.
+
+The decoder subtracts `0x107` (263) from its first argument and returns the entry at that index. Its second parameter is unused. Plain-string decoding needs only the offset and the correct array order.
+
+```javascript
+(function (G, d) {
+    const t = G();
+    while (!![]) {
+        try {
+            const E =
+                -parseInt(f(0x110)) / 0x1
+                    * (-parseInt(f(0x10b)) / 0x2)
+                + parseInt(f(0x111)) / 0x3
+                + parseInt(f(0x10d)) / 0x4
+                + parseInt(f(0x113)) / 0x5
+                + -parseInt(f(0x10f)) / 0x6
+                + -parseInt(f(0x107)) / 0x7
+                + parseInt(f(0x10a)) / 0x8
+                    * (-parseInt(f(0x10e)) / 0x9);
+            if (E === d) {
+                break;
+            } else {
+                t["push"](t["shift"]());
+            }
+        } catch (L) {
+            t["push"](t["shift"]());
+        }
+    }
+}(W, 0xaf1a1));
+
+const cp = require(f(0x109));
+const url = f(0x112);
+console[f(0x108)](url, typeof cp[f(0x10c)]);
+```
+
+The startup loop computes `E` and compares it with `0xaf1a1` (717,217). A mismatch moves the first entry to the end. The exception handler performs the same rotation. Once the checksum matches, the loop stops and the application calls use the resulting order.
+
+Static recovery reproduces that search over candidate rotations. For a left rotation of `r` positions:
+
+```text
+f(i) = stored_array[(i - 263 + r) mod 13]
+```
+
+The evaluator substitutes these values into the checksum expression. It never calls the submitted `W()` or `f()`.
+
+Rotations 0 through 9 produce NaN: at least one `parseInt` operand resolves to an application string with no numeric prefix. Rotation 10 produces 717,217. No other rotation matches. A separate Python implementation of the checksum returns the same solution.
+
+| Decoder call | Value at rotation 10 |
+| --- | --- |
+| `f(0x109)` | `child_process` |
+| `f(0x112)` | `https://example.invalid/setup` |
+| `f(0x108)` | `log` |
+| `f(0x10c)` | `spawn` |
+
+All four values are printable even under the wrong rotation because every array entry is a plain string. Printability cannot select the order here. The checksum supplies the deciding constraint.
+
+If checksum recovery fails, the next step depends on whether rotation code was recognised:
 
 - *No rotation code:* the array is taken as stored ("unrotated").
 - *Rotation code but no solvable checksum:* the scanner falls back to *consensus*. It accepts a rotation only if that rotation decodes at least 80% of up to 64 call sites to printable text, and the runner-up decodes at most half as many. A keyless base64 or plain array decodes to printable text under every rotation, so consensus cannot select one and the array is reported as unresolved.
-- *Never assumed unrotated:* an array is never treated as unrotated when recognised rotation code exists (Section 5.4 shows an unrecognised rotator that defeats this in the evaluated engine; Section 5.6 describes the change that closes it). An earlier implementation missed a parameterless `for(;;)` loop and incorrectly decoded 22 commercial-bundle files under rotation 0. This failure illustrates why plausible output alone cannot establish the correct rotation.
+- *Never assumed unrotated:* an array is never treated as unrotated when recognised rotation code exists (Section 5.4 shows an unrecognised rotator that defeats this in the evaluated engine; Section 5.6 describes the change that closes it). An earlier implementation missed a parameterless `for(;;)` loop and incorrectly decoded 22 commercial-bundle files under rotation 0. The decoded text looked plausible under the wrong rotation.
 
 Call sites are calls to a decoder or to a helper that reaches one through single-return wrappers and `const` aliases. Calls inside wrappers are excluded as plumbing. Each site is evaluated, and arguments drawn from constant objects resolve. Recovered strings are substituted wherever rules read literal values, including concatenations of decoded fragments.
 
@@ -188,7 +235,7 @@ The command-line tool analyses each file in a pool of child processes. Each proc
 - with a per-file deadline that kills and replaces the process;
 - on Linux, where unprivileged user namespaces are available, inside an empty network namespace with `prlimit` caps on CPU time, file size and open files.
 
-The applied controls are recorded in the output. A hostile rule module that attempts a file write, a process launch and a network connection is refused all three in our tests. These controls limit resource use and access if analysis fails. The tests establish the listed restrictions, not containment of arbitrary parser or engine exploits.
+The applied controls are recorded in the output. A hostile rule module that attempts a file write, a process launch and a network connection is refused all three in our tests. These controls limit resource use and access if analysis fails. The tests cover these access restrictions. Containment of arbitrary parser or engine exploits remains untested.
 
 ## 4. Implementation
 
@@ -228,7 +275,7 @@ The evaluation combines scans of popular software, recently changed npm packages
 | --- | --- | --- |
 | Calibration | 2,500 npm (`npm-high-impact` 1.13.0 ranking) and 500 Open VSX extensions by downloads; 143,153 unique files | Used during development to set severities; not held out |
 | 1 | Top 5,000 npm packages (`npm-high-impact` ranking; 4,992 acquired) and top 1,000 VS Code Marketplace extensions by installs (967 acquired), with the calibration Open VSX set; 332,054 unique files, 188,901 not in the calibration corpus | Alert volume beyond the initial calibration set; one rule adjustment informed by Tier 1 |
-| 2 | 20,000 most recently changed npm packages from the registry changes feed (sequences 140,571,698–140,654,245, 29 October 2026); 19,976 acquired, 2,403,437 unique files; 84% scoped | Discovery in the unvetted stream |
+| 2 | 20,000 most recently changed npm packages from the registry changes feed (sequences 140,571,698–140,654,245, 29 October 2026); 19,976 acquired, 2,403,437 unique files; 84% scoped | Review of recently changed packages |
 | 3 | Datadog malicious-packages dataset at commit `438afad` [R3]: all 122 IDE-extension samples and a seeded random sample (seed 20261029) of 2,000 of 26,715 npm samples, 41,359 unique files; the 14 retained UNK_DeadDrop artifacts | Sensitivity and bypass analysis |
 
 Archives are read in memory under size caps; nothing is installed and no lifecycle script runs. Malicious samples remain encrypted at rest, and their members are written only as inert files for parsing.
@@ -250,7 +297,7 @@ An initial Tier 1 run, before the engine was frozen, raised four errors on the L
 
 ### 5.3 Recently changed npm packages
 
-Tier 2 is the unvetted stream: every package whose registry document changed in a window of about 83,000 change sequences ending on 29 October 2026, most of them published that day. The scanner raised 2 error-level and 6,215 warning-level findings in 2,403,437 files from 19,976 packages:
+Tier 2 includes every selected package whose registry document changed in a window of about 83,000 change sequences ending on 29 October 2026, most of them published that day. The scanner raised 2 error-level and 6,215 warning-level findings in 2,403,437 files from 19,976 packages:
 
 | Rule | Severity | Findings | Packages |
 | --- | --- | --- | --- |
@@ -310,11 +357,10 @@ samples, 900 read environment variables or home-directory files, 873 use `child_
 Among missed IDE extensions, 81 use `child_process` and 21 contain variation-selector code
 points that can hide text.
 
-This screening exposes a coverage gap: credential access and install-time behaviors can
-occur without the clipboard, Electron or encrypted-loader patterns modeled here. The
-retained UNK_DeadDrop artifacts reproduce expected outputs, including the missed Windows
-agent and a context-only login interface. Those artifacts helped shape the rules, so they do
-not establish generalization across recruitment campaigns.
+Credential access and install-time behaviors often fall outside the clipboard, Electron
+and encrypted-loader patterns modeled here. The retained UNK_DeadDrop artifacts helped
+shape the rules. Their expected outputs, including the missed Windows agent and the
+context-only login interface, measure coverage of the development inputs.
 
 To measure how easily the rules are evaded by an adversary who knows them, we wrote inert variants of the demonstration fixtures and of the loader test fixture, each changing one thing, and scanned them with the CLI on the evaluation server:
 
@@ -356,13 +402,13 @@ support, Acorn rejected 31,964 calibration files; the Babel fallback reduced tha
 Tier 1 parsed 330,473 of 332,054 files (99.5%): Acorn parsed 251,593, TypeScript 77,521, TSX
 668, Flow with JSX 572, and JSX 119. Of 1,576 failures, 1,305 were TypeScript files,
 including legacy `module X {}` namespace syntax. None parsed under the independent Babel
-configuration we tested. That result does not establish that every failure is invalid in its
-original toolchain. Five files were not valid UTF-8. Tier 2 parsed 2,398,405 of 2,403,437
+configuration we tested. Compatibility with the original
+toolchains remains untested. Five files were not valid UTF-8. Tier 2 parsed 2,398,405 of 2,403,437
 files (99.8%).
 
 ### 5.6 Hardening after the evaluation
 
-After the frozen-engine measurements, we changed the engine to absorb the bypass variants and rescanned every corpus and the retained artifacts on the same server; the hardened engine's source hash is recorded with its results, separately from the frozen engine's. The changes generalise the structures rather than adding the variants as signatures:
+After freezing the baseline measurements, we extended the engine to recognise the structures exposed by the bypass tests. We rescanned every corpus and the retained artifacts on the same server. The results record each engine's source hash separately. The hardened engine adds these analysis paths:
 
 - the evaluator treats `let` and `var` bindings as constants when no assignment in the file resolves to them, and evaluates `atob`, `Buffer.from(...).toString(...)`, spread arguments of known arrays and `eval` of a constant identifier name (other `eval` text is still not interpreted);
 - clipboard tracing harvests every value stored into a mutable variable, recognises copy handlers registered as object methods, and treats `document.execCommand('copy')` as a write of the field filled before it;
@@ -381,9 +427,9 @@ With these changes, 18 of the 19 variants reach the baseline's severity and full
 
 The new warnings are a commercial extension's genuine obfuscator.io arrays and an AI scripting CLI's string arrays, both declared with `var` and previously skipped, and an installer's `curl … | bash` copy button. The newly decoded Tier 2 strings were screened as in Section 5.3. Two packages newly revealed a `child_process` import: a commercial SAP CAP plugin whose licence code downloads an encrypted per-customer configuration and parses it as JSON, and a commercial developer CLI whose launches list files with `git` and locate the global npm directory. Static reading found no code-execution sink for downloaded data, and neither package was classified as malicious. The Univer Pro modules and the agent library whose arrays had stayed unresolved decode to product-licence and service endpoints and public DNS-over-HTTPS resolvers.
 
-The hardening also reproduced the calibration problem in Section 5.2. A first version escalated any detached Electron launch without a window or stdio, which raised an error on an AI coding extension that relaunches its own runtime (`process.execPath`) as a detached helper server. The rule now escalates only a named binary other than the extension's own runtime. A malicious extension using the same relaunch therefore remains a warning: the syntax does not distinguish them. On the calibration corpus with four in-process workers, the hardened engine processed 281 files/s (median 1.2 ms, p99 210 ms per file), against 264 files/s for the frozen engine in the same configuration, so the added evaluation has no measurable throughput cost.
+The hardening also reproduced the calibration problem in Section 5.2. A first version escalated any detached Electron launch without a window or stdio, which raised an error on an AI coding extension that relaunches its own runtime (`process.execPath`) as a detached helper server. The rule now escalates only a named binary other than the extension's own runtime. A malicious extension using the same relaunch therefore remains a warning: the syntax does not distinguish them. On the calibration corpus with four in-process workers, the hardened engine processed 281 files/s (median 1.2 ms, p99 210 ms per file), against 264 files/s for the frozen engine in the same configuration, a single-run comparison with no measured slowdown.
 
-These figures show that the evaluated bypasses were shallow and can be closed without measurable alert-volume cost. They do not show robustness. The variants were written by the authors, the hardening was designed against them, and an adversary who knows the new rules can choose the next rewrite: a reassigned alias, an unrecognised sink, or text moved out of the file.
+The fixes closed the tested bypasses without adding error-level findings. We wrote the variants and designed the hardening against them. Resistance to an adaptive adversary remains unmeasured: another rewrite could reassign an alias, use an unsupported sink or move the command outside the file.
 
 ### 5.7 Controlled string-array recovery
 
@@ -396,8 +442,8 @@ shift on or off. Each sample used its own seed. The test used javascript-obfusca
 current at the time, and 4.1.1, current when the newest baseline was updated. We enabled
 only string-array transforms, so every hidden string has a known original.
 
-A string counted as recovered when it appeared in a tool's output or, for the scanner, among
-decoded call-site values. We counted output as unexplained when neither the original nor
+We scored every tool the same way. A string counted as recovered when it appeared in output
+or, for the scanner, among decoded call-site values. We counted output as unexplained when neither the original nor
 obfuscated input contained it whole or as a concatenation; deobfuscators can fold `'a' +
 'b'`. Set-level scoring cannot detect a wrong rotation of a plain or base64 array because
 each call site would decode to another real string from the same program. We therefore
@@ -411,17 +457,6 @@ three deobfuscators on a stratified subset of 1,440 samples: ten inputs for each
 configuration and release. Each tool ran in a separate process with a 60-second limit. The
 tools were webcrack 2.16.0 [R9], which runs the decoder in a sandbox, and the static tools
 synchrony 2.4.6 [R8] and obfuscator-io-deobfuscator 1.0.6 [R10].
-
-We applied the same scoring to each tool. A hidden string counted as recovered when it
-appeared in output or, for the scanner, among decoded call-site values. We marked a string
-unexplained when neither source sample contained it whole or as a concatenation. Set-level
-scores can miss a wrong rotation because it may return other valid strings from the same
-program. We therefore compared the scanner's decoded values with the original call sites in
-source order and marked values outside the longest common subsequence as misplaced.
-
-The obfuscator replaces each occurrence in place. As a validation, the scanner placed all
-strings correctly in 25 unencoded samples. Shifting every decoded value one array position
-misplaced 4,240 of 4,903 sites.
 
 | Tool (samples) | Recall, 5.9.0 | Recall, 4.1.1 | Samples with unexplained strings |
 | --- | --- | --- | --- |
@@ -509,13 +544,15 @@ Median time per sample, including parsing and scoring, ranged from 30 to 61 ms f
 scanner engines. The last runs shared a server with other benchmarks. The baselines took 290
 to 1,045 ms and also regenerated code.
 
-The test supports the title's claim within its scope. Every engine reported only correct, correctly placed strings when it identified the decoder and rotation loop, and reported unresolved sites when it did not. Coverage depended on recognising decoder shapes. Two shapes defeated the evaluated engines entirely, and the fixes that closed them came from this experiment. The held-out releases indicate that the fixes generalise across the obfuscator's versions; they do not test other obfuscator families. The sandboxed approach covers new shapes without such fixes, at the cost of executing input-derived code and rewriting the program. The test uses one obfuscator family on benign inputs. Malware authors also apply control-flow flattening and dead-code injection, which were disabled here, and custom obfuscators.
+Every scanner engine placed its recovered strings correctly in this controlled experiment. Coverage depended on recognising decoder shapes: two shapes caused major losses, and the fixes came from examining these failures. The held-out releases tested those fixes across further versions of the same obfuscator. webcrack covered both original releases by executing input-derived decoder code in a sandbox and rewriting the program.
+
+The experiment used benign inputs and one obfuscator family. Control-flow flattening and dead-code injection were disabled. Custom obfuscators and these additional transforms remain outside the measurement.
 
 ## 6. Case study: UNK_DeadDrop
 
-The retained UNK_DeadDrop artifacts illustrate the three analysis tasks [R1]. ClickFix lures assembled detached `curl` and `perl -MPOSIX` commands at copy time. In one generation, the clipboard write appeared inside a generic `copyText(text)` helper; tracing its callers exposed the command builder. The extension instead concealed module names, including `child_process`, and key material in an RC4 string array. Recovering the array made those values available for inspection. The Windows branch generated hidden PowerShell that launched collection code through the signed editor binary with `ELECTRON_RUN_AS_NODE`.
+The retained UNK_DeadDrop ClickFix lures assembled detached `curl` and `perl -MPOSIX` commands at copy time. In one generation, the clipboard write appeared inside a generic `copyText(text)` helper; tracing its callers exposed the command builder. The extension instead concealed module names, including `child_process`, and key material in an RC4 string array. Recovering the array made those values available for inspection. The Windows branch generated hidden PowerShell that launched collection code through the signed editor binary with `ELECTRON_RUN_AS_NODE` [R1].
 
-The retained artifacts and their results are listed below. The frozen and hardened engines produce identical outputs on all 14.
+The frozen and hardened engines produce identical outputs on all 14 retained artifacts:
 
 | Retained artifact | Expected | Result | Rule |
 | --- | --- | --- | --- |
@@ -573,8 +610,7 @@ releases tested and warned on 128 malware samples.
 The hardened engine handled 18 of the 19 variants without adding error-level findings across
 2.8 million tested files. The variants came from the authors and do not measure resistance
 to an adaptive adversary. The scanner exposes evidence for further inspection alongside
-package and credential-access analysis. A clean scan cannot establish that an artifact is
-safe. Published manifests, review records and bypass fixtures let others reproduce the
+package and credential-access analysis. A clean scan reports only that the evaluated patterns were absent or missed. Published manifests, review records and bypass fixtures let others reproduce the
 stated limits and test future changes.
 
 ## Artifact availability

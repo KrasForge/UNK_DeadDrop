@@ -18,7 +18,7 @@ A development deployment at `dashboard.cklomino[.]ink` exposed seventy frontend 
 
 ## The Vite server exposed seventy frontend modules
 
-The administration recovery followed imports exposed by a Vite development server. It preserved seventy frontend modules, whose embedded source maps included the original TypeScript comments. The recovered application calls itself `rms-platform`; its client contains mail metrics, inbox and outbox views, templates, auto-reply controls, a task board, database tables and wallet-management components.
+I followed imports exposed by the Vite development server and preserved seventy frontend modules. Their embedded source maps included the original TypeScript comments. The recovered application calls itself `rms-platform`; its client contains mail metrics, inbox and outbox views, templates, auto-reply controls, a task board, database tables and wallet-management components.
 
 The acquisition followed only modules loaded by the application. It involved no login or call to the authenticated data API. The source references `/api/github-jobs-check/`, `/api/db/...` and `/api/admin/wallets/{refresh,preview,claim,claim-all}/`; these are strings in the client, not observed requests. The related [historical indicator reference](historical-indicators.md) records the exact route forms and the [evidence index](artifact-reference.md) lists hashes for the recovered modules and related samples. The retained client excerpts are in [E06](../preprint/evidence/E06.pdf) and [E09](../preprint/evidence/E09.pdf).
 
@@ -49,8 +49,7 @@ No transaction records accompanied the frontend. The sender and harvester tools 
 
 ### The `SuperAdmin` check lives in the client
 
-The wallet controls raise a further question: which accounts could use them? The recovered frontend exposes part of the access check. The client helper grants super-administrator treatment when either a user flag is set or an email comparison matches. These checks control frontend navigation and protected routes; without the backend authorization logic, they do not establish which accounts could execute a server-side claim.
+The client helper grants super-administrator treatment when either a user flag is set or an email comparison matches. These checks control frontend navigation and protected routes. The missing backend code leaves server-side claim authorization unknown.
 
-The signup route displays a disabled-signup message, so the client does not establish an active account-creation workflow. The interface supports roles but does not reveal how many people used them.
+The signup route displays a disabled-signup message. Roles are defined in the interface; account creation and user counts require backend records.
 
-[Companion detections and static scanner](https://github.com/KrasForge/unk-deaddrop-companion).

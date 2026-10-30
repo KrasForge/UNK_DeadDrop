@@ -304,3 +304,9 @@ inert code examples; it uses the companion's installed Acorn package.
 `python deliverables/blog-series/build_assets.py` rebuilds the diagrams using
 ReportLab and PyMuPDF. `python deliverables/blog-series/package.py` rebuilds and
 checks the download archive.
+
+## Direct-prose review: 30 October 2026
+
+Edited all fourteen current article sources. Reduced repetitive limitations and decorative transitions, varied sentence structure, and used first-person descriptions for documented analysis. Kept main titles, code snippets, hashes, citations and evidence boundaries intact. Historical rendered editions were left as archives.
+
+verify.py passed for all fourteen posts: fourteen linked figures, 47 local link targets, three parsed JavaScript snippets and the inert Acorn demonstration. No prohibited negative-clause phrases or em dashes remain in the active article prose. The source ZIP and local Astro site were rebuilt from these sources and the current PDFs. This revision is local; it does not record a new deployment.

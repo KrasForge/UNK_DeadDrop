@@ -20,7 +20,7 @@ No capture session was recorded. The available evidence comes from the native bi
 
 ## Frame comparison in the Linux Go agent
 
-The Go symbols included the following group:
+In the Go binary, I found these capture symbols:
 
 ```text
 capture.CaptureDisplay    capture.CaptureAndSend
@@ -31,7 +31,7 @@ capture.copyPrev          capture.frameFPS
 
 `CaptureDisplay` and `CaptureAndSend` suggest acquisition and transfer. The more distinctive names are `copyPrev`, `blockChanged` and `encodeBlocks`: they fit a design that retains an earlier frame, compares image regions and encodes changes for transmission. `Loop` and `frameFPS` add evidence of repeated capture and rate accounting. MITRE ATT&CK groups screen acquisition under [Screen Capture (T1113)](https://attack.mitre.org/techniques/T1113/).
 
-The symbols do not establish exact block dimensions or how often the capture loop runs. They also leave open whether the relevant code is reachable on a particular host. A Linux process needs access to a usable display session and sufficient permissions before a capture routine can acquire an image.
+Block dimensions and loop frequency remain unmeasured, as does code reachability on a particular host. A Linux process needs access to a usable display session and sufficient permissions before a capture routine can acquire an image.
 
 ![Why these symbols suggest repeated capture](assets/05-screen-capture.png)
 
@@ -39,7 +39,7 @@ The symbols do not establish exact block dimensions or how often the capture loo
 
 ### The Go symbols identify TLS key logging
 
-Three other matches in the Go binary were `writeKeyLog`, `KeyLogWriter` and `crypto/tls.(*Config).writeKeyLog`. Their surrounding names identify TLS key logging. None of those matches provides evidence of keyboard interception; no keyboard hook was established by this search.
+Three other matches in the Go binary were `writeKeyLog`, `KeyLogWriter` and `crypto/tls.(*Config).writeKeyLog`. Their surrounding names identify TLS key logging. The search found no keyboard hook.
 
 ## Screen-capture components in the Windows bundle
 
@@ -52,11 +52,11 @@ The Windows bundle supplies a separate set of components:
 
 The installer checks for the capture files and raises an error if they are missing. The associated scheduled task is named `GoogleUpdateSupporterNode`. These checks make the capture component an explicit installation requirement.
 
-The Windows dependencies and Go symbols come from different artifacts. They suggest similar capture and transfer functions, but do not establish a shared implementation across operating systems. For the Windows branch, investigators would start with the installed bundle, task action and process session to determine whether capture ran.
+The Windows dependencies and Go symbols come from different artifacts. They suggest similar capture and transfer functions. Whether the implementations share code remains unresolved. For the Windows branch, investigators would start with the installed bundle, task action and process session to determine whether capture ran.
 
 ## The capture rule requires Overlord and four symbols
 
-The [capture-agent YARA rule](https://github.com/KrasForge/unk-deaddrop-companion/blob/main/rules/yara/deaddrop_capture_agent.yar) requires an Overlord environment marker and four capture-related symbol strings. It can locate files containing that combination for further inspection. Its match does not establish that a desktop was accessed or that frames reached a server.
+The [capture-agent YARA rule](https://github.com/KrasForge/unk-deaddrop-companion/blob/main/rules/yara/deaddrop_capture_agent.yar) requires an Overlord environment marker and four capture-related symbol strings. It locates files carrying that combination. Desktop access and frame delivery require runtime evidence.
 
 On a host, the useful follow-up evidence includes the installed component, its process and session context, display permissions and associated network activity. For the Windows branch, the `GoogleUpdateSupporterNode` task gives an additional place to look for the executable and arguments used.
 
@@ -68,4 +68,3 @@ ef183bbb40f4c7c3f4b52994cdba3295f3eab2604fdad99eefa3b67b8d966e8d
 Capture task: GoogleUpdateSupporterNode
 ```
 
-[Companion detections and static scanner](https://github.com/KrasForge/unk-deaddrop-companion).

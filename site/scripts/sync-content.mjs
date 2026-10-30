@@ -23,7 +23,7 @@ const sourceFiles = (await readdir(seriesRoot))
   .sort();
 
 await mkdir(docsRoot, { recursive: true });
-for (const page of ['index.md', 'research-materials.md']) {
+for (const page of ['index.md', 'research-materials.md', 'about.md']) {
   const template = await readFile(resolve(contentRoot, page), 'utf8');
   await writeFile(resolve(docsRoot, page), template.replaceAll('__BASE_PATH__', basePrefix));
 }

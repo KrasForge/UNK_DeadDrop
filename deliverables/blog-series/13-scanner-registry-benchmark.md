@@ -15,7 +15,7 @@ og_image_alt: "Summary of scanner findings across popular software, recent packa
 
 The scanner raised two error-level findings among nearly 2.4 million files from recently changed npm packages. I read both. One came from an AI desktop application's local helper; the other from a setup guide whose `curl` command printed an HTTP status code. Neither was malicious.
 
-The quieter surprise came from a different corpus. Among 2,122 known-malicious packages and extensions, the scanner flagged only 62 samples, all at warning level. It raised no errors. The benchmark had answered two different questions: how often did rules interrupt review with serious false alarms, and how often did they notice malware outside the structures they were built to recognise? The answers were low noise and low coverage.
+The quieter surprise came from a different corpus. Among 2,122 known-malicious packages and extensions, the scanner flagged only 62 samples, all at warning level. It raised no errors. Serious false alarms were rare. So were detections outside the structures the rules were built to recognise.
 
 The results and sampling details are in the [scanner paper](../scanner-paper/UNK-Scanner-Paper.pdf). They come from fixed runs on 29 October, using one engine on an eight-vCPU virtual server. Part 11's [YARA replay](11-detection-engineering.md) covers a different system and different question.
 
@@ -49,7 +49,7 @@ The second came from a remote-access product's setup guide. It copied text conta
 
 Warnings took longer to sort out. String-array obfuscation accounted for 6,142 findings across 153 packages. I screened the recovered strings for shells, processes, wallet terms, credential stores and exfiltration services. Seven packages matched those searches; their code fit their apparent roles, including bots, a workspace connector and agent command-line tools. Nine packages still had unresolved arrays, eight from one commercial product.
 
-Clipboard and hidden-script warnings received code review. I also read five Electron findings whose package names did not suggest developer tooling. The remaining 39 were triaged from the recorded launch target and environment. This is enough to describe the review that took place, but not enough to label every flagged package benign. In particular, unresolved arrays leave work for an analyst.
+Clipboard and hidden-script warnings received code review. I also read five Electron findings whose package names did not suggest developer tooling. The remaining 39 were triaged from the recorded launch target and environment. Review depth varied by finding type. The 39 triaged Electron findings received no full code review, and unresolved arrays still need analysis.
 
 Two error findings in 19,976 packages amounts to about 0.01% of packages needing error review in this scan. That number describes this window and this rule set. It is not a fleet false-positive rate.
 
@@ -67,10 +67,9 @@ The retained campaign files show that the scanner recognises the structures it w
 
 ## Acorn and Babel parsed 330,473 files
 
-The missed malware samples also raise a parsing question: how often did analysis fail before a rule could inspect the code? Parser coverage was measured separately. The scanner tries Acorn first, then an AST-only Babel fallback for supported TypeScript and JSX syntax. In the popular-software collection it parsed 330,473 of 332,054 files. Of the 1,576 parse failures, most were TypeScript. None parsed under the independent Babel configuration we tested; that does not prove they are invalid in their original build toolchains. Five inputs were not valid UTF-8.
+I measured parser failures separately to distinguish unreadable inputs from code the rules missed. The scanner tries Acorn first, then an AST-only Babel fallback for supported TypeScript and JSX syntax. In the popular-software collection it parsed 330,473 of 332,054 files. Of the 1,576 parse failures, most were TypeScript. None parsed under the independent Babel configuration I tested. Compatibility with their original build toolchains remains untested. Five inputs were not valid UTF-8.
 
 With four workers, the isolated command-line run processed 272 files per second on the calibration collection; the in-process worker-thread run processed 264. That one comparison showed no throughput penalty from isolation, but it was not a repeated performance study. The malware set ran at 325 files per second. The recent-package scan reached 848 with six workers and a different mix of mostly small files.
 
 The scanner is useful for surfacing the behaviours it knows how to follow. Its low error count makes it practical to review; its malware misses mean a clean result cannot clear a package. Part 14 follows the less comfortable question: how little does an author need to change to avoid those findings?
 
-[Companion detections and static scanner](https://github.com/KrasForge/unk-deaddrop-companion).
