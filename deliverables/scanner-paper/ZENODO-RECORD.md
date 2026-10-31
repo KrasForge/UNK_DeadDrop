@@ -1,5 +1,12 @@
 # Zenodo record: scanner preprint
 
+## Current version (31 October 2026)
+
+- Version DOI: [10.5281/zenodo.23826671](https://doi.org/10.5281/zenodo.23826671), record https://zenodo.org/records/23826671
+- File: `UNK-Scanner-Paper.pdf`, 147,395 bytes, Zenodo MD5 `b01a4917477438271e8287d59d675424`
+- Contents: the sentence-rhythm and layout revision of 31 October; findings, data, figures and references unchanged.
+- Earlier versions, including 10.5281/zenodo.23823716, have restricted file access; their landing pages and DOIs remain public, as Zenodo does not allow owners to remove published records.
+
 Status: published and publicly verified on 31 October 2026.
 
 - Version DOI: [10.5281/zenodo.23823716](https://doi.org/10.5281/zenodo.23823716)
