@@ -34,7 +34,7 @@ GitHub Pages rebuilds the hosted edition from these sources on pushes to `main`.
 Each hosted article has a canonical GitHub Pages URL. Every article links to the
 [companion detections and static scanner](https://github.com/KrasForge/unk-deaddrop-companion).
 The preprint is published on Zenodo under CC BY 4.0:
-[record DOI](https://doi.org/10.5281/zenodo.23826668) ·
+[record DOI](https://doi.org/10.5281/zenodo.23829170) ·
 [concept DOI](https://doi.org/10.5281/zenodo.23652297). Current rules,
 tests and validation notes live in the companion repository.
 

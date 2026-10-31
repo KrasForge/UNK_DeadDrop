@@ -8,7 +8,7 @@ The site ships with the public materials needed to review the series without dep
 ## Paper and source edition
 
 - Scanner paper: [PDF](__BASE_PATH__/downloads/UNK-Scanner-Paper.pdf) · [Zenodo record](https://doi.org/10.5281/zenodo.23826671) · [Concept DOI](https://doi.org/10.5281/zenodo.23823715) · CC BY 4.0.
-- Campaign preprint: [PDF](__BASE_PATH__/downloads/UNK_DeadDrop-Preprint.pdf) · [Current Zenodo version](https://doi.org/10.5281/zenodo.23826668) · [Concept DOI](https://doi.org/10.5281/zenodo.23652297) · CC BY 4.0.
+- Campaign preprint: [PDF](__BASE_PATH__/downloads/UNK_DeadDrop-Preprint.pdf) · [Current Zenodo version](https://doi.org/10.5281/zenodo.23829170) · [Concept DOI](https://doi.org/10.5281/zenodo.23652297) · CC BY 4.0.
 - [Blog series source package](__BASE_PATH__/downloads/UNK_DeadDrop-Blog-Series.zip)
 
 The scanner PDF is the file deposited at Zenodo, SHA-256 `5c1dbf32898275bc48e7191f8a2d49501539c6a1b049aca574838c9aec7a4553`. The campaign PDF also matches its current Zenodo version.
