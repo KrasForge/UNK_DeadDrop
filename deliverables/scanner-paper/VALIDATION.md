@@ -1,3 +1,17 @@
+# Sentence-rhythm pass, 31 October 2026
+
+Varied sentence length in the body text without changing word choice: adjacent sentences
+were joined or split using punctuation and a fixed list of connectives only. A checker
+confirmed that the sequence of content words is unchanged and that headings, code, tables,
+figures, captions, lists, links and the References section are byte-identical; no em
+dashes. The coefficient of variation of sentence length rose from 0.521 to 0.682. Joins flagged as
+uncertain were reviewed by hand for claim, citation and qualification attachment.
+
+This PDF is published on the project site but differs in wording, not content, from the
+Zenodo deposit (version DOI 10.5281/zenodo.23823716, SHA-256 `5c1dbf32898275bc48e7191f8a2d49501539c6a1b049aca574838c9aec7a4553`), which is unchanged.
+
+PDF: 17 A4 pages, 147,395 bytes, SHA-256 `372f4efa2ce86335cde24bc007a51c0040f0ab861cdd68308ca73f1148e77efc`.
+
 # Stop Slop editorial pass: 30 October 2026
 
 Replaced document-centered framing in the introduction and design overview with the research question, analysis path and baseline-versus-revision distinction. Evaluation numbers and caveats remain unchanged. Rebuilt with ReportLab 5.0.1: 17 A4 pages, 146,451 bytes. SHA-256: `e0d2555ad8ed55de7c45ca796ae88960c1940ab3d35f2637411646a7c19c8dcb`.
@@ -130,6 +144,6 @@ Rebuilt the 17-page PDF. Visually inspected the complete example page; code fits
 
 ## Zenodo deposit preparation: 31 October 2026
 
-Updated the cover date to match this prepared preprint and rebuilt the 17-page PDF with ReportLab 5.0.1. The deposited file is searchable and carries no draft banner. SHA-256: `5c1dbf32898275bc48e7191f8a2d49501539c6a1b049aca574838c9aec7a4553`; MD5: `05ba6fa124c3903ab8f1fd482142b9e1`; size: 147,363 bytes. The GitHub Pages download was refreshed after the deposit; its file checksum now matches Zenodo.
+Updated the cover date to match this prepared preprint and rebuilt the 17-page PDF with ReportLab 5.0.1. The deposited file is searchable and carries no draft banner. SHA-256: `5c1dbf32898275bc48e7191f8a2d49501539c6a1b049aca574838c9aec7a4553`; MD5: `05ba6fa124c3903ab8f1fd482142b9e1`; size: 147,363 bytes. The GitHub Pages download was refreshed in deployment [41142625153](https://github.com/KrasForge/UNK_DeadDrop/actions/runs/41142625153); its file checksum now matches Zenodo.
 
-Created `zenodo-metadata.json` and `ZENODO-RECORD.md` with a separate preprint record, CC BY 4.0, ORCID, bibliography, campaign-paper DOI and exact evaluated companion commit. The existing Zenodo software archive v2.1.0 predates that evaluated commit, so the paper record links to the commit rather than calling the older archive the tested release. Zenodo published record [10.5281/zenodo.23823716](https://doi.org/10.5281/zenodo.23823716), concept DOI [10.5281/zenodo.23823715](https://doi.org/10.5281/zenodo.23823715). The public API reports the expected open CC BY 4.0 record and matching file checksum.
+Created `zenodo-metadata.json` and `ZENODO-RECORD.md` with a separate preprint record, CC BY 4.0, ORCID, bibliography, campaign-paper DOI and exact evaluated companion commit. At publication, software archive v2.1.0 predated that commit, so the paper record linked to the exact source commit. Companion archive [v2.2.0](https://doi.org/10.5281/zenodo.23825573) now contains the evaluated scanner source; the exact commit remains the evaluation reference. Zenodo published record [10.5281/zenodo.23823716](https://doi.org/10.5281/zenodo.23823716), concept DOI [10.5281/zenodo.23823715](https://doi.org/10.5281/zenodo.23823715). The public API reports the expected open CC BY 4.0 record and matching file checksum.
