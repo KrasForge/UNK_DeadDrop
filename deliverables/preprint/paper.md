@@ -40,7 +40,7 @@ The post-cutoff refresh used the half-open window `(24 July, 25 October 2026]`, 
 
 Command and control is abbreviated C2, and an indicator of compromise is abbreviated IOC. Platform mechanisms include App-Bound Encryption (ABE), the Windows Data Protection API (DPAPI), Component Object Model (COM) elevation, and macOS Transparency, Consent, and Control (TCC); their effectiveness depends on operating-system, application, policy and session conditions.
 
-The detection-rule results in Section 10 come from evaluations recorded on 26 October 2026 and reviewed for this revision on 27 October, and they replay retained material and selected software controls; they do not extend the historical collection period. The published companion snapshot and subsequent local revisions are identified separately in Appendix D. No malware execution, new infrastructure collection or fresh replay was performed for this manuscript update.
+The detection-rule results in Section 10 come from evaluations recorded on 26 October 2026 and reviewed for this revision on 27 October, and they replay retained material and selected software controls; they do not extend the historical collection period. No malware execution, new infrastructure collection or fresh replay was performed for this manuscript update.
 
 ### 2.1 Corpus selection and retained records
 
@@ -200,7 +200,7 @@ The cited companion snapshot contains 33 named YARA rules in 28 files, pinned to
 
 The recorded 26 October replay examined 192 selected input files and 395 raw or archive-member views, and every rule matched at least one retained case object; 90 input files had a match and 102 had none. ZIP, VSIX, TAR, gzip and nested ZIP content was inspected in memory without executing samples. Five RAR containers were scanned only as raw bytes; four ECHOES containers matched exact hashes. The two targeting databases were excluded. Copied variants and nested views inflate object counts, and exact-hash rules recognize only the listed bytes. These results measure coverage of the selected retained artifacts, while unknown variants and independent incidents fall outside that test set. [R17]
 
-The same report records zero matches across 1,914 local standard-library and installed-package files, evaluated as 2,379 raw or nested views. This local software sample is too limited to estimate operational precision. A later control review identified seven source rules that also matched research prose, rendered exhibits or public security tools; those controls reproduced the source strings used by the rules. Narrower conditions removed those hits while preserving the artifact matches; Appendix D records the review inputs and revisions.
+The same report records zero matches across 1,914 local standard-library and installed-package files, evaluated as 2,379 raw or nested views. This local software sample is too limited to estimate operational precision. A later control review identified seven source rules that also matched research prose, rendered exhibits or public security tools; those controls reproduced the source strings used by the rules. Narrower conditions removed those hits while preserving the artifact matches.
 
 The wallet-agent rule illustrates the remaining limits. It requires ELF magic at byte zero, a size below 64 MiB, an Overlord module path, an environment marker and at least two wallet-related strings. The ELF requirement rejects a marker-rich plain-text fixture, but does not prove that matched strings belong to reachable code. Source-pattern rules can also match sufficiently complete quoted implementations, while exact-hash rules miss any changed bytes. Analysts must interpret matches using file type, acquisition context and the matched content. [R17]
 
@@ -263,8 +263,7 @@ limitations and source fingerprints. Appendix B lists their roles. These reports
 the public references R1 to R18 and do not provide independent replication.
 
 The public companion repository contains inert fixtures and 33 experimental YARA rules. This
-paper pins the source snapshot to the commit cited in [R17]. Appendix D distinguishes later
-local rule refinements from that published commit.
+paper pins the source snapshot to the commit cited in [R17].
 
 The companion paper [R18] describes and evaluates the static scanner in the same repository.
 No software archival DOI was verified for this revision. The restricted case archive and
@@ -372,14 +371,6 @@ Open both databases in SQLite read-only mode and attach the antispam pool as `ot
 
 An address string is the unit of analysis. Repository values are stored references, not a verified count of extant repositories. SQL equality and UNION semantics apply to the stored values; the counts do not resolve aliases, ownership or successful delivery. Re-execution requires authorised access to the restricted inputs.
 
-## Appendix D. Detection-rule snapshots and later revisions
-
-The public reference point is companion commit `ae74de8a927a8eda1b0cf5bd9136ffc86ed0f522`, dated 26 October 2026. Its `docs/actual-artifact-validation.md` records the 192-input YARA replay and 1,914-file software baseline summarized in Section 10.1. Its rule set contains 33 named rules in 28 files and no Sigma rules. The earlier E15 report remains a historical record of a different tooling snapshot. [R17]
-
-The separate local noise review used libyara 4.5.4 over 177 case inputs, 380 views and 344 distinct objects; 76 objects matched. Its case selection excluded analyst Markdown, databases, identity and blockchain material, and the sealed environment archive. Seven source rules were narrowed after control collisions. The revision record reports preserved artifact matches, no remaining hits by those seven rules in the selected external controls, and six passing Python test methods. Own rule and test-source matches were tracked separately. Unrelated compiled Overlord controls were unavailable.
-
-Rule revision record (`REVISION.md`), SHA-256: `b1e66ef1ba129685803045d83a05731cfe154364b4c1aec2aa8066aacf2d3433`.
-
 ## References
 
 [R1] Proofpoint. [Don't Fear the Repo: UNK_DeadDrop Phishing Campaign Targets Developers to Steal Cryptocurrency](https://www.proofpoint.com/us/blog/threat-insight/dont-fear-repo-unkdeaddrop-phishing-campaign-targets-developers-steal).
@@ -441,4 +432,4 @@ References R6–R16 were added by a separate bounded refresh on 25 October. It d
 historical evidence cutoff or contact listed lure or C2 infrastructure. The
 new web references were retained in a dated Noesis refresh; dedicated citation-
 archive operations were unavailable to the current principal, so the paper does
-not claim an independent archival deposit. Reference R17 identifies the 26 October public companion snapshot. Appendix D distinguishes its validation from subsequent local rule revisions. The historical E15 record remains unchanged.
+not claim an independent archival deposit. Reference R17 identifies the 26 October public companion snapshot. The historical E15 record remains unchanged.
