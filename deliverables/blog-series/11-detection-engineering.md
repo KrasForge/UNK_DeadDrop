@@ -17,7 +17,7 @@ The published companion snapshot contains 33 named YARA rules in 28 files, and e
 
 The wallet-agent rule initially matched marker-rich research prose, and requiring ELF magic at byte zero rejects that text fixture. It checks the header, not the executable's behavior.
 
-The [companion repository](https://github.com/KrasForge/unk-deaddrop-companion) contains file-content rules and a parse-only JavaScript scanner, but it no longer includes the event rules or workspace-configuration rules: authentic endpoint logs and the original `.vscode` task and settings files were not available for replay. Synthetic event records and invented configuration files would show how a rule behaves, not whether it matches the collected targets.
+The [companion repository](https://github.com/KrasForge/unk-scanner) contains file-content rules and a parse-only JavaScript scanner, but it no longer includes the event rules or workspace-configuration rules: authentic endpoint logs and the original `.vscode` task and settings files were not available for replay. Synthetic event records and invented configuration files would show how a rule behaves, not whether it matches the collected targets.
 
 ## The wallet-agent rule matched the held Go binary
 
@@ -45,7 +45,7 @@ Most unmatched inputs were generic dashboard modules, web assets or research con
 
 Workspace-file signatures remain absent because neither the original `.vscode/tasks.json` nor `.vscode/settings.json` appears in the saved repository archive or its commit history, and event rules were removed because there are no authentic Windows process, Linux audit or comparable endpoint logs in the retained set. The companion therefore has no Sigma rules. The two SQLite databases containing target addresses were also excluded from scanning.
 
-The companion's [artifact-validation report](https://github.com/KrasForge/unk-deaddrop-companion/blob/main/docs/actual-artifact-validation.md) lists per-rule match counts and corpus limits. Its [detection notes](https://github.com/KrasForge/unk-deaddrop-companion/blob/main/docs/detection-notes.md) explain each condition and its limits.
+The companion's [artifact-validation report](https://github.com/KrasForge/unk-scanner/blob/main/docs/actual-artifact-validation.md) lists per-rule match counts and corpus limits. Its [detection notes](https://github.com/KrasForge/unk-scanner/blob/main/docs/detection-notes.md) explain each condition and its limits.
 
 ## No matches in 1,914 local software files
 
@@ -71,5 +71,5 @@ YARA can inspect only the bytes supplied to it. A rule for decrypted JavaScript 
 
 A hunting service may use a different rule set for manual file scans. Check where the uploaded rules are deployed.
 
-The repository includes inert [YARA boundary tests](https://github.com/KrasForge/unk-deaddrop-companion/blob/main/tests/test_detections.py), a [prose false-positive test](https://github.com/KrasForge/unk-deaddrop-companion/blob/main/tests/test_blog_boundaries.py), and the [test requirements](https://github.com/KrasForge/unk-deaddrop-companion/blob/main/requirements-dev.txt). Run the checks using the instructions in its README. These tests are repeatable checks of rule behavior, not malware execution or production validation.
+The repository includes inert [YARA boundary tests](https://github.com/KrasForge/unk-scanner/blob/main/tests/test_detections.py), a [prose false-positive test](https://github.com/KrasForge/unk-scanner/blob/main/tests/test_blog_boundaries.py), and the [test requirements](https://github.com/KrasForge/unk-scanner/blob/main/requirements-dev.txt). Run the checks using the instructions in its README. These tests are repeatable checks of rule behavior, not malware execution or production validation.
 

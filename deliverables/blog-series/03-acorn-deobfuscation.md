@@ -102,7 +102,7 @@ A later test replaced `push(shift())` rotation with `splice`. The evaluated engi
 
 The scanner does not assemble the AES key or decrypt the payloads. Authenticated decryption remains a separate check on the recovered fragments, and partial string recovery must be read alongside the unresolved call sites.
 
-The [scanner paper](../scanner-paper/UNK-Scanner-Paper.pdf) describes the evaluated implementation, including its per-process restrictions, resource limits and AST-only TypeScript/JSX fallback, and the command-line output records which isolation controls were applied (Linux network-namespace isolation depends on host support). Installation and current release instructions are maintained in the [companion repository](https://github.com/KrasForge/unk-deaddrop-companion), with packages on [npm](https://www.npmjs.com/package/unk-scanner) and [PyPI](https://pypi.org/project/unk-scanner/).
+The [scanner paper](../scanner-paper/UNK-Scanner-Paper.pdf) describes the evaluated implementation, including its per-process restrictions, resource limits and AST-only TypeScript/JSX fallback, and the command-line output records which isolation controls were applied (Linux network-namespace isolation depends on host support). Installation and current release instructions are maintained in the [companion repository](https://github.com/KrasForge/unk-scanner), with packages on [npm](https://www.npmjs.com/package/unk-scanner) and [PyPI](https://pypi.org/project/unk-scanner/).
 
 The larger registry evaluation is in [Part 13](13-scanner-registry-benchmark.md). It found few error-level alerts and missed most generic package malware. A completed scan is a pattern check, not a safety verdict.
 

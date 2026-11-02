@@ -30,14 +30,14 @@
       "resource_type": "publication-preprint"
     },
     {
-      "identifier": "https://github.com/KrasForge/unk-deaddrop-companion/commit/d54e06dbceb4bb4b2a7b27427246cafda83136e5",
+      "identifier": "https://github.com/KrasForge/unk-scanner/commit/d54e06dbceb4bb4b2a7b27427246cafda83136e5",
       "relation": "isSupplementedBy",
       "resource_type": "software"
     }
   ],
   "references": [
     "[R1] Ilja Krasnjanski. UNK_DeadDrop: An Artifact-Based Study of Recruitment Malware, Credential Collection, and Operator Infrastructure. Zenodo preprint. https://doi.org/10.5281/zenodo.23652297",
-    "[R2] KrasForge. `unk-deaddrop-companion` and `unk-scanner`. https://github.com/KrasForge/unk-deaddrop-companion",
+    "[R2] KrasForge. `unk-deaddrop-companion` and `unk-scanner`. https://github.com/KrasForge/unk-scanner",
     "[R3] Datadog Security Labs. Open-Source Dataset of Malicious Software Packages. https://github.com/DataDog/malicious-software-packages-dataset (Apache-2.0).",
     "[R4] MITRE ATT&CK. Contagious Interview, G1052. The MITRE Corporation, 2025. https://attack.mitre.org/groups/G1052/",
     "[R5] DataDog. GuardDog. GitHub, Apache-2.0. https://github.com/DataDog/guarddog",

@@ -421,11 +421,11 @@ Last modified 31 July 2026; checked 25 October 2026.
 [R16] MITRE ATT&CK. [Web Service: Dead Drop Resolver, T1102.001](https://attack.mitre.org/techniques/T1102/001/).
 Last modified 11 September 2026; checked 25 October 2026.
 
-[R17] KrasForge. [`unk-deaddrop-companion`, artifact-tested YARA rules, static scanner and validation report](https://github.com/KrasForge/unk-deaddrop-companion/tree/ae74de8a927a8eda1b0cf5bd9136ffc86ed0f522).
+[R17] KrasForge. [`unk-deaddrop-companion`, artifact-tested YARA rules, static scanner and validation report](https://github.com/KrasForge/unk-scanner/tree/ae74de8a927a8eda1b0cf5bd9136ffc86ed0f522).
 
 GitHub source snapshot, commit `ae74de8a927a8eda1b0cf5bd9136ffc86ed0f522`, 26 October 2026; public branch identity checked 27 October 2026.
 
-[R18] Ilja Krasnjanski. Static AST-Based Triage of Socially-Engineered Developer Lures: Proving Obfuscator Rotations Without Execution. Companion preprint, 29 October 2026. Software: [`unk-scanner`](https://github.com/KrasForge/unk-deaddrop-companion).
+[R18] Ilja Krasnjanski. Static AST-Based Triage of Socially-Engineered Developer Lures: Proving Obfuscator Rotations Without Execution. Companion preprint, 29 October 2026. Software: [`unk-scanner`](https://github.com/KrasForge/unk-scanner).
 
 The five-source contribution comparison was checked on 21 October 2026.
 References R6–R16 were added by a separate bounded refresh on 25 October. It did not re-open the

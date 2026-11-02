@@ -15,7 +15,7 @@ hero:
       link: __BASE_PATH__/downloads/UNK-Scanner-Paper.pdf
       variant: minimal
     - text: Open Source Detection Rules
-      link: https://github.com/KrasForge/unk-deaddrop-companion
+      link: https://github.com/KrasForge/unk-scanner
       variant: minimal
 ---
 

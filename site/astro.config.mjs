@@ -58,7 +58,7 @@ export default defineConfig({
             { label: 'Historical indicators', link: '/indicators/' },
             { label: 'Sample and repository artifacts', link: '/artifacts/' },
             { label: 'Research materials', link: '/research-materials/' },
-            { label: 'Companion detections and static scanner', link: 'https://github.com/KrasForge/unk-deaddrop-companion' },
+            { label: 'Companion detections and static scanner', link: 'https://github.com/KrasForge/unk-scanner' },
             { label: 'About the author', link: '/about/' }
           ]
         }

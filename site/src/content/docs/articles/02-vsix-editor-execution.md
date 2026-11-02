@@ -130,7 +130,7 @@ Before opening an unsolicited project in an AI editor:
 
 Repository-only review can miss the installed extension. A hunt limited to native binaries can miss the JavaScript Windows branch. Preserve task definitions, editor and agent configuration directories, workspace settings, extension metadata, script arguments, process ancestry and any resulting persistence. The extension identifier and package hash provide exact selectors. The editor-to-interpreter transition gives responders a behavior to investigate when names or builds change.
 
-The companion repository has a [YARA rule for the recovered VSIX manifest](https://github.com/KrasForge/unk-deaddrop-companion/blob/main/rules/yara/deaddrop_vsix_manifest.yar). It must scan extracted archive members.
+The companion repository has a [YARA rule for the recovered VSIX manifest](https://github.com/KrasForge/unk-scanner/blob/main/rules/yara/deaddrop_vsix_manifest.yar). It must scan extracted archive members.
 
 The companion scanner covers JavaScript. Its `electron-run-as-node` rule reports the recovered pipeline at error level because that file writes a PowerShell script, sets `$env:ELECTRON_RUN_AS_NODE` and launches it with a hidden window. The scanner also reports the extension's obfuscated string array as recovered.
 

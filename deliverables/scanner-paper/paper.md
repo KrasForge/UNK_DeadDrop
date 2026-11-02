@@ -516,15 +516,17 @@ extensions, up from four. None reached error level. The older decoder shape had 
 obfuscated samples from the earlier engine.
 
 The three deobfuscators failed on different shapes. On version 5.9.0 output, synchrony found
-the array but reported “no decoder”; obfuscator-io-deobfuscator returned the array in place, yet both recovered more than 98% of version 4.1.1 output. webcrack recovered 98% from both
-releases by executing the decoder rather than matching its shape.
+the array but reported “no decoder”; obfuscator-io-deobfuscator 1.0.6, the npm release we pinned, returned the array in place, yet both recovered more than 98% of version 4.1.1 output. webcrack recovered 98% from both
+releases by executing the decoder rather than matching its shape. A follow-up check on one inert input, outside the controlled experiment, placed the boundary earlier than 5.9.0: both static tools decoded output from versions 3.2.7 and 4.1.1 and failed on 4.2.2, 5.0.0 and 5.9.0, where the decoder rebases its index in its own body rather than in an inner function. An unreleased build of obfuscator-io-deobfuscator (commit `42efc01`) decoded all three of those releases on the same input.
 
 webcrack's remaining misses involved rewrites: strings folded into longer literals, a
 constant `JSON.parse` replaced by an object literal, and an empty string. Each baseline's
 unexplained strings came from one input. webcrack returned the keys of the rewritten JSON
 object. synchrony turned an obfuscator variable name into a property name.
-obfuscator-io-deobfuscator propagated a variable as `undefined` and folded it into an error
-message, changing the program's output. We did not inspect every missed string from
+obfuscator-io-deobfuscator inlined a helper whose optional argument no call supplied and folded
+`": undefined"` into an error message; the string sits in a branch that never runs, so the
+program's output is unchanged, and the score counts it only because it does not occur in the
+original. We did not inspect every missed string from
 synchrony and obfuscator-io-deobfuscator.
 
 Median time per sample, including parsing and scoring, ranged from 30 to 61 ms for the
@@ -607,7 +609,7 @@ Source, rules, inert fixtures, benchmark harness, acquisition manifests, review 
 
 [R1] Ilja Krasnjanski. UNK_DeadDrop: An Artifact-Based Study of Recruitment Malware, Credential Collection, and Operator Infrastructure. Zenodo preprint. https://doi.org/10.5281/zenodo.23652297
 
-[R2] KrasForge. `unk-deaddrop-companion` and `unk-scanner`. https://github.com/KrasForge/unk-deaddrop-companion
+[R2] KrasForge. `unk-deaddrop-companion` and `unk-scanner`. https://github.com/KrasForge/unk-scanner
 
 [R3] Datadog Security Labs. Open-Source Dataset of Malicious Software Packages. https://github.com/DataDog/malicious-software-packages-dataset (Apache-2.0).
 

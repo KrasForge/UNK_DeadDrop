@@ -86,7 +86,7 @@ One escalation needed to be narrowed during this pass. A first version treated a
 
 Throughput was 281 files per second on the calibration corpus after hardening, compared with 264 in the earlier run, but that's one measurement on one host, so it cannot show whether the change affected performance. The three added warnings and zero additional errors describe the reviewed corpora only.
 
-The new fixtures are regression tests in the [companion repository](https://github.com/KrasForge/unk-deaddrop-companion), and the [scanner paper](../scanner-paper/UNK-Scanner-Paper.pdf) reports the frozen and hardened runs separately. These fixtures guided the fixes and now guard against regressions. Coverage of unseen rewrites remains an open test.
+The new fixtures are regression tests in the [companion repository](https://github.com/KrasForge/unk-scanner), and the [scanner paper](../scanner-paper/UNK-Scanner-Paper.pdf) reports the frozen and hardened runs separately. These fixtures guided the fixes and now guard against regressions. Coverage of unseen rewrites remains an open test.
 
 ## Comparing decoded strings with their originals
 
@@ -98,4 +98,4 @@ To check those fixes on unseen inputs, I generated a held-out set from twenty ne
 
 The same change also mattered for real malware. On the public dataset from [Part 13](13-scanner-registry-benchmark.md), samples producing a warning doubled from 64 to 128 because many used the older decoder shape. None reached error level. The warning reports recovered obfuscation. Maliciousness requires examining what the decoded code does.
 
-The [scanner paper](../scanner-paper/UNK-Scanner-Paper.pdf) describes the experiment. Scripts and results are in the [companion repository](https://github.com/KrasForge/unk-deaddrop-companion).
+The [scanner paper](../scanner-paper/UNK-Scanner-Paper.pdf) describes the experiment. Scripts and results are in the [companion repository](https://github.com/KrasForge/unk-scanner).
