@@ -18,14 +18,25 @@ const isRootPagesRepository = repositoryName.toLowerCase() === `${repositoryOwne
 const configuredBase = process.env.BASE_PATH ?? (isRootPagesRepository ? '/' : `/${repositoryName}`);
 const basePrefix = configuredBase === '/' ? '' : configuredBase;
 
+// Link-preview image tags for a card drawn by scripts/build_og.py into public/og/.
+const siteUrl = process.env.SITE_URL ?? `https://${repositoryOwner.toLowerCase()}.github.io`;
+const previewHead = (image, alt) => {
+  const url = `${siteUrl}${basePrefix}/og/${image}`;
+  const tags = [['property', 'og:image', url], ['property', 'og:image:width', '1200'], ['property', 'og:image:height', '630'],
+    ['property', 'og:image:alt', alt], ['name', 'twitter:image', url]];
+  return `head:\n${tags.map(([attr, name, value]) =>
+    `  - tag: meta\n    attrs:\n      ${attr}: ${name}\n      content: ${JSON.stringify(value)}\n`).join('')}`;
+};
+
 const sourceFiles = (await readdir(seriesRoot))
   .filter((name) => /^\d{2}-.*\.md$/.test(name))
   .sort();
 
 await mkdir(docsRoot, { recursive: true });
 for (const page of ['index.md', 'research-materials.md', 'about.md']) {
-  const template = await readFile(resolve(contentRoot, page), 'utf8');
-  await writeFile(resolve(docsRoot, page), template.replaceAll('__BASE_PATH__', basePrefix));
+  let template = (await readFile(resolve(contentRoot, page), 'utf8')).replaceAll('__BASE_PATH__', basePrefix);
+  if (page === 'index.md') template = template.replace(/^---\n/, `---\n${previewHead('home.png', 'UNK_DeadDrop technical series')}`);
+  await writeFile(resolve(docsRoot, page), template);
 }
 
 await rm(generatedRoot, { recursive: true, force: true });
@@ -59,7 +70,9 @@ for (const [index, fileName] of sourceFiles.entries()) {
   const description = yamlValue(frontmatter, 'description');
   const date = yamlValue(frontmatter, 'date');
   const slug = fileName.replace(/\.md$/, '');
-  const output = `---\ntitle: ${JSON.stringify(title)}\ndescription: ${JSON.stringify(description)}\nlastUpdated: ${date}\nsidebar:\n  order: ${index + 1}\n---\n\n${rewriteLinks(body)}`;
+  const part = slug.slice(0, 2);
+  const preview = previewHead(`${part}.png`, `Part ${Number(part)}: ${title}`);
+  const output = `---\ntitle: ${JSON.stringify(title)}\ndescription: ${JSON.stringify(description)}\nlastUpdated: ${date}\nsidebar:\n  order: ${index + 1}\n${preview}---\n\n${rewriteLinks(body)}`;
   await writeFile(resolve(generatedRoot, `${slug}.md`), output);
 }
 
