@@ -42,6 +42,8 @@ The third revision changed both retrieval and persistence; the fourth retained t
 
 The staging references led to final PowerShell resources unavailable through the unauthenticated routes. No final payload was available for capability analysis.
 
+**Update, 5 November 2026.** A later review of operator-linked repositories changes what can be said here without changing the comparison above. The delivery repository held a fifth archive commit, made about two hours after the first with the same destination, token and decoys, so the four distinct configurations still stand. A separate public repository, carrying the same retrieval header and, in its first revision, the same account and token as the final ECHOES archive, contains scripts dated 31 March to 10 April that are decryptable with parameters stored beside them. Read statically and never run, they collect wallet application folders, browser credentials and files named for seeds and recovery codes, include keylogging and clipboard logging, and upload to a private repository created per machine. These scripts are the closest recovered counterpart of the missing stage rather than proof of what the March archives fetched, since those exact bytes were never retained, and nothing in them shows that any victim was affected.
+
 Account status was less clear than a 404 suggested. One historical check found an unavailable account whose name was also unavailable for registration, which supports a suspension hypothesis but does not confirm it with the platform. Neighboring numeric identifiers showed no distinctive batch-registration pattern, and consecutive IDs can belong to unrelated signups; proving common registration control would require unavailable platform data.
 
 ## C2PA metadata in the poster

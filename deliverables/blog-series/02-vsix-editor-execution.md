@@ -29,7 +29,7 @@ The July repository review identified five weaponised copies:
 
 A sixth copy, `gitlab[.]com/lautaro19/rekt-db`, contained matching payload markers. The evidence supports likely operator control, not confirmed ownership. GitLab reportedly removed `pulsynk-org/rekt-db`; `pulsynk/rekt-db` is a different repository.
 
-The [historical indicator reference](historical-indicators.md) records the dated observations, and the [artifact reference](artifact-reference.md) lists hashes for selected task and settings files. Current availability has not been checked.
+The [historical indicator reference](historical-indicators.md) records the dated observations, and the [artifact reference](artifact-reference.md) lists hashes for selected task and settings files. When I rechecked on 4 November 2026 the two GitHub repositories and the four GitLab copies were still public, so I reported them to both platforms, and by the next day `Lyracartoon/predict-together` had gone while the others remained available; treat this as a dated observation rather than a current status.
 
 [Proofpoint's UNK_DeadDrop analysis](https://www.proofpoint.com/us/blog/threat-insight/dont-fear-repo-unkdeaddrop-phishing-campaign-targets-developers-steal) documents the VSIX route and Windows architecture also present in this package, while Jamf Threat Labs has separately documented [threat actors abusing Visual Studio Code](https://www.jamf.com/blog/threat-actors-expand-abuse-of-visual-studio-code/), and the editor's own [task documentation](https://code.visualstudio.com/docs/debugtest/tasks) and Electron's [environment-variable reference](https://www.electronjs.org/docs/latest/api/environment-variables) describe the two legitimate features this chain repurposes.
 

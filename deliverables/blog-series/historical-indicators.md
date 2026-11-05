@@ -224,7 +224,7 @@ These are dated observations, not statements about present availability. The Git
 
 The case notes also record exact SHA-256 values for `tasks.json` (`c935808147f0236c81483d7bbeda4b9d602f3595d5d4057f8115d39e222d1c4b`) and `settings.json` (`35813f4401d3ad77b618275473a556eb47bfa6f4b7439dd8943b19f81aa7252e`) from specific repository variants. A file-hash match applies only to byte-identical files; it does not cover other task or settings variants. The limitations of this ownership reassessment are described in [E10](../preprint/evidence/E10.pdf).
 
-The separate ECHOES delivery branch was recorded at `hxxps://github[.]com/Lyracartoon/Echoes-of-the-Unborn-Sun`, reported live on 23 July. Four archive revisions were preserved; the final PowerShell resource was unavailable, so this URL is not used to claim a confirmed link to the ClickFix or VSIX branches. The archive analysis is in [E11](../preprint/evidence/E11.pdf).
+The separate ECHOES delivery branch was recorded at `hxxps://github[.]com/Lyracartoon/Echoes-of-the-Unborn-Sun`, reported live on 23 July. Four archive revisions were preserved; the final PowerShell resource was unavailable, so this URL is not used to claim a confirmed link to the ClickFix or VSIX branches. The archive analysis is in [E11](../preprint/evidence/E11.pdf). Update, 5 November 2026: the repository was unavailable when rechecked, its history held a fifth archive commit that repeats the first revision's configuration, and later operator-linked scripts are described in [Part 9](09-echoes-lineage-image-provenance.md).
 
 ## What this list excludes
 
