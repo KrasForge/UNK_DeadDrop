@@ -9,6 +9,18 @@ const isRootPagesRepository = repositoryName.toLowerCase() === `${owner}.github.
 const site = process.env.SITE_URL ?? `https://${owner}.github.io`;
 const base = process.env.BASE_PATH ?? (isRootPagesRepository ? '/' : `/${repositoryName}`);
 
+// GoatCounter page-view counting (no cookies, no personal data) at
+// ilja-krasnjanski.goatcounter.com. GOATCOUNTER_CODE overrides the site code;
+// set it to "off" to build without the counter (e.g. for local previews).
+const goatcounterSetting = process.env.GOATCOUNTER_CODE || 'ilja-krasnjanski';
+const goatcounterCode = goatcounterSetting === 'off' ? '' : goatcounterSetting;
+const analyticsHead = goatcounterCode
+  ? [{
+      tag: 'script',
+      attrs: { 'data-goatcounter': `https://${goatcounterCode}.goatcounter.com/count`, async: true, src: 'https://gc.zgo.at/count.js' },
+    }]
+  : [];
+
 export default defineConfig({
   site,
   base,
@@ -17,6 +29,7 @@ export default defineConfig({
       title: 'UNK_DeadDrop',
       description: 'A technical investigation of developer-targeted phishing, collection tooling, infrastructure, and detection engineering.',
       favicon: 'favicon.svg',
+      head: analyticsHead,
       customCss: ['./src/styles/custom.css'],
       tableOfContents: { minHeadingLevel: 2, maxHeadingLevel: 2 },
       lastUpdated: true,
