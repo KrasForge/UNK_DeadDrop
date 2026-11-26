@@ -69,10 +69,11 @@ for (const [index, fileName] of sourceFiles.entries()) {
   const title = yamlValue(frontmatter, 'title');
   const description = yamlValue(frontmatter, 'description');
   const date = yamlValue(frontmatter, 'date');
+  const published = yamlValue(frontmatter, 'published');
   const slug = fileName.replace(/\.md$/, '');
   const part = slug.slice(0, 2);
   const preview = previewHead(`${part}.png`, `Part ${Number(part)}: ${title}`);
-  const output = `---\ntitle: ${JSON.stringify(title)}\ndescription: ${JSON.stringify(description)}\nlastUpdated: ${date}\nsidebar:\n  order: ${index + 1}\n${preview}---\n\n${rewriteLinks(body)}`;
+  const output = `---\ntitle: ${JSON.stringify(title)}\ndescription: ${JSON.stringify(description)}\nlastUpdated: ${date}\n${published ? `published: ${published}\n` : ''}sidebar:\n  order: ${index + 1}\n${preview}---\n\n${rewriteLinks(body)}`;
   await writeFile(resolve(generatedRoot, `${slug}.md`), output);
 }
 

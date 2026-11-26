@@ -2,6 +2,7 @@
 title: "Where Overlord Ends and the Collection Toolchain Begins"
 description: "Overlord build metadata, browser-store selectors, wallet-upload markers and capture components in the Linux agent."
 lastUpdated: 2026-11-26
+published: 2026-10-25
 sidebar:
   order: 12
 head:

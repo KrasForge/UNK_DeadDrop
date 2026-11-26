@@ -2,6 +2,7 @@
 title: "Parsing Without Executing: JavaScript Deobfuscation with Acorn"
 description: "Rebuilding an AES key from sixteen obfuscated fragments with Acorn, and proving it with authenticated decryption without ever running the malicious extension."
 lastUpdated: 2026-11-26
+published: 2026-10-25
 sidebar:
   order: 3
 head:

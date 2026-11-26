@@ -2,6 +2,7 @@
 title: "Building and Testing Detections for UNK_DeadDrop"
 description: "Thirty-three YARA rules replayed against retained artifacts, followed by a separate noise review, a static scanner evaluation and a look at what source scanning cannot see."
 date: "2026-11-26"
+published: "2026-10-25"
 author: "Ilja Krasnjanski"
 canonical: "https://krasforge.github.io/UNK_DeadDrop/articles/11-detection-engineering/"
 kicker: "UNK_DeadDrop · Part 11"

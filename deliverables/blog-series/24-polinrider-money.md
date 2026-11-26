@@ -2,6 +2,7 @@
 title: "Following PolinRider's Money: Gas, Bridges, Laundering and Cash-Out"
 description: "What PolinRider's on-chain C2 costs, how stolen money pays for it, where the proceeds cross chains and cash out, and why UNK_DeadDrop's cash-out stays out of sight."
 date: "2026-11-26"
+published: "2026-11-26"
 author: "Ilja Krasnjanski"
 canonical: "https://krasforge.github.io/UNK_DeadDrop/articles/24-polinrider-money/"
 kicker: "PolinRider · Part 7"

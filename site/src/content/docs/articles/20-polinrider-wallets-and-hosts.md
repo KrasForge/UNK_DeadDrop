@@ -2,6 +2,7 @@
 title: "Three Resolver Wallets and Eleven Hosts"
 description: "A closed enumeration of PolinRider's Ethereum resolver found three wallets handing one pool of hosts between them, run by a scheduler and paid for out of a drain collection wallet."
 lastUpdated: 2026-11-26
+published: 2026-11-26
 sidebar:
   order: 20
 head:

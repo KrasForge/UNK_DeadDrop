@@ -2,6 +2,7 @@
 title: "Following a Developer from UNK_DeadDrop to PolinRider"
 description: "A second take-home assessment in one developer's account ran an extra file before the application started, and that file belonged to a different operation with its own delivery, resolver and hosting."
 date: "2026-11-26"
+published: "2026-11-26"
 author: "Ilja Krasnjanski"
 canonical: "https://krasforge.github.io/UNK_DeadDrop/articles/18-polinrider-following-a-developer/"
 kicker: "PolinRider · Part 1"

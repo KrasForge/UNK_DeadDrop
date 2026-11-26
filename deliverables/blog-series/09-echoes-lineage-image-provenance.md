@@ -2,6 +2,7 @@
 title: "Tracing the ECHOES Archive: Payload Lineage and Image Provenance"
 description: "Four revisions of the ECHOES lure archive, a final payload that was never recovered, and C2PA data in its poster that records an AI image pipeline."
 date: "2026-11-26"
+published: "2026-10-25"
 author: "Ilja Krasnjanski"
 canonical: "https://krasforge.github.io/UNK_DeadDrop/articles/09-echoes-lineage-image-provenance/"
 kicker: "UNK_DeadDrop · Part 9"

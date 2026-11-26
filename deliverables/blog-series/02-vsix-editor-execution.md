@@ -2,6 +2,7 @@
 title: "How a Malicious VSIX Uses the Signed Editor Runtime"
 description: "How a fake Google Update Support extension installs collection components, elevates silently through an auto-elevating COM object and turns the editor's own Electron binary into a Node interpreter on Windows."
 date: "2026-11-26"
+published: "2026-10-25"
 author: "Ilja Krasnjanski"
 canonical: "https://krasforge.github.io/UNK_DeadDrop/articles/02-vsix-editor-execution/"
 kicker: "UNK_DeadDrop · Part 2"

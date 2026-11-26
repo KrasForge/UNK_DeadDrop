@@ -2,6 +2,7 @@
 title: "When a Decoder Returns the Wrong Strings"
 description: "A changed array-rotation loop exposed incorrect recovery, while eighteen of nineteen small variants evaded a rule, lowered severity or defeated decoding."
 lastUpdated: 2026-11-26
+published: 2026-10-29
 sidebar:
   order: 14
 head:

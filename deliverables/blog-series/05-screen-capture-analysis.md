@@ -2,6 +2,7 @@
 title: "Beyond Screenshot Strings: Reconstructing Screen Capture"
 description: "Frame-comparison symbols in the Go agents, a mandatory Windows capture bundle, and why the screen, not only the disk, is the unit of incident scoping."
 date: "2026-11-26"
+published: "2026-10-25"
 author: "Ilja Krasnjanski"
 canonical: "https://krasforge.github.io/UNK_DeadDrop/articles/05-screen-capture-analysis/"
 kicker: "UNK_DeadDrop · Part 5"

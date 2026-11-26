@@ -2,6 +2,7 @@
 title: "The TronzitVeca Persona Farm: Borrowed Histories and Manufactured Developers"
 description: "How a persona farm behind UNK_DeadDrop built developer reputations from other people's commits, how its operator identity ties together, and how a direction-and-date test separates its personas from the developers it copied."
 date: "2026-11-26"
+published: "2026-11-26"
 author: "Ilja Krasnjanski"
 canonical: "https://krasforge.github.io/UNK_DeadDrop/articles/15-persona-farm/"
 kicker: "UNK_DeadDrop · Part 15"

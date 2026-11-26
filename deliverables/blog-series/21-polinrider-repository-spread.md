@@ -2,6 +2,7 @@
 title: "When One Assessment Reaches Nineteen Repositories"
 description: "An infected workstation writes the PolinRider kit into every repository it can push to by amending existing commits under their authors' names, so author dates mislead and write access becomes the exposure."
 date: "2026-11-26"
+published: "2026-11-26"
 author: "Ilja Krasnjanski"
 canonical: "https://krasforge.github.io/UNK_DeadDrop/articles/21-polinrider-repository-spread/"
 kicker: "PolinRider · Part 4"

@@ -2,6 +2,7 @@
 title: "Three Resolver Wallets and Eleven Hosts"
 description: "A closed enumeration of PolinRider's Ethereum resolver found three wallets handing one pool of hosts between them, run by a scheduler and paid for out of a drain collection wallet."
 date: "2026-11-26"
+published: "2026-11-26"
 author: "Ilja Krasnjanski"
 canonical: "https://krasforge.github.io/UNK_DeadDrop/articles/20-polinrider-wallets-and-hosts/"
 kicker: "PolinRider · Part 3"

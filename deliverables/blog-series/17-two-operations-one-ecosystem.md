@@ -2,6 +2,7 @@
 title: "Two Operations, One Ecosystem: Separating UNK_DeadDrop from PolinRider"
 description: "Why UNK_DeadDrop and PolinRider are two operations, why shared techniques, hosting and victims do not link them, and which publisher makes each attribution."
 date: "2026-11-26"
+published: "2026-11-26"
 author: "Ilja Krasnjanski"
 canonical: "https://krasforge.github.io/UNK_DeadDrop/articles/17-two-operations-one-ecosystem/"
 kicker: "UNK_DeadDrop · Part 17"

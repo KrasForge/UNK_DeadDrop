@@ -1,0 +1,18 @@
+---
+// Shows the first-publication date above Starlight's "Last updated" line.
+import Default from '@astrojs/starlight/components/LastUpdated.astro';
+const { lang, entry } = Astro.locals.starlightRoute;
+const published = entry.data.published;
+---
+
+{
+	published && (
+		<p>
+			Published:{' '}
+			<time datetime={published.toISOString()}>
+				{published.toLocaleDateString(lang, { dateStyle: 'medium', timeZone: 'UTC' })}
+			</time>
+		</p>
+	)
+}
+<Default />

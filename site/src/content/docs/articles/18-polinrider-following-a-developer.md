@@ -2,6 +2,7 @@
 title: "Following a Developer from UNK_DeadDrop to PolinRider"
 description: "A second take-home assessment in one developer's account ran an extra file before the application started, and that file belonged to a different operation with its own delivery, resolver and hosting."
 lastUpdated: 2026-11-26
+published: 2026-11-26
 sidebar:
   order: 18
 head:

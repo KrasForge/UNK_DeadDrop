@@ -2,6 +2,7 @@
 title: "After October: Dead-Drop Successors, Panel Lineage and One Hosting Provider"
 description: "How UNK_DeadDrop rebuilt its GitLab dead drop twice after a 22 October outage, what a watch on a known path could not see, and what panel code, Cortex and the Advin hosting concentration do and do not establish."
 lastUpdated: 2026-11-26
+published: 2026-11-26
 sidebar:
   order: 16
 head:

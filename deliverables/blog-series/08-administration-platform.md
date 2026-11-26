@@ -2,6 +2,7 @@
 title: "Inside rms-platform: Delivery Monitoring and Wallet Administration"
 description: "What seventy recovered frontend modules reveal about repository monitoring, wallet workflows and authorization limits."
 date: "2026-11-26"
+published: "2026-10-25"
 author: "Ilja Krasnjanski"
 canonical: "https://krasforge.github.io/UNK_DeadDrop/articles/08-administration-platform/"
 kicker: "UNK_DeadDrop · Part 8"

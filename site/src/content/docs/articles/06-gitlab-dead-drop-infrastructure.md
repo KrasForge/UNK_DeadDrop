@@ -2,6 +2,7 @@
 title: "Following the GitLab Dead Drop: Configuration Changes and C2 History"
 description: "How a GitLab-hosted configuration file let the UNK_DeadDrop operators change servers without new payloads, what its revision history reveals, and how the dead drop was rebuilt twice after it went dark in October."
 lastUpdated: 2026-11-26
+published: 2026-10-25
 sidebar:
   order: 6
 head:

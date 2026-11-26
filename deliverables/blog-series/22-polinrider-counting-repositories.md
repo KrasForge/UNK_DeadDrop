@@ -2,6 +2,7 @@
 title: "What 2,301 Affected Accounts Actually Means"
 description: "Five code-search passes give a floor of at least 2,301 GitHub accounts whose repositories carry PolinRider's launcher, and the differences between the passes say as much about search as about spread."
 date: "2026-11-26"
+published: "2026-11-26"
 author: "Ilja Krasnjanski"
 canonical: "https://krasforge.github.io/UNK_DeadDrop/articles/22-polinrider-counting-repositories/"
 kicker: "PolinRider · Part 5"

@@ -2,6 +2,7 @@
 title: "Detecting PolinRider Beyond a Filename"
 description: "Multi-engine scanners and a JavaScript-only source scanner saw almost none of PolinRider, while a check on what a repository runs automatically and on asset files that parse as JavaScript reached every launcher in a real-world test."
 date: "2026-11-26"
+published: "2026-11-26"
 author: "Ilja Krasnjanski"
 canonical: "https://krasforge.github.io/UNK_DeadDrop/articles/23-polinrider-detection/"
 kicker: "PolinRider · Part 6"

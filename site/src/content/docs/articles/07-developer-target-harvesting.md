@@ -2,6 +2,7 @@
 title: "From Commit Metadata to a Developer Target List"
 description: "Reconstructing the harvester, sender configuration and aggregate counts behind two SQLite targeting pools."
 lastUpdated: 2026-11-26
+published: 2026-10-25
 sidebar:
   order: 7
 head:

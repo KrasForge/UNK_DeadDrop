@@ -2,6 +2,7 @@
 title: "Building and Testing Detections for UNK_DeadDrop"
 description: "Thirty-three YARA rules replayed against retained artifacts, followed by a separate noise review, a static scanner evaluation and a look at what source scanning cannot see."
 lastUpdated: 2026-11-26
+published: 2026-10-25
 sidebar:
   order: 11
 head:

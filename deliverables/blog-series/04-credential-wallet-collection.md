@@ -2,6 +2,7 @@
 title: "Inside the Collector: Browser Credentials and Wallet Files"
 description: "How the collector defeats Chrome's App-Bound Encryption, sweeps the user's folders for wallet material and recovery files, and what limits its reach."
 date: "2026-11-26"
+published: "2026-10-25"
 author: "Ilja Krasnjanski"
 canonical: "https://krasforge.github.io/UNK_DeadDrop/articles/04-credential-wallet-collection/"
 kicker: "UNK_DeadDrop · Part 4"

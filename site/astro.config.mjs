@@ -33,6 +33,7 @@ export default defineConfig({
       customCss: ['./src/styles/custom.css'],
       tableOfContents: { minHeadingLevel: 2, maxHeadingLevel: 2 },
       lastUpdated: true,
+      components: { LastUpdated: './src/components/LastUpdated.astro' },
       credits: true,
       sidebar: [
         { label: 'Series overview', link: '/' },

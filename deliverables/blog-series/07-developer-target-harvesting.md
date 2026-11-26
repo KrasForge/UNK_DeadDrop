@@ -2,6 +2,7 @@
 title: "From Commit Metadata to a Developer Target List"
 description: "Reconstructing the harvester, sender configuration and aggregate counts behind two SQLite targeting pools."
 date: "2026-11-26"
+published: "2026-10-25"
 author: "Ilja Krasnjanski"
 canonical: "https://krasforge.github.io/UNK_DeadDrop/articles/07-developer-target-harvesting/"
 kicker: "UNK_DeadDrop · Part 7"

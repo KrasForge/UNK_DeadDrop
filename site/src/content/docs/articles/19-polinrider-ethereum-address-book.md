@@ -2,6 +2,7 @@
 title: "How PolinRider Uses Blockchains as an Address Book"
 description: "The Hiring777 loader finds its server in the recipient field of an Ethereum transfer, while PolinRider's older TRON branch keeps payloads on BNB Smart Chain behind a succession of on-chain pointers."
 lastUpdated: 2026-11-26
+published: 2026-11-26
 sidebar:
   order: 19
 head:

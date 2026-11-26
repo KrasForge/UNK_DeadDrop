@@ -2,6 +2,7 @@
 title: "When a Decoder Returns the Wrong Strings"
 description: "A changed array-rotation loop exposed incorrect recovery, while eighteen of nineteen small variants evaded a rule, lowered severity or defeated decoding."
 date: "2026-11-26"
+published: "2026-10-29"
 author: "Ilja Krasnjanski"
 canonical: "https://krasforge.github.io/UNK_DeadDrop/articles/14-scanner-recovery-and-bypasses/"
 kicker: "UNK_DeadDrop · Part 14"

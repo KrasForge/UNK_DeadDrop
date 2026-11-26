@@ -2,6 +2,7 @@
 title: "Detecting PolinRider Beyond a Filename"
 description: "Multi-engine scanners and a JavaScript-only source scanner saw almost none of PolinRider, while a check on what a repository runs automatically and on asset files that parse as JavaScript reached every launcher in a real-world test."
 lastUpdated: 2026-11-26
+published: 2026-11-26
 sidebar:
   order: 23
 head:

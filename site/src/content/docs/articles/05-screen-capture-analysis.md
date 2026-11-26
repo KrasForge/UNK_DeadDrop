@@ -2,6 +2,7 @@
 title: "Beyond Screenshot Strings: Reconstructing Screen Capture"
 description: "Frame-comparison symbols in the Go agents, a mandatory Windows capture bundle, and why the screen, not only the disk, is the unit of incident scoping."
 lastUpdated: 2026-11-26
+published: 2026-10-25
 sidebar:
   order: 5
 head:

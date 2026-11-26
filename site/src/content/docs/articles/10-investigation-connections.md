@@ -2,6 +2,7 @@
 title: "From Three Phishing Emails to a Connected Investigation"
 description: "The pivots linking recruitment messages, delivery artifacts, payload configuration and supporting software."
 lastUpdated: 2026-11-26
+published: 2026-10-25
 sidebar:
   order: 10
 head:

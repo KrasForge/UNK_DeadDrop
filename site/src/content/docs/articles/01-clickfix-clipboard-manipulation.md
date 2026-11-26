@@ -2,6 +2,7 @@
 title: "Anatomy of a Developer Lure: ClickFix Clipboard Manipulation"
 description: "How a fake recruitment verification page replaces a copied command with one that also runs an installer, how the kit changed between July and November 2026, and what that means for detection."
 lastUpdated: 2026-11-26
+published: 2026-10-25
 sidebar:
   order: 1
 head:

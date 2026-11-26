@@ -2,6 +2,7 @@
 title: "Where Overlord Ends and the Collection Toolchain Begins"
 description: "Overlord build metadata, browser-store selectors, wallet-upload markers and capture components in the Linux agent."
 date: "2026-11-26"
+published: "2026-10-25"
 author: "Ilja Krasnjanski"
 canonical: "https://krasforge.github.io/UNK_DeadDrop/articles/12-framework-and-collection-boundary/"
 kicker: "UNK_DeadDrop · Part 12"

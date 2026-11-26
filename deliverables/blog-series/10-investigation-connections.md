@@ -2,6 +2,7 @@
 title: "From Three Phishing Emails to a Connected Investigation"
 description: "The pivots linking recruitment messages, delivery artifacts, payload configuration and supporting software."
 date: "2026-11-26"
+published: "2026-10-25"
 author: "Ilja Krasnjanski"
 canonical: "https://krasforge.github.io/UNK_DeadDrop/articles/10-investigation-connections/"
 kicker: "UNK_DeadDrop · Part 10"

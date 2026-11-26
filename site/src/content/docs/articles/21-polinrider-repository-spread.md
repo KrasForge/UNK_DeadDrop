@@ -2,6 +2,7 @@
 title: "When One Assessment Reaches Nineteen Repositories"
 description: "An infected workstation writes the PolinRider kit into every repository it can push to by amending existing commits under their authors' names, so author dates mislead and write access becomes the exposure."
 lastUpdated: 2026-11-26
+published: 2026-11-26
 sidebar:
   order: 21
 head:

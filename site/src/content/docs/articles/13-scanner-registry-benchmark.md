@@ -2,6 +2,7 @@
 title: "What 2.8 Million Files Revealed About unk-scanner"
 description: "Two false alarms in recently changed npm packages, low coverage of public malware, and the limits of a larger static-analysis benchmark."
 lastUpdated: 2026-11-26
+published: 2026-10-29
 sidebar:
   order: 13
 head:

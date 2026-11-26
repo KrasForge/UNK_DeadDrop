@@ -2,6 +2,7 @@
 title: "Two Operations, One Ecosystem: Separating UNK_DeadDrop from PolinRider"
 description: "Why UNK_DeadDrop and PolinRider are two operations, why shared techniques, hosting and victims do not link them, and which publisher makes each attribution."
 lastUpdated: 2026-11-26
+published: 2026-11-26
 sidebar:
   order: 17
 head:
