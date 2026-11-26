@@ -50,12 +50,13 @@ tests and validation notes live in the companion repository.
 
 ## Editorial approach
 
-The revised posts follow the broad structure of the technical paper's references:
-a concrete finding at the opening, an investigation organized around the relevant
-artifacts, code and configuration details, and implications tied to the analysis.
-They use original wording and the case's own evidence. Academic citation labels
-have been replaced with descriptive evidence links. Limitations appear beside the findings they affect. The articles omit recurring
-takeaway boxes, editing history and repeated commentary about how to assess the prose.
+Since 26 November 2026 the posts follow the house style of research-lab publications such as Security Research
+Labs: a one- or two-sentence lede with the result, a short "Key takeaways" list, two-part section headings
+("Delivery: the clipboard holds a different command"), short declarative paragraphs, numbered figure captions,
+limits stated beside the claim they affect and a short conclusion. They use original wording and the case's own
+evidence, with descriptive evidence links in place of academic citation labels. The pre-restyle texts are kept in
+`../blog-series-before-srlabs-2026-11-26/`, and `style_check.py` confirms that a restyle kept every number, code
+span, indicator and link.
 
 References consulted for structure and pacing:
 
