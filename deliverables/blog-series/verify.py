@@ -6,8 +6,8 @@ import re
 import subprocess
 BASE=Path(__file__).resolve().parent
 posts=sorted(BASE.glob('[0-9][0-9]-*.md'))
-assert len(posts)==14
-assert [p.name[:2] for p in posts] == [f"{i:02}" for i in range(1,15)]
+assert len(posts)==24
+assert [p.name[:2] for p in posts] == [f"{i:02}" for i in range(1,25)]
 code=[]; summary=[]; figures=set(); links=set()
 for p in posts:
     s=p.read_text()
@@ -34,7 +34,7 @@ for p in posts:
     words=len(re.findall(r"\b[\w'-]+\b",body))
     assert words > 0, p.name  # Splits have no arbitrary minimum word target.
     summary.append({'file':p.name,'words_excluding_code_and_evidence':words})
-assert len(figures)==14
+assert len(figures)>=21
 # Parse all JavaScript examples; do not invoke the lure handler or file selectors.
 parser="""import { parse } from 'acorn';
 let text = ''; for await (const chunk of process.stdin) text += chunk;

@@ -1,0 +1,157 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE svg
+  PUBLIC '-//W3C//DTD SVG 1.0//EN'
+  'http://www.w3.org/TR/2001/REC-SVG-20010904/DTD/svg10.dtd'>
+<svg width="451" height="494" preserveAspectRatio="xMinYMin meet" viewBox="0 0 451 494" xmlns="http://www.w3.org/2000/svg" version="1.0" fill-rule="evenodd" xmlns:xlink="http://www.w3.org/1999/xlink">
+	<title>...</title>
+	<desc>...</desc>
+	<clipPath id="clip">
+		<rect x="0" y="0" width="451" height="494"/>
+	</clipPath>
+	<g id="group" transform="scale(1,-1) translate(0,-494)" style="clip-path: url(#clip)">
+		<g transform="">
+			<g transform=" matrix(0,1,-1,0,9,424)">
+				<text x="-26.443359375" y="0" style="font-family: 'Liberation Serif'; font-style: italic; font-size: 8px;fill: rgb(30%,35%,40%); stroke:none;" transform="translate(0,0) scale(1,-1)">Sources of funds</text>
+			</g>
+			<g transform=" matrix(0,1,-1,0,9,327)">
+				<text x="-18.6640625" y="0" style="font-family: 'Liberation Serif'; font-style: italic; font-size: 8px;fill: rgb(30%,35%,40%); stroke:none;" transform="translate(0,0) scale(1,-1)">Paymasters</text>
+			</g>
+			<g transform=" matrix(0,1,-1,0,9,243)">
+				<text x="-23.21875" y="0" style="font-family: 'Liberation Serif'; font-style: italic; font-size: 8px;fill: rgb(30%,35%,40%); stroke:none;" transform="translate(0,0) scale(1,-1)">Gas recipients</text>
+			</g>
+			<g transform=" matrix(0,1,-1,0,9,152)">
+				<text x="-17.884765625" y="0" style="font-family: 'Liberation Serif'; font-style: italic; font-size: 8px;fill: rgb(30%,35%,40%); stroke:none;" transform="translate(0,0) scale(1,-1)">Payout tier</text>
+			</g>
+			<g transform=" matrix(0,1,-1,0,9,62)">
+				<text x="-14.66796875" y="0" style="font-family: 'Liberation Serif'; font-style: italic; font-size: 8px;fill: rgb(30%,35%,40%); stroke:none;" transform="translate(0,0) scale(1,-1)">Cash-out</text>
+			</g>
+			<rect x="26" y="380" width="96" height="88" style="stroke: rgb(14%,20%,25%); stroke-linecap: butt; stroke-width: 0.7; fill: rgb(96%,96%,97%); fill-rule: evenodd;"/>
+			<text x="45.380615234375" y="454" style="font-family: 'Liberation Serif'; font-weight: bold; font-size: 9px;fill: rgb(14%,20%,25%); stroke:none;" transform="translate(0,908) scale(1,-1)">Theft proceeds</text>
+			<text x="42.6796875" y="441.0" style="font-family: 'Liberation Serif'; font-size: 8px;fill: rgb(14%,20%,25%); stroke:none;" transform="translate(0,882) scale(1,-1)">Deployer-key theft,</text>
+			<text x="33.4453125" y="430.5" style="font-family: 'Liberation Serif'; font-size: 8px;fill: rgb(14%,20%,25%); stroke:none;" transform="translate(0,861) scale(1,-1)">31 July 2024: 22.82 ETH</text>
+			<text x="33.2265625" y="420.0" style="font-family: 'Liberation Serif'; font-size: 8px;fill: rgb(14%,20%,25%); stroke:none;" transform="translate(0,840) scale(1,-1)">Victim drains, Aug. 2024</text>
+			<text x="35.451171875" y="409.5" style="font-family: 'Liberation Serif'; font-size: 8px;fill: rgb(14%,20%,25%); stroke:none;" transform="translate(0,819) scale(1,-1)">Lure theft, 10 July 2025</text>
+			<text x="45.3359375" y="399.0" style="font-family: 'Liberation Serif'; font-size: 8px;fill: rgb(14%,20%,25%); stroke:none;" transform="translate(0,798) scale(1,-1)">Vault pulls: about</text>
+			<text x="38.115234375" y="388.5" style="font-family: 'Liberation Serif'; font-size: 8px;fill: rgb(14%,20%,25%); stroke:none;" transform="translate(0,777) scale(1,-1)">681,000 in stablecoins</text>
+			<rect x="26" y="296" width="96" height="62" style="stroke: rgb(14%,20%,25%); stroke-linecap: butt; stroke-width: 0.7; fill: rgb(96%,96%,97%); fill-rule: evenodd;"/>
+			<text x="49.74658203125" y="344" style="font-family: 'Liberation Serif'; font-weight: bold; font-size: 9px;fill: rgb(14%,20%,25%); stroke:none;" transform="translate(0,688) scale(1,-1)">Provisioning</text>
+			<text x="45.4453125" y="331.0" style="font-family: 'Liberation Serif'; font-size: 8px;fill: rgb(14%,20%,25%); stroke:none;" transform="translate(0,662) scale(1,-1)">BSC 0xade999f5;</text>
+			<text x="38.12109375" y="320.5" style="font-family: 'Liberation Serif'; font-size: 8px;fill: rgb(14%,20%,25%); stroke:none;" transform="translate(0,641) scale(1,-1)">successor 0x5fb6f15a;</text>
+			<text x="46.111328125" y="310.0" style="font-family: 'Liberation Serif'; font-size: 8px;fill: rgb(14%,20%,25%); stroke:none;" transform="translate(0,620) scale(1,-1)">TRON TJ9F6EaJ</text>
+			<rect x="26" y="212" width="96" height="62" style="stroke: rgb(14%,20%,25%); stroke-linecap: butt; stroke-width: 0.7; fill: rgb(96%,96%,97%); fill-rule: evenodd;"/>
+			<text x="42.13525390625" y="260" style="font-family: 'Liberation Serif'; font-weight: bold; font-size: 9px;fill: rgb(14%,20%,25%); stroke:none;" transform="translate(0,520) scale(1,-1)">Payload carriers</text>
+			<text x="32.341796875" y="247.0" style="font-family: 'Liberation Serif'; font-size: 8px;fill: rgb(14%,20%,25%); stroke:none;" transform="translate(0,494) scale(1,-1)">0x20e3b9f0, 0xe69222e6,</text>
+			<text x="32.44921875" y="236.5" style="font-family: 'Liberation Serif'; font-size: 8px;fill: rgb(14%,20%,25%); stroke:none;" transform="translate(0,473) scale(1,-1)">0xadd1b89e, 0x779bb1bb</text>
+			<text x="37.455078125" y="226.0" style="font-family: 'Liberation Serif'; font-size: 8px;fill: rgb(14%,20%,25%); stroke:none;" transform="translate(0,452) scale(1,-1)">gas and payload writes</text>
+			<rect x="26" y="118" width="96" height="68" style="stroke: rgb(14%,20%,25%); stroke-linecap: butt; stroke-width: 0.7; fill: rgb(96%,96%,97%); fill-rule: evenodd;"/>
+			<text x="36.38720703124999" y="172" style="font-family: 'Liberation Serif'; font-weight: bold; font-size: 9px;fill: rgb(14%,20%,25%); stroke:none;" transform="translate(0,344) scale(1,-1)">Carrier-side payees</text>
+			<text x="40.009765625" y="159.0" style="font-family: 'Liberation Serif'; font-size: 8px;fill: rgb(14%,20%,25%); stroke:none;" transform="translate(0,318) scale(1,-1)">Successor payer: 130</text>
+			<text x="44.890625" y="148.5" style="font-family: 'Liberation Serif'; font-size: 8px;fill: rgb(14%,20%,25%); stroke:none;" transform="translate(0,297) scale(1,-1)">recipients on BSC</text>
+			<text x="38.125" y="138.0" style="font-family: 'Liberation Serif'; font-size: 8px;fill: rgb(14%,20%,25%); stroke:none;" transform="translate(0,276) scale(1,-1)">Base payment service,</text>
+			<text x="30.228515625" y="127.5" style="font-family: 'Liberation Serif'; font-size: 8px;fill: rgb(14%,20%,25%); stroke:none;" transform="translate(0,255) scale(1,-1)">Polymarket; TRON payroll</text>
+			<rect x="26" y="28" width="96" height="68" style="stroke: rgb(14%,20%,25%); stroke-linecap: butt; stroke-width: 0.7; fill: rgb(96%,96%,97%); fill-rule: evenodd;"/>
+			<text x="38.61962890624999" y="82" style="font-family: 'Liberation Serif'; font-weight: bold; font-size: 9px;fill: rgb(14%,20%,25%); stroke:none;" transform="translate(0,164) scale(1,-1)">Exchange deposits</text>
+			<text x="40.67578125" y="69.0" style="font-family: 'Liberation Serif'; font-size: 8px;fill: rgb(14%,20%,25%); stroke:none;" transform="translate(0,138) scale(1,-1)">Exchange A: deposit</text>
+			<text x="41.892578125" y="58.5" style="font-family: 'Liberation Serif'; font-size: 8px;fill: rgb(14%,20%,25%); stroke:none;" transform="translate(0,117) scale(1,-1)">address, 52 deposits</text>
+			<text x="30.45703125" y="48.0" style="font-family: 'Liberation Serif'; font-size: 8px;fill: rgb(14%,20%,25%); stroke:none;" transform="translate(0,96) scale(1,-1)">Exchange B: two accounts,</text>
+			<text x="44.5546875" y="37.5" style="font-family: 'Liberation Serif'; font-size: 8px;fill: rgb(14%,20%,25%); stroke:none;" transform="translate(0,75) scale(1,-1)">128,224.74 USDT</text>
+			<polyline points="122 420, 126 420, 126 243, 122 243" style="stroke: rgb(14%,20%,25%); stroke-linecap: butt; stroke-width: 0.85; fill: none; fill-rule: evenodd;"/>
+			<polygon points="122 243, 127 245, 127 241" style="stroke: none; stroke-linecap: butt; stroke-width: 1; fill: rgb(14%,20%,25%); fill-rule: evenodd;"/>
+			<polyline points="74 296, 74 274" style="stroke: rgb(14%,20%,25%); stroke-linecap: butt; stroke-width: 0.85; fill: none; fill-rule: evenodd;"/>
+			<polygon points="74 274, 72 279, 76 279" style="stroke: none; stroke-linecap: butt; stroke-width: 1; fill: rgb(14%,20%,25%); fill-rule: evenodd;"/>
+			<polyline points="26 327, 18 327, 18 152, 26 152" style="stroke: rgb(14%,20%,25%); stroke-linecap: butt; stroke-width: 0.85; fill: none; fill-rule: evenodd;"/>
+			<polygon points="26 152, 21 150, 21 154" style="stroke: none; stroke-linecap: butt; stroke-width: 1; fill: rgb(14%,20%,25%); fill-rule: evenodd;"/>
+			<polyline points="74 118, 74 96" style="stroke: rgb(14%,20%,25%); stroke-linecap: butt; stroke-width: 0.85; fill: none; fill-rule: evenodd;"/>
+			<polygon points="74 96, 72 101, 76 101" style="stroke: none; stroke-linecap: butt; stroke-width: 1; fill: rgb(14%,20%,25%); fill-rule: evenodd;"/>
+			<rect x="130" y="380" width="96" height="88" style="stroke: rgb(14%,20%,25%); stroke-linecap: butt; stroke-width: 0.7; fill: rgb(100%,100%,100%); fill-rule: evenodd; stroke-dasharray: 4, 3;"/>
+			<text x="148.866455078125" y="454" style="font-family: 'Liberation Serif'; font-weight: bold; font-size: 9px;fill: rgb(14%,20%,25%); stroke:none;" transform="translate(0,908) scale(1,-1)">Bridge funding</text>
+			<text x="137.009765625" y="441.0" style="font-family: 'Liberation Serif'; font-size: 8px;fill: rgb(14%,20%,25%); stroke:none;" transform="translate(0,882) scale(1,-1)">Across, Relay, Gas[.]Zip;</text>
+			<text x="146.45703125" y="430.5" style="font-family: 'Liberation Serif'; font-size: 8px;fill: rgb(14%,20%,25%); stroke:none;" transform="translate(0,861) scale(1,-1)">upstream not traced</text>
+			<text x="163.783203125" y="420.0" style="font-family: 'Liberation Serif'; font-size: 8px;fill: rgb(14%,20%,25%); stroke:none;" transform="translate(0,840) scale(1,-1)">to a theft</text>
+			<rect x="130" y="296" width="96" height="62" style="stroke: rgb(14%,20%,25%); stroke-linecap: butt; stroke-width: 0.7; fill: rgb(96%,96%,97%); fill-rule: evenodd;"/>
+			<text x="150.3759765625" y="344" style="font-family: 'Liberation Serif'; font-weight: bold; font-size: 9px;fill: rgb(14%,20%,25%); stroke:none;" transform="translate(0,688) scale(1,-1)">Signal-tier gas</text>
+			<text x="139.2265625" y="331.0" style="font-family: 'Liberation Serif'; font-size: 8px;fill: rgb(14%,20%,25%); stroke:none;" transform="translate(0,662) scale(1,-1)">Four disposable wallets,</text>
+			<text x="144.900390625" y="320.5" style="font-family: 'Liberation Serif'; font-size: 8px;fill: rgb(14%,20%,25%); stroke:none;" transform="translate(0,641) scale(1,-1)">each funded minutes</text>
+			<text x="148.787109375" y="310.0" style="font-family: 'Liberation Serif'; font-size: 8px;fill: rgb(14%,20%,25%); stroke:none;" transform="translate(0,620) scale(1,-1)">before it first pays</text>
+			<rect x="130" y="212" width="96" height="62" style="stroke: rgb(14%,20%,25%); stroke-linecap: butt; stroke-width: 0.7; fill: rgb(96%,96%,97%); fill-rule: evenodd;"/>
+			<text x="153.373046875" y="260" style="font-family: 'Liberation Serif'; font-weight: bold; font-size: 9px;fill: rgb(14%,20%,25%); stroke:none;" transform="translate(0,520) scale(1,-1)">Signal wallet</text>
+			<text x="140.6796875" y="247.0" style="font-family: 'Liberation Serif'; font-size: 8px;fill: rgb(14%,20%,25%); stroke:none;" transform="translate(0,494) scale(1,-1)">0x33ff3eda and pointer</text>
+			<text x="146.56640625" y="236.5" style="font-family: 'Liberation Serif'; font-size: 8px;fill: rgb(14%,20%,25%); stroke:none;" transform="translate(0,473) scale(1,-1)">sender 0x596dcc9f;</text>
+			<text x="147.669921875" y="226.0" style="font-family: 'Liberation Serif'; font-size: 8px;fill: rgb(14%,20%,25%); stroke:none;" transform="translate(0,452) scale(1,-1)">small daily gas bill</text>
+			<rect x="130" y="28" width="96" height="68" style="stroke: rgb(14%,20%,25%); stroke-linecap: butt; stroke-width: 0.7; fill: rgb(96%,96%,97%); fill-rule: evenodd;"/>
+			<text x="157.25341796875" y="82" style="font-family: 'Liberation Serif'; font-weight: bold; font-size: 9px;fill: rgb(14%,20%,25%); stroke:none;" transform="translate(0,164) scale(1,-1)">FixedFloat</text>
+			<text x="142.78515625" y="69.0" style="font-family: 'Liberation Serif'; font-size: 8px;fill: rgb(14%,20%,25%); stroke:none;" transform="translate(0,138) scale(1,-1)">Resolver-side splitter:</text>
+			<text x="146.888671875" y="58.5" style="font-family: 'Liberation Serif'; font-size: 8px;fill: rgb(14%,20%,25%); stroke:none;" transform="translate(0,117) scale(1,-1)">15.197 BNB, about</text>
+			<text x="142.22265625" y="48.0" style="font-family: 'Liberation Serif'; font-size: 8px;fill: rgb(14%,20%,25%); stroke:none;" transform="translate(0,96) scale(1,-1)">10,300 USD, on 3 and</text>
+			<text x="149.1171875" y="37.5" style="font-family: 'Liberation Serif'; font-size: 8px;fill: rgb(14%,20%,25%); stroke:none;" transform="translate(0,75) scale(1,-1)">7 November 2026</text>
+			<polyline points="178 380, 178 358" style="stroke: rgb(14%,20%,25%); stroke-linecap: butt; stroke-width: 0.85; fill: none; fill-rule: evenodd; stroke-dasharray: 4, 3;"/>
+			<polygon points="178 358, 176 363, 180 363" style="stroke: none; stroke-linecap: butt; stroke-width: 1; fill: rgb(14%,20%,25%); fill-rule: evenodd;"/>
+			<polyline points="178 296, 178 274" style="stroke: rgb(14%,20%,25%); stroke-linecap: butt; stroke-width: 0.85; fill: none; fill-rule: evenodd;"/>
+			<polygon points="178 274, 176 279, 180 279" style="stroke: none; stroke-linecap: butt; stroke-width: 1; fill: rgb(14%,20%,25%); fill-rule: evenodd;"/>
+			<rect x="234" y="380" width="100" height="88" style="stroke: rgb(14%,20%,25%); stroke-linecap: butt; stroke-width: 0.7; fill: rgb(96%,96%,97%); fill-rule: evenodd;"/>
+			<text x="250.13134765625" y="454" style="font-family: 'Liberation Serif'; font-weight: bold; font-size: 9px;fill: rgb(14%,20%,25%); stroke:none;" transform="translate(0,908) scale(1,-1)">Collection wallets</text>
+			<text x="248.90234375" y="441.0" style="font-family: 'Liberation Serif'; font-size: 8px;fill: rgb(14%,20%,25%); stroke:none;" transform="translate(0,882) scale(1,-1)">Drain collector: about</text>
+			<text x="252.673828125" y="430.5" style="font-family: 'Liberation Serif'; font-size: 8px;fill: rgb(14%,20%,25%); stroke:none;" transform="translate(0,861) scale(1,-1)">22 emptied wallets;</text>
+			<text x="256.005859375" y="420.0" style="font-family: 'Liberation Serif'; font-size: 8px;fill: rgb(14%,20%,25%); stroke:none;" transform="translate(0,840) scale(1,-1)">sweep hub: about</text>
+			<text x="247.33984375" y="409.5" style="font-family: 'Liberation Serif'; font-size: 8px;fill: rgb(14%,20%,25%); stroke:none;" transform="translate(0,819) scale(1,-1)">1,270 more; key origin</text>
+			<text x="264.34765625" y="399.0" style="font-family: 'Liberation Serif'; font-size: 8px;fill: rgb(14%,20%,25%); stroke:none;" transform="translate(0,798) scale(1,-1)">an inference</text>
+			<rect x="250" y="296" width="84" height="62" style="stroke: rgb(14%,20%,25%); stroke-linecap: butt; stroke-width: 0.7; fill: rgb(96%,96%,97%); fill-rule: evenodd;"/>
+			<text x="271.50830078125" y="344" style="font-family: 'Liberation Serif'; font-weight: bold; font-size: 9px;fill: rgb(14%,20%,25%); stroke:none;" transform="translate(0,688) scale(1,-1)">Paymaster</text>
+			<text x="260.78125" y="331.0" style="font-family: 'Liberation Serif'; font-size: 8px;fill: rgb(14%,20%,25%); stroke:none;" transform="translate(0,662) scale(1,-1)">0xe6a869f1 (BSC);</text>
+			<text x="267.234375" y="320.5" style="font-family: 'Liberation Serif'; font-size: 8px;fill: rgb(14%,20%,25%); stroke:none;" transform="translate(0,641) scale(1,-1)">seeded resolver</text>
+			<text x="278.55859375" y="310.0" style="font-family: 'Liberation Serif'; font-size: 8px;fill: rgb(14%,20%,25%); stroke:none;" transform="translate(0,620) scale(1,-1)">wallet C</text>
+			<rect x="234" y="212" width="100" height="62" style="stroke: rgb(14%,20%,25%); stroke-linecap: butt; stroke-width: 0.7; fill: rgb(96%,96%,97%); fill-rule: evenodd;"/>
+			<text x="252.884521484375" y="260" style="font-family: 'Liberation Serif'; font-weight: bold; font-size: 9px;fill: rgb(14%,20%,25%); stroke:none;" transform="translate(0,520) scale(1,-1)">Resolver wallets</text>
+			<text x="246.126953125" y="247.0" style="font-family: 'Liberation Serif'; font-size: 8px;fill: rgb(14%,20%,25%); stroke:none;" transform="translate(0,494) scale(1,-1)">Ethereum NullReceiver</text>
+			<text x="249.904296875" y="236.5" style="font-family: 'Liberation Serif'; font-size: 8px;fill: rgb(14%,20%,25%); stroke:none;" transform="translate(0,473) scale(1,-1)">branch; fees from the</text>
+			<text x="260.7890625" y="226.0" style="font-family: 'Liberation Serif'; font-size: 8px;fill: rgb(14%,20%,25%); stroke:none;" transform="translate(0,452) scale(1,-1)">drain collector</text>
+			<rect x="234" y="118" width="100" height="68" style="stroke: rgb(14%,20%,25%); stroke-linecap: butt; stroke-width: 0.7; fill: rgb(96%,96%,97%); fill-rule: evenodd;"/>
+			<text x="252.638427734375" y="172" style="font-family: 'Liberation Serif'; font-weight: bold; font-size: 9px;fill: rgb(14%,20%,25%); stroke:none;" transform="translate(0,344) scale(1,-1)">Paymaster relay</text>
+			<text x="240.681640625" y="159.0" style="font-family: 'Liberation Serif'; font-size: 8px;fill: rgb(14%,20%,25%); stroke:none;" transform="translate(0,318) scale(1,-1)">10 tested paymasters, three</text>
+			<text x="240.451171875" y="148.5" style="font-family: 'Liberation Serif'; font-size: 8px;fill: rgb(14%,20%,25%); stroke:none;" transform="translate(0,297) scale(1,-1)">days to six weeks, filled by</text>
+			<text x="252.23046875" y="138.0" style="font-family: 'Liberation Serif'; font-size: 8px;fill: rgb(14%,20%,25%); stroke:none;" transform="translate(0,276) scale(1,-1)">swap payouts; three</text>
+			<text x="257.458984375" y="127.5" style="font-family: 'Liberation Serif'; font-size: 8px;fill: rgb(14%,20%,25%); stroke:none;" transform="translate(0,255) scale(1,-1)">recurring payees</text>
+			<rect x="234" y="28" width="100" height="68" style="stroke: rgb(14%,20%,25%); stroke-linecap: butt; stroke-width: 0.7; fill: rgb(96%,96%,97%); fill-rule: evenodd;"/>
+			<text x="255.380615234375" y="82" style="font-family: 'Liberation Serif'; font-weight: bold; font-size: 9px;fill: rgb(14%,20%,25%); stroke:none;" transform="translate(0,164) scale(1,-1)">Payee cash-out</text>
+			<text x="258.44921875" y="69.0" style="font-family: 'Liberation Serif'; font-size: 8px;fill: rgb(14%,20%,25%); stroke:none;" transform="translate(0,138) scale(1,-1)">Deposits at four</text>
+			<text x="247.79296875" y="58.5" style="font-family: 'Liberation Serif'; font-size: 8px;fill: rgb(14%,20%,25%); stroke:none;" transform="translate(0,117) scale(1,-1)">exchanges; member or</text>
+			<text x="250.349609375" y="48.0" style="font-family: 'Liberation Serif'; font-size: 8px;fill: rgb(14%,20%,25%); stroke:none;" transform="translate(0,96) scale(1,-1)">contractor undecided</text>
+			<polyline points="241 380, 241 274" style="stroke: rgb(14%,20%,25%); stroke-linecap: butt; stroke-width: 0.85; fill: none; fill-rule: evenodd;"/>
+			<polygon points="241 274, 239 279, 243 279" style="stroke: none; stroke-linecap: butt; stroke-width: 1; fill: rgb(14%,20%,25%); fill-rule: evenodd;"/>
+			<polyline points="292 296, 292 274" style="stroke: rgb(14%,20%,25%); stroke-linecap: butt; stroke-width: 0.85; fill: none; fill-rule: evenodd;"/>
+			<polygon points="292 274, 290 279, 294 279" style="stroke: none; stroke-linecap: butt; stroke-width: 1; fill: rgb(14%,20%,25%); fill-rule: evenodd;"/>
+			<polyline points="284 118, 284 96" style="stroke: rgb(14%,20%,25%); stroke-linecap: butt; stroke-width: 0.85; fill: none; fill-rule: evenodd;"/>
+			<polygon points="284 96, 282 101, 286 101" style="stroke: none; stroke-linecap: butt; stroke-width: 1; fill: rgb(14%,20%,25%); fill-rule: evenodd;"/>
+			<rect x="344" y="118" width="103" height="240" style="stroke: rgb(14%,20%,25%); stroke-linecap: butt; stroke-width: 0.7; fill: rgb(100%,100%,100%); fill-rule: evenodd; stroke-dasharray: 4, 3;"/>
+			<text x="360.121826171875" y="344" style="font-family: 'Liberation Serif'; font-weight: bold; font-size: 9px;fill: rgb(14%,20%,25%); stroke:none;" transform="translate(0,688) scale(1,-1)">Laundering layers</text>
+			<text x="360.619140625" y="331.0" style="font-family: 'Liberation Serif'; font-size: 8px;fill: rgb(14%,20%,25%); stroke:none;" transform="translate(0,662) scale(1,-1)">listed in a public theft</text>
+			<text x="383.505859375" y="320.5" style="font-family: 'Liberation Serif'; font-size: 8px;fill: rgb(14%,20%,25%); stroke:none;" transform="translate(0,641) scale(1,-1)">register</text>
+			<text x="395.5" y="310.0" style="font-family: 'Liberation Serif'; font-size: 8px;fill: rgb(14%,20%,25%); stroke:none;" transform="translate(0,620) scale(1,-1)"></text>
+			<text x="360.953125" y="299.5" style="font-family: 'Liberation Serif'; font-size: 8px;fill: rgb(14%,20%,25%); stroke:none;" transform="translate(0,599) scale(1,-1)">Allbridge, Stargate to</text>
+			<text x="360.955078125" y="289.0" style="font-family: 'Liberation Serif'; font-size: 8px;fill: rgb(14%,20%,25%); stroke:none;" transform="translate(0,578) scale(1,-1)">TRON: Nexera-listed</text>
+			<text x="356.28125" y="278.5" style="font-family: 'Liberation Serif'; font-size: 8px;fill: rgb(14%,20%,25%); stroke:none;" transform="translate(0,557) scale(1,-1)">wallet, 2,978,110 USDT</text>
+			<text x="369.728515625" y="268.0" style="font-family: 'Liberation Serif'; font-size: 8px;fill: rgb(14%,20%,25%); stroke:none;" transform="translate(0,536) scale(1,-1)">from 25 senders</text>
+			<text x="395.5" y="257.5" style="font-family: 'Liberation Serif'; font-size: 8px;fill: rgb(14%,20%,25%); stroke:none;" transform="translate(0,515) scale(1,-1)"></text>
+			<text x="358.619140625" y="247.0" style="font-family: 'Liberation Serif'; font-size: 8px;fill: rgb(14%,20%,25%); stroke:none;" transform="translate(0,494) scale(1,-1)">BNB tree via Bridgers,</text>
+			<text x="363.609375" y="236.5" style="font-family: 'Liberation Serif'; font-size: 8px;fill: rgb(14%,20%,25%); stroke:none;" transform="translate(0,473) scale(1,-1)">Symbiosis: over 8.6</text>
+			<text x="364.505859375" y="226.0" style="font-family: 'Liberation Serif'; font-size: 8px;fill: rgb(14%,20%,25%); stroke:none;" transform="translate(0,452) scale(1,-1)">million, vault share</text>
+			<text x="372.61328125" y="215.5" style="font-family: 'Liberation Serif'; font-size: 8px;fill: rgb(14%,20%,25%); stroke:none;" transform="translate(0,431) scale(1,-1)">about 107,500</text>
+			<text x="395.5" y="205.0" style="font-family: 'Liberation Serif'; font-size: 8px;fill: rgb(14%,20%,25%); stroke:none;" transform="translate(0,410) scale(1,-1)"></text>
+			<text x="356.951171875" y="194.5" style="font-family: 'Liberation Serif'; font-size: 8px;fill: rgb(14%,20%,25%); stroke:none;" transform="translate(0,389) scale(1,-1)">deBridge: 119,000 from</text>
+			<text x="367.5078125" y="184.0" style="font-family: 'Liberation Serif'; font-size: 8px;fill: rgb(14%,20%,25%); stroke:none;" transform="translate(0,368) scale(1,-1)">the payroll signer</text>
+			<text x="395.5" y="173.5" style="font-family: 'Liberation Serif'; font-size: 8px;fill: rgb(14%,20%,25%); stroke:none;" transform="translate(0,347) scale(1,-1)"></text>
+			<text x="364.396484375" y="163.0" style="font-family: 'Liberation Serif'; font-size: 8px;fill: rgb(14%,20%,25%); stroke:none;" transform="translate(0,326) scale(1,-1)">Attributions are the</text>
+			<text x="381.228515625" y="152.5" style="font-family: 'Liberation Serif'; font-size: 8px;fill: rgb(14%,20%,25%); stroke:none;" transform="translate(0,305) scale(1,-1)">register's</text>
+			<polyline points="74 212, 74 197, 344 197" style="stroke: rgb(14%,20%,25%); stroke-linecap: butt; stroke-width: 0.85; fill: none; fill-rule: evenodd;"/>
+			<polygon points="344 197, 339 195, 339 199" style="stroke: none; stroke-linecap: butt; stroke-width: 1; fill: rgb(14%,20%,25%); fill-rule: evenodd;"/>
+			<text x="156.87744140625" y="201" style="font-family: 'Liberation Serif'; font-size: 7.5px;fill: rgb(30%,35%,40%); stroke:none;" transform="translate(0,402) scale(1,-1)">74,720.49 USDT bridged to TRON</text>
+			<polyline points="74 468, 74 478, 395 478, 395 358" style="stroke: rgb(14%,20%,25%); stroke-linecap: butt; stroke-width: 0.85; fill: none; fill-rule: evenodd;"/>
+			<polygon points="395 358, 393 363, 397 363" style="stroke: none; stroke-linecap: butt; stroke-width: 1; fill: rgb(14%,20%,25%); fill-rule: evenodd;"/>
+			<text x="182.8677978515625" y="481" style="font-family: 'Liberation Serif'; font-size: 7.5px;fill: rgb(30%,35%,40%); stroke:none;" transform="translate(0,962) scale(1,-1)">vault proceeds into the BNB layer</text>
+			<polyline points="30 10, 56 10" style="stroke: rgb(14%,20%,25%); stroke-linecap: butt; stroke-width: 0.85; fill: none; fill-rule: evenodd;"/>
+			<text x="62" y="7" style="font-family: 'Liberation Serif'; font-size: 8px;fill: rgb(14%,20%,25%); stroke:none;" transform="translate(0,14) scale(1,-1)">Observed transfer or role</text>
+			<polyline points="220 10, 246 10" style="stroke: rgb(14%,20%,25%); stroke-linecap: butt; stroke-width: 0.85; fill: none; fill-rule: evenodd; stroke-dasharray: 4, 3;"/>
+			<text x="252" y="7" style="font-family: 'Liberation Serif'; font-size: 8px;fill: rgb(14%,20%,25%); stroke:none;" transform="translate(0,14) scale(1,-1)">Not traced, inferred, or register attribution</text>
+		</g>
+	</g>
+</svg>

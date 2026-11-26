@@ -1,6 +1,6 @@
-# UNK_DeadDrop: a fourteen-part series with indicator and artifact references
+# UNK_DeadDrop and PolinRider: a twenty-four-part series with indicator and artifact references
 
-Fourteen articles, a historical indicator appendix and a sample-artifact reference by Ilja Krasnjanski, updated 30 October 2026.
+Twenty-four articles, a historical indicator appendix and a sample-artifact reference by Ilja Krasnjanski, updated 26 November 2026. Parts 1–14 were brought up to the case record of 17 November 2026; Parts 15–17 add the persona farm, the control layer after October and the separation of the operations; Parts 18–24 cover PolinRider, a separate operation.
 Parts 13–14 cover the larger scanner benchmark and recovery/bypass results, including the hardened engine that closed the bypasses. Parts 3, 6, 9 and 11 have been expanded or updated to match the latest analysis.
 Parts 10–12 add the investigative connections, detection engineering and framework
 comparison. Parts 4–5 and 7–8 are the split collection/capture and targeting/admin
@@ -20,6 +20,16 @@ articles. The hosted edition is available at [krasforge.github.io/UNK_DeadDrop](
 12. [Where Overlord Ends and the Collection Toolchain Begins](12-framework-and-collection-boundary.md)
 13. [What 2.8 Million Files Revealed About unk-scanner](13-scanner-registry-benchmark.md)
 14. [When a Decoder Returns the Wrong Strings](14-scanner-recovery-and-bypasses.md)
+15. [The TronzitVeca Persona Farm: Borrowed Histories and Manufactured Developers](15-persona-farm.md)
+16. [After October: Dead-Drop Successors, Panel Lineage and One Hosting Provider](16-control-layer-after-october.md)
+17. [Two Operations, One Ecosystem: Separating UNK_DeadDrop from PolinRider](17-two-operations-one-ecosystem.md)
+18. [Following a Developer from UNK_DeadDrop to PolinRider](18-polinrider-following-a-developer.md)
+19. [How PolinRider Uses Blockchains as an Address Book](19-polinrider-ethereum-address-book.md)
+20. [Three Resolver Wallets and Eleven Hosts](20-polinrider-wallets-and-hosts.md)
+21. [When One Assessment Reaches Nineteen Repositories](21-polinrider-repository-spread.md)
+22. [What 2,301 Affected Accounts Actually Means](22-polinrider-counting-repositories.md)
+23. [Detecting PolinRider Beyond a Filename](23-polinrider-detection.md)
+24. [Following PolinRider's Money: Gas, Bridges, Laundering and Cash-Out](24-polinrider-money.md)
 
 [Historical indicators, artifacts and network evidence](historical-indicators.md) collects defanged lure URLs, payload hosts, resolver revisions, repository addresses and IP associations. It separates retained sample evidence from provider-based pivots and older public reporting. The [sample and repository artifact reference](artifact-reference.md) lists exact hashes for held payloads, recovered response bodies, repository files and the ECHOES archive lineage.
 

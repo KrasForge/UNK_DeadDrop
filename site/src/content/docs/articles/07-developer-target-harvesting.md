@@ -1,18 +1,39 @@
 ---
 title: "From Commit Metadata to a Developer Target List"
 description: "Reconstructing the harvester, sender configuration and aggregate counts behind two SQLite targeting pools."
-lastUpdated: 2026-10-25
+lastUpdated: 2026-11-26
 sidebar:
   order: 7
+head:
+  - tag: meta
+    attrs:
+      property: og:image
+      content: "https://example.github.io/UNK_DeadDrop/og/07.png"
+  - tag: meta
+    attrs:
+      property: og:image:width
+      content: "1200"
+  - tag: meta
+    attrs:
+      property: og:image:height
+      content: "630"
+  - tag: meta
+    attrs:
+      property: og:image:alt
+      content: "Part 7: From Commit Metadata to a Developer Target List"
+  - tag: meta
+    attrs:
+      name: twitter:image
+      content: "https://example.github.io/UNK_DeadDrop/og/07.png"
 ---
 
 
 
-The sender configuration pointed to two SQLite databases. I followed those references to the harvesting code and pools containing 79,698 and 62,667 rows, which together contain 142,365 distinct stored address strings associated with 27,698 repository values (the worker, configuration and read-only count records are summarized in [E08](../../evidence/E08.pdf)), and the harvesting code collected those addresses from public commit metadata for use by the sender tooling.
+The sender configuration pointed to two SQLite databases. I followed those references to the harvesting code and pools containing 79,698 and 62,667 rows, which together contain 142,365 distinct stored address strings associated with 27,698 repository values (the worker, configuration and read-only count records are summarized in [E08](../../evidence/E08.pdf)), and the harvesting code collected those addresses from public commit metadata for use by the sender tooling. The operator had committed the harvester together with its output to a public repository under the GitHub account of TronzitVeca, the central persona of the operation's persona farm that [Part 15](../15-persona-farm/) examines, so the tool and the list it produced came from the same place.
 
 ## One harvester fed two address pools
 
-The harvester selects repositories by star range, walks their branches to extract author and committer addresses, then lowercases and trims them before filtering, and visits up to twenty branches per repository in the recorded implementation. Worker configurations partition the search. Scheduler and merge code consolidate results into two master pools. MITRE ATT&CK classifies this reconnaissance as [gathering victim email addresses (T1589.002)](https://attack.mitre.org/techniques/T1589/002/). The SQLite relation is simple:
+The harvester selects repositories by star range, splitting any search that exceeds the platform's cap of 1,000 results into narrower star or creation-date ranges, and for each repository it walks up to twenty branches, takes the author and committer addresses from a single listing of up to 100 commits per branch, lowercases and trims them, and discards GitHub's no-reply addresses. Worker configurations partition the search, and the scheduler log records three workers on a Windows host between 18 and 20 April 2026, adding about 130,000 addresses in a single day, which shows how cheaply the whole list could be rebuilt. Merge code then consolidates the results into two master pools that together occupy about 12.4 MB. MITRE ATT&CK classifies this reconnaissance as [gathering victim email addresses (T1589.002)](https://attack.mitre.org/techniques/T1589/002/). The SQLite relation is simple:
 
 ```text
 emails
@@ -20,7 +41,7 @@ emails
   repo: associated repository value
 ```
 
-The sender configuration refers to both pools. Different intervals, cooldowns and warm-up settings control how the tools consume them, and the toolkit names the two pools `safe` and `antispam`; the database references connect harvesting to message preparation, but no send logs were recovered to establish which addresses received messages.
+The split between the pools is not a targeting decision. The merge step sorts each address by its mail domain against a fixed list of 22 domains, mostly consumer mail providers, that the code labels anti-spam, so the `antispam` pool holds addresses at those providers and the `safe` pool holds corporate and other addresses. The sender is a custom bulk cold-outreach tool rather than Gophish, despite sharing three route names with it, and it consumes both pools with a 90-day cooldown, send intervals of three to four hours, per-sender daily limits and a warm-up mode, which is throttling for deliverability; it has no landing pages, link rewriting or credential capture. The database references connect harvesting to message preparation, but no send logs were recovered to establish which addresses received messages.
 
 ![Two pools, two different counting problems](../assets/07-targeting.png)
 
@@ -52,15 +73,15 @@ SELECT count(*) FROM (
 );
 ```
 
-In this comparison, the stored address sets are disjoint but the repository sets overlap. Adding the two repository counts would therefore overcount. The queries compare stored strings without additional address canonicalization or identity resolution, so aliases and multiple addresses belonging to one person remain separate entries.
+In this comparison, the stored address sets are disjoint, as the domain-based split guarantees by construction, but the repository sets overlap. Adding the two repository counts would therefore overcount. The queries compare stored strings without additional address canonicalization or identity resolution, so aliases and multiple addresses belonging to one person remain separate entries.
 
-The sender code configures `mail.privateemail.com` through variables carrying a `ZOHO` prefix, which is a toolkit setting, not proof that this campaign used the service, and retained message headers show Mailgun VERP envelope behavior for the D2S and Category Labs messages, while the Nodit message used its own domain in the envelope. A forwarding service obscured the original sending IP, so its relay address is not attributed to the operators, and the [indicator reference](../../indicators/) records the observed sender and tracking-domain details, with the limits of each observation.
+The sender code's variables carry a `ZOHO` prefix, but the code connects to Namecheap Private Email at `mail.privateemail.com`, which earlier toolkit campaigns used as a real production relay. The July campaigns moved to Mailgun, and the retained headers show its VERP envelope behavior for the D2S and Category Labs messages, while the June Nodit message came from the lure domain's own mail server with a DKIM key that was never published; a month later the July messages passed SPF, DKIM, DMARC and ARC checks, a learning curve that says nothing about legitimacy when the attacker owns the domain. A forwarding service obscured the original sending IP, so its relay address is not attributed to the operators, and the [indicator reference](../../indicators/) records the observed sender and tracking-domain details, with the limits of each observation.
 
 ### Star ranges divided the repository search
 
 The three worker configurations each query a different band of repository star counts: `stars:101..137`, `stars:138..174` and `stars:175..210`. None specifies a language, topic, keyword or organization. The harvester therefore searches public repositories across those bands instead of selecting a particular kind of developer.
 
-Of the 27,698 repository values, 595 (2.1 percent) have names suggesting 3D or graphics work, such as Blender, Unity, Unreal, WebGL, shaders or rendering. That count comes from repository names alone. The `3dscenebox[.]online` lure in [Part 1](../01-clickfix-clipboard-manipulation/) initially looked like a campaign against 3D artists, but the harvester shows no separate sourcing channel for that group, and the evidence fits a new cover story sent to the same broad pool.
+Of the 27,698 repository values, 595 (2.1 percent) have names suggesting 3D or graphics work, such as Blender, Unity, Unreal, WebGL, shaders or rendering. That count comes from repository names alone, and when I measured other categories the same way, design and interface work came to 1.5 percent, AI and machine learning to 2.9 percent and crypto or web3 to only 0.6 percent; for an operation whose income is cryptocurrency theft, crypto being the smallest category rules out a curated list, so the pool is an untargeted mailing list of real open-source contributors and selection has to happen later. The recovered console shows where it happens: its mail operation records who replies, keeps the conversation going with an auto-reply endpoint, and the respondent then receives a pretext matched to how they describe themselves, a validator staking page for someone in crypto, a "review our repository in Cursor, no coding needed" pitch for someone who does not code, and a "Scene Box" pack preview for someone who mentions 3D work, all three dropping the same pair of droppers. The `3dscenebox[.]online` lure in [Part 1](../01-clickfix-clipboard-manipulation/) initially looked like a campaign against 3D artists, but five independent checks found no separate sourcing channel for that group, and the evidence fits a skin on the existing kit sent to the same broad pool. From the recipient's side the chain is confirmed as well: a later "Surge Group" lure arrived on 23 July at an alias I had given only to GitHub, and the Nodit sender wrote that they had found the recipient's GitHub profile.
 
 ## Three repositories carried delivery kits
 
@@ -102,5 +123,5 @@ The public repository names a real 2024 launchpad as its homepage, and a second 
 
 The harvester collected addresses for messages; the public contract projects drew developers toward private conversations. Sender configuration connects the databases to message preparation, but counting people contacted or compromised would require send logs and endpoint records, which were not recovered. The repository total also counts stored values. I did not reverify each repository's existence or ownership.
 
-The [administration frontend](../08-administration-platform/) contains mail and wallet views, but its connection to these particular SQLite pools remains unverified.
+The [administration frontend](../08-administration-platform/) contains the reply-driven mail operation and the wallet views that sit downstream of this list, but nothing I hold shows its backend reading these particular SQLite pools.
 

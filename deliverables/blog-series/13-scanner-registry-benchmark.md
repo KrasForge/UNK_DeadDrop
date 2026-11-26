@@ -1,7 +1,7 @@
 ---
 title: "What 2.8 Million Files Revealed About unk-scanner"
 description: "Two false alarms in recently changed npm packages, low coverage of public malware, and the limits of a larger static-analysis benchmark."
-date: "2026-10-29"
+date: "2026-11-26"
 author: "Ilja Krasnjanski"
 canonical: "https://krasforge.github.io/UNK_DeadDrop/articles/13-scanner-registry-benchmark/"
 kicker: "UNK_DeadDrop · Part 13"
@@ -15,13 +15,13 @@ og_image_alt: "Summary of scanner findings across popular software, recent packa
 
 The scanner raised two error-level findings among nearly 2.4 million files from recently changed npm packages. I read both. One came from an AI desktop application's local helper; the other from a setup guide whose `curl` command printed an HTTP status code. Neither was malicious.
 
-The quieter surprise came from a different corpus, where among 2,122 known-malicious packages and extensions, the scanner flagged only 62 samples, all at warning level. It raised no errors. Serious false alarms were rare. So were detections outside the structures the rules were built to recognise.
+The quieter surprise came from a different corpus, where among 2,122 known-malicious packages and extensions, the scanner flagged only 62 samples, all at warning level. It raised no errors. Serious false alarms were rare. So were detections outside the structures the rules were built to recognize, and even after a later engine revision doubled the malware warnings to 128, about nineteen in twenty known-malicious samples still received none.
 
 The results and sampling details are in the [scanner paper](../scanner-paper/UNK-Scanner-Paper.pdf), and they come from fixed runs on 29 October, using one engine on an eight-vCPU virtual server, while Part 11's [YARA replay](11-detection-engineering.md) covers a different system and different question.
 
 ![Three scanner corpora with error and warning counts shown separately.](assets/13-benchmark-results.svg)
 
-*The error count stays low on popular and recent code, while most known-malicious samples receive no warning. Counts are not directly comparable because the corpus units differ.*
+*The error count stays low on popular and recent code, while most known-malicious samples receive no warning. The counts are those of the frozen engine, and they are not directly comparable because the corpus units differ.*
 
 ## npm, Open VSX, and public malware corpora
 
@@ -35,7 +35,7 @@ The expanded run added three collections:
 | Packages selected from the npm registry changes feed | 19,976 of 20,000 package names | 2,403,437 |
 | Datadog malicious-package dataset | 122 IDE extensions; seeded sample of 2,000 npm packages | 41,359 |
 
-The first collection included 188,901 files absent from the calibration set. These make a useful comparison, with one qualification: the first scan raised four errors in Microsoft Live Share and GitHub Codespaces bundles; both contained an editor-as-Node launch near code from a privilege-elevation library, and the rule escalated from the hidden PowerShell anywhere in the bundle, although the operations were not part of the same launch path.
+Between them the three collections hold 2,776,850 file entries, which is the figure in the title, but 56,361 files occur in more than one collection, so the distinct files number about 2.72 million. The first collection included 188,901 files absent from the calibration set. These make a useful comparison, with one qualification: the first scan raised four errors in Microsoft Live Share and GitHub Codespaces bundles; both contained an editor-as-Node launch near code from a privilege-elevation library, and the rule escalated from the hidden PowerShell anywhere in the bundle, although the operations were not part of the same launch path.
 
 I changed escalation to require the hidden execution in the launching function or a local helper it calls, and the change cleared those four findings and preserved the severities of the retained UNK_DeadDrop files. I then froze the engine for the reported scans. Because those Tier 1 files informed a rule change, the final result is disjoint from the original calibration corpus but is not an untouched held-out measurement.
 
@@ -61,15 +61,17 @@ Of 122 IDE extensions, four raised warnings, and among 1,884 npm packages classi
 
 The warnings came from obfuscated string arrays and hidden-script launches, while most missed samples did not use the clipboard, Electron or encrypted-loader patterns represented in the rules, and parser failures explained 27 misses, leaving many readable samples outside the scanner's model.
 
-Screening the missed files found common access to environment variables and home-directory files, frequent use of `child_process` and network requests, and references to webhooks, while twenty-one missed IDE extensions contained variation-selector characters used to hide text. These counts describe what appeared in the missed code; each behaviour also occurs in legitimate programs.
+Screening the missed files found common access to environment variables and home-directory files, frequent use of `child_process` and network requests, and references to webhooks, while twenty-one missed IDE extensions contained variation-selector characters used to hide text. These counts describe what appeared in the missed code; each behavior also occurs in legitimate programs.
 
-The retained campaign files show that the scanner recognises the structures it was built from, which is useful when the code is available and resembles the observed samples, but it does not counter the broader malware result, because those retained files informed the rules. Even within the case, the Windows Node agent raised only notes. Its absence of a warning is a miss, not a change in what the agent does.
+The retained campaign files show that the scanner recognizes the structures it was built from, which is useful when the code is available and resembles the observed samples, but it does not counter the broader malware result, because those retained files informed the rules. Even within the case, the Windows Node agent raised only notes. Its absence of a warning is a miss, not a change in what the agent does.
+
+The 62 belong to the frozen engine. When a controlled recovery experiment (described in [Part 14](14-scanner-recovery-and-bypasses.md)) exposed an older decoder shape that the engine did not recognize, the revised engine raised warnings on 128 of the 2,122 samples, still with none at error level, because many obfuscated samples used that older shape. A warning for recovered obfuscation says only that the file was obfuscated, and the denominator includes 295 samples that contain no file the scanner reads at all, which count as undetected.
 
 ## Acorn and Babel parsed 330,473 files
 
-I measured parser failures separately to distinguish unreadable inputs from code the rules missed. The scanner tries Acorn first, then an AST-only Babel fallback for supported TypeScript and JSX syntax. In the popular-software collection it parsed 330,473 of 332,054 files; of the 1,576 parse failures, most were TypeScript, and none parsed under the independent Babel configuration I tested, though compatibility with their original build toolchains remains untested. Five inputs were not valid UTF-8.
+I measured parser failures separately to distinguish unreadable inputs from code the rules missed. The evaluated engine tries Acorn first, then an AST-only Babel fallback for supported TypeScript and JSX syntax, but that fallback exists only in the [companion repository](https://github.com/KrasForge/unk-scanner); the release on npm and PyPI is still 0.2.0, which has none. Release 0.2.0 rejected 31,964 of the 143,153 calibration files, and when I checked every rejection with an independent parser, 31,292 turned out to be valid source, overwhelmingly TypeScript, so for that release more than a fifth of the calibration corpus is unexamined rather than examined and found clean. For JavaScript alone its coverage is almost complete: only 28 valid files, all containing JSX, were rejected. In the popular-software collection it parsed 330,473 of 332,054 files; of the 1,576 parse failures, most were TypeScript, and none parsed under the independent Babel configuration I tested, though compatibility with their original build toolchains remains untested. Five inputs were not valid UTF-8.
 
-With four workers, the isolated command-line run processed 272 files per second on the calibration collection; the in-process worker-thread run processed 264, and that one comparison showed no throughput penalty from isolation, but it was not a repeated performance study. The malware set ran at 325 files per second. The recent-package scan reached 848 with six workers and a different mix of mostly small files.
+With four workers, the isolated command-line run processed 272 files per second on the calibration collection and the in-process worker-thread run 264, while on a sixteen-thread workstation the same calibration ran at 412 files per second isolated against 439 in process, a cost of about 6% with run-to-run variation of about 10% either way. Both are single runs, so they fit a small isolation cost within noise and nothing more precise. The malware set ran at 325 files per second, and the recent-package scan reached 848 with six workers and a different mix of mostly small files. Memory, not time, was the binding constraint: with a 256 MiB heap thirteen bundles of five to eight megabytes failed, while with the 512 MiB default every file completed.
 
-The scanner is useful for surfacing the behaviours it knows how to follow, and its low error count makes it practical to review, but its malware misses mean a clean result cannot clear a package. Part 14 follows the less comfortable question: how little does an author need to change to avoid those findings?
+The scanner is useful for surfacing the behaviors it knows how to follow, and its low error count makes it practical to review, but its malware misses mean a clean result cannot clear a package, and it reads only JavaScript and TypeScript files, so code started from an editor task, an agent hook, a package script or a file named like a font is outside its view by design. Part 14 follows the less comfortable question: how little does an author need to change to avoid those findings?
 

@@ -1,14 +1,35 @@
 ---
 title: "Following the GitLab Dead Drop: Configuration Changes and C2 History"
-description: "How a GitLab-hosted configuration file let the UNK_DeadDrop operators change servers without new payloads, and what its revision history reveals."
-lastUpdated: 2026-10-29
+description: "How a GitLab-hosted configuration file let the UNK_DeadDrop operators change servers without new payloads, what its revision history reveals, and how the dead drop was rebuilt twice after it went dark in October."
+lastUpdated: 2026-11-26
 sidebar:
   order: 6
+head:
+  - tag: meta
+    attrs:
+      property: og:image
+      content: "https://example.github.io/UNK_DeadDrop/og/06.png"
+  - tag: meta
+    attrs:
+      property: og:image:width
+      content: "1200"
+  - tag: meta
+    attrs:
+      property: og:image:height
+      content: "630"
+  - tag: meta
+    attrs:
+      property: og:image:alt
+      content: "Part 6: Following the GitLab Dead Drop: Configuration Changes and C2 History"
+  - tag: meta
+    attrs:
+      name: twitter:image
+      content: "https://example.github.io/UNK_DeadDrop/og/06.png"
 ---
 
 
 
-On 13 July 2026, a GitLab commit replaced a list of server names with `api.cklomino[.]ink` and `api.dsfmot[.]xyz` (the retained repository bundle and file history are documented in [E07](../../evidence/E07.pdf)). The file held configuration, not a payload. The client reads its destination from this resource; changing the server list therefore changes where an unchanged payload can connect. The payload hash stays the same. The configuration history records the changing destinations, and certificate and panel observations connect one of those domains to a historical origin address, while the [historical indicator reference](../../indicators/) lists every recorded resolver value, the separate unreferenced file, related lure hosts and the limits on each IP association.
+On 13 July 2026, a GitLab commit replaced a list of server names with `api.cklomino[.]ink` and `api.dsfmot[.]xyz` (the retained repository bundle and file history are documented in [E07](../../evidence/E07.pdf)). The file held configuration, not a payload. The client reads its destination from this resource; changing the server list therefore changes where an unchanged payload can connect. The payload hash stays the same, and that design is also why the file mattered so much in October, when the repository went dark and the operators rebuilt it under new names within days. The configuration history records the changing destinations, and certificate and panel observations connect one of those domains to a historical origin address, while the [historical indicator reference](../../indicators/) lists every recorded resolver value, the separate unreferenced file, related lure hosts and the limits on each IP association.
 
 The later July installer family used a separate mechanism; its `upd_m`, `upd_w`, `upda_m` and `upda_w` droppers embedded `api.aazdias[.]ink` as the primary store and `api.fallaazdis[.]ink` as the fallback, and those values came from the recovered dropper configuration, not from the GitLab `config.json` history. The origin association to `207.241.172[.]222` came from dated certificate and passive-scan observations, not a direct fetch from that address.
 
@@ -35,18 +56,23 @@ The primary file has five recorded revisions on 26 May, beginning with an initia
 1. 26 May 2026, final listed revision of `config.json`: `api.domatisc[.]ink` and `api.coslyintra[.]online`.
 2. 1 June 2026, separate file `config-alt.json`: `api.onoplainai[.]ink` and `api.migadyn[.]info`. Its use by the recovered client is unestablished.
 3. 13 July 2026, about 07:10 UTC, `config.json`: `api.cklomino[.]ink` and `api.dsfmot[.]xyz`.
+4. 25 July 2026, 06:02:59 UTC, `config.json`: `api.chestsoi[.]ink` alone.
 
-Commit `c3c71d65` replaces the primary destination set left by the May revisions, and the retained history contains six commits to `config.json` and one to `config-alt.json` (the latter is a separately recorded resource, not an evidenced client fallback).
+Commit `c3c71d65` replaces the primary destination set left by the May revisions, and the history I retained in July contains six commits to `config.json` and one to `config-alt.json` (the latter is a separately recorded resource, not an evidenced client fallback). The fourth state came later and from my own monitoring: from 23 July a watch polled the file every two hours, and it alerted at 06:30 UTC on 25 July after commit `b1a275dd35` cut the primary list down to the single host `api.chestsoi[.]ink`, which the file then named until October; two further commits on 10 and 12 October added no host, although I did not keep their contents. The certificate for `api.domatisc[.]ink` was issued on 26 May, the morning the dead drop first pointed at it, which gives the May sequence an independent clock, while the 1 June date of the alternative file rests on commit metadata alone.
 
-Client refresh behavior determines when a configuration change takes effect. A client that fetches the file again may receive a new address, while one using a cached destination may continue trying the old server, and the retained history contains no client execution trace to resolve that behavior. Blocking a destination can interrupt traffic, while a client that consults this configuration resource may receive another address, so connection records are needed to identify the destination each client used.
+Client refresh behavior determines when a configuration change takes effect, and the agent side is built for the contingency: the Windows Node bundle carries its own copy of the dead-drop project and fails over between hosts in round-robin order. A client that fetches the file again may receive a new address, while one using a cached destination may continue trying the old server, and I hold no client execution trace that shows which happened on a real machine. Blocking a destination can interrupt traffic, while a client that consults this configuration resource may receive another address, so connection records are needed to identify the destination each client used.
+
+### The October outage and two successor repositories
+
+On 22 October 2026 the original repository became unreadable, and my watch saw it within hours, although nothing I hold records the cause. A replacement group, `drop-indexings`, was created on 23 October at 21:29 UTC, and by 23:39 its project `tasks` named `api.chestsoi[.]ink`, the same host as before, about 31 hours after the first poll that found the original gone. On 3 November at 03:05 UTC the GitLab account `0xapp123` created a third repository, `up-indexings/tasks`, and its commit `dcb1f391` a minute later wrote a `config.json` naming a new command host, `api.cerysoi[.]ink`, alone; the agent builds fetched on 12 November carry that repository as their only network address. My watch could only notice a known path stop answering, so I learned of the replacement from [SafeDep's antd-img-crop report](https://safedep.io/blog/antd-img-crop-forged-commit-overlord-stealer) and an indicator feed about fifteen days after it appeared, and of the third repository from [Stormshield's Trigram report](https://www.stormshield.com/news/cti-trigram-campaign/) about nine days after its creation. [Part 16](../16-control-layer-after-october/) follows the successors, the panels and the hosting after October in detail.
 
 ## A July hostname linked to a reported origin
 
 I compared the resolver hostnames with historical scan records to investigate the services behind them, and July scan notes associate `207.241.172[.]222` with C2 and administration services, and they record a certificate naming `api.cklomino[.]ink` and a third-party bare-IP scan that returned a Subtensor sign-in panel. The raw scan responses and certificate were not retained. The panel HTML and JavaScript available for inspection were retrieved from `api.domatisc[.]ink`, so they cannot independently reproduce the reported response from the bare IP.
 
-The panel adds an application-level association to the certificate evidence, while further relationships came from certificate facets, passive DNS and reverse-DNS fields. These observations came from research-service records. The origin analysis did not directly scan the server or log in. [E20](../../evidence/E20.pdf) and [E21](../../evidence/E21.pdf) record the source and limits of those historical associations.
+The panel itself is less novel than its title suggests, because when I later scored a login script captured from the November command host against every public version of the Overlord framework, it shared 81 of its 82 identifiers with the framework's early-March 2026 base, so the operators run a lightly modified public panel rather than their own. The panel adds an application-level association to the certificate evidence, while further relationships came from certificate facets, passive DNS and reverse-DNS fields. These observations came from research-service records. The origin analysis did not directly scan the server or log in. [E20](../../evidence/E20.pdf) and [E21](../../evidence/E21.pdf) record the source and limits of those historical associations.
 
-The July observations associated `207.241.172[.]222` with C2 and administration, `170.205.31[.]182` with lure hosting, and `23.137.105[.]75` with earlier C2 infrastructure. These roles describe the recorded periods. Current availability and ownership were not checked.
+The July observations associated `207.241.172[.]222` with C2 and administration, `170.205.31[.]182` with lure hosting, and `23.137.105[.]75` with the July campaign's backend. These roles describe the recorded periods, but the first address proved durable: in November `api.cerysoi[.]ink`, the host the third repository names, was served from `207.241.172[.]222` as well. All three addresses, and every other serving and command address I observed from July to November, sit with one provider, Advin Services, across its two autonomous systems AS22295 and AS206216, while the operators' first Overlord server stood at another provider from 26 May; Advin is ordinary shared hosting, so that concentration organizes a provider request but does not prove control of a range.
 
 ### The SSH host-key search found no new address
 
@@ -62,7 +88,7 @@ Timing offered more context. Certificates for four bases were first issued on 13
 
 Shared panels and certificate automation can produce this cadence across unrelated customers, so I used the timing to check code and configuration relationships, rather than to assign hosts to the cluster. These registration and enumeration observations come from restricted 23 July records and are discussed in the [paper](../../downloads/UNK_DeadDrop-Preprint.pdf), but are not independently reproduced in the public evidence exhibits.
 
-A sweep of two /23 ranges belonging to the hosting provider covered about a thousand addresses; 291 exposed services. The provider used ordinary shared hosting. About twenty unrelated tenants ran services on port 3000, while the free scan dataset returned no results for the agent's port 5173 in either range, and those observations make port-based hunting a poor discriminator: port 3000 was common among unrelated tenants, and the dataset did not cover the agent's port. The results come from research services and have not been refreshed since 24 July.
+A sweep of two /23 ranges belonging to the hosting provider covered about a thousand addresses; 291 exposed services. The provider used ordinary shared hosting. About twenty unrelated tenants ran services on port 3000, while the free scan dataset returned no results for port 5173, which is Overlord's default production port for its server, in either range, and those observations make port-based hunting a poor discriminator: port 3000 was common among unrelated tenants, and the dataset did not cover port 5173 at all. The results come from research services and have not been refreshed since 24 July.
 
 Part 7 follows the target-acquisition tooling behind the two SQLite pools.
 

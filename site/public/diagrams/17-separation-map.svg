@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE svg
+  PUBLIC '-//W3C//DTD SVG 1.0//EN'
+  'http://www.w3.org/TR/2001/REC-SVG-20010904/DTD/svg10.dtd'>
+<svg width="451" height="372" preserveAspectRatio="xMinYMin meet" viewBox="0 0 451 372" xmlns="http://www.w3.org/2000/svg" version="1.0" fill-rule="evenodd" xmlns:xlink="http://www.w3.org/1999/xlink">
+	<title>...</title>
+	<desc>...</desc>
+	<clipPath id="clip">
+		<rect x="0" y="0" width="451" height="372"/>
+	</clipPath>
+	<g id="group" transform="scale(1,-1) translate(0,-372)" style="clip-path: url(#clip)">
+		<g transform="">
+			<polyline points="4 362, 30 362" style="stroke: rgb(14%,20%,25%); stroke-linecap: butt; stroke-width: 0.85; fill: none; fill-rule: evenodd;"/>
+			<text x="36" y="359" style="font-family: 'Liberation Serif'; font-size: 8px;fill: rgb(14%,20%,25%); stroke:none;" transform="translate(0,718) scale(1,-1)">My evidence (observed, or on my own identifiers)</text>
+			<polyline points="270 362, 296 362" style="stroke: rgb(14%,20%,25%); stroke-linecap: butt; stroke-width: 0.85; fill: none; fill-rule: evenodd; stroke-dasharray: 4, 3;"/>
+			<text x="302" y="359" style="font-family: 'Liberation Serif'; font-size: 8px;fill: rgb(14%,20%,25%); stroke:none;" transform="translate(0,718) scale(1,-1)">Third-party assessment or</text>
+			<text x="302" y="349" style="font-family: 'Liberation Serif'; font-size: 8px;fill: rgb(14%,20%,25%); stroke:none;" transform="translate(0,698) scale(1,-1)">graph artefact, not an observation</text>
+			<rect x="4" y="80" width="443" height="256" style="stroke: rgb(83%,85%,87%); stroke-linecap: butt; stroke-width: 1.2; fill: none; fill-rule: evenodd;"/>
+			<text x="12" y="324" style="font-family: 'Liberation Serif'; font-weight: bold; font-size: 8.5px;fill: rgb(14%,20%,25%); stroke:none;" transform="translate(0,648) scale(1,-1)">Contagious Interview ecosystem</text>
+			<rect x="14" y="226" width="150" height="86" style="stroke: rgb(14%,20%,25%); stroke-linecap: butt; stroke-width: 0.7; fill: rgb(96%,96%,97%); fill-rule: evenodd;"/>
+			<text x="56.75073242187499" y="298" style="font-family: 'Liberation Serif'; font-weight: bold; font-size: 9px;fill: rgb(14%,20%,25%); stroke:none;" transform="translate(0,596) scale(1,-1)">UNK_DeadDrop</text>
+			<text x="46.904296875" y="285.0" style="font-family: 'Liberation Serif'; font-size: 8px;fill: rgb(14%,20%,25%); stroke:none;" transform="translate(0,570) scale(1,-1)">Overlord-based operation;</text>
+			<text x="43.005859375" y="274.5" style="font-family: 'Liberation Serif'; font-size: 8px;fill: rgb(14%,20%,25%); stroke:none;" transform="translate(0,549) scale(1,-1)">ClickFix, VSIX, folder-open</text>
+			<text x="46.90625" y="264.0" style="font-family: 'Liberation Serif'; font-size: 8px;fill: rgb(14%,20%,25%); stroke:none;" transform="translate(0,528) scale(1,-1)">task; GitLab raw-file dead</text>
+			<text x="42.0" y="253.5" style="font-family: 'Liberation Serif'; font-size: 8px;fill: rgb(14%,20%,25%); stroke:none;" transform="translate(0,507) scale(1,-1)">drop; Advin, July–Nov. 2026</text>
+			<rect x="287" y="150" width="150" height="162" style="stroke: rgb(14%,20%,25%); stroke-linecap: butt; stroke-width: 0.7; fill: rgb(90%,92%,93%); fill-rule: evenodd;"/>
+			<text x="341.000732421875" y="298" style="font-family: 'Liberation Serif'; font-weight: bold; font-size: 9px;fill: rgb(14%,20%,25%); stroke:none;" transform="translate(0,596) scale(1,-1)">PolinRider</text>
+			<text x="312.005859375" y="285.0" style="font-family: 'Liberation Serif'; font-size: 8px;fill: rgb(14%,20%,25%); stroke:none;" transform="translate(0,570) scale(1,-1)">TRON/BSC/Aptos carriers and</text>
+			<text x="318.240234375" y="274.5" style="font-family: 'Liberation Serif'; font-size: 8px;fill: rgb(14%,20%,25%); stroke:none;" transform="translate(0,549) scale(1,-1)">the Ethereum NullReceiver</text>
+			<text x="321.23828125" y="264.0" style="font-family: 'Liberation Serif'; font-size: 8px;fill: rgb(14%,20%,25%); stroke:none;" transform="translate(0,528) scale(1,-1)">branch; fake-font and init</text>
+			<text x="319.669921875" y="253.5" style="font-family: 'Liberation Serif'; font-size: 8px;fill: rgb(14%,20%,25%); stroke:none;" transform="translate(0,507) scale(1,-1)">loaders; Evoxt AS149440,</text>
+			<text x="344.88671875" y="243.0" style="font-family: 'Liberation Serif'; font-size: 8px;fill: rgb(14%,20%,25%); stroke:none;" transform="translate(0,486) scale(1,-1)">AS399486</text>
+			<rect x="297" y="160" width="130" height="64" style="stroke: rgb(14%,20%,25%); stroke-linecap: butt; stroke-width: 0.7; fill: rgb(96%,96%,97%); fill-rule: evenodd;"/>
+			<text x="342.499267578125" y="210" style="font-family: 'Liberation Serif'; font-weight: bold; font-size: 9px;fill: rgb(14%,20%,25%); stroke:none;" transform="translate(0,420) scale(1,-1)">Hiring777</text>
+			<text x="329.125" y="197.0" style="font-family: 'Liberation Serif'; font-size: 8px;fill: rgb(14%,20%,25%); stroke:none;" transform="translate(0,394) scale(1,-1)">recruiter persona; its</text>
+			<text x="330.2421875" y="186.5" style="font-family: 'Liberation Serif'; font-size: 8px;fill: rgb(14%,20%,25%); stroke:none;" transform="translate(0,373) scale(1,-1)">take-home carried a</text>
+			<text x="329.681640625" y="176.0" style="font-family: 'Liberation Serif'; font-size: 8px;fill: rgb(14%,20%,25%); stroke:none;" transform="translate(0,352) scale(1,-1)">NullReceiver loader</text>
+			<polyline points="164 296, 287 296" style="stroke: rgb(30%,35%,40%); stroke-linecap: butt; stroke-width: 0.85; fill: none; fill-rule: evenodd; stroke-dasharray: 4, 3;"/>
+			<text x="187.99951171875" y="300" style="font-family: 'Liberation Serif'; font-size: 6.5px;fill: rgb(30%,35%,40%); stroke:none;" transform="translate(0,600) scale(1,-1)">string-array obfuscation rule</text>
+			<polyline points="164 266, 287 266" style="stroke: rgb(30%,35%,40%); stroke-linecap: butt; stroke-width: 0.85; fill: none; fill-rule: evenodd; stroke-dasharray: 4, 3;"/>
+			<text x="192.3302001953125" y="279" style="font-family: 'Liberation Serif'; font-size: 6.5px;fill: rgb(30%,35%,40%); stroke:none;" transform="translate(0,558) scale(1,-1)">bare attribution tag on an</text>
+			<text x="194.312255859375" y="270" style="font-family: 'Liberation Serif'; font-size: 6.5px;fill: rgb(30%,35%,40%); stroke:none;" transform="translate(0,540) scale(1,-1)">npm-cluster C2 address</text>
+			<text x="193.8631591796875" y="252" style="font-family: 'Liberation Serif'; font-style: italic; font-size: 6.5px;fill: rgb(30%,35%,40%); stroke:none;" transform="translate(0,504) scale(1,-1)">artefact paths, excluded</text>
+			<rect x="176" y="150" width="99" height="66" style="stroke: rgb(14%,20%,25%); stroke-linecap: butt; stroke-width: 0.7; fill: rgb(96%,96%,97%); fill-rule: evenodd;"/>
+			<text x="196.876220703125" y="202" style="font-family: 'Liberation Serif'; font-weight: bold; font-size: 9px;fill: rgb(14%,20%,25%); stroke:none;" transform="translate(0,404) scale(1,-1)">Shared victims</text>
+			<text x="200.0625" y="189.0" style="font-family: 'Liberation Serif'; font-size: 8px;fill: rgb(14%,20%,25%); stroke:none;" transform="translate(0,378) scale(1,-1)">two developers;</text>
+			<text x="200.623046875" y="178.5" style="font-family: 'Liberation Serif'; font-size: 8px;fill: rgb(14%,20%,25%); stroke:none;" transform="translate(0,357) scale(1,-1)">three records in</text>
+			<text x="195.29296875" y="168.0" style="font-family: 'Liberation Serif'; font-size: 8px;fill: rgb(14%,20%,25%); stroke:none;" transform="translate(0,336) scale(1,-1)">the evidence graph</text>
+			<polyline points="176 183, 120 183, 120 226" style="stroke: rgb(14%,20%,25%); stroke-linecap: butt; stroke-width: 0.85; fill: none; fill-rule: evenodd;"/>
+			<polyline points="275 183, 287 183" style="stroke: rgb(14%,20%,25%); stroke-linecap: butt; stroke-width: 0.85; fill: none; fill-rule: evenodd;"/>
+			<rect x="14" y="110" width="150" height="64" style="stroke: rgb(14%,20%,25%); stroke-linecap: butt; stroke-width: 0.7; fill: rgb(96%,96%,97%); fill-rule: evenodd;"/>
+			<text x="72.505126953125" y="160" style="font-family: 'Liberation Serif'; font-weight: bold; font-size: 9px;fill: rgb(14%,20%,25%); stroke:none;" transform="translate(0,320) scale(1,-1)">Trigram</text>
+			<text x="50.666015625" y="147.0" style="font-family: 'Liberation Serif'; font-size: 8px;fill: rgb(14%,20%,25%); stroke:none;" transform="translate(0,294) scale(1,-1)">Stormshield, Nov 2026;</text>
+			<text x="50.5625" y="136.5" style="font-family: 'Liberation Serif'; font-size: 8px;fill: rgb(14%,20%,25%); stroke:none;" transform="translate(0,273) scale(1,-1)">UNK_DeadDrop on my</text>
+			<text x="64.89453125" y="126.0" style="font-family: 'Liberation Serif'; font-size: 8px;fill: rgb(14%,20%,25%); stroke:none;" transform="translate(0,252) scale(1,-1)">own identifiers</text>
+			<polyline points="60 226, 60 174" style="stroke: rgb(14%,20%,25%); stroke-linecap: butt; stroke-width: 0.85; fill: none; fill-rule: evenodd;"/>
+			<text x="64" y="197" style="font-family: 'Liberation Serif'; font-size: 6.5px;fill: rgb(14%,20%,25%); stroke:none;" transform="translate(0,394) scale(1,-1)">same operation</text>
+			<text x="180" y="128" style="font-family: 'Liberation Serif'; font-size: 7.5px;fill: rgb(30%,35%,40%); stroke:none;" transform="translate(0,256) scale(1,-1)">Shared context, not operational values: recruiter</text>
+			<text x="180" y="117" style="font-family: 'Liberation Serif'; font-size: 7.5px;fill: rgb(30%,35%,40%); stroke:none;" transform="translate(0,234) scale(1,-1)">pretext, take-home repository, folder-open task,</text>
+			<text x="180" y="106" style="font-family: 'Liberation Serif'; font-size: 7.5px;fill: rgb(30%,35%,40%); stroke:none;" transform="translate(0,212) scale(1,-1)">task-configuration file type; BeaverTail, OtterCookie</text>
+			<text x="180" y="95" style="font-family: 'Liberation Serif'; font-size: 7.5px;fill: rgb(30%,35%,40%); stroke:none;" transform="translate(0,190) scale(1,-1)">and InvisibleFerret family records</text>
+			<rect x="14" y="4" width="300" height="58" style="stroke: rgb(30%,35%,40%); stroke-linecap: butt; stroke-width: 0.7; fill: rgb(100%,100%,100%); fill-rule: evenodd; stroke-dasharray: 4, 3;"/>
+			<text x="128.872314453125" y="48" style="font-family: 'Liberation Serif'; font-weight: bold; font-size: 9px;fill: rgb(30%,35%,40%); stroke:none;" transform="translate(0,96) scale(1,-1)">Kimsuky (APT43)</text>
+			<text x="48.125" y="35.0" style="font-family: 'Liberation Serif'; font-size: 8px;fill: rgb(30%,35%,40%); stroke:none;" transform="translate(0,70) scale(1,-1)">Stormshield links Trigram to Kimsuky; Genians found UNK_DeadDrop</text>
+			<text x="77.7890625" y="24.5" style="font-family: 'Liberation Serif'; font-size: 8px;fill: rgb(30%,35%,40%); stroke:none;" transform="translate(0,49) scale(1,-1)">identities in a cluster it attributes to Kimsuky, with no</text>
+			<text x="102.5703125" y="14.0" style="font-family: 'Liberation Serif'; font-size: 8px;fill: rgb(30%,35%,40%); stroke:none;" transform="translate(0,28) scale(1,-1)">shared sample. Not established by me.</text>
+			<polyline points="89 110, 89 62" style="stroke: rgb(30%,35%,40%); stroke-linecap: butt; stroke-width: 0.85; fill: none; fill-rule: evenodd; stroke-dasharray: 4, 3;"/>
+			<polygon points="89 62, 87 67, 91 67" style="stroke: none; stroke-linecap: butt; stroke-width: 1; fill: rgb(30%,35%,40%); fill-rule: evenodd;"/>
+			<text x="93" y="86" style="font-family: 'Liberation Serif'; font-size: 6.5px;fill: rgb(30%,35%,40%); stroke:none;" transform="translate(0,172) scale(1,-1)">Stormshield's assessment</text>
+		</g>
+	</g>
+</svg>

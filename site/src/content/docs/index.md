@@ -1,6 +1,27 @@
 ---
+head:
+  - tag: meta
+    attrs:
+      property: og:image
+      content: "https://example.github.io/UNK_DeadDrop/og/home.png"
+  - tag: meta
+    attrs:
+      property: og:image:width
+      content: "1200"
+  - tag: meta
+    attrs:
+      property: og:image:height
+      content: "630"
+  - tag: meta
+    attrs:
+      property: og:image:alt
+      content: "UNK_DeadDrop technical series"
+  - tag: meta
+    attrs:
+      name: twitter:image
+      content: "https://example.github.io/UNK_DeadDrop/og/home.png"
 title: UNK_DeadDrop technical series
-description: Fourteen articles tracing developer-targeted phishing from delivery artifacts through collection, infrastructure, administration tooling, and detection engineering.
+description: Twenty-four articles tracing developer-targeted recruitment malware from delivery artifacts through collection, infrastructure, personas, attribution and the separate PolinRider operation.
 template: splash
 hero:
   tagline: An artifact-led investigation of developer-targeted phishing and its supporting collection infrastructure.
@@ -19,26 +40,44 @@ hero:
       variant: minimal
 ---
 
-The series starts with three recruitment messages received in June and July 2026. It follows the evidence through clipboard substitution, a malicious editor extension, credential and wallet collection, mutable infrastructure, targeting databases, administration software, and experimental detections.
+The series starts with three recruitment messages received in June and July 2026. It follows the evidence through clipboard substitution, a malicious editor extension, credential and wallet collection, mutable infrastructure, targeting databases, administration software and experimental detections, then on to the persona farm behind the operators' credibility, the control layer after October, and PolinRider, a separate operation that the investigation ran into along the way.
 
-The underlying case evidence ends on 24 July 2026. Public reporting was checked through 25 October 2026. Each article distinguishes static capability from observed execution and identifies where the retained artifacts stop.
+Parts 1 to 14 began with evidence ending on 24 July 2026 and have been brought up to the case record of 17 November 2026; Parts 15 to 24 rest on that record. Public reporting was checked through 18 November 2026. Each article distinguishes static capability from observed execution and identifies where the retained artifacts stop.
 
 ## Read the investigation
+
+### UNK_DeadDrop: delivery, collection and infrastructure
 
 1. [Anatomy of a Developer Lure: ClickFix Clipboard Manipulation](/UNK_DeadDrop/articles/01-clickfix-clipboard-manipulation/)
 2. [How a Malicious VSIX Uses the Signed Editor Runtime](/UNK_DeadDrop/articles/02-vsix-editor-execution/)
 3. [Parsing Without Executing: JavaScript Deobfuscation with Acorn](/UNK_DeadDrop/articles/03-acorn-deobfuscation/)
 4. [Inside the Collector: Browser Credentials and Wallet Files](/UNK_DeadDrop/articles/04-credential-wallet-collection/)
 5. [Beyond Screenshot Strings: Reconstructing Screen Capture](/UNK_DeadDrop/articles/05-screen-capture-analysis/)
-6. [Following the GitLab Dead Drop](/UNK_DeadDrop/articles/06-gitlab-dead-drop-infrastructure/)
+6. [Following the GitLab Dead Drop: Configuration Changes and C2 History](/UNK_DeadDrop/articles/06-gitlab-dead-drop-infrastructure/)
 7. [From Commit Metadata to a Developer Target List](/UNK_DeadDrop/articles/07-developer-target-harvesting/)
-8. [Inside rms-platform](/UNK_DeadDrop/articles/08-administration-platform/)
-9. [Tracing the ECHOES Archive](/UNK_DeadDrop/articles/09-echoes-lineage-image-provenance/)
+8. [Inside rms-platform: Delivery Monitoring and Wallet Administration](/UNK_DeadDrop/articles/08-administration-platform/)
+9. [Tracing the ECHOES Archive: Payload Lineage and Image Provenance](/UNK_DeadDrop/articles/09-echoes-lineage-image-provenance/)
 10. [From Three Phishing Emails to a Connected Investigation](/UNK_DeadDrop/articles/10-investigation-connections/)
 11. [Building and Testing Detections for UNK_DeadDrop](/UNK_DeadDrop/articles/11-detection-engineering/)
 12. [Where Overlord Ends and the Collection Toolchain Begins](/UNK_DeadDrop/articles/12-framework-and-collection-boundary/)
 13. [What 2.8 Million Files Revealed About unk-scanner](/UNK_DeadDrop/articles/13-scanner-registry-benchmark/)
 14. [When a Decoder Returns the Wrong Strings](/UNK_DeadDrop/articles/14-scanner-recovery-and-bypasses/)
+
+### UNK_DeadDrop: personas, control layer and attribution
+
+15. [The TronzitVeca Persona Farm: Borrowed Histories and Manufactured Developers](/UNK_DeadDrop/articles/15-persona-farm/)
+16. [After October: Dead-Drop Successors, Panel Lineage and One Hosting Provider](/UNK_DeadDrop/articles/16-control-layer-after-october/)
+17. [Two Operations, One Ecosystem: Separating UNK_DeadDrop from PolinRider](/UNK_DeadDrop/articles/17-two-operations-one-ecosystem/)
+
+### PolinRider, a separate operation
+
+18. [Following a Developer from UNK_DeadDrop to PolinRider](/UNK_DeadDrop/articles/18-polinrider-following-a-developer/)
+19. [How PolinRider Uses Blockchains as an Address Book](/UNK_DeadDrop/articles/19-polinrider-ethereum-address-book/)
+20. [Three Resolver Wallets and Eleven Hosts](/UNK_DeadDrop/articles/20-polinrider-wallets-and-hosts/)
+21. [When One Assessment Reaches Nineteen Repositories](/UNK_DeadDrop/articles/21-polinrider-repository-spread/)
+22. [What 2,301 Affected Accounts Actually Means](/UNK_DeadDrop/articles/22-polinrider-counting-repositories/)
+23. [Detecting PolinRider Beyond a Filename](/UNK_DeadDrop/articles/23-polinrider-detection/)
+24. [Following PolinRider's Money: Gas, Bridges, Laundering and Cash-Out](/UNK_DeadDrop/articles/24-polinrider-money/)
 
 ## Scope
 

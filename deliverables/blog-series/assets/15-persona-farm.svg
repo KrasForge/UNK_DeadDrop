@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE svg
+  PUBLIC '-//W3C//DTD SVG 1.0//EN'
+  'http://www.w3.org/TR/2001/REC-SVG-20010904/DTD/svg10.dtd'>
+<svg width="451" height="500" preserveAspectRatio="xMinYMin meet" viewBox="0 0 451 500" xmlns="http://www.w3.org/2000/svg" version="1.0" fill-rule="evenodd" xmlns:xlink="http://www.w3.org/1999/xlink">
+	<title>...</title>
+	<desc>...</desc>
+	<clipPath id="clip">
+		<rect x="0" y="0" width="451" height="500"/>
+	</clipPath>
+	<g id="group" transform="scale(1,-1) translate(0,-500)" style="clip-path: url(#clip)">
+		<g transform="">
+			<polyline points="4 490, 30 490" style="stroke: rgb(14%,20%,25%); stroke-linecap: butt; stroke-width: 0.85; fill: none; fill-rule: evenodd;"/>
+			<text x="36" y="487" style="font-family: 'Liberation Serif'; font-size: 8px;fill: rgb(14%,20%,25%); stroke:none;" transform="translate(0,974) scale(1,-1)">Established link</text>
+			<polyline points="130 490, 156 490" style="stroke: rgb(14%,20%,25%); stroke-linecap: butt; stroke-width: 0.85; fill: none; fill-rule: evenodd; stroke-dasharray: 4, 3;"/>
+			<text x="162" y="487" style="font-family: 'Liberation Serif'; font-size: 8px;fill: rgb(14%,20%,25%); stroke:none;" transform="translate(0,974) scale(1,-1)">Moderate link</text>
+			<rect x="4.0" y="414" width="106.0" height="56" style="stroke: rgb(14%,20%,25%); stroke-linecap: butt; stroke-width: 0.7; fill: rgb(96%,96%,97%); fill-rule: evenodd;"/>
+			<text x="26.873291015624996" y="456" style="font-family: 'Liberation Serif'; font-weight: bold; font-size: 9px;fill: rgb(14%,20%,25%); stroke:none;" transform="translate(0,912) scale(1,-1)">GitLab account</text>
+			<text x="28.564453125" y="443.0" style="font-family: 'Liberation Serif'; font-size: 8px;fill: rgb(14%,20%,25%); stroke:none;" transform="translate(0,886) scale(1,-1)">owns a dead-drop</text>
+			<text x="18.232421875" y="432.5" style="font-family: 'Liberation Serif'; font-size: 8px;fill: rgb(14%,20%,25%); stroke:none;" transform="translate(0,865) scale(1,-1)">configuration repository</text>
+			<polyline points="57 414, 57 400, 180.5 400, 180.5 386" style="stroke: rgb(14%,20%,25%); stroke-linecap: butt; stroke-width: 0.85; fill: none; fill-rule: evenodd;"/>
+			<polygon points="180.5 386, 178.5 391, 182.5 391" style="stroke: none; stroke-linecap: butt; stroke-width: 1; fill: rgb(14%,20%,25%); fill-rule: evenodd;"/>
+			<rect x="116.33" y="414" width="105.99999999999999" height="56" style="stroke: rgb(14%,20%,25%); stroke-linecap: butt; stroke-width: 0.7; fill: rgb(96%,96%,97%); fill-rule: evenodd;"/>
+			<text x="139.69547851562498" y="456" style="font-family: 'Liberation Serif'; font-weight: bold; font-size: 9px;fill: rgb(14%,20%,25%); stroke:none;" transform="translate(0,912) scale(1,-1)">Linked address</text>
+			<text x="139.89249999999998" y="443.0" style="font-family: 'Liberation Serif'; font-size: 8px;fill: rgb(14%,20%,25%); stroke:none;" transform="translate(0,886) scale(1,-1)">tied to that GitLab</text>
+			<text x="137.33976562499998" y="432.5" style="font-family: 'Liberation Serif'; font-size: 8px;fill: rgb(14%,20%,25%); stroke:none;" transform="translate(0,865) scale(1,-1)">account; not control</text>
+			<polyline points="169.33 414, 169.33 400, 210.5 400, 210.5 386" style="stroke: rgb(14%,20%,25%); stroke-linecap: butt; stroke-width: 0.85; fill: none; fill-rule: evenodd;"/>
+			<polygon points="210.5 386, 208.5 391, 212.5 391" style="stroke: none; stroke-linecap: butt; stroke-width: 1; fill: rgb(14%,20%,25%); fill-rule: evenodd;"/>
+			<rect x="228.66" y="414" width="105.99999999999997" height="56" style="stroke: rgb(14%,20%,25%); stroke-linecap: butt; stroke-width: 0.7; fill: rgb(96%,96%,97%); fill-rule: evenodd;"/>
+			<text x="250.78182617187497" y="456" style="font-family: 'Liberation Serif'; font-weight: bold; font-size: 9px;fill: rgb(14%,20%,25%); stroke:none;" transform="translate(0,912) scale(1,-1)">GitHub account</text>
+			<text x="249.00374999999997" y="443.0" style="font-family: 'Liberation Serif'; font-size: 8px;fill: rgb(14%,20%,25%); stroke:none;" transform="translate(0,886) scale(1,-1)">0xed123 renamed to</text>
+			<text x="246.44124999999997" y="432.5" style="font-family: 'Liberation Serif'; font-size: 8px;fill: rgb(14%,20%,25%); stroke:none;" transform="translate(0,865) scale(1,-1)">0xapp123, April 2024</text>
+			<polyline points="281.66 414, 281.66 400, 240.5 400, 240.5 386" style="stroke: rgb(14%,20%,25%); stroke-linecap: butt; stroke-width: 0.85; fill: none; fill-rule: evenodd;"/>
+			<polygon points="240.5 386, 238.5 391, 242.5 391" style="stroke: none; stroke-linecap: butt; stroke-width: 1; fill: rgb(14%,20%,25%); fill-rule: evenodd;"/>
+			<rect x="340.99" y="414" width="106.0" height="56" style="stroke: rgb(14%,20%,25%); stroke-linecap: butt; stroke-width: 0.7; fill: rgb(96%,96%,97%); fill-rule: evenodd;"/>
+			<text x="361.991220703125" y="456" style="font-family: 'Liberation Serif'; font-weight: bold; font-size: 9px;fill: rgb(14%,20%,25%); stroke:none;" transform="translate(0,912) scale(1,-1)">Git author name</text>
+			<text x="371.890390625" y="443.0" style="font-family: 'Liberation Serif'; font-size: 8px;fill: rgb(14%,20%,25%); stroke:none;" transform="translate(0,886) scale(1,-1)">and Telegram</text>
+			<text x="374.441171875" y="432.5" style="font-family: 'Liberation Serif'; font-size: 8px;fill: rgb(14%,20%,25%); stroke:none;" transform="translate(0,865) scale(1,-1)">presentation</text>
+			<polyline points="393.99 414, 393.99 400, 270.5 400, 270.5 386" style="stroke: rgb(14%,20%,25%); stroke-linecap: butt; stroke-width: 0.85; fill: none; fill-rule: evenodd;"/>
+			<polygon points="270.5 386, 268.5 391, 272.5 391" style="stroke: none; stroke-linecap: butt; stroke-width: 1; fill: rgb(14%,20%,25%); fill-rule: evenodd;"/>
+			<rect x="120" y="330" width="211" height="56" style="stroke: rgb(14%,20%,25%); stroke-linecap: butt; stroke-width: 0.7; fill: rgb(96%,96%,97%); fill-rule: evenodd;"/>
+			<text x="192.14111328125" y="372" style="font-family: 'Liberation Serif'; font-weight: bold; font-size: 9px;fill: rgb(14%,20%,25%); stroke:none;" transform="translate(0,744) scale(1,-1)">TronzitVeca core</text>
+			<text x="171.294921875" y="359.0" style="font-family: 'Liberation Serif'; font-size: 8px;fill: rgb(14%,20%,25%); stroke:none;" transform="translate(0,718) scale(1,-1)">One converging operator identity,</text>
+			<text x="175.296875" y="348.5" style="font-family: 'Liberation Serif'; font-size: 8px;fill: rgb(14%,20%,25%); stroke:none;" transform="translate(0,697) scale(1,-1)">high confidence; no legal name</text>
+			<rect x="4" y="230" width="160" height="74" style="stroke: rgb(14%,20%,25%); stroke-linecap: butt; stroke-width: 0.7; fill: rgb(96%,96%,97%); fill-rule: evenodd;"/>
+			<text x="47.87915039062499" y="290" style="font-family: 'Liberation Serif'; font-weight: bold; font-size: 9px;fill: rgb(14%,20%,25%); stroke:none;" transform="translate(0,580) scale(1,-1)">Operator personas</text>
+			<text x="44.013671875" y="277.0" style="font-family: 'Liberation Serif'; font-size: 8px;fill: rgb(14%,20%,25%); stroke:none;" transform="translate(0,554) scale(1,-1)">0xapp123 / TronzitVeca:</text>
+			<text x="48.013671875" y="266.5" style="font-family: 'Liberation Serif'; font-size: 8px;fill: rgb(14%,20%,25%); stroke:none;" transform="translate(0,533) scale(1,-1)">recruitment lures from</text>
+			<text x="45.900390625" y="256.0" style="font-family: 'Liberation Serif'; font-size: 8px;fill: rgb(14%,20%,25%); stroke:none;" transform="translate(0,512) scale(1,-1)">at least November 2023</text>
+			<text x="42.404296875" y="245.5" style="font-family: 'Liberation Serif'; font-size: 8px;fill: rgb(14%,20%,25%); stroke:none;" transform="translate(0,491) scale(1,-1)">"Silvio Silva": one handle</text>
+			<text x="40.685546875" y="235.0" style="font-family: 'Liberation Serif'; font-size: 8px;fill: rgb(14%,20%,25%); stroke:none;" transform="translate(0,470) scale(1,-1)">binds relay and back office</text>
+			<rect x="172" y="230" width="136" height="74" style="stroke: rgb(14%,20%,25%); stroke-linecap: butt; stroke-width: 0.7; fill: rgb(96%,96%,97%); fill-rule: evenodd;"/>
+			<text x="204.6328125" y="290" style="font-family: 'Liberation Serif'; font-weight: bold; font-size: 9px;fill: rgb(14%,20%,25%); stroke:none;" transform="translate(0,580) scale(1,-1)">Probable takeover</text>
+			<text x="196.6328125" y="277.0" style="font-family: 'Liberation Serif'; font-size: 8px;fill: rgb(14%,20%,25%); stroke:none;" transform="translate(0,554) scale(1,-1)">A real developer's account,</text>
+			<text x="207.455078125" y="266.5" style="font-family: 'Liberation Serif'; font-size: 8px;fill: rgb(14%,20%,25%); stroke:none;" transform="translate(0,533) scale(1,-1)">used by the operator</text>
+			<text x="201.013671875" y="256.0" style="font-family: 'Liberation Serif'; font-size: 8px;fill: rgb(14%,20%,25%); stroke:none;" transform="translate(0,512) scale(1,-1)">since late October 2025;</text>
+			<text x="200.791015625" y="245.5" style="font-family: 'Liberation Serif'; font-size: 8px;fill: rgb(14%,20%,25%); stroke:none;" transform="translate(0,491) scale(1,-1)">holder a probable victim</text>
+			<polyline points="120 350, 84 350, 84 304" style="stroke: rgb(14%,20%,25%); stroke-linecap: butt; stroke-width: 0.85; fill: none; fill-rule: evenodd;"/>
+			<polygon points="84 304, 82 309, 86 309" style="stroke: none; stroke-linecap: butt; stroke-width: 1; fill: rgb(14%,20%,25%); fill-rule: evenodd;"/>
+			<polyline points="240 330, 240 304" style="stroke: rgb(14%,20%,25%); stroke-linecap: butt; stroke-width: 0.85; fill: none; fill-rule: evenodd;"/>
+			<polygon points="240 304, 238 309, 242 309" style="stroke: none; stroke-linecap: butt; stroke-width: 1; fill: rgb(14%,20%,25%); fill-rule: evenodd;"/>
+			<rect x="316" y="230" width="131" height="74" style="stroke: rgb(14%,20%,25%); stroke-linecap: butt; stroke-width: 0.7; fill: rgb(90%,92%,93%); fill-rule: evenodd;"/>
+			<text x="347.624755859375" y="290" style="font-family: 'Liberation Serif'; font-weight: bold; font-size: 9px;fill: rgb(14%,20%,25%); stroke:none;" transform="translate(0,580) scale(1,-1)">0x-serial sub-ring</text>
+			<text x="350.181640625" y="277.0" style="font-family: 'Liberation Serif'; font-size: 8px;fill: rgb(14%,20%,25%); stroke:none;" transform="translate(0,554) scale(1,-1)">Internally coherent,</text>
+			<text x="355.84375" y="266.5" style="font-family: 'Liberation Serif'; font-size: 8px;fill: rgb(14%,20%,25%); stroke:none;" transform="translate(0,533) scale(1,-1)">high confidence</text>
+			<text x="354.064453125" y="256.0" style="font-family: 'Liberation Serif'; font-size: 8px;fill: rgb(14%,20%,25%); stroke:none;" transform="translate(0,512) scale(1,-1)">Link to core: one</text>
+			<text x="335.845703125" y="245.5" style="font-family: 'Liberation Serif'; font-size: 8px;fill: rgb(14%,20%,25%); stroke:none;" transform="translate(0,491) scale(1,-1)">organisation co-membership</text>
+			<polyline points="331 358, 381 358, 381 304" style="stroke: rgb(14%,20%,25%); stroke-linecap: butt; stroke-width: 0.85; fill: none; fill-rule: evenodd; stroke-dasharray: 4, 3;"/>
+			<polygon points="381 304, 379 309, 383 309" style="stroke: none; stroke-linecap: butt; stroke-width: 1; fill: rgb(14%,20%,25%); fill-rule: evenodd;"/>
+			<text x="386" y="320" style="font-family: 'Liberation Serif'; font-size: 7.5px;fill: rgb(30%,35%,40%); stroke:none;" transform="translate(0,640) scale(1,-1)">moderate</text>
+			<rect x="316" y="120" width="131" height="86" style="stroke: rgb(14%,20%,25%); stroke-linecap: butt; stroke-width: 0.7; fill: rgb(90%,92%,93%); fill-rule: evenodd;"/>
+			<text x="351.12060546875" y="192" style="font-family: 'Liberation Serif'; font-weight: bold; font-size: 9px;fill: rgb(14%,20%,25%); stroke:none;" transform="translate(0,384) scale(1,-1)">Sub-ring clients</text>
+			<text x="340.060546875" y="179.0" style="font-family: 'Liberation Serif'; font-size: 8px;fill: rgb(14%,20%,25%); stroke:none;" transform="translate(0,358) scale(1,-1)">Component library, 2021:</text>
+			<text x="352.05859375" y="168.5" style="font-family: 'Liberation Serif'; font-size: 8px;fill: rgb(14%,20%,25%); stroke:none;" transform="translate(0,337) scale(1,-1)">130 commits, four</text>
+			<text x="350.287109375" y="158.0" style="font-family: 'Liberation Serif'; font-size: 8px;fill: rgb(14%,20%,25%); stroke:none;" transform="translate(0,316) scale(1,-1)">published packages</text>
+			<text x="341.73046875" y="147.5" style="font-family: 'Liberation Serif'; font-size: 8px;fill: rgb(14%,20%,25%); stroke:none;" transform="translate(0,295) scale(1,-1)">DeFi client, 2022: wallet</text>
+			<text x="345.29296875" y="137.0" style="font-family: 'Liberation Serif'; font-size: 8px;fill: rgb(14%,20%,25%); stroke:none;" transform="translate(0,274) scale(1,-1)">and governance admin</text>
+			<polyline points="381 230, 381 206" style="stroke: rgb(14%,20%,25%); stroke-linecap: butt; stroke-width: 0.85; fill: none; fill-rule: evenodd;"/>
+			<polygon points="381 206, 379 211, 383 211" style="stroke: none; stroke-linecap: butt; stroke-width: 1; fill: rgb(14%,20%,25%); fill-rule: evenodd;"/>
+			<rect x="4" y="4" width="304" height="202" style="stroke: rgb(14%,20%,25%); stroke-linecap: butt; stroke-width: 0.7; fill: rgb(100%,100%,100%); fill-rule: evenodd; stroke-dasharray: 4, 3;"/>
+			<text x="61.383544921874986" y="192" style="font-family: 'Liberation Serif'; font-weight: bold; font-size: 9px;fill: rgb(14%,20%,25%); stroke:none;" transform="translate(0,384) scale(1,-1)">Adjacent clusters: link to the core not established</text>
+			<rect x="10" y="96" width="144" height="86" style="stroke: rgb(14%,20%,25%); stroke-linecap: butt; stroke-width: 0.7; fill: rgb(96%,96%,97%); fill-rule: evenodd;"/>
+			<text x="31.996826171874993" y="168" style="font-family: 'Liberation Serif'; font-weight: bold; font-size: 9px;fill: rgb(14%,20%,25%); stroke:none;" transform="translate(0,336) scale(1,-1)">Second laundering cluster</text>
+			<text x="28.90625" y="155.0" style="font-family: 'Liberation Serif'; font-size: 8px;fill: rgb(14%,20%,25%); stroke:none;" transform="translate(0,310) scale(1,-1)">Three accounts, 288 repositories;</text>
+			<text x="34.24609375" y="144.5" style="font-family: 'Liberation Serif'; font-size: 8px;fill: rgb(14%,20%,25%); stroke:none;" transform="translate(0,289) scale(1,-1)">no farm address after creation</text>
+			<text x="31.5234375" y="134.0" style="font-family: 'Liberation Serif'; font-size: 8px;fill: rgb(14%,20%,25%); stroke:none;" transform="translate(0,268) scale(1,-1)">Shared-CV rota "Felix Martel":</text>
+			<text x="38.287109375" y="123.5" style="font-family: 'Liberation Serif'; font-size: 8px;fill: rgb(14%,20%,25%); stroke:none;" transform="translate(0,247) scale(1,-1)">four accounts, ~26 months;</text>
+			<text x="47.904296875" y="113.0" style="font-family: 'Liberation Serif'; font-size: 8px;fill: rgb(14%,20%,25%); stroke:none;" transform="translate(0,226) scale(1,-1)">aged seats taken over</text>
+			<rect x="158" y="96" width="144" height="86" style="stroke: rgb(14%,20%,25%); stroke-linecap: butt; stroke-width: 0.7; fill: rgb(96%,96%,97%); fill-rule: evenodd;"/>
+			<text x="202.874755859375" y="168" style="font-family: 'Liberation Serif'; font-weight: bold; font-size: 9px;fill: rgb(14%,20%,25%); stroke:none;" transform="translate(0,336) scale(1,-1)">Copying layer</text>
+			<text x="181.896484375" y="155.0" style="font-family: 'Liberation Serif'; font-size: 8px;fill: rgb(14%,20%,25%); stroke:none;" transform="translate(0,310) scale(1,-1)">Seven owners, RubyOnWorld</text>
+			<text x="190.00390625" y="144.5" style="font-family: 'Liberation Serif'; font-size: 8px;fill: rgb(14%,20%,25%); stroke:none;" transform="translate(0,289) scale(1,-1)">and six others: 455 listed</text>
+			<text x="190.8984375" y="134.0" style="font-family: 'Liberation Serif'; font-size: 8px;fill: rgb(14%,20%,25%); stroke:none;" transform="translate(0,268) scale(1,-1)">repositories, 35,586 pre-</text>
+			<text x="182.80078125" y="123.5" style="font-family: 'Liberation Serif'; font-size: 8px;fill: rgb(14%,20%,25%); stroke:none;" transform="translate(0,247) scale(1,-1)">creation commit occurrences,</text>
+			<text x="180.244140625" y="113.0" style="font-family: 'Liberation Serif'; font-size: 8px;fill: rgb(14%,20%,25%); stroke:none;" transform="translate(0,226) scale(1,-1)">a floor under capped collection</text>
+			<rect x="10" y="10" width="144" height="80" style="stroke: rgb(14%,20%,25%); stroke-linecap: butt; stroke-width: 0.7; fill: rgb(96%,96%,97%); fill-rule: evenodd;"/>
+			<text x="40.87377929687499" y="76" style="font-family: 'Liberation Serif'; font-weight: bold; font-size: 9px;fill: rgb(14%,20%,25%); stroke:none;" transform="translate(0,152) scale(1,-1)">marks-5 organisation</text>
+			<text x="51.12109375" y="63.0" style="font-family: 'Liberation Serif'; font-size: 8px;fill: rgb(14%,20%,25%); stroke:none;" transform="translate(0,126) scale(1,-1)">Marks and Spencer</text>
+			<text x="33.453125" y="52.5" style="font-family: 'Liberation Serif'; font-size: 8px;fill: rgb(14%,20%,25%); stroke:none;" transform="translate(0,105) scale(1,-1)">impersonation, 36 repositories</text>
+			<text x="32.126953125" y="42.0" style="font-family: 'Liberation Serif'; font-size: 8px;fill: rgb(14%,20%,25%); stroke:none;" transform="translate(0,84) scale(1,-1)">of copied work; five claimants,</text>
+			<text x="56.896484375" y="31.5" style="font-family: 'Liberation Serif'; font-size: 8px;fill: rgb(14%,20%,25%); stroke:none;" transform="translate(0,63) scale(1,-1)">farm test empty</text>
+			<rect x="158" y="10" width="144" height="80" style="stroke: rgb(14%,20%,25%); stroke-linecap: butt; stroke-width: 0.7; fill: rgb(96%,96%,97%); fill-rule: evenodd;"/>
+			<text x="183.631103515625" y="76" style="font-family: 'Liberation Serif'; font-weight: bold; font-size: 9px;fill: rgb(14%,20%,25%); stroke:none;" transform="translate(0,152) scale(1,-1)">Associated engagements</text>
+			<text x="188.005859375" y="63.0" style="font-family: 'Liberation Serif'; font-size: 8px;fill: rgb(14%,20%,25%); stroke:none;" transform="translate(0,126) scale(1,-1)">DeFi project: 30 commits,</text>
+			<text x="199.673828125" y="52.5" style="font-family: 'Liberation Serif'; font-size: 8px;fill: rgb(14%,20%,25%); stroke:none;" transform="translate(0,105) scale(1,-1)">May 2024, merged</text>
+			<text x="186.791015625" y="42.0" style="font-family: 'Liberation Serif'; font-size: 8px;fill: rgb(14%,20%,25%); stroke:none;" transform="translate(0,84) scale(1,-1)">Ten months of code-owner</text>
+			<text x="189.8984375" y="31.5" style="font-family: 'Liberation Serif'; font-size: 8px;fill: rgb(14%,20%,25%); stroke:none;" transform="translate(0,63) scale(1,-1)">access, disputed identity;</text>
+			<text x="186.7890625" y="21.0" style="font-family: 'Liberation Serif'; font-size: 8px;fill: rgb(14%,20%,25%); stroke:none;" transform="translate(0,42) scale(1,-1)">no malicious change found</text>
+		</g>
+	</g>
+</svg>

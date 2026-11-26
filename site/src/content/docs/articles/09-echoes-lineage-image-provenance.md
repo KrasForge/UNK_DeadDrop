@@ -1,9 +1,30 @@
 ---
 title: "Tracing the ECHOES Archive: Payload Lineage and Image Provenance"
 description: "Four revisions of the ECHOES lure archive, a final payload that was never recovered, and C2PA data in its poster that records an AI image pipeline."
-lastUpdated: 2026-10-29
+lastUpdated: 2026-11-26
 sidebar:
   order: 9
+head:
+  - tag: meta
+    attrs:
+      property: og:image
+      content: "https://example.github.io/UNK_DeadDrop/og/09.png"
+  - tag: meta
+    attrs:
+      property: og:image:width
+      content: "1200"
+  - tag: meta
+    attrs:
+      property: og:image:height
+      content: "630"
+  - tag: meta
+    attrs:
+      property: og:image:alt
+      content: "Part 9: Tracing the ECHOES Archive: Payload Lineage and Image Provenance"
+  - tag: meta
+    attrs:
+      name: twitter:image
+      content: "https://example.github.io/UNK_DeadDrop/og/09.png"
 ---
 
 
@@ -14,7 +35,7 @@ The retained current RAR has SHA-256 `7db6789c09e29305c728bf3d7b94c5ef1c3e13eef1
 
 The delivery repositories do have a documented connection. The restricted catalogue of 172 public repositories examined on 24 July placed ECHOES and the weaponised `predict-together` copy under the same account, and those two and one further assessment repository were the only three catalogued repositories carrying delivery kits; the catalogue is discussed in the [paper](../../downloads/UNK_DeadDrop-Preprint.pdf) but is not reproduced in the public evidence exhibits.
 
-That connects account control and delivery staging. Not the missing final payload. ECHOES contributes a distinct entry route: a password-protected archive and shortcut lead to PowerShell, while repository-held retrieval settings change across revisions; ClickFix instead relies on a pasted command, and the VSIX route relies on editor tasks and extension installation, yet their shared use of repository staging does not make their downstream capabilities interchangeable.
+That connects account control and delivery staging, not the missing final payload: one delivery account ran two delivery kits, the folder-open repository and ECHOES. ECHOES contributes a distinct entry route. The archive holds a `.pdf.lnk` shortcut whose arguments carry an encoded first stage, which decrypts to a PowerShell second stage that relaunches itself hidden, elevates, opens a decoy PDF, installs scheduled-task and script persistence firing at startup and hourly, pulls two further stages from the same GitHub account using a hard-coded access token, and deletes itself, while repository-held retrieval settings change across revisions; ClickFix instead relies on a pasted command, and the VSIX route relies on editor tasks and extension installation, yet their shared use of repository staging does not make their downstream capabilities interchangeable.
 
 ## Four archive revisions from March
 
@@ -25,7 +46,7 @@ I compared four archive revisions: one from 5 March, one from 17 March and two f
 3. `b209f365`, 25 March, 03:54: another repository destination, with the tag changed to WORD and a VBS persistence layer added.
 4. `4b6ea6b2`, 25 March, 13:29: a further destination change and a new access token, with the staging otherwise unchanged.
 
-The third revision changed both retrieval and persistence; the fourth retained that staging while replacing the destination and access token. The embedded tokens were not used to retrieve the final stage. Their values are withheld.
+The third revision changed both retrieval and persistence; the fourth retained that staging while replacing the destination and access token. The embedded tokens were not used to retrieve the final stage. Their values are withheld. A later review of the delivery repository found a fifth archive commit, made about two hours after the first with the same destination, token and decoys, a cosmetic re-compression that leaves the four distinct configurations standing. The kit was not unique to this lure either: [FortiGuard Labs had documented the same LNK and GitHub chain](https://www.fortinet.com/blog/threat-research/dprk-related-campaigns-with-lnk-and-github-c2) on 2 April 2026 with Korean business lures in place of the animation pitch, and named one of the C2 accounts in my record among its own, so the operator varies the lure while reusing the toolchain. The Hangul decoy metadata and the token-based C2 are consistent with Proofpoint's assessment that the operation is very likely North Korea-aligned and with FortiGuard's DPRK framing, which remain those publishers' assessments rather than mine.
 
 ![Four retained ECHOES archive revisions](../assets/07-echoes.png)
 
@@ -33,7 +54,9 @@ The third revision changed both retrieval and persistence; the fourth retained t
 
 ## The final PowerShell payload was not recovered
 
-The staging references led to final PowerShell resources unavailable through the unauthenticated routes. No final payload was available for capability analysis.
+The staging references led to final PowerShell resources unavailable through the unauthenticated routes, and that absence follows from the design rather than from bad luck: the files sit in private repositories reachable only with the embedded token, so no crawler, scanner or token-less sandbox can have captured them. My hunt of 23 July covered the account cluster on the forge, stored URL-scanner scans, VirusTotal, MalwareBazaar and the Open Threat Exchange without a hit, and FortiGuard did not publish stage-three hashes either, so no final payload was available for capability analysis.
+
+The closest counterpart came from a separate public staging repository linked to the same operator personas, which carries the same retrieval header and, in its first revision, the same account and token as the final ECHOES archive, and holds scripts dated 31 March to 10 April that decrypt with parameters stored beside them. Read statically and never run, they form a four-part toolkit that collects wallet application folders and files named for seeds, private keys and recovery codes, decrypts browser credentials (including through the App-Bound encryption bypass and, new to the investigation, Volume Shadow Copy reads of locked browser databases), runs a keylogger and clipboard logger through a VBScript runner, and uploads through GitHub's contents API into a private repository named after each victim's user and machine. That egress is ordinary TLS to `api.github[.]com`, so blocking it by destination would also block legitimate GitHub use, whereas the toolkit's fixed, self-identifying container format decrypts statically and is a durable detection handle. It also settles a smaller question from [Part 4](../04-credential-wallet-collection/): the Overlord agents and their Node and Python stages log no keys, but the operator's separate PowerShell toolkit does. These scripts show the operator's tooling rather than what the March archives fetched, since those exact bytes were never retained, and nothing in them shows that any victim was affected.
 
 Account status was less clear than a 404 suggested. One historical check found an unavailable account whose name was also unavailable for registration, which supports a suspension hypothesis but does not confirm it with the platform. Neighboring numeric identifiers showed no distinctive batch-registration pattern, and consecutive IDs can belong to unrelated signups; proving common registration control would require unavailable platform data.
 

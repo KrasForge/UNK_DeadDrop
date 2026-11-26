@@ -66,6 +66,26 @@ export default defineConfig({
           ]
         },
         {
+          label: 'Personas, control and attribution',
+          items: [
+            { label: '15. Persona farm', link: '/articles/15-persona-farm/' },
+            { label: '16. Control layer after October', link: '/articles/16-control-layer-after-october/' },
+            { label: '17. Two operations, one ecosystem', link: '/articles/17-two-operations-one-ecosystem/' }
+          ]
+        },
+        {
+          label: 'PolinRider',
+          items: [
+            { label: '18. Following a developer', link: '/articles/18-polinrider-following-a-developer/' },
+            { label: '19. Ethereum as an address book', link: '/articles/19-polinrider-ethereum-address-book/' },
+            { label: '20. Resolver wallets and hosts', link: '/articles/20-polinrider-wallets-and-hosts/' },
+            { label: '21. Repository spread', link: '/articles/21-polinrider-repository-spread/' },
+            { label: '22. Counting the repositories', link: '/articles/22-polinrider-counting-repositories/' },
+            { label: '23. Detection', link: '/articles/23-polinrider-detection/' },
+            { label: '24. Following the money', link: '/articles/24-polinrider-money/' }
+          ]
+        },
+        {
           label: 'Reference',
           items: [
             { label: 'Historical indicators', link: '/indicators/' },

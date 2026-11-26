@@ -27,7 +27,11 @@ FONTS = '/usr/share/fonts/liberation-sans-fonts/LiberationSans-{}.ttf'
 DIAGRAMS = {'01': '01-clickfix', '02': '02-vsix', '03': '03-deobfuscation', '04': '04-collection',
             '05': '05-screen-capture', '06': '05-resolver', '07': '07-targeting', '08': '06-administration',
             '09': '07-echoes', '10': '10-evidence-map', '11': '11-detection-logic', '12': '12-framework-boundary',
-            '13': '13-benchmark-results', '14': '14-rotation-failure'}
+            '13': '13-benchmark-results', '14': '14-rotation-failure',
+            '15': '15-persona-farm', '16': '16-dead-drop-successors', '17': '17-separation-map',
+            '18': '19-polinrider-resolvers', '19': '19-polinrider-resolvers', '20': '20-polinrider-wallet-hosts',
+            '21': '21-polinrider-propagation', '22': '21-polinrider-propagation', '23': '21-polinrider-propagation',
+            '24': '24-polinrider-money'}
 
 
 def wrap(s, size, width, bold=True):
@@ -102,9 +106,11 @@ if __name__ == '__main__':
     for path in sorted((DOCS / 'articles').glob('[0-9][0-9]-*.md')):
         part = path.stem[:2]
         title, description = front_matter(path)
-        render(card(1200, 630, f'UNK_DeadDrop · Part {int(part)} of 14', title, '', footer,
+        n = int(part)
+        label = f'PolinRider · Part {n - 17} of 7' if n >= 18 else f'UNK_DeadDrop · Part {n} of 17'
+        render(card(1200, 630, label, title, '', footer,
                     SITE / f'public/diagrams/{DIAGRAMS[part]}.png'), OUT / f'{part}.png')
-    render(card(1200, 630, 'Fourteen-part technical series', 'UNK_DeadDrop',
+    render(card(1200, 630, 'Twenty-four-part technical series', 'UNK_DeadDrop',
                 'Fake job interviews that reach developer machines, reconstructed from the artifacts without running a sample.',
                 footer, SITE / 'public/diagrams/10-evidence-map.png'), OUT / 'home.png')
     render(card(1280, 640, 'Open-source static scanner', 'unk-scanner',
