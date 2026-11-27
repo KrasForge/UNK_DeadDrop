@@ -13,7 +13,7 @@ tags:
   - "GitLab"
   - "Overlord"
   - "infrastructure"
-og_image_alt: "Timeline of the GitLab dead drop from the May commits through the 22 October outage to the two successor repositories and their discovery dates"
+og_image_alt: "Part 16 of the UNK_DeadDrop series: After October: Dead-Drop Successors, Panel Lineage and One Hosting Provider"
 ---
 
 I found that UNK_DeadDrop rebuilt its GitLab dead drop twice after the original repository became unreadable on 22 October 2026, and my watch on the known path found neither successor. The third repository, created by `0xapp123` on 3 November, is the only network address in agent builds fetched on 12 November, and I learned of it from Stormshield about nine days after its creation.
@@ -42,9 +42,9 @@ The original repository's primary configuration file has six commits in two epoc
 4. **25 July.** My watch polled the file every two hours from 23 July. Commit `b1a275dd35` at 06:02:59 UTC reduced the list to `api.chestsoi[.]ink` alone, and the watch alerted at 06:30.
 5. **10 and 12 October.** Two further commits added no host. I did not retain their contents, so the history is complete for the hosts named but not for every change.
 
-![Timeline of the GitLab dead drop and its two successors](assets/16-dead-drop-successors.png)
+![Every host list in the operator's three GitLab dead-drop repositories, by commit, from 26 May to 3 November 2026, with the 22 October outage and the dates I learned of each successor](assets/16-dead-drop-lists.png)
 
-*Figure 1. Operator actions dated from repository contents, against the outage and my own observations. The 22 October date records the outage, not its cause.*
+*Figure 1. Every host list the dead drop published, by commit. The two successor repositories carried on with the host the original had last named, then moved to api.cerysoi[.]ink.*
 
 ## Recovery: the 22 October outage and the first replacement
 
@@ -96,6 +96,10 @@ The same lesson came back from the certificate side. Certificate transparency ha
 
 Earlier certificates for the same hosts are present, which points to an indexing failure of that index rather than a blind spot for one authority. Most of the missing certificates are from Let's Encrypt, and the failure concerns crt[.]sh, not the transparency logs themselves. For this operator, a crt[.]sh negative carries no information.
 
+![Stacked bars of the 40 operator-side certificates retained by VirusTotal, by month of issuance from May to November 2026, split into present in and missing from the crt.sh index](assets/16-crtsh-cliff.png)
+
+*Figure 2. Operator certificates by month of issuance. From October onward most are missing from the crt[.]sh index, and none of the four November certificates is present.*
+
 A second, separate failure sat beside it. On 12 November I found that crt[.]sh was answering substring queries with an empty list while exact-domain queries still worked. A stem sweep I had scheduled two days earlier had therefore been reporting "0 new" as empty answers rather than checks. Its stems would have matched only two lure families, and none of the names registered after it started, so that failure cost no alerts and is not why the generation below went uncollected. Other substring queries had returned thousands of records two days earlier, so whether the behavior changed or depends on query form or load is not settled. Either way, a certificate sweep needs a positive control with a known answer, because the index distinguishes "nothing matched" from "this query no longer works" nowhere in its response. Reading certificates retained by VirusTotal instead produced 118 distinct operator certificates against the 42 I had held. Pivoting the eight of Stormshield's addresses that were new to me returned 165 hostnames, of which only two were already in my files. A whole lure generation had passed under my instruments while the panel lineage, the dead-drop mechanism and the agent credential stayed the same.
 
 ### The uncollected lure generation
@@ -124,6 +128,10 @@ The operator's panel has appeared as "Google Login" and as "Subtensor - Sign In"
 I scored each captured file against every version of its counterpart in the framework's history: six versions of the login script, eleven of the login page and forty-nine of the main stylesheet, back to 5 March 2026. In every case the best match was the oldest public version, commit `f8515a2883` of 5 March, with similarity falling at each later version. The best scores were 0.978 for the script, 0.828 for the page and 0.752 for the stylesheet. I use them only to rank versions.
 
 The operators changed the wording, the crown icon, an inline favicon, an added Bittensor theme stylesheet and the timing of the particle animation. They left the authentication design alone, so the framework's ordinary features are not their development.
+
+![A urlscan.io capture of the Subtensor operator login beside a line diff of its page source against the login page of Overlord commit f8515a2883](assets/16-panel-vs-upstream.png)
+
+*Figure 3. The operator's login page against the oldest public Overlord login page. Only the branding, the icon, the favicon and a theme stylesheet differ, and 71 of its 87 lines are unchanged.*
 
 ### A second production server
 
@@ -181,6 +189,10 @@ Certificates and registrations record when the operators act, and they record di
 | Weekdays | 57 of 73 sessions Monday to Thursday, 5 on a Friday | |
 
 The gap between the two medians is about nine hours, so one shift covering both would have to span about nineteen. I therefore read buying domains and provisioning hosts as distinct activities.
+
+![Histogram by UTC hour of 73 certificate session starts and 99 domain registrations, with medians at 06:55 and 15:46 UTC](assets/16-two-clocks.png)
+
+*Figure 4. The hours at which certificate sessions began and domains were registered. The two medians are about nine hours apart.*
 
 I tested the obvious alternatives before quoting hours:
 

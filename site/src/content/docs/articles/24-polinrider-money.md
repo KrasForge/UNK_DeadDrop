@@ -46,7 +46,7 @@ On 31 July 2024, between 15:33 and 15:37 UTC, four wallets belonging to the owne
 
 The sweep did not look like the owner:
 
-- it paid a priority fee nearly twenty times the owner's usual setting;
+- it paid a priority fee of 1.845 gwei, the highest of the owner's 288 transactions and nearly twenty times the 0.1 gwei the owner set most often;
 - it sent an exact balance-minus-gas amount to a fresh destination;
 - it swapped and bridged within fifteen minutes.
 
@@ -79,9 +79,13 @@ The value carried is also what separates a record from a payment. The signal wal
 
 The pointer sender `0x596dcc9f`, which writes payload pointers, ties the signal wallet to the carrier side. Its only funding is two payments of 0.01 ETH from the signal wallet. Between 16 September and 16 November 2026 the two channels each had a transaction in the same Ethereum block 315 times, out of 1,696 and 1,135 blocks with a transaction from each. One process scheduling both explains that; shared infrastructure does not.
 
+![Bar chart of the distance in blocks from each of the pointer sender's 1,135 blocks to the nearest signal-wallet write: 315 in the same block against 4.4 expected by chance, and almost all within ten blocks](../assets/24-same-block-writes.png)
+
+*Figure 1. The pointer sender and the signal wallet write in the same block 315 times, against about four by chance.*
+
 ![PolinRider's money flow from sources of funds through provisioning, carriers and resolvers to payouts and cash-out](../assets/24-polinrider-money.png)
 
-*Figure 1. Solid elements are signed transfers or roles read on chain. Dashed elements mark bridge funding not traced to a theft and laundering layers whose attributions belong to the public register. UNK_DeadDrop is not part of this graph.*
+*Figure 2. Solid elements are signed transfers or roles read on chain. Dashed elements mark bridge funding not traced to a theft and laundering layers whose attributions belong to the public register. UNK_DeadDrop is not part of this graph.*
 
 ## Provisioning: disposable wallets and short bursts
 

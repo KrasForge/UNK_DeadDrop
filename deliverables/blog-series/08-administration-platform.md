@@ -11,7 +11,7 @@ tags:
   - "admin panel"
   - "crypto wallets"
   - "source analysis"
-og_image_alt: "Inside rms-platform: Delivery Monitoring and Wallet Administration"
+og_image_alt: "Part 8 of the UNK_DeadDrop series: Inside rms-platform: Delivery Monitoring and Wallet Administration"
 ---
 
 
@@ -20,7 +20,7 @@ I recovered seventy frontend modules of an operator application called rms-platf
 ## Key takeaways
 
 - The recovered client contains mail metrics, inbox and outbox views, auto-reply controls, repository monitoring and wallet import, refresh, preview, claim and bulk-claim actions.
-- Mnemonic and ColdKey fields, a miner-request column and Subtensor theming converge on Bittensor validators and miners, with EVM and Aptos wallets secondary.
+- Mnemonic and ColdKey fields, a miner-request column and the Subtensor theming of the operator's later panel converge on Bittensor validators and miners, while the wallet console itself handles EVM, Solana, Bitcoin, TRON, Sui and Aptos addresses.
 - My read of all seventy modules found no cryptocurrency address and no service key, because claim recipients are supplied by the backend at claim time.
 - The hard-coded super-administrator address `eros1030109@gmail[.]com` also appears in lure-domain DMARC records and the dead drop's commit history.
 - The back-office dashboard moved with the rest of the operators' hosting estate, from Liga Hosting in June 2026 to the October lure fleet, and its Django debug page shows the same `rms-platform` code base running there as root.
@@ -28,6 +28,10 @@ I recovered seventy frontend modules of an operator application called rms-platf
 ## Impact: the console that sits behind the lures
 
 A development deployment at `dashboard.cklomino[.]ink` exposed seventy frontend modules for an application called rms-platform. The recovered client combined mail views, repository availability checks and wallet-management controls. Its wallet views include mnemonic and ColdKey fields, plus import, preview and claim actions.
+
+![Screenshot of the back office's dark sign-in page, branded Cklomino, describing itself as an operations console for outreach at scale](assets/08-console-signin.png)
+
+*Figure 1. The back office's sign-in page on `dashboard.gaganata[.]ink`, from a public urlscan.io capture of 5 October 2026. It describes the console in the operators' own words and tells visitors that access is limited to registered accounts.*
 
 The backend implementation and its stored records were not recovered. By November, however, two outside records had placed the back office it talks to on a timeline and tied it to a persona. The console is therefore no longer an isolated artifact.
 
@@ -49,9 +53,13 @@ The source references `/api/github-jobs-check/`, `/api/db/...` and `/api/admin/w
 
 ## Delivery monitoring: a view of repository availability
 
-One view tracks repositories by `clone_url`, displays availability labels and offers refresh controls through `/api/github-jobs-check/`. The feature fits the delivery history, since repositories can disappear, move or be replaced. A status view could help monitor locations used to distribute lures or payloads. No backend event history was recovered to show whether a repository suspension triggered an alert or a replacement.
+One view lists each campaign's delivery repository by its link and hosting provider, shows it as live or down with the HTTP status of the last check, and reads the results through `/api/github-jobs-check/`. The operator registers each campaign's `clone_url` in a server-side configuration file. The feature fits the delivery history, since repositories can disappear, move or be replaced. A status view could help monitor locations used to distribute lures or payloads. No backend event history was recovered to show whether a repository suspension triggered an alert or a replacement.
 
-The labels are `live`, `down`, `fresh` and `dead`, and the view refreshes automatically. With it the operators can learn within minutes that a delivery repository has been suspended and move to a fresh account. For anyone requesting takedowns, that argues for removing a cluster of repositories at once rather than one at a time.
+A server worker checks the repositories every five minutes and the page re-reads the result every minute. A separate `fresh`, `stale` or `dead` tone warns when that worker itself has stalled. With it the operators can learn within minutes that a delivery repository has been suspended and move to a fresh account. For anyone requesting takedowns, that argues for removing a cluster of repositories at once rather than one at a time.
+
+![Annotated excerpt of the repository-monitor page source, showing a five-minute server check, a one-minute page poll, live or dead status per repository and a stalled-worker warning](assets/08-repo-monitor.png)
+
+*Figure 2. The repository monitor in the developer's own comments. A server worker checks every delivery repository on GitHub, GitLab or Bitbucket every five minutes, and the page warns when that worker stalls.*
 
 ### The mail view keys a target on a GitHub user
 
@@ -89,6 +97,10 @@ The current host identifies itself. A scanner's capture of `170.205.30[.]27:8000
 
 That is the same monorepo as the client I recovered in July from `/root/rms-platform/apps/admin/client`, now with a server-rendered admin beside the Vite client. The back office was relocated rather than rebuilt, and it is run carelessly. Django prints its route list only on 404 pages, and this instance fails earlier, so the routes are not visible.
 
+![Fields of the Django error page on port 8000, showing Django 6.0.7, a virtualenv under /root and rms-platform admin paths, above the July client's build paths](assets/08-django-debug.png)
+
+*Figure 3. The November error page and the July client name the same `/root/rms-platform/apps/admin` tree. I read the page as text from a scanner record and did not render it.*
+
 ### A database user links the back office to a persona
 
 In November, [Stormshield's Trigram report](https://www.stormshield.com/news/cti-trigram-campaign/) described a Django back office behind the same kit and named the database user `silviattech1129`. The same handle appears in the author address of a commit to the replacement dead-drop repository of October ([Part 16](16-control-layer-after-october.md)). It also binds the "Silvio Silva" persona to a 2025 launchpad presentation.
@@ -106,13 +118,17 @@ The wallet interface contains import, refresh, preview, claim and bulk-claim act
 /api/admin/wallets/claim-all/
 ```
 
-The collection paths and their relationship to the dynamically selected server are listed in the [historical indicator reference](historical-indicators.md). Mnemonic and ColdKey fields, Bittensor-related interface language, and references to EVM and Aptos connect the intended wallet workflow to material targeted by the collectors. The collectors select wallet material that corresponds to these interface fields.
+The collection paths and their relationship to the dynamically selected server are listed in the [historical indicator reference](historical-indicators.md). Mnemonic and ColdKey fields, Bittensor-related interface language, and the console's six address chains connect the intended wallet workflow to material targeted by the collectors. The collectors select wallet material that corresponds to these interface fields.
 
-A cold-key field in the wallet import, a miner-request column in the mail table and the Subtensor theming converge on Bittensor validators and miners. EVM and Aptos wallets are secondary.
+A cold-key field in the wallet import, a miner-request column in the mail table and the "Subtensor" theming of the operator's later login panel, a separate build, converge on Bittensor validators and miners. The recovered client itself carries no Subtensor branding and its wallet console lists no Bittensor chain. A recovery phrase yields eight addresses, three EVM and one each for Solana, Bitcoin, TRON, Sui and Aptos, and private keys or a Solana key file can be imported too. The derivation runs on the server, so that scheme is the client's own description of it.
 
 ### Claim recipients never reach the victim's machine
 
 No transaction records accompanied the frontend, and the client could not have yielded them. The recipient addresses of a claim are supplied by the backend from a server-side configuration at claim time and never reach the victim's machine. No sample detonation recovers them. My read of all seventy modules found no cryptocurrency address and no service key. That is the main reason the operation's cash-out remains untraced.
+
+![Annotated source of the super-administrator check with the hard-coded address, and of the claim handlers that send only an address id and confirm a drain to recipients in the server's .env file](assets/08-superadmin-claim.png)
+
+*Figure 4. The client decides who may drain but not where the funds go. A single claim sends only an address id, and Claim All asks to send every balance "to the claim recipients in .env" on the server.*
 
 The routes that need no victim are exhausted as well. No public source has published a receiving address for this operation. The campaign's domains and the operator wallets I knew returned no hits in the public scam and phishing databases I could query, and the published indicator sets carry no address. Searches for 2026 Bittensor coldkey drains found only the compromised PyPI `bittensor` package of July 2024, a different vector at a different time. Any route to the receiving address now starts from a confirmed victim wallet.
 

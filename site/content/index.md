@@ -54,7 +54,7 @@ Parts 1 to 14 began with evidence ending on 24 July 2026 and have been brought u
 19. [How PolinRider Uses Blockchains as an Address Book](__BASE_PATH__/articles/19-polinrider-ethereum-address-book/)
 20. [Three Resolver Wallets and Eleven Hosts](__BASE_PATH__/articles/20-polinrider-wallets-and-hosts/)
 21. [When One Assessment Reaches Nineteen Repositories](__BASE_PATH__/articles/21-polinrider-repository-spread/)
-22. [What 2,301 Affected Accounts Actually Means](__BASE_PATH__/articles/22-polinrider-counting-repositories/)
+22. [What 2,300 Affected Accounts Actually Means](__BASE_PATH__/articles/22-polinrider-counting-repositories/)
 23. [Detecting PolinRider Beyond a Filename](__BASE_PATH__/articles/23-polinrider-detection/)
 24. [Following PolinRider's Money: Gas, Bridges, Laundering and Cash-Out](__BASE_PATH__/articles/24-polinrider-money/)
 

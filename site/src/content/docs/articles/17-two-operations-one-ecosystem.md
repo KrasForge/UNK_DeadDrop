@@ -67,10 +67,6 @@ I keep the clock out of the table because it is the weakest comparison I have. U
 
 When I compared the Hiring777 material with the UNK_DeadDrop estate in November, I found no shared address, subnet, autonomous system, certificate or panel fingerprint between them.
 
-![UNK_DeadDrop and PolinRider as two operations within the Contagious Interview ecosystem](../assets/17-separation-map.png)
-
-*Figure 1. Solid lines are my own evidence. Dashed lines mark the two excluded artifact paths and Stormshield's Kimsuky link, which I have not established. The ecosystem frame groups shared context and is not a link.*
-
 ## Measurement: two artifact paths, zero observations
 
 I built the path count on a graph from my evidence snapshot of 14 November 2026. In that graph, records are joined only by recorded relationships between observables. Campaign and actor labels are not vertices, so an attribution edge cannot carry a path on its own.
@@ -82,7 +78,7 @@ Counted as vertex-disjoint paths, the NullReceiver, PolinRider and Hiring777 blo
 
 Removing those two leaves zero observational paths between the two blocks. That number, more than any single indicator, is why I treat the operations as separate. For comparison, the same measure gives the TronzitVeca and ECHOES persona block twelve independent paths across 210 source files.
 
-As a second and unrelated method, I ran Leiden community detection over 2,218 observables. Every one of the 177 connected resolver-side records landed in a community containing no UNK_DeadDrop record. Of those, 176 sit in six communities of five or more records and one sits in a community of four.
+As a second and unrelated method, I ran Leiden community detection over 2,218 observables. I counted the bare-tagged C2 address with the PolinRider npm cluster, where its relationships place it. Every one of the 177 connected resolver-side records then landed in a community containing no UNK_DeadDrop record. Of those, 176 sit in six communities of five or more records and one sits in a community of four. Left under its old tag, that address is the only UNK_DeadDrop record in any of those communities.
 
 ### The boundary runs both ways
 
@@ -168,6 +164,10 @@ Of the 186 Miasma repositories a code search found, the only three that intersec
 The npm stealer cluster published from nine single-use accounts in October and November 2026 is the hardest parallel case. It carries PolinRider's genuine resolver design, both TRON wallets, both Aptos fallback accounts, the exact TronGrid query string and the worm's forced-push propagation.
 
 Every value it shares with the real loader, however, was already printed in [JFrog's June report](https://research.jfrog.com/post/hijacked-npm-vscode-tasks-blockchain/) or in OpenSourceMalware's posts of March, April and July. The Aptos accounts and the first XOR key are in JFrog's and OpenSourceMalware's 31 July write-ups, and the exact TronGrid query string in OpenSourceMalware's post of 8 March. Both XOR carrier keys are public too, in the posts of 8 March and 12 April, so the absence of the second key from the npm build does not by itself separate copying from shared source. Its code names itself after the analysts' label for the actor rather than anything the operator uses, and it carries local test endpoints. I assess it as probable reuse or emulation of PolinRider at moderate confidence. A non-public constant or a shared build marker would settle the question in either direction. The lesson I took from it is to check every constant against the public write-ups before calling it unpublished, because a cluster that copies from reporting matches on exactly the values reporting has made known.
+
+![A grid of eight PolinRider resolver constants against four public write-ups and the npm stealer cluster's build: every constant was printed before October 2026, and only XOR key 2 is absent from the npm build](../assets/17-constants-in-print.png)
+
+*Figure 1. Each cell is an exact-string search of a saved copy of the write-up or of the strings I decoded from the npm build. The 8 March post was already on the Internet Archive on 22 June, months before the cluster's first package on 12 October.*
 
 ## Hiring777: a reported campaign, not UNK_DeadDrop
 

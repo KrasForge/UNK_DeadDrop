@@ -12,7 +12,7 @@ tags:
   - "Acorn"
   - "JavaScript"
   - "AES-GCM"
-og_image_alt: "Diagram of the static reconstruction and authenticated decryption workflow"
+og_image_alt: "Part 3 of the UNK_DeadDrop series: Parsing Without Executing: JavaScript Deobfuscation with Acorn"
 ---
 
 
@@ -39,6 +39,10 @@ What offset is applied before the underlying call?
 ```
 
 Recovering the key required mapping these wrappers and a rotated string table. My first regex missed a wrapper that declared an intermediate value before returning. Five plausible rotations then failed checks across the call sites.
+
+![Three wrapper functions from extension.js, the third of which declares an object holding its offset before the return statement](assets/03-wrappers.png)
+
+*Figure 1. Three of the wrappers in the VSIX loader. The third declares its offset in an object first, which is the shape my regex missed.*
 
 ## Method: parsing the loader without running it
 
@@ -89,6 +93,10 @@ For this obfuscator family a wrong rotation does not fail; it silently returns o
 
 The scheme explains why. Both obfuscated components use a rotated string array and a decoder that takes an index and a key, a custom base64 alphabet that puts lowercase letters first, then UTF-8 and RC4 with fifty-one distinct four-character keys supplied per call site. The correct key is a property of the call site, not of the array entry. Measured over the first 400 entries, 133 yield more than one printable candidate, so "first printable match wins" picks the wrong one whenever a wrong key happens to produce ASCII first, which for five-character plaintexts is common.
 
+![Bar chart of how many per-call-site RC4 keys turn each of the first 400 string-array entries into printable text, beside six entries with two plausible readings](assets/03-printable-ambiguity.png)
+
+*Figure 2. Of the first 400 array entries, 133 decode to printable text under more than one key. A wrong key returns plausible strings instead of failing.*
+
 Two further traps sat beside it. Decoding with the standard base64 alphabet also produces printable-looking garbage instead of failing. A brute-force consensus over a handful of resolvable sites produced five spurious solutions, each of which decoded one anchor and nothing else. The next checks were whether each string fit its call context and whether the key fragments could be reconstructed in source order. The encrypted payloads would provide a stronger validation.
 
 ### Putting the sixteen fragments back in order
@@ -96,6 +104,10 @@ Two further traps sat beside it. Decoding with the standard base64 alphabet also
 The key expression combined nine decoder results with seven literal fragments. Recovering their values was only half the work. The fragments also had to be concatenated in the original order, including values nested inside parenthesized additions.
 
 A small bounded evaluator concatenated string literals and already-decoded values in source order. The recovered key could then be checked against the encrypted payloads.
+
+![Table of the sixteen key fragments in source order, nine decoder calls traced through their wrappers and seven literals, with key material withheld](assets/03-key-fragments.png)
+
+*Figure 3. The sixteen fragments of the AES key in source order. Literal fragments and per-call keys are withheld; the hex-digit counts add up to 64.*
 
 ## Verification: authenticated decryption of all three payloads
 
@@ -196,6 +208,10 @@ The same experiment found a version boundary in the published tools:
 - webcrack, which runs the decoder in a sandbox instead of matching its shape, recovered about 98% on both.
 
 On the stratified subset, webcrack 2.16.0 recovered 98.1 percent of hidden strings from both 5.9.0 and 4.1.1 output. synchrony 2.4.6 recovered 98.2 percent from 4.1.1 and nothing from 5.9.0, reporting no decoder. obfuscator-io-deobfuscator 1.0.6 recovered 98.0 percent from 4.1.1 and nothing from 5.9.0, leaving the array in place, and timed out on 144 samples, all from one input whose self-recursive function inlining never converges. Its unreleased main branch at commit `42efc01` decodes 3.2.7, 4.1.1 and 5.0.0 output, so the published release is behind its own repository.
+
+![Bar chart of hidden strings recovered from javascript-obfuscator releases 5.9.0 and 4.1.1 by my three scanner engines and three published deobfuscators](assets/03-recall-by-release.png)
+
+*Figure 4. String recovery against ground truth by tool and obfuscator release. The two static deobfuscators recover nothing from 5.9.0, and the revised engine recovers 99.8% from both.*
 
 Each of the three tools produced an unexplained string on exactly one input, by a different mechanism: a constant `JSON.parse` rewritten to an object literal, an obfuscator identifier turned into a property name, and a constant folded to `undefined`. The last one does not change the program's behavior. I reproduced it before reporting it, and the folded value sits in an unreachable branch; the same output appears on the unobfuscated original, so there was nothing to report upstream. Writing the reproduction first, with the unobfuscated original as a control, is what caught that.
 

@@ -27,7 +27,7 @@ articles. The hosted edition is available at [krasforge.github.io/UNK_DeadDrop](
 19. [How PolinRider Uses Blockchains as an Address Book](19-polinrider-ethereum-address-book.md)
 20. [Three Resolver Wallets and Eleven Hosts](20-polinrider-wallets-and-hosts.md)
 21. [When One Assessment Reaches Nineteen Repositories](21-polinrider-repository-spread.md)
-22. [What 2,301 Affected Accounts Actually Means](22-polinrider-counting-repositories.md)
+22. [What 2,300 Affected Accounts Actually Means](22-polinrider-counting-repositories.md)
 23. [Detecting PolinRider Beyond a Filename](23-polinrider-detection.md)
 24. [Following PolinRider's Money: Gas, Bridges, Laundering and Cash-Out](24-polinrider-money.md)
 

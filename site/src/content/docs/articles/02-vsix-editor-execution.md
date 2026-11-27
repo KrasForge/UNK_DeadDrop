@@ -72,6 +72,10 @@ Namespace style is therefore not evidence of ownership: some namespaces are dres
 
 The delivery accounts differ in tradecraft. Most stage their payload in a single act and rely on turnover, with one to nine commits each. The `pridnet` repository carries 19 commits under a persona address, with author dates from 18 to 30 May and ordinary frontend messages about a navigation bar, a footer and a scroll-to-top button. The payload arrived in one commit titled `feat: add echo network page`, which added the vendor directory with its shell and command setup scripts, the cache marker files and the encrypted payloads. A rule keyed on new accounts with few commits, or on the author address, misses it.
 
+![Timeline of the 19 commits in the pridnet repository from 18 to 30 May 2026, with the workspace-settings commit and the single 16-file commit that added the kit highlighted](../assets/02-pridnet-history.png)
+
+*Figure 1. The kit arrived in one commit among nineteen ordinary-looking ones. Author dates are set by the committer and are shown as recorded.*
+
 ### Finding more copies
 
 Code search separates two kinds of marker. The campaign-specific ones, the settings keys, the extension filename and the embedded agent token, returned only the known repository and a victim's blog post, because the operator rotates them per campaign. The invariant ones, the staging script filenames, returned a third weaponized repository on an account not seen before, and its workspace settings were empty.
@@ -88,13 +92,13 @@ The repository route also reached further than these copies. The operator's mail
 
 The repository task uses `runOn: folderOpen` and points into an ordinary-looking project directory. In the weaponized copy I hold for the AI-editor lure, the same commit that adds the trigger also suppresses workspace trust. The editor's usual gate is switched off by the project it is meant to guard against. Editor trust and task permissions still gate execution where the user's own settings override that.
 
+![The tasks.json and settings.json files of the weaponized predict-together copy, with the folder-open trigger, the hidden presentation, the suppressed trust prompt and the server settings highlighted](../assets/02-folder-open-trigger.png)
+
+*Figure 2. The two workspace files that make opening the folder the whole trigger. The task hides its terminal, and the settings switch off the trust prompt and supply the server.*
+
 After installation, the extension is no longer confined to the project. The installer deletes the task and staging directories, retrying many times, so a victim who later inspects the clone finds a clean project. The extension it installed declares startup activation and runs whenever the editor finishes starting, in any workspace and indefinitely.
 
 Deleting the cloned repository therefore does not remediate the compromise. The check belongs in the extension directories of the editor and of any fork such as Cursor.
-
-![How the editor becomes an interpreter](../assets/02-vsix.png)
-
-*Figure 1. The repository installs an extension whose Windows branch invokes the editor's Electron runtime in Node mode.*
 
 ### The extension manifest
 
@@ -194,6 +198,10 @@ The defense is cheap. Setting the UAC consent policy to always notify, or keepin
 ### The extension launches the editor binary as Node
 
 The source sets `ELECTRON_RUN_AS_NODE` and invokes the editor executable with an agent-script path. `process.execPath` supplies the executable location from inside the extension. The code uses the editor binary as a Node interpreter for collection code supplied by the chain, rather than its normal startup code. MITRE ATT&CK tracks this behavior as [Electron Applications (T1218.015)](https://attack.mitre.org/techniques/T1218/015/).
+
+![Excerpt of windows-js-pipeline.js that writes a PowerShell script setting ELECTRON_RUN_AS_NODE and elevates it through the CMSTPLUA COM object, with a visible UAC fallback](../assets/02-editor-as-node.png)
+
+*Figure 3. The elevated step runs the editor's own signed binary as Node. The CMSTPLUA moniker appears in clear text, while the interface ID is built from numbers.*
 
 The rest of the chain does not even need the editor for that. Its second stage downloads its own Node.js runtime (version 20.18.1) from the attacker's store and falls back to the official distribution, so a victim needs no Node installation at all. The editor binary is reserved for the elevated step.
 

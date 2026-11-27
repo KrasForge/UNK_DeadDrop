@@ -47,10 +47,6 @@ The quieter result came from a different corpus. Serious false alarms were rare,
 
 The results and sampling details are in the [scanner paper](../../downloads/UNK-Scanner-Paper.pdf). They come from fixed runs on 29 October, using one engine on an eight-vCPU virtual server. Part 11's [YARA replay](../11-detection-engineering/) covers a different system and a different question.
 
-![Three scanner corpora with error and warning counts shown separately.](/UNK_DeadDrop/diagrams/13-benchmark-results.svg)
-
-*Figure 1. The error count stays low on popular and recent code, while most known-malicious samples receive no warning. The counts are those of the frozen engine, and they are not directly comparable because the corpus units differ.*
-
 ## Corpora: npm, Open VSX and public malware
 
 The first check covered 2,500 npm packages ranked by `npm-high-impact` and 500 Open VSX extensions ranked by downloads. That produced 143,153 distinct files. I had already used this material to tune severity. It was useful for finding noisy rules, but it could not show how the same choices would behave on other code.
@@ -96,6 +92,10 @@ The principle that keeps the alert volume low is that no single common technique
 - A recovered string array is a warning, and its detail records whether recovery succeeded, because commercial extensions obfuscate too.
 - An encrypted loader is an error, but only when embedded base64, AES-GCM authentication and decoded text passed to `Module._compile` are linked through constant bindings.
 - A plain `curl` piped into a shell behind a copy button is a warning, because installation pages do that. A hidden or encoded window, `mshta`, base64 decoding, detaching, a write inside a copy handler or verification-lure wording makes it an error.
+
+![The inert ClickFix baseline fixture with the detach, download, verification-text and copy-handler lines highlighted, and the single error finding the scanner reported](../assets/13-severity-combination.png)
+
+*Figure 1. Four individually common signals, linked through one command builder, produce the only error in this fixture.*
 
 The two error findings in the recent-package collection below are what this design costs when an ordinary program happens to combine two of those signals.
 
@@ -146,6 +146,10 @@ The retained campaign files show that the scanner recognizes the structures it w
 
 The 62 belong to the frozen engine. A controlled recovery experiment, described in [Part 14](../14-scanner-recovery-and-bypasses/), exposed an older decoder shape that the engine did not recognize. Because many obfuscated samples used that older shape, the revised engine raised warnings on 128 of the 2,122 samples, still with none at error level. A warning for recovered obfuscation says only that the file was obfuscated. The denominator includes 295 samples that contain no file the scanner reads at all, and these count as undetected.
 
+![Stacked bars for three sets of known-malicious samples showing the share warned by the frozen and revised engines, the share read without a warning and the share with no JavaScript file](../assets/13-malware-coverage.png)
+
+*Figure 2. Even the revised engine warned on only 128 of 2,122 known-malicious samples, and none reached error level. Another 295 samples held no file the scanner reads.*
+
 ### Rescans: more warnings, no new errors
 
 Each engine change was rescanned against every collection and diffed file by file against the previous results, not compared as summary counts:
@@ -169,6 +173,10 @@ I measured parser failures separately to distinguish unreadable inputs from code
 - Published packages normally also ship compiled JavaScript, which 0.2.0 does analyze, so the gap for users of the release is real but partial.
 - In the popular-software collection, the evaluated engine parsed 330,473 of 332,054 files. Of the 1,576 parse failures, most were TypeScript, and none parsed under the independent Babel configuration I tested. Compatibility with their original build toolchains remains untested.
 - Five inputs were not valid UTF-8.
+
+![Bars for JavaScript and TypeScript files in the calibration corpus split into parsed, valid but rejected, and invalid](../assets/13-parse-coverage.png)
+
+*Figure 3. Release 0.2.0 read all but 103 of 108,171 JavaScript files but rejected 31,861 of 34,982 TypeScript and JSX files, almost all of them valid source.*
 
 The reusable discipline is to check a parser's rejections with a second parser before calling them invalid input. Otherwise a report can show a clean scan over files that were never read.
 

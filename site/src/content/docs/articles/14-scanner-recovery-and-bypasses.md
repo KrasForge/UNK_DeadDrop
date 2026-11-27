@@ -47,10 +47,6 @@ An unresolved value would have been easier to trust. These strings looked recove
 
 It was one of nineteen single-change variants tested against the evaluated engine. These tests used inert copies of demonstration code and a loader fixture. They were not additional malware samples. The full results are in the [scanner paper](../../downloads/UNK-Scanner-Paper.pdf).
 
-![Recognized push and shift rotation leads to checksum evaluation; unrecognized splice rotation falls through to an incorrect zero-rotation result.](/UNK_DeadDrop/diagrams/14-rotation-failure.svg)
-
-*Figure 1. The failing variant bypassed checksum evaluation because its array mutation was not recognized. The returned strings were wrong, not unresolved.*
-
 ## Mechanism: the loader rotates its string array before decoding
 
 The extension analyzed in [Part 3](../03-acorn-deobfuscation/) hides strings behind decoder calls into an encoded array. The program reorders that array before using it. If an analyst decodes the calls against the original order, the output may still look plausible while pointing to a false module name or URL.
@@ -82,6 +78,10 @@ If the loop is recognized but the checksum cannot be solved, the scanner compare
 ### Where the `splice` fixture failed
 
 The `splice` fixture revealed a different problem. The scanner never identified its loop as rotation code, so the unresolved-checksum path never ran, and it fell through to the no-rotation case. The mistake was in the scanner's view of the code, before checksum evaluation began.
+
+![The rotation loop of the splice fixture with its two changed lines highlighted, and the findings of the frozen and hardened engines for the same file](../assets/14-splice-fixture.png)
+
+*Figure 1. Two lines changed from `push(shift())` to `splice`. The frozen engine reported 6 of 6 call sites decoded under rotation 0, while the hardened engine solved rotation 9 by the checksum.*
 
 It was not the first time. An earlier implementation missed a parameterless `for(;;)` rotation loop and decoded 22 files in commercial bundles under rotation zero, with output that looked plausible. That is where the rule came from that an array is never assumed unrotated when recognized rotation code exists. The `splice` fixture showed that the rule protects only against loops the scanner recognizes.
 
@@ -150,6 +150,10 @@ The same nineteen fixtures were run again. Eighteen now match their baseline sev
 
 Counting the fixtures handled overall, the hardened engine went from five of twenty-three to twenty-two.
 
+![Table of the nineteen single-change bypass fixtures with their outcome under the frozen, hardened and revised engines](../assets/14-fixture-outcomes.png)
+
+*Figure 2. Hardening brought eighteen of the nineteen variants back to their baseline result. The one exception fetches its command at copy time, so the file holds nothing to recover.*
+
 That figure needs its conditions beside it. I wrote the fixtures together with the fixes, so the pass records regression coverage, not robustness against an adaptive author, and twenty-two of twenty-three is not an evasion rate. The later revised engine left the fixture outcome unchanged at twenty-two, which is the point at which further single-change hardening stopped buying anything measurable.
 
 ### Corpus rescans
@@ -203,6 +207,10 @@ I scored three published deobfuscators the same way on a 1,440-sample subset. Th
 - webcrack 2.16.0, which runs the decoder in a sandbox, recovered 98.1% from both releases.
 - The two static tools, synchrony 2.4.6 and obfuscator-io-deobfuscator 1.0.6, recovered 98.2% and 98.0% from 4.1.1 output and nothing from 5.9.0.
 - Further reproductions place the boundary at release 4.2.2: both static tools decode 3.2.7 and 4.1.1 and fail from 4.2.2 onward. An unreleased commit on obfuscator-io-deobfuscator's main branch already decodes those releases.
+
+![Table of the share of hidden strings recovered by the three scanner engines and three published deobfuscators across five javascript-obfuscator releases](../assets/14-recovery-by-release.png)
+
+*Figure 3. The two static deobfuscators decode releases up to 4.1.1 and nothing from 4.2.2 onward. The earlier scanner engines failed on the older releases, and the revised engine recovered at least 99.7% on all five.*
 
 - The published obfuscator-io-deobfuscator release also timed out on 144 samples. All of them came from one input, where self-recursive function inlining never converged.
 - The two baselines I timed had medians of 290 and 1,045 milliseconds per sample.

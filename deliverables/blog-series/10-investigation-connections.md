@@ -11,7 +11,7 @@ tags:
   - "investigation"
   - "threat intelligence"
   - "evidence"
-og_image_alt: "From Three Phishing Emails to a Connected Investigation"
+og_image_alt: "Part 10 of the UNK_DeadDrop series: From Three Phishing Emails to a Connected Investigation"
 ---
 
 
@@ -78,6 +78,10 @@ Three independent artifact types place one re-provisioning day, 13 July 2026:
 - the Windows agent archive's preserved modification times show its update script and the file holding the dead-drop URL edited that day.
 
 The Go implant's `vcs.time` of 01:14:06 UTC on 21 July then falls five minutes and thirty-four seconds after the D2S message. That field is the commit time of the source revision, not a compile time ([Part 12](12-framework-and-collection-boundary.md)). Either the send was scheduled while the revision was committed, or the proximity is coincidence, and nothing I observed separates the two. On either reading build and campaign operations belong to the same workflow.
+
+![Two timelines: 13 July with three domain registrations and the dead-drop commit, and 21 and 22 July with the two lure sends seven seconds apart in clock time and the implant commit five and a half minutes after the first](assets/10-july-timing.png)
+
+*Figure 1. The 13 July re-provisioning day and the July sends. The dead-drop commit falls between two registrations, and the D2S and Category Labs messages left at the same clock time, seven seconds apart, on consecutive nights.*
 
 ## Infrastructure: resolver edits point to two July server generations
 
@@ -164,6 +168,10 @@ The privileged console address is one of several operator addresses sharing the 
 
 The GitLab account carries no name or profile, but GitLab derives its avatar identifier from a hash of the account's lowercased e-mail address, and that hash equals the one for `apollo1030109@gmail[.]com`. The same address authored hundreds of commits under the git names `0xapp123` and `0xed123`, and persona READMEs send readers to `@Tr1030109` on Telegram and `0xapp123` on Discord. I assess with high confidence that these identifiers converge on one operator identity, the TronzitVeca persona that [Part 15](15-persona-farm.md) follows through the persona farm.
 
+![The GitLab account's avatar hash beside the SHA-256 of the lowercased address apollo1030109@gmail[.]com, identical](assets/10-avatar-hash.png)
+
+*Figure 2. The dead drop's owner, read from its avatar. GitLab publishes the SHA-256 of the account's e-mail address in the avatar URL, and hashing `apollo1030109@gmail[.]com` reproduces it exactly.*
+
 The addresses split by role. The ones used for the domain registration, the lure DMARC records and the dead-drop commits return no code commits at all, while the cover-repository addresses return thousands. Outward-facing identities do not appear in commit metadata.
 
 [Genians' Operation GitPower report](https://www.genians.co.kr/en/blog/threat_intelligence/kimsuky_ai_llm) of 10 August 2026 lists `eros1030109` and `apollo1030109` among its own identities, reached through a cluster built on different malware. It also lists `170.205.30[.]227` and `170.205.29[.]83` as C2 without naming a hoster; that they sit at Advin is my own attribution. [Part 17](17-two-operations-one-ecosystem.md) weighs what that corroboration does and does not show.
@@ -181,6 +189,10 @@ To test which connections carry weight, I built a graph from the evidential link
 | PolinRider and related resolver blocks | 0 once two non-observational artifacts are removed |
 
 The persona block's minimum cut spans different evidence types: identity reuse through two operator addresses and two platform accounts, hosting through an address and a persona domain, the GitLab dead drop, and code through the console source and the leaked build path. No single record carries it. The D2S and Category Labs links are sound but have no redundancy, so one corrected observation would break each.
+
+![Rows of colored chips, one row per independent observation path: twelve for the persona block and ECHOES, two for D2S AI Trade through d2saitrade[.]ink, one for Category Labs](assets/10-observation-paths.png)
+
+*Figure 3. The independent paths behind each cluster, colored by evidence type. The persona block's twelve routes run through identities, hosting, dead drops and code; D2S and Category Labs hang on one domain each.*
 
 A missing edge is not missing evidence. These counts measure what my graph records as observations, so where a case file holds a link the graph lacks, the attribution is not necessarily weaker.
 

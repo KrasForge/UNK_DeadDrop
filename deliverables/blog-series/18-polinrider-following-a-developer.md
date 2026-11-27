@@ -11,7 +11,7 @@ tags:
   - "NullReceiver"
   - "recruitment malware"
   - "attribution"
-og_image_alt: "A copy-trading take-home assessment whose start scripts run an extra init file before the application"
+og_image_alt: "Part 18 of the UNK_DeadDrop series: Following a Developer from UNK_DeadDrop to PolinRider"
 ---
 
 I found an obfuscated Node loader in one developer's copy of a Hiring777 take-home assessment, started by an extra `init` step before the application itself. It reads its next server from the recipient field of an Ethereum transaction, and it belongs to PolinRider, an operation separate from UNK_DeadDrop.
@@ -59,7 +59,7 @@ The danger was in one modified copy and not necessarily in the assignment as a w
 - the file tree for an extensionless `init`;
 - each `package.json` for the prepended command.
 
-The result was narrower than I expected. About nineteen of those accounts belong to candidates who hold 26 matching copies between them, one of them probably unrelated. With the recruiter's two base copies that makes 28 repositories, of which exactly one carries the dropper.
+The result was narrower than I expected. Nineteen of those accounts belong to candidates who hold 26 matching copies between them. A similarly named repository on one further account is probably unrelated, and I did not count it. With the recruiter's two base copies that makes 28 repositories, of which exactly one carries the dropper.
 
 The recruiter's own copies and every other candidate copy pushed between May and October were clean. That matters in both directions when it comes to notification. The other candidates should not be told that their copies are infected. The one affected developer's exposure dates from whenever they last ran a development, build or start script after the loader entered the submission.
 
@@ -154,6 +154,10 @@ The assessment carries a chronology I cannot close:
 1. The commit that adds the loader carries an unsigned author date in early June.
 2. The Ethereum wallet the loader hard-codes received its first gas on BNB Smart Chain on 3 July.
 3. The same wallet sent its first resolver transaction on 4 September.
+
+![Timeline from May to November 2026 with four lanes: the recruiter account and its clean base copies, 23 clean candidate copies, the infected copy's commits including the 2 June loader commit and the 1 November re-push, and resolver wallet C's 3 July gas, 4 September funding and 294 beacons](assets/18-chronology.png)
+
+*Figure 1. The loader commit's self-asserted date falls 94 days before the hard-coded wallet's first beacon. The 1 November push changed nothing.*
 
 Those dates fit a dormant implant sitting in the repository with a wallet that was generated in advance and switched on later. They equally fit a commit date that is simply misleading. As [Part 4](21-polinrider-repository-spread.md) shows, this kit is written into repositories by amending existing commits whose author dates it inherits.
 

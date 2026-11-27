@@ -11,7 +11,7 @@ tags:
   - "infostealer"
   - "credentials"
   - "crypto wallets"
-og_image_alt: "Inside the Collector: Browser Credentials and Wallet Files"
+og_image_alt: "Part 4 of the UNK_DeadDrop series: Inside the Collector: Browser Credentials and Wallet Files"
 ---
 
 
@@ -34,6 +34,10 @@ These conclusions come from the recovered scripts and the limits recorded in [E0
 The Windows collection path splits across a Node agent, a coordinator and a Python browser-decryption component. Copying a browser database is one step. Recovering its encryption material and extracting usable credentials is another. MITRE ATT&CK classifies this activity as [Credentials from Web Browsers (T1555.003)](https://attack.mitre.org/techniques/T1555/003/).
 
 The Python source handles DPAPI-related key recovery and a complete bypass of the [App-Bound Encryption](https://security.googleblog.com/2024/07/improving-security-of-chrome-cookies-on.html) that Chrome has used on Windows since version 127. It unwraps the browser's key through its COM elevation service for Chrome, Edge and Brave, and falls back to the legacy path where the protection is absent.
+
+![The module docstring of detect_malware.py describing App-Bound Encryption, the browser elevation service and the advice to run from the browser install directory](assets/04-abe-docstring.png)
+
+*Figure 1. The authors documented the App-Bound Encryption bypass in their own docstring. Their fix for the path check explains why the chain places Python in Chrome's program folder.*
 
 The code is built to survive browser updates:
 
@@ -89,6 +93,10 @@ The selection rules combine extension classes rather than names:
 | Configuration on data drives (search 1) | `.json`, `.yaml`, `.yml`, `.toml`, `.ini`, `.cfg`, `.conf`, `.plist`, `.properties`, `.env` | No, up to 80 per drive or volume |
 
 *Table 1. Phase-three selection rules in the July build, unchanged in the newest stage-three build.*
+
+![The constants at the top of the stage-three collector: file size and count limits, search depths, extension sets, the credential name pattern, time budgets and the macOS top-level folders](assets/04-selection-rules.png)
+
+*Figure 2. The constants that decide what phase three takes. Extension classes do most of the work, and the name pattern only adds to them.*
 
 ### The name pattern decides less than it seems
 
@@ -146,6 +154,10 @@ I found no KDBX parser or code to recover the master password, and no artifacts 
 For selected files, the transfer code uses a default 2 MiB chunk size with up to five attempts per chunk, waiting 2, 4, 6 and 8 seconds between them. A chunk that fails all five sends the whole archive attempt into an upload loop that retries indefinitely. The loop waits the attempt number times a five-second base delay, capped at 120 seconds.
 
 The code's own comment says the standalone run does not exit until the uploads complete. The outer delay can be tuned through `OVERLORD_UPLOAD_RETRY_DELAY_MS` and `OVERLORD_UPLOAD_RETRY_DELAY_MAX_MS`. Skipping certificate validation is hard-coded on every HTTPS upload, so the implant would hand its data to any interceptor on the path.
+
+![Excerpt of the stage-three upload code showing 2 MiB chunks, disabled certificate validation, five tries per chunk and an endless retry loop that asks the dead drop for a new server](assets/04-upload-retry.png)
+
+*Figure 3. The upload code has no exit except success. On network errors it asks the dead drop for a fresh server and keeps trying.*
 
 Disconnecting the network therefore does not protect a victim, because the process persists and keeps trying. The right step is to stop the process and remove its persistence.
 

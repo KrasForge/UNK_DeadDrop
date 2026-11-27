@@ -11,7 +11,7 @@ tags:
   - "NullReceiver"
   - "infrastructure"
   - "blockchain command and control"
-og_image_alt: "Timeline of the hosts encoded by PolinRider's three Ethereum resolver wallets between July and November 2026"
+og_image_alt: "Part 20 of the UNK_DeadDrop series: Three Resolver Wallets and Eleven Hosts"
 ---
 
 I found that PolinRider's Ethereum resolver runs on three wallets that hand one pool of eleven hosts between them, in a way that only one operator would arrange. One recovered loader gave me the first wallet, and a closed enumeration over the chain gave me the other two and, by 14 November, all eleven hosts.
@@ -50,9 +50,9 @@ The closure has a precise boundary:
 
 The advisories themselves nearly produced false wallets. Forty-nine packages use the toolkit, and the seven resolver addresses I pulled from their advisories turned out to be wallet B and six transcription corruptions of it, most with an inserted digit and every one with zero on-chain activity. The wallet count stands at three. An address that resembles a known one but has never transacted is a corruption signal, so I check new advisory addresses character by character against the known set before treating them as indicators.
 
-![Bars showing, for each of the three resolver wallets, the first to last beacon to each host between July and November 2026, with beacon counts.](assets/20-polinrider-wallet-hosts.png)
+![Tick chart of every beacon of the three Ethereum resolver wallets from July to 14 November 2026, one lane per wallet and host, with beacon counts and the 14 October overlap marked](assets/20-resolver-beacons.png)
 
-*Figure 1. Hosts encoded by the three resolver wallets in 2026, by block time. Bars run from a wallet's first to last beacon to a host and do not imply continuous use.*
+*Figure 1. Every beacon of the three resolver wallets, in the lane of the host it names. Wallets B and C share hosts, and on 14 October both named `23.27.13[.]72`.*
 
 ## Hosts: the eleven addresses, by wallet
 
@@ -121,6 +121,10 @@ Everything about the beacons indicates a machine:
 
 *Table 2. Automation measures from the raw fee fields, read when wallet C stood at nonce 299.*
 
+![Histogram on a logarithmic time axis of the gaps between consecutive transactions of each resolver wallet, with a peak at 20 minutes for wallet A and at about 3 hours 20 minutes for wallets B and C](assets/20-send-gaps.png)
+
+*Figure 2. Time between consecutive transactions of each resolver wallet. The narrow peaks at 20 minutes and at about 3 hours 20 minutes are a scheduler's period.*
+
 The same four measures point the other way on the operation's money wallets, which show 58 distinct gas prices in 70 transactions and 39 in 47, variable gas limits and twelve zero-second gaps. Those read as batches started by hand.
 
 I grouped the 1,148 decoded beacons into 743 sessions, opening a new session after any gap longer than 90 minutes. The sessions spread almost evenly across the twenty-four hours of the UTC day. The densest ten consecutive hours hold 43% of them, against about 42% for a uniform clock.
@@ -156,6 +160,10 @@ I record that as shared space without evidence of shared control.
 ## Funding: what a wallet's balance says
 
 Each beacon costs gas, which turns a wallet's balance into a forecast. I divided wallet C's balance on 7 November by its mean fee per beacon and multiplied by its period, which gave about 32 more days of beacons: 0.0153 ETH bought roughly 226 further beacons at about one every 3.3 hours. The operator refunded it with 0.06 ETH on 11 November, about a month early. At the measured rate the runway after the refund is about 150 days.
+
+![Line chart of wallet C's ETH balance from 4 September to 14 November 2026, projected forward at its cost per beacon with and without the 0.06 ETH refund of 11 November](assets/20-walletc-runway.png)
+
+*Figure 3. Wallet C's balance and its projection at the measured cost per beacon. Without the refund it would have run dry in early December; after it, the runway reaches April 2027.*
 
 Where the gas comes from is more informative than how much it costs:
 

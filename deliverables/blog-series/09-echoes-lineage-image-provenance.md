@@ -12,7 +12,7 @@ tags:
   - "C2PA"
   - "image provenance"
   - "malware lineage"
-og_image_alt: "Diagram of the four retained ECHOES archive revisions"
+og_image_alt: "Part 9 of the UNK_DeadDrop series: Tracing the ECHOES Archive: Payload Lineage and Image Provenance"
 ---
 
 
@@ -45,6 +45,10 @@ The `.pdf.lnk` is not a shortcut somebody made by dragging a file. Its link flag
 
 The file is kit output and carries no host attribution, unlike the working-tree path that leaked from a Python payload elsewhere in this toolchain. What it offers a hunter is shape: a double extension with a PowerShell target, the zeroed and trackerless structure, the scheduled-task naming, a fixed set of script drops under `%AppData%`, a byte-loop stage-one cipher keyed with a nineteen-character string, keyboard-mash identifiers, and outbound `raw.githubusercontent[.]com` requests carrying two junk marker headers.
 
+![Annotated hex dump of the shortcut's 76-byte header with zeroed timestamps and file size, followed by its decoy tooltip, padded arguments, Chrome icon and PowerShell target](assets/09-lnk-header.png)
+
+*Figure 1. The ECHOES shortcut, byte by byte. Its timestamps and file size are zero, it has no target ID list, link info or tracker block, and its only target is PowerShell behind a Hangul-document tooltip and a Chrome icon.*
+
 ### The entry chain
 
 The archive holds a `.pdf.lnk` shortcut whose arguments carry an encoded first stage. The chain then runs as follows:
@@ -55,6 +59,10 @@ The archive holds a `.pdf.lnk` shortcut whose arguments carry an encoded first s
 4. It installs scheduled-task and script persistence firing at startup and hourly.
 5. It pulls two further stages from the same GitHub account using a hard-coded access token.
 6. It deletes itself.
+
+![Table working the stage-one cipher on the first nineteen numbers of the shortcut's arguments, key byte plus 103 minus cipher, giving the opening of the PowerShell second stage](assets/09-stage1-cipher.png)
+
+*Figure 2. The first stage decoded by hand. Each number is subtracted from a key byte plus 103, and the first 38 values already spell the opening of the second stage.*
 
 No sample I held before ECHOES used a shortcut file, a scheduled task, hidden-window PowerShell with the execution policy bypassed, or GitHub raw content authenticated with a hard-coded personal access token as its C2. ECHOES therefore widens the known toolkit beyond the editor-task and clipboard chains rather than repeating them.
 
@@ -92,6 +100,10 @@ I compared four archive revisions: one from 5 March, one from 17 March and two f
 The third revision changed both retrieval and persistence. The fourth retained that staging while replacing the destination and access token. The embedded tokens were not used to retrieve the final stage, and their values are withheld.
 
 A later review of the delivery repository found a fifth archive commit, made about two hours after the first with the same destination, token and decoys. It is a cosmetic re-compression that leaves the four distinct configurations standing. The accurate count is therefore five re-commits over four distinct C2 configurations: the archive and shortcut bytes differ, but the C2 account and repository, the token, the decoy images, the task tag and the stage-one cipher are all those of the first revision, and like the other early revisions it carries no VBS layer. Across the series the operator rotated through two accounts and three tokens.
+
+![Table of the five ECHOES archive commits with their C2 account, repository, token, task tag and whale.vbs persistence, changed cells shaded](assets/09-archive-revisions.png)
+
+*Figure 3. Five commits, four C2 configurations. The 5 March re-commit repeats the first configuration; the third revision brings the WORD tag and the VBS layer, and the fourth switches account and token.*
 
 ### One password, five archives
 
@@ -153,6 +165,10 @@ The orchestrator works in logged phases. It collects from AppData, Desktop, Docu
 The browser half is more capable than the earlier sample of this family. It covers DPAPI, the App-Bound bypass through the browser's own COM elevator and a relaunch under an embedded Python, and Volume Shadow Copy reads of the locked `Login Data` and `Cookies` databases. The installer elevates through UAC and by default decrypts every Chrome and Edge profile on the machine. The largest payload, about 11 MB, is not encrypted at all: it is the official embeddable CPython 3.12.8 package, matching python.org's file, so there is no backdoored interpreter to hunt.
 
 That egress is ordinary TLS to `api.github[.]com`, so blocking it by destination would also block legitimate GitHub use. The toolkit's fixed, self-identifying container format decrypts statically and is a durable detection handle. Each encrypted payload begins with the five-byte magic `PS1E1`, followed by a salt and IV and password-derived AES ciphertext, and the loader states that scheme in its own code. Volume Shadow Copy access by a process that then reads browser databases is the best behavioral detection opportunity in the toolkit.
+
+![Hex of the first 64 bytes of an encrypted toolkit payload, with the PS1E1 magic, salt and IV marked, above the loader's code that parses them](assets/09-ps1e1-header.png)
+
+*Figure 4. Every encrypted payload opens with the five bytes `PS1E1`, then a 16-byte salt and a 16-byte IV. The loader states the same layout in its own code.*
 
 A Python decryptor in the same tooling leaked the operator's working-tree path in an unsanitized docstring. Read segment by segment, it runs through a shared task root, a PowerShell tooling tree and a persona-named directory matching a dead-drop commit author. ECHOES is plausible output of that PowerShell tree. The path itself is withheld.
 

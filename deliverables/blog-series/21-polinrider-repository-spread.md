@@ -11,7 +11,7 @@ tags:
   - "repository worm"
   - "git forensics"
   - "software supply chain"
-og_image_alt: "Spread of the PolinRider kit from an infected workstation through amended and fork commits into repositories"
+og_image_alt: "Part 21 of the UNK_DeadDrop series: When One Assessment Reaches Nineteen Repositories"
 ---
 
 I found loader artifacts in nineteen of the 26 public repositories of the developer who took the Hiring777 take-home assessment. Eighteen of them had nothing to do with any recruiter, so changes written through one developer's access exposed clients and collaborators who never spoke to the recruiter.
@@ -32,6 +32,10 @@ The take-home assessment was one repository. The rest of the same developer's pu
 - Five are forks: four of open-source projects and one of an UNK_DeadDrop take-home lure.
 
 Sixteen of the nineteen, the thirteen client websites and three of the forks, carry the same kit. Seven of its files are byte-identical across all sixteen, while its fake-font payload differs between the client websites and the forks. An identical root `api.js` sits only in the client websites. It is probably a further loader, but I have not analyzed it.
+
+![Table of git blob hashes and sizes of nine kit files across thirteen client websites and three forks, with seven columns identical in every row](assets/21-kit-blobs.png)
+
+*Figure 1. Seven kit files share one blob hash in all sixteen repositories. The fake font differs between the client websites and the forks, and only the client websites carry the root `api.js`.*
 
 The other three infected repositories carry less:
 
@@ -85,6 +89,10 @@ How the kit reached each repository differs by repository type:
 
 The launcher itself is the same everywhere on the first account and matches a publicly reported variant exactly. It is a task labeled as a linting check, set to run on folder open, hidden in every way the task format allows, and running a command that works on both POSIX and Windows to execute the fake font with Node.
 
+![The launcher tasks.json of build d8d23107 with its debugger block, lint-style label, fake-font command, hiding options and folder-open trigger annotated](assets/21-launcher-annotated.png)
+
+*Figure 2. The d8d23107 launcher from the first account, read from GitHub by its blob hash. Every presentation option that could show the task is turned off.*
+
 The pattern fits an implant on the machine that writes the kit into the working copies it finds, fabricates a commit under the upstream author's identity where it needs one, and is otherwise swept into the owner's next commit, with ordinary pushes then carrying it to the platform. I infer this from the repository artifacts; I did not observe it on a machine.
 
 Victims' own public reports describe two further forms:
@@ -105,7 +113,7 @@ The take-home copy shows two reading rules at once:
 
 An unsigned commit under the owner's address is not evidence that the owner wrote it, and a re-push with unchanged hashes is not activity.
 
-For the same reason I quote no date for the compromise of the client websites. Their commit dates point to late September, but those dates come from exactly the metadata this kit forges. My records match the launcher they carry to the October build, whose pushes I place between 20 October and 4 November. Either the September dates are an artifact of forged metadata, or the websites carry an earlier build than that match suggests. Settling it would need the push dates and a per-repository inventory of launcher builds on that account.
+For the same reason I quote no date for the compromise of the client websites. Their commit dates point to late September, but those dates come from exactly the metadata this kit forges. My records match the launcher they carry to the October build, whose pushes fall between 10 October and 6 November in my 996-repository sample. Either the September dates are an artifact of forged metadata, or the websites carry an earlier build than that match suggests. Settling it would need the push dates and a per-repository inventory of launcher builds on that account.
 
 ### The fork of the UNK_DeadDrop lure
 
@@ -126,6 +134,10 @@ The executed files carry names such as `fa-solid-*`, `fa-brand-400.*` and `fa-br
 - an argument form that passes the path separately to a `node` command.
 
 The trait common to every form is an automatically triggered task, directly or through a `dependsOn` chain, that runs a file under `public/fonts/` with Node. A rule keyed to one font name or to the root path therefore ages out. For the same reason [Part 5](22-polinrider-counting-repositories.md) counts by that trait rather than by a filename.
+
+![The launcher tasks.json of build 4de8b6d6, in which a hidden folder-open task depends on a separate eslint-check task that runs a helper script](assets/21-launcher-dependson.png)
+
+*Figure 3. From build 4de8b6d6 the trigger and the command sit in two tasks joined by `dependsOn`. The working task calls a helper script, which runs the fake font.*
 
 ### Configuration launchers
 

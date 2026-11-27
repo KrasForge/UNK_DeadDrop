@@ -11,7 +11,7 @@ tags:
   - "screen capture"
   - "malware analysis"
   - "reverse engineering"
-og_image_alt: "Beyond Screenshot Strings: Reconstructing Screen Capture"
+og_image_alt: "Part 5 of the UNK_DeadDrop series: Beyond Screenshot Strings: Reconstructing Screen Capture"
 ---
 
 
@@ -66,6 +66,10 @@ The platform picture needs the dependency list and the symbol table read togethe
 
 The Linux difference points to per-platform tailoring over time. The streaming design is compiled into the July build, but whether that July build could acquire frames is not established. The operator's separate Cortex console returns screenshots of the remote browser. macOS victims are therefore best scoped as watched until shown otherwise.
 
+![Go module dependencies of the May and July Linux agents with four screen and X11 libraries removed in July, beside the capture package symbols still present in the July build](assets/05-go-capture-build.png)
+
+*Figure 1. The July Linux build dropped the X11 and screenshot libraries but kept the agent's own capture package. Its frame-comparison symbols are still there.*
+
 Diffing the July Linux build's dependency set against the public framework's own module file shows the size of the cut. The framework's WebRTC transport, audio capture, webcam capture, video encoding, screen capture, Windows pseudoconsole and desktop bus are all absent, while the operators' own SQLite driver for reading browser databases was already present in May. The July Linux agent is therefore provisioned as a credential-theft and shell tool rather than a surveillance tool. Noise reduction on Linux is a plausible motive, but that motive is my inference.
 
 A build's symbol table is also not the end of its capability. The Go agent speaks the framework's protocol, which includes a `screenshot` command and a plugin channel through which the server can stream a native library into a running agent. Any capability set read from a Go build is a floor rather than a ceiling. [Part 16](16-control-layer-after-october.md) describes the Cortex console, whose own agent I do not hold.
@@ -95,6 +99,10 @@ The installer checks for the capture files and refuses to deploy without them. I
 
 The agent then persists as a hidden scheduled task named `GoogleUpdateSupporterNode`, made to resemble a Google update component. The task runs with highest available privileges and 999 restart attempts. The same Windows Node agent also offers live remote desktop with injected mouse and keyboard input, a hidden shell and clipboard access. The feed is meant for an operator who can act on what it shows.
 
+![Excerpt of the stage-three installer that refuses to deploy without the capture module and registers the hidden GoogleUpdateSupporterNode scheduled task](assets/05-capture-install.png)
+
+*Figure 2. The installer aborts if the capture module is missing, then registers a hidden task that restarts every minute up to 999 times.*
+
 The Windows dependencies and Go symbols come from different artifacts, yet they implement the same frame-differenced design in two languages. Whether the implementations share code remains unresolved. For the Windows branch, investigators would start with the installed bundle, task action and process session to determine whether capture ran.
 
 ## Windows agent: the feed inside a hands-on-keyboard tool
@@ -114,6 +122,10 @@ The agent's command dispatcher has 39 handlers. I grouped them as follows:
 The plugin commands are refused with the message `plugins not supported in node agent`. Unlike the Go agent, the Windows agent cannot gain capability at run time through a plugin, so its bundle is the whole of what it can do.
 
 Two author-written modules carry the screen and input work. `lib/screenshot.js` captures every monitor as JPEG through `jpeg-js` and `node-screenshots`. `lib/input.js` handles only synthetic events, such as `desktop_mouse_move` and `desktop_key_down`, for injecting input during an operator-driven remote desktop session. It contains no hook and no capture, which is the code-level reason the agent has no keylogger. It also has no automatic clipboard replacement and no anti-analysis code, and its source is readable.
+
+![The stream loop in lib/desktop.js, which captures the selected monitor as JPEG, sends each frame over the WebSocket and paces itself between 150 and 800 milliseconds](assets/05-capture-loop.png)
+
+*Figure 3. The Windows agent streams the desktop until the operator stops it. The frame interval follows the quality setting.*
 
 ### Protocol: a deterministic identity and a polite session
 
@@ -152,6 +164,10 @@ The bundle's own archive metadata dates its construction. Its 24 hand-authored f
 3. 30 June: `lib/screenshot.js`;
 4. 13 July: `update-agent.js` and `lib/server-resolve.js`, which holds the dead-drop URL and was edited on the day the dead drop rotated to new servers ([Part 6](06-gitlab-dead-drop-infrastructure.md));
 5. 20 July: `package-lock.json`.
+
+![Timeline of the modification times of the 24 hand-written files in the Windows Node agent bundle from 21 June to 20 July 2026, with the dead-drop rotation and the delivery marked](assets/05-bundle-history.png)
+
+*Figure 4. The agent bundle was built over a month. Its entry point and dead-drop resolver changed on 13 July, the day the dead drop rotated.*
 
 The archive contains two test files and a macOS `.DS_Store`, so it was zipped from a working tree on macOS. The difference between its local DOS timestamps and its UTC extra fields puts the creating machine at UTC-4. The agent's core files date from 13 July, nine days before the 22 July delivery I examined. All 13 resolved URLs in its lockfile point at the public npm registry, so there is no private registry to pivot on.
 

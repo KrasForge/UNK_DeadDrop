@@ -11,7 +11,7 @@ tags:
   - "Overlord"
   - "reverse engineering"
   - "software provenance"
-og_image_alt: "Where Overlord Ends and the Collection Toolchain Begins"
+og_image_alt: "Part 12 of the UNK_DeadDrop series: Where Overlord Ends and the Collection Toolchain Begins"
 ---
 
 
@@ -70,6 +70,10 @@ The July comparison inspected selected client module and configuration files. It
 SQLite-related dependencies and wallet/browser markers were absent from the selected upstream files. Those files were not retained at a pinned revision, preventing a reproducible source diff at the time.
 
 The later diff against the framework's module file settled the question as far as dependencies can. A pure-Go SQLite driver with its four dependencies and a byte-size formatter are present in the implant and absent upstream. The framework has no SQLite dependency at all, so it cannot read a Chromium login database or a Firefox key store on its own. The operators added that driver while keeping cgo disabled, and by extension the credential and wallet layer built on it is theirs.
+
+![Dependency diff of the July Linux agent against the public Overlord client module file: shared libraries, SQLite packages only in the implant, capture libraries only upstream](assets/12-dependency-diff.png)
+
+*Figure 1. The SQLite driver and its dependencies exist only in the implant. Upstream's WebRTC, audio, webcam and screen-capture libraries are absent from this build.*
 
 ### The operator layer in the November builds
 
@@ -132,6 +136,10 @@ In the other direction, an earlier note of mine listed `/api/company-wallet/` as
 The phased JavaScript collection and the Windows Node/Python pipeline occur in separate components of the toolchain. Their functions extend the collection paths beyond the Go executable. On Windows the recovered branch does not use the Go agent at all, and stage three deletes its masquerading executable before installing the Node agent.
 
 The July JavaScript stage three shows the same split between framework and operator in its environment variables. It references thirty-nine in all: thirteen standard system variables, sixteen attacker-defined ones and ten others. Of the sixteen, thirteen are operational, covering the dead-drop resolver override, the phase-three budgets, a standalone runtime cap, upload retry delays and an output path. The other three are developer test hooks left in a production payload, and they are named `OVERLORD_LOCAL_TEST`, `OVERLORD_TEST_EP_OUT` and `OVERLORD_TEST_LOGIN_PASSWORD`, the last of which injects a login password rather than phishing it. Those three are the operators' own variables wearing the framework's prefix.
+
+![The sixteen attacker-defined environment variables of the July stage three, grouped into thirteen operational variables and three test hooks, with their prefixes marked](assets/12-env-prefixes.png)
+
+*Figure 2. Twelve of the operators' sixteen variables carry the `OVERLORD_` prefix. The prefix alone does not mark a framework variable.*
 
 The server URL, agent token and client-id seed are each compared against a build-time placeholder before use, which the builder substitutes at packaging time. The placeholder strings and the test hooks are operator-specific and survive infrastructure rotation, and together with unit tests shipped inside the Windows agent bundle they show a codebase built without release hygiene.
 

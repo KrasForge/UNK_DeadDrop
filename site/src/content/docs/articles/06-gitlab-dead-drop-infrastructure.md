@@ -56,10 +56,6 @@ The recovered JavaScript has its own hard-coded fallback, `api.domatisc[.]ink`, 
 
 The repository also contains a separate `config-alt.json` file with another pair of destination strings. Neither retained payload references it. Client use of this second file remains unknown.
 
-![Timeline of the referenced config.json changes and the separate config-alt.json file](/UNK_DeadDrop/diagrams/05-resolver.svg)
-
-*Figure 1. The referenced configuration changed in May and July. A separate file was added in June, but no retained payload references it.*
-
 The configuration history records the changing destinations. Certificate and panel observations connect one of those domains to a historical origin address. The [historical indicator reference](../../indicators/) lists every recorded resolver value, the separate unreferenced file, related lure hosts and the limits on each IP association.
 
 ### The July installer droppers used a separate mechanism
@@ -76,6 +72,10 @@ The primary file has five recorded revisions on 26 May. They begin with an initi
 4. 25 July 2026, 06:02:59 UTC, `config.json`: `api.chestsoi[.]ink` alone.
 
 Commit `c3c71d65` replaces the primary destination set left by the May revisions. The history I retained in July contains six commits to `config.json` and one to `config-alt.json`. The latter is a separately recorded resource, not an evidenced client fallback.
+
+![Every commit to the dead-drop configuration files with the host list it left, from 26 May 2026 to the successor repositories of 23 October and 3 November](../assets/06-dead-drop-commits.png)
+
+*Figure 1. Each move of the dead drop is a one-line commit. In the replacement repository, a misspelled host was corrected eleven minutes after it was written.*
 
 The fourth state came later and from my own monitoring. From 23 July a watch polled the file every two hours. It alerted at 06:30 UTC on 25 July after commit `b1a275dd35` cut the primary list down to the single host `api.chestsoi[.]ink`, which the file then named until October. Two further commits on 10 and 12 October added no host, although I did not keep their contents.
 
@@ -138,6 +138,10 @@ On 22 October 2026 the original repository became unreadable, and my watch saw i
 1. A replacement group, `drop-indexings`, was created on 23 October at 21:29 UTC. By 23:39 its project `tasks` named `api.chestsoi[.]ink`, the same host as before, about 31 hours after the first poll that found the original gone.
 2. On 3 November at 03:05 UTC the GitLab account `0xapp123` created a third repository, `up-indexings/tasks`. Its commit `dcb1f391` a minute later wrote a `config.json` naming a new command host, `api.cerysoi[.]ink`, alone. The agent builds fetched on 12 November carry that repository as their only network address.
 
+![Timeline of the hosts named by the original config.json, the unused config-alt.json and the two successor repositories, May to November 2026](../assets/06-dead-drop-timeline.png)
+
+*Figure 2. The host list each dead-drop resource named over time. Dashed lines mark outside reports and my own observations.*
+
 My watch could only notice a known path stop answering. I learned of the replacement from [SafeDep's antd-img-crop report](https://safedep.io/blog/antd-img-crop-forged-commit-overlord-stealer) and an indicator feed about fifteen days after it appeared. I learned of the third repository from [Stormshield's Trigram report](https://www.stormshield.com/news/cti-trigram-campaign/) about nine days after its creation. [Part 16](../16-control-layer-after-october/) follows the successors, the panels and the hosting after October in detail.
 
 ## Infrastructure: a July hostname linked to a reported origin
@@ -149,6 +153,10 @@ The origin association to `207.241.172[.]222` came from dated certificate and pa
 ### The panel is a lightly modified public Overlord panel
 
 The panel itself is less novel than its title suggests. I later scored a login script captured from the November command host against every public version of the Overlord framework. It shared 81 of its 82 identifiers with the framework's early-March 2026 base, so the operators run a lightly modified public panel rather than their own.
+
+![Public urlscan.io capture of the Subtensor operator sign-in page at api.cerysoi[.]ink, with the Bittensor theming annotated](../assets/06-command-host-panel.png)
+
+*Figure 3. The command host named by the third repository serves a Bittensor-themed Overlord sign-in. The capture is from 9 November 2026.*
 
 The panel adds an application-level association to the certificate evidence. Further relationships came from certificate facets, passive DNS and reverse-DNS fields. These observations came from research-service records. The origin analysis did not directly scan the server or log in. [E20](../../evidence/E20.pdf) and [E21](../../evidence/E21.pdf) record the source and limits of those historical associations.
 
@@ -189,6 +197,10 @@ Timing offered more context. Certificates for four bases were first issued on 13
 Command domains are provisioned differently from lure domains. Five of the seven `.ink` command domains for which I hold both dates received a certificate within an hour of registration, in one sitting. Nine of eleven `.xyz` lure names waited eleven to fifteen days. `chestsoi[.]ink`, registered on 13 July, is an exception: its first certificates, for `api.` and two wildcards, date from 25 July, the morning the dead drop was rotated to it.
 
 The hours differ too. Across the estate, host provisioning clusters early in the UTC day, at a median session start of 06:55 UTC, while domain purchases cluster at a median hour of 15 UTC. The command and dead-drop domains sit at a median hour of 7.5, the lure fleet at 15.0. I read this as two provisioning jobs about nine hours apart rather than one shift, and it says nothing on its own about where the operators are.
+
+![Two histograms by hour of day in UTC: 73 certificate-issuance sessions with a median start of 06:55, and 99 domain registrations split into command, lure and other domains](../assets/06-provisioning-clocks.png)
+
+*Figure 4. Hosts are set up early in the UTC day and lure domains are bought in the afternoon. The command and dead-drop domains follow the morning pattern.*
 
 On 23 July, `aazdias[.]ink` and `fallaazdis[.]ink` were registered about six minutes apart through the same registrar and privacy service, with the same Cloudflare nameserver pair. Their primary-and-fallback naming repeats the earlier `aavzx[.]ink` and `fallbaav[.]ink` arrangement. The current stores, a new dashboard host and several older lure domains also received certificates that day.
 

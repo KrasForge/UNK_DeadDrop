@@ -77,6 +77,10 @@ What came out was a small, precise program. It performs these steps:
 
 That recipient is not a wallet anyone controls. Its twenty bytes are an IPv4 address, the same four bytes again, and the twelve ASCII bytes `helloipbot!!`. The transfer that carries it has zero value and empty input, so the whole transaction exists only to write those twenty bytes into the chain.
 
+![The newest record of four PolinRider publication channels, with each recipient field split into IPv4 addresses, ports, block numbers, transaction indexes and marker bytes, and what each decodes to](../assets/19-address-field-records.png)
+
+*Figure 2. The newest record of each of four channels, as stored on chain. Each writes its data into a field that should hold an account address.*
+
 ### The second stage
 
 Having decoded the address, the loader fetches its second stage in cleartext HTTP from port 443 of that host, under a path beginning `/0x/`: `/0x/cls` and `/0x/ls`. It accepts a gzip, deflate or brotli body, or a base64 payload in a response header, and runs the result as a module inside a faked context that wires the process's input, output and `child_process` through to it, so the next stage gets an interactive shell channel. The port and the protocol are separate facts. A host listed in an indicator feed as "HTTPS on 443" would mislead anyone writing a network rule for this traffic.
@@ -120,6 +124,10 @@ I recovered the XOR keys write by write with a frequency method that scores each
 The scoring method is log-likelihood against the byte distribution of a sibling carrier's plaintext, with the printable share as the acceptance test. Every decoded loader reads the calldata as UTF-8 and XORs character by character, so builds that carry non-ASCII characters, such as the zero-width characters one obfuscator appends to renamed identifiers, cannot be solved byte-wise at all.
 
 Generations change every four to six months under a new key. Two keys ran side by side for sixteen months, which I read as a loader and a main stage shipped together.
+
+![Tick chart of the carrier's 350 data writes from February 2025 to November 2026, one lane per XOR key or encoding](../assets/19-carrier-key-generations.png)
+
+*Figure 3. Every data write of the carrier `0x9bc13553`, in the lane of the key that decrypts it. Keys 4 and 5 run side by side from June 2025 to October 2026, and keys 6 to 8 arrive in October 2026.*
 
 The operator also confirmed its own key material twice. On 7 October 2026 at 16:18:37 it wrote the literal second half of one key unencrypted, and eight minutes earlier it wrote the word `error` in clear.
 
@@ -234,6 +242,10 @@ The hand-over to `.25` took one cadence, with no period of advertising both. Out
 An Aptos account repeats a second server string, `http://23.27.20[.]186:443`, in 177 writes since July. The operator therefore keeps two publication channels on two chains at once, advertising adjacent addresses in one /24.
 
 That account, `0x96b097c3`, began as a pointer: its first fourteen writes in July match the July store `0xfee5a75b`. From 31 July it writes the same slot every time, which reversed reads as the server string followed by `260730`, a build of 30 July by the stage's own dating convention. Its eight-hourly cadence began on 11 September, broke for 13 days and 23 hours from 2 October, and produced one off-schedule write on 16 November; I can explain neither. No feed or scanning service I checked documents `23.27.20[.]186` at all, which fits a channel no victim ever reaches through a lure. Redundancy is applied to the C2 feed, not to payload addressing: the Aptos pointer channel ended on 7 October and payload addressing stayed on Ethereum.
+
+![Daily transaction counts on four TRON-branch channels from 20 June to 16 November 2026: the BNB Smart Chain carrier, the Aptos account, the signal wallet and the Ethereum pointer sender](../assets/19-four-channels.png)
+
+*Figure 4. Transactions per day on the four channels. The server channels write on a steady cadence, while the payload carrier writes in bursts, and the pointer sender starts on 6 October.*
 
 ## Links between branches: one paymaster
 

@@ -29,7 +29,6 @@ head:
 ---
 
 
-
 I found that a fake recruitment verification page copies a different command than it shows. The copied command prints the promised `VERIFY-` code to the terminal while it also attempts to install a payload.
 
 ## Key takeaways
@@ -56,10 +55,6 @@ The recovered lures use recruitment and technical-assessment themes. Their verif
 
 The command does print the promised verification result while it also attempts to install a payload. That makes the exchange more convincing than a page that asks someone to run an unexplained command, because the page and terminal appear to agree. The candidate gets the expected output to submit.
 
-![One copy action, two command effects](../assets/01-clickfix.png)
-
-*Figure 1. The copied command combines the verification output with an installation attempt.*
-
 ### Copying changes the terminal command
 
 The copy handler served by `d2saitrade[.]ink` replaces the clipboard contents in a few lines. Only line breaks have been added to this excerpt:
@@ -81,6 +76,10 @@ c.addEventListener(`copy`, e => {
 `R()` receives the phrase entered by the candidate, but that value does not appear in the command text in this bundle. The handler also runs only when text inside the command box is selected. I followed `R()` into the installation logic.
 
 A clipboard API alone is a weak signal because legitimate applications use one too. The evidence of deception is the mismatch between the displayed verification text and the generated command.
+
+![The command shown in the lure's command box beside the command it places on the clipboard, with the differing part highlighted](../assets/01-shown-vs-copied.png)
+
+*Figure 1. The November build keeps the deception in one swap: the box shows a detached `curl` POST of the nonce, while the clipboard gets the same wrapper around a download and run of `verify_m`.*
 
 ### Platform-specific wrappers
 
@@ -248,6 +247,10 @@ Reading eleven recovered site bundles beside archived and third-party captures s
 
 *Table 2. Pretexts observed on the lure platform by 12 November 2026.*
 
+![Screenshots of six lure landing pages impersonating Mantle, Amber Group, EigenCloud, Bullish and Scroll, and an invented satellite subnet](../assets/01-lure-covers.png)
+
+*Figure 2. Six covers on one kit, from public urlscan.io captures of 8 and 9 November 2026. The brands are impersonated.*
+
 The shared machinery is what makes them one thing. The fellowship, missions and subnet bundles use the same `/apply`, `/refcode/unlock`, `/refcode/consume`, `/refcode/cmd-copy` and `/track-activity` endpoints as the recruitment lures, the same `cn_ip_restricted` and `alb_verify` markers, the same `cmdline_copied` event, and the same `curl -ks … && exec bash` stage-two command fetching `verify_w` or `verify_m` from the site's own origin.
 
 Two rows of the table need their limits stated. The conference portal is a real event's name used without the organizer's process: the organizer's own invitation-letter procedure is entirely different and does not link the domain, although I cannot prove the organizer did not authorize it. What ties it to the operator is its host, which served the known launchers at `/verify_m` and `/verify_w` on 2 November. Whether any invitation code circulated is unknown.
@@ -287,6 +290,10 @@ On 12 November at 02:30 UTC, 54 of the lure domains were live, meaning registere
 *Table 3. Live lure domains by serving address, 12 November 2026.*
 
 Sixteen of the 54 had been registered on 9 or 10 November, two to three days before the check, so the fleet was still growing. About forty more were on registrar hold and 27 no longer resolved. Registration dates span 28 April to 10 November 2026, with 107 domains registered in October and 24 in November. Every one of these serving addresses belongs to the single hoster behind the whole estate, which [Part 16](../16-control-layer-after-october/) discusses.
+
+![Bar chart of daily registrations of the 142 November-generation lure domains, October to 12 November 2026, split into live and not live](../assets/01-registration-bursts.png)
+
+*Figure 3. Registrations came in three bursts, around 19 October, 26 to 29 October and 9 to 10 November.*
 
 Four names with no delegation still answered with `45.54.28[.]15`. That address belongs to DNSFilter, a DNS-filtering company, and reads as a sinkhole response, not as a new serving host. A sweep that only reads addresses would mistake it for a consolidation of the fleet, so the holder of an unexpected shared address needs checking before it is used as a pivot.
 

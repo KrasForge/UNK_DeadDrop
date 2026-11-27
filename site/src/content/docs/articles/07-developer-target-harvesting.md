@@ -107,6 +107,10 @@ The harvester works in these steps:
 
 Worker configurations partition the search. A scheduler stops the workers daily, merges and clears their results, and restarts them. The scheduler log records three workers on a Windows host between 18 and 20 April 2026, adding about 130,000 addresses in a single day, which shows how cheaply the whole list could be rebuilt. Merge code then consolidates the results into two master pools that together occupy about 12.4 MB.
 
+![Excerpt of the harvester's scheduler log from 18 to 20 April 2026, showing merge counts per worker and 129,768 new addresses in one day](../assets/07-scheduler-log.png)
+
+*Figure 1. The operators' own scheduler log. Three workers added 57,567 and 72,201 addresses to the two pools in one day.*
+
 MITRE ATT&CK classifies this reconnaissance as [gathering victim email addresses (T1589.002)](https://attack.mitre.org/techniques/T1589/002/). The SQLite relation is simple:
 
 ```text
@@ -119,15 +123,15 @@ emails
 
 The split between the pools is not a targeting decision. The merge step sorts each address by its mail domain against a fixed list of 22 domains, mostly consumer mail providers, that the code labels anti-spam. The `antispam` pool holds addresses at those providers, and the `safe` pool holds corporate and other addresses. Gmail alone accounts for 53,783 of the 62,667 addresses in the `antispam` pool. The split serves deliverability, since consumer and corporate mail filters treat bulk senders differently.
 
-![Two pools, two different counting problems](../assets/07-targeting.png)
-
-*Figure 1. The address sets are disjoint, while repository values overlap between the two pools.*
-
 ### Star ranges divided the repository search
 
 The three worker configurations each query a different band of repository star counts: `stars:101..137`, `stars:138..174` and `stars:175..210`. None specifies a language, topic, keyword or organization. The harvester therefore searches public repositories across those bands instead of selecting a particular kind of developer.
 
 Each configuration requests 10 results per page for up to 100 pages. The bands therefore cover mid-popularity repositories of about 101 to 210 stars, not widely used projects.
+
+![The three worker search queries, which select only by star range, and the list of 22 mail domains that splits the harvest into two pools](../assets/07-harvester-logic.png)
+
+*Figure 2. The harvester's entire targeting logic. Star bands choose the repositories, and a fixed list of 22 mail domains splits the addresses.*
 
 ## Counting: 142,365 distinct address strings
 
@@ -137,7 +141,8 @@ The two databases share some repository values. A SQL union counts each value on
 - 62,667 rows in the antispam pool;
 - an exact address overlap of zero between them;
 - 142,365 distinct address strings across both;
-- 27,698 distinct repository values across both.
+- 20,880 distinct repository values in the safe pool alone;
+- 27,698 distinct repository values across both, so adding the per-pool counts would overcount.
 
 The queries check address overlap and count the combined repository values:
 
@@ -175,6 +180,10 @@ A live mail panel on `yukismt[.]ink` is the console side of the same tool. I com
 - Gophish configures sending through `/api/smtp/` sending profiles, while this console uses `/api/senders`, described as business mailboxes, SMTP, limits and template pools;
 - Gophish's landing pages and credential capture, with `/api/pages/`, `/track` and `/report`, are absent, and the bundle contains no click tracking, link rewriting or redirect;
 - the front end is a single vanilla JavaScript file rather than Gophish's admin interface.
+
+![Public urlscan.io capture of the Yuki Mail sign-in page on yukismt[.]ink, subtitled SMTP campaign control](../assets/07-mail-console.png)
+
+*Figure 3. The mail console names its own job. The capture is from 12 October 2026; I saw no data behind the sign-in page.*
 
 Read from its own section headings, it is a cold-outreach mailer. It has per-sender daily limits with warnings above warmed-mailbox volumes, randomized pacing, a per-sender egress address over WireGuard, an optional reply-to address, automatic bounce removal and suppression, plain-text or HTML templates with an optional open pixel, and exportable send outcomes. I saw only its front end.
 
@@ -248,6 +257,10 @@ The creation dates show how some of the accounts were built:
 - A second persona account had been dormant since 2017, then received 68 repositories between 27 June and 1 July 2025. Three had exact byte-size matches under new names on the flagship account.
 - `pridnet` forked five real trading and LLM projects in March 2026, went quiet for 68 days, then published the weaponized assessment repository.
 - `Lyracartoon` held only its two weaponized repositories.
+
+![Creation dates of the 172 public repositories on the five operator accounts, colored by role, showing bursts in April 2024 and mid-2025 and weaponized repositories in 2026](../assets/07-portfolio-bursts.png)
+
+*Figure 4. The portfolios were filled in bursts, and the weaponized repositories came later. Repository names are left out.*
 
 ### A byte-level sweep found operator indicators only in known copies
 

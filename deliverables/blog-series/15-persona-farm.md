@@ -12,14 +12,14 @@ tags:
   - "GitHub provenance"
   - "IT-worker fraud"
   - "attribution"
-og_image_alt: "Structure of the TronzitVeca persona farm, its sub-ring and the adjacent copying clusters, with established and moderate links"
+og_image_alt: "Part 15 of the UNK_DeadDrop series: The TronzitVeca Persona Farm: Borrowed Histories and Manufactured Developers"
 ---
 
 I found that the TronzitVeca persona farm built developer reputations from other people's commits: in 110 of 130 flagged farm repositories, a commit-by-commit comparison with the upstream source verified rewritten authorship, 2,907 re-attributed commits in all. A converging chain of identifiers ties the persona to UNK_DeadDrop's dead-drop infrastructure, and forged identities from the wider farm reached real client work, including write access and a code-owner role over a client repository for ten months.
 
 ## Key takeaways
 
-- The high-star launchpad projects published under TronzitVeca are clean; the money-moving function is stubbed out behind a comment that routes interested readers to Telegram.
+- The high-star launchpad projects published under TronzitVeca are clean; the money-moving function is stubbed out behind a comment asking readers to make contact, and the repository's documents route them to Telegram.
 - One operator identity converges at high confidence from a GitLab dead-drop owner through GitHub, git author and Telegram identifiers to TronzitVeca; this is not a legal name or a single person.
 - A retained enumeration of seven owners in the RubyOnWorld layer gives 35,586 commit occurrences that predate their containing repository; I have not established that the TronzitVeca core directs this layer.
 - A direction-and-date test separated six copy victims from the farm, and twelve further candidates did not meet the standard.
@@ -27,7 +27,11 @@ I found that the TronzitVeca persona farm built developer reputations from other
 
 ## Lure: a clean portfolio that routes readers to Telegram
 
-The repositories that gave the TronzitVeca persona its standing were clean. The high-star launchpad projects published under the persona carry tidy, professional code. At the point where a launchpad would actually move money, the function is stubbed out behind a comment telling anyone interested to get in touch on Telegram.
+The repositories that gave the TronzitVeca persona its standing were clean. The high-star launchpad projects published under the persona carry tidy, professional code. At the point where a launchpad would actually move money, the function is stubbed out behind a comment asking anyone interested to make contact. The README, contributing guide and security policy all name the operator's Telegram account.
+
+![Code panel of remove_liquidity.rs from the persona's pump.fun contract, whose body is only a contact comment and a return of success](assets/15-stubbed-handler.png)
+
+*Figure 1. The liquidity-removal handler of the persona's pump.fun contract. Its body is one comment asking the reader to make contact, followed by a return of success.*
 
 I checked the public copies and found no malware in them. I did not obtain the privately supplied completion, because getting it would have meant engaging the operator to ask for it. What the repositories do establish is a mechanism: a technically convincing public portfolio that routes the readers most likely to be useful into a private conversation.
 
@@ -69,6 +73,10 @@ Decoding the real dates of every post splits the originals cleanly:
 
 The account itself was repurposed, not aged. Its identifier dates its creation to 12 July 2022. It posted a handful of NFT-giveaway retweets in August 2022 and two bare links in January 2023, then nothing for about ten months, and came back in November 2023 under a new handle as the TronzitVeca recruiter. A dormancy gap landing exactly on the persona switch fits an account acquired or handed over for the new identity; I hold that at moderate confidence, because replies were not enumerated.
 
+![Monthly post counts of the persona's X account from July 2022 to January 2026, split into own posts and retweets, with the eight recruiter posts marked](assets/15-persona-timeline.png)
+
+*Figure 2. The account's activity by month. A ten-month silence ends in November 2023 with the TronzitVeca recruiter posts.*
+
 The passively archived part of that timeline, from May 2024 to December 2025, yields no real name. Its five recruitment and agency posts drew no public replies, because respondents were sent to private channels. An earlier lure in December 2023 did draw 29 public replies.
 
 ### The "Silvio Silva" thread
@@ -79,7 +87,7 @@ They say nothing about the nationality, residence or real employer of whoever us
 
 ![Structure of the persona farm and the adjacent clusters](assets/15-persona-farm.png)
 
-*Figure 1. Identifiers converge on the TronzitVeca core. The 0x-serial sub-ring links to the core at moderate confidence, while the second laundering cluster with its shared-CV rota, the seven-owner copying layer and the marks-5 organization are drawn apart because no link to the core is established.*
+*Figure 3. Identifiers converge on the TronzitVeca core. The 0x-serial sub-ring links to the core at moderate confidence, while the second laundering cluster with its shared-CV rota, the seven-owner copying layer and the marks-5 organization are drawn apart because no link to the core is established.*
 
 ## Portfolio: nine tenths stage dressing
 
@@ -146,6 +154,10 @@ That number needs its counting rules beside it:
 - The 455 repositories are not 455 verified forgeries, because mirrors and forks legitimately preserve earlier dates.
 
 Most of it sits under the RubyOnWorld owner itself: 292 repositories, in which 34,825 of the 35,038 commits read predate their repository and 237 of 238 non-fork repositories are affected. The other six owners hold the remainder.
+
+![Scatter plot of commit author date against repository creation date for the seven-owner copying layer, with nearly all points below the creation-date diagonal](assets/15-copied-history.png)
+
+*Figure 4. Commits in the copying layer, by author date and by the creation date of the repository holding them. On 27 September 2022 alone, 21,691 occurrences dated back to 2001 arrived in repositories created that day.*
 
 The figure measures how common copying is in the examined set. I have not established that the TronzitVeca core directs this layer.
 

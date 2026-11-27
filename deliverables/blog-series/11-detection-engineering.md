@@ -10,7 +10,7 @@ tags:
   - "UNK_DeadDrop"
   - "YARA"
   - "detection engineering"
-og_image_alt: "YARA matching conditions and results from case-artifact and software-baseline scans"
+og_image_alt: "Part 11 of the UNK_DeadDrop series: Building and Testing Detections for UNK_DeadDrop"
 ---
 
 
@@ -27,6 +27,10 @@ I replayed 33 named YARA rules in 28 files against the saved investigation mater
 ## Results: the published rules and the noise review
 
 The published companion snapshot contains 33 named YARA rules in 28 files. Every rule matched at least one object in the saved investigation material, while none matched the small local software baseline.
+
+![Bar chart of matching case-object views for each of the 33 YARA rules in the 26 October replay, beside five control groups with zero rule hits](assets/11-rule-replay.png)
+
+*Figure 1. Every rule matched case material, from 20 views down to one. Views include copies and archive members, so the bars are not independent samples.*
 
 A wider noise review on the same day found that seven source rules collided with public browser-decryption research and tooling and with my own published exhibits and rendered articles. That is exactly the kind of input a rule author does not think to use as a control. I tightened the seven that day, and the revisions preserved every earlier artifact match. They are still not part of the published snapshot.
 
@@ -69,6 +73,10 @@ The rule now requires all of the following:
 - at least two wallet-collection strings.
 
 The combination matched the held Go agent. Removing the header or one required marker category gives a negative result in the inert boundary tests.
+
+![The published wallet-agent YARA rule with its ELF, framework, environment and wallet strings tied to the five-part condition](assets/11-wallet-agent-rule.png)
+
+*Figure 2. The wallet-agent rule fires only on the conjunction. The framework markers alone would also match unrelated Overlord deployments.*
 
 The earlier rule version matched a harmless fixture with the complete marker set in research prose. Requiring the ELF header at offset zero prevents that ordinary text collision. YARA does not validate the rest of the executable or determine whether the strings are reachable code, so a marker-rich ELF can still match.
 
@@ -187,6 +195,10 @@ Public family tags do not isolate this operator either. A tag sweep on 12 Novemb
 ### Counting what other engines say
 
 Antivirus ratios need the same discipline. VirusTotal showed nine detections on the Chrome App-Bound decryptor from the PredictTogether repository, but seven of the nine are one BitDefender-engine signature resold under OEM licenses, so the nine are three independent detections. Quoting the ratio as nine independent votes would overstate the evidence threefold. The label it carries names a Chrome-decryption technique another stealer family also uses, not an actor.
+
+![VirusTotal engine labels for the App-Bound decryptor: seven engines share one BitDefender signature, and ESET and Microsoft detect independently](assets/11-vt-oem.png)
+
+*Figure 3. Seven of the nine detections carry the same BitDefender signature under OEM licenses. Only three engines judged the file independently.*
 
 A crowdsourced wallet-extension rule on VirusTotal matches both this operation's stealer and another campaign's files, which looks like a shared artifact. Counting it settles the question. The rule holds 93 strings, 75 Chromium extension identifiers and 18 Firefox add-on names, and fires on any six. The decrypted stealer contains 20 of the 93 and targets 35 distinct Chromium identifiers, fifteen of them absent from the rule's list. Both operations draw on overlapping parts of a public list, so a YARA match like this is evidence of a shared target list or technique, never of a shared supplier, until the threshold and the matched strings are counted.
 

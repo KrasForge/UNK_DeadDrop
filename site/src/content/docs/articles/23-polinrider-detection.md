@@ -103,6 +103,10 @@ Beside the trigger check sits a content test that I would recommend to anyone. A
 
 The two conditions protect each other. The signature check keeps genuine fonts and images out even when some of their bytes happen to form text, and the parse check keeps ordinary text files with odd extensions out.
 
+![Table of twelve payloads under font names with size, first four bytes, the signature a genuine file of that type starts with, hash prefix and VirusTotal result](../assets/23-payload-first-bytes.png)
+
+*Figure 1. The twelve payloads I recovered from the newer launcher builds. Each begins with whitespace or JavaScript, never with a font signature.*
+
 How the test is applied matters as much as the test:
 
 - It runs over every file with a font, image, media or document extension wherever it sits, and over files with invented extensions in asset-like directories (fonts, assets, images, icons, media, static, public), skipping dependency, version-control and build directories.
@@ -117,6 +121,10 @@ The results are the reusable part:
 - On the 82 lifecycle scripts among the top 1,000 npm packages it flagged nothing.
 - The content test recognized all thirteen held loader payloads, twelve plus a control.
 - On five live repositories of the separate Miasma worm it found every launcher. The folder-open task, both agent session-start hooks and the always-applied agent rule were reported at high confidence and the npm test script at medium.
+
+![Three launcher command forms: the root inline form the earlier searches found, the nested inline form and the argument form](../assets/23-launcher-forms.png)
+
+*Figure 2. Of the 78 launchers the condition flagged, 61 used the nested inline form and 17 the argument form. My earlier string searches matched neither.*
 
 The Miasma check was an out-of-sample test. [SafeDep](https://safedep.io/inside-the-miasma-supply-chain-attack-toolkit) describes that kit as wired to run automatically through five developer tools, four of them agent or editor configurations and the fifth the npm test script. The five repositories were those still serving the kit on 7 November among the first eighteen I checked from the published list, with payloads of 4.6 MB under three hashes, and only two of the five carried a `package.json` with the test script.
 

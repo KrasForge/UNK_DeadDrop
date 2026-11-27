@@ -1,6 +1,6 @@
 ---
-title: "What 2,301 Affected Accounts Actually Means"
-description: "Five code-search passes give a floor of at least 2,301 GitHub accounts whose repositories carry PolinRider's launcher, and the differences between the passes say as much about search as about spread."
+title: "What 2,300 Affected Accounts Actually Means"
+description: "Five code-search passes give a floor of at least 2,300 GitHub accounts whose repositories carry PolinRider's launcher, and the differences between the passes say as much about search as about spread."
 lastUpdated: 2026-11-27
 published: 2026-11-26
 sidebar:
@@ -21,7 +21,7 @@ head:
   - tag: meta
     attrs:
       property: og:image:alt
-      content: "Part 22: What 2,301 Affected Accounts Actually Means"
+      content: "Part 22: What 2,300 Affected Accounts Actually Means"
   - tag: meta
     attrs:
       name: twitter:image
@@ -29,11 +29,11 @@ head:
 ---
 
 
-I ran five code-search passes between 6 and 11 November and found at least 2,301 GitHub accounts, in about 6,900 repositories, whose public repositories carry a PolinRider launcher. That is a lower bound on accounts, and the differences between the passes say as much about search as about spread.
+I ran five code-search passes between 6 and 11 November and found at least 2,300 GitHub accounts, in about 6,900 repositories, whose public repositories carry a PolinRider launcher. That is a lower bound on accounts, and the differences between the passes say as much about search as about spread.
 
 ## Key takeaways
 
-- Five passes returned 310, 537, 1,809, 1,908 and 1,862 accounts; their union, recounted from the saved lists, is at least 2,301 accounts in about 6,900 repositories.
+- Five passes returned 310, 537, 1,809, 1,908 and 1,862 accounts; their union, recounted from the saved lists, is at least 2,300 accounts in about 6,900 repositories.
 - The figure counts accounts only, not infected computers, people who ran the loader, or thefts.
 - No single pass approaches the union: code search caps results, skips forks and private repositories, and appears to collapse identical files, and the nested launcher form my first searches could not see carries 4,277 of the 5,418 repositories of the most complete pass.
 - A larger later count is not evidence of new spread, and published counts from searches with different coverage cannot be joined into a growth curve.
@@ -78,7 +78,7 @@ Before computing any figure I set aside matches whose file is not a launcher at 
 | 3 | 7 Nov | all four, size-split queries | 5,418 | 1,809 |
 | 4 | 8 Nov | all four | 5,946 | 1,908 |
 | 5 | 11 Nov | all four | 5,715 | 1,862 |
-| Union | | | about 6,900 | at least 2,301 |
+| Union | | | about 6,900 | at least 2,300 |
 
 *Table 1. The five code-search passes after defender matches were removed.*
 
@@ -91,7 +91,7 @@ Each pass differs from the one before it in a specific way, and those difference
 - **Pass 3** used six queries covering every launcher form, each split by file size so that no slice exceeded the cap. Of 5,480 candidates, 5,421 repositories in 1,809 accounts confirmed, and 5,418 remain once three defender fixtures are removed. It found 1,559 accounts that no earlier pass had returned.
 - **Passes 4 and 5** repeated the complete query set on 8 and 11 November. The fifth flagged 92 accounts in no earlier list, five of them pushed that day.
 
-The union grew with the queries rather than with the campaign: at least 310 accounts after the first day, at least 590 after the overnight run, at least 2,204 after the third pass and at least 2,301 after all five. The first figure was a true floor, but once every launcher form was searched it had understated the population by a factor of seven.
+The union grew with the queries rather than with the campaign: at least 310 accounts after the first day, at least 590 after the overnight run, at least 2,204 after the third pass and at least 2,300 after all five. Those running figures were taken during the searches. The saved helper-script list holds 68 of the 70 accounts that search returned, with rate-limit error responses written in place of results, so unions recounted from the saved lists run two lower at each stage, at 308, 588 and 2,202. The final 2,300 is that recount. The first figure was a true floor, but once every launcher form was searched it had understated the population by a factor of seven.
 
 Pass 3 also shows where the population sits:
 
@@ -150,15 +150,19 @@ It is tempting to draw a line through those points and my November floor and cal
 
 Counting the launcher files themselves raises a parallel trap. A 67-repository sample first suggested eleven distinct launcher builds, identified by the git hash of the task file. The 996-repository sample of 6 November contained thirty, with all eleven earlier builds reappearing and nineteen new. My first reading, a rotation on a roughly two-week clock, did not survive the larger sample. New builds were first pushed every one to three weeks, on 2, 23 and 26 September, 10 October, 14 October for three builds, 15 and 23 October and 4 November, while older builds stayed in circulation. Up to ten large builds had victims pushing in the same weeks, so the kit is extended with parallel variants rather than replaced on a cycle.
 
+![Dot chart of last-push dates for the eleven launcher builds with at least 40 repositories in the 6 November sample, showing builds active in overlapping windows from September to November 2026](../assets/22-build-windows.png)
+
+*Figure 1. Push windows of the eleven large builds in the 996-repository sample of 6 November. Older builds kept being pushed while newer ones appeared.*
+
 | Build | Push window | Note |
 |---|---|---|
-| `5e226620` | from 31 May 2026 | the long-running workhorse |
+| `5e226620` | 26 March to 4 November 2026 | the long-running workhorse |
 | `5b08e3cd` | September 2026 | still carries resolver wallet B |
-| `d8d23107` | 20 October to 4 November 2026 | the build of my analyzed loader |
-| `4de8b6d6` | live from 5 November 2026 | first build with the helper scripts |
+| `d8d23107` | 10 October to 6 November 2026 | the build of my analyzed loader |
+| `4de8b6d6` | from 4 November 2026 | first build with the helper scripts |
 | `dc23e7fe` | appeared 6 November 2026 | current at the time of the passes |
 
-*Table 3. Selected launcher builds and their push windows.*
+*Table 3. Selected launcher builds and their push windows in the 996-repository sample of 6 November, which ends that day.*
 
 Each build pairs with its own fake-font filename, and the naming walked from `400.woff2` through `500.woff2` and `900.eot` to `700.otf`. A push date is a repository's last push, so a repository pushed again later stretches its build's window, but the overlap is too wide to be explained that way.
 
@@ -184,6 +188,10 @@ One more number from this case looks like a victim count and is not. On 3 Novemb
 
 The timing comes first. Counting Ethereum only, 1,342 distinct wallets were emptied into the resolver side's collection wallet and its sweep hub. They arrived at between one and forty-four a week from 3 September 2026 and then 1,229 in calendar week 45. Of those, 1,161 came between 05:00 and 06:59 UTC on 3 November, 160 in the first hour and 1,001 in the second. Launcher pushes, meanwhile, rose gradually over the autumn, as the growth section shows.
 
+![Two weekly bar charts from late July to November 2026: launcher repositories by week of last push rise from a few a week to about 200, while wallets swept into the collection wallet and hub stay near zero until 1,229 in the week of 2 November](../assets/22-pushes-vs-sweeps.png)
+
+*Figure 2. Launcher pushes and wallet sweeps by calendar week. The sweeps arrive as one batch, not along the spread.*
+
 The wallets themselves point to a single owner:
 
 | Trait | Observation |
@@ -201,7 +209,7 @@ That is one script farming airdrops across a whole set of wallets, whose keys mo
 
 ## Conclusion
 
-Wallet keys, repository accounts and infected machines are three different populations, and only the second can be counted from outside. I therefore report at least 2,301 accounts as a floor with its definition attached, not as a victim count or a growth rate.
+Wallet keys, repository accounts and infected machines are three different populations, and only the second can be counted from outside. I therefore report at least 2,300 accounts as a floor with its definition attached, not as a victim count or a growth rate.
 
 For anyone measuring a campaign like this, the lesson is to count by behavior, keep the definition stable, retain timestamps and take the union of differently shaped queries. A single capped search samples the index, not the population.
 
