@@ -37,10 +37,6 @@ Their links led to clipboard manipulation and editor-extension delivery routes. 
 
 Some connections are direct code references. The copy handler calls a command builder, the editor task invokes an installer, and sender configuration separately names the database files. Other relationships rely on historical infrastructure observations or compatible functions in separately recovered software. No endpoint or backend record reconstructs a complete infection and collection sequence.
 
-![Connections need named relationships](assets/10-evidence-map.png)
-
-*Figure 1. Code references, configuration values and historical observations connect the recovered components.*
-
 ## Delivery: a copy handler, an editor task, and a passworded archive
 
 ### The browser route

@@ -42,10 +42,6 @@ The recovered lures use recruitment and technical-assessment themes. Their verif
 
 The command does print the promised verification result while it also attempts to install a payload. That makes the exchange more convincing than a page that asks someone to run an unexplained command, because the page and terminal appear to agree. The candidate gets the expected output to submit.
 
-![One copy action, two command effects](assets/01-clickfix.png)
-
-*Figure 1. The copied command combines the verification output with an installation attempt.*
-
 ### Copying changes the terminal command
 
 The copy handler served by `d2saitrade[.]ink` replaces the clipboard contents in a few lines. Only line breaks have been added to this excerpt:

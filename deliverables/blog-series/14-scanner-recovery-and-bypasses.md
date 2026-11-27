@@ -32,10 +32,6 @@ An unresolved value would have been easier to trust. These strings looked recove
 
 It was one of nineteen single-change variants tested against the evaluated engine. These tests used inert copies of demonstration code and a loader fixture. They were not additional malware samples. The full results are in the [scanner paper](../scanner-paper/UNK-Scanner-Paper.pdf).
 
-![Recognized push and shift rotation leads to checksum evaluation; unrecognized splice rotation falls through to an incorrect zero-rotation result.](assets/14-rotation-failure.svg)
-
-*Figure 1. The failing variant bypassed checksum evaluation because its array mutation was not recognized. The returned strings were wrong, not unresolved.*
-
 ## Mechanism: the loader rotates its string array before decoding
 
 The extension analyzed in [Part 3](03-acorn-deobfuscation.md) hides strings behind decoder calls into an encoded array. The program reorders that array before using it. If an analyst decodes the calls against the original order, the output may still look plausible while pointing to a false module name or URL.

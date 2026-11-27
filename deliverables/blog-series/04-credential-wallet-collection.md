@@ -60,10 +60,6 @@ On macOS and Linux the Go agents carry the same capability in two operator packa
 
 Wallet selectors extend the scope beyond browser stores. The operator's list holds thirty-five browser wallet-extension identifiers, among them MetaMask, Phantom, Backpack, Solflare, TronLink and Enkrypt. Part 8 examines corresponding mnemonic and ColdKey fields in the administration frontend.
 
-![A selected file is only the first step](assets/04-collection.png)
-
-*Figure 1. Filename selection, file access, decryption and upload form separate stages of collection.*
-
 ## Files: phase 3 sweeps the user's folders
 
 ### Three searches in turn

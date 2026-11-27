@@ -73,10 +73,6 @@ I also checked the infection route. None of the 47 packages of the campaign's ma
 
 This pattern changed the scope of the investigation. A recruitment lure exposes one developer, but changes written through that developer's access can expose clients and collaborators. I leave the developer, the clients and the upstream projects unnamed here; their repositories are evidence of exposure, not of anything they did.
 
-![Diagram of the spread from an infected workstation into local working copies, through amended commits, fork commits and forged merge commits, into repositories on the hosting platform and a population floor from code search.](assets/21-polinrider-propagation.png)
-
-*Figure 1. Spread of the kit from one workstation into repositories. Solid boxes are observed in repositories; dashed ones are reported by victims or inferred.*
-
 ## Mechanism: commits that keep someone else's name
 
 The way the kit is written into repositories is what makes it hard to see. In every victim I examined, the injecting commits carry real contributors' names, messages and timestamps. The payload is added to an existing commit, which is amended in place with its author, date and message unchanged and then force-pushed.

@@ -104,10 +104,6 @@ emails
 
 The split between the pools is not a targeting decision. The merge step sorts each address by its mail domain against a fixed list of 22 domains, mostly consumer mail providers, that the code labels anti-spam. The `antispam` pool holds addresses at those providers, and the `safe` pool holds corporate and other addresses. Gmail alone accounts for 53,783 of the 62,667 addresses in the `antispam` pool. The split serves deliverability, since consumer and corporate mail filters treat bulk senders differently.
 
-![Two pools, two different counting problems](assets/07-targeting.png)
-
-*Figure 1. The address sets are disjoint, while repository values overlap between the two pools.*
-
 ### Star ranges divided the repository search
 
 The three worker configurations each query a different band of repository star counts: `stars:101..137`, `stars:138..174` and `stars:175..210`. None specifies a language, topic, keyword or organization. The harvester therefore searches public repositories across those bands instead of selecting a particular kind of developer.
@@ -122,7 +118,8 @@ The two databases share some repository values. A SQL union counts each value on
 - 62,667 rows in the antispam pool;
 - an exact address overlap of zero between them;
 - 142,365 distinct address strings across both;
-- 27,698 distinct repository values across both.
+- 20,880 distinct repository values in the safe pool alone;
+- 27,698 distinct repository values across both, so adding the per-pool counts would overcount.
 
 The queries check address overlap and count the combined repository values:
 

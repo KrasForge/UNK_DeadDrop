@@ -77,10 +77,6 @@ console.log(fn.type, returned.argument.type);
 
 I reconstructed the wrappers' index and key transformations from their syntax trees, then implemented those transformations separately. The extension was never imported or executed.
 
-![From obfuscated syntax to authenticated files](assets/03-deobfuscation.png)
-
-*Figure 1. Wrapper mapping and string-table recovery supply the key fragments; GCM authentication checks the reconstructed key against the payloads.*
-
 ### Choosing the string-table rotation
 
 The string array had been rotated, so a valid-looking index could point to the wrong encoded element until the array order was resolved. Searching from one expected `crypt` anchor yielded five plausible rotations. Comparing each rotation against all resolved call sites narrowed the candidates.

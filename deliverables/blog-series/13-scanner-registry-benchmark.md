@@ -32,10 +32,6 @@ The quieter result came from a different corpus. Serious false alarms were rare,
 
 The results and sampling details are in the [scanner paper](../scanner-paper/UNK-Scanner-Paper.pdf). They come from fixed runs on 29 October, using one engine on an eight-vCPU virtual server. Part 11's [YARA replay](11-detection-engineering.md) covers a different system and a different question.
 
-![Three scanner corpora with error and warning counts shown separately.](assets/13-benchmark-results.svg)
-
-*Figure 1. The error count stays low on popular and recent code, while most known-malicious samples receive no warning. The counts are those of the frozen engine, and they are not directly comparable because the corpus units differ.*
-
 ## Corpora: npm, Open VSX and public malware
 
 The first check covered 2,500 npm packages ranked by `npm-high-impact` and 500 Open VSX extensions ranked by downloads. That produced 143,153 distinct files. I had already used this material to tune severity. It was useful for finding noisy rules, but it could not show how the same choices would behave on other code.

@@ -74,10 +74,6 @@ The earlier rule version matched a harmless fixture with the complete marker set
 
 A file signature identifies matching content. Execution and data transfer require host evidence; operator attribution requires a separate investigation.
 
-![YARA conditions and validation results](assets/11-detection-logic.svg)
-
-*Figure 1. Every wallet-agent condition is required. The retained rules matched case artifacts, while the local software baseline and marker-rich prose fixture had no hits.*
-
 ## Markers: six obvious ones that do not work
 
 Six markers that look like natural detections for this operation fail on inspection:

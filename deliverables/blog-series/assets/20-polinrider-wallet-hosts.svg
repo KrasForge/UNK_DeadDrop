@@ -75,7 +75,7 @@
 			<text x="431.94117647058823" y="32.5" style="font-family: 'Liberation Serif'; font-style: italic; font-size: 6.5px;fill: rgb(30%,35%,40%); stroke:none;" transform="translate(0,65) scale(1,-1)">active</text>
 			<path d="M 354.794118,30 L 354.794118,217 Z" style="stroke: rgb(65%,27%,24%); stroke-linecap: butt; stroke-width: 0.8; stroke-dasharray: 4, 3;"/>
 			<text x="332.93718405330884" y="33" style="font-family: 'Liberation Serif'; font-size: 7px;fill: rgb(65%,27%,24%); stroke:none;" transform="translate(0,66) scale(1,-1)">14 Oct</text>
-			<text x="4" y="16" style="font-family: 'Liberation Serif'; font-size: 7.2px;fill: rgb(30%,35%,40%); stroke:none;" transform="translate(0,32) scale(1,-1)">Bars: first to last beacon of a wallet to a host; number: beacons. Dashed outline: the wallet's activity window (Table 3).</text>
+			<text x="4" y="16" style="font-family: 'Liberation Serif'; font-size: 7.2px;fill: rgb(30%,35%,40%); stroke:none;" transform="translate(0,32) scale(1,-1)">Bars: first to last beacon of a wallet to a host; number: beacons. Dashed outline: the wallet's activity window.</text>
 			<text x="4" y="6" style="font-family: 'Liberation Serif'; font-size: 7.2px;fill: rgb(30%,35%,40%); stroke:none;" transform="translate(0,12) scale(1,-1)">Wallet A's setup-day placeholder pairs are not shown.</text>
 		</g>
 	</g>

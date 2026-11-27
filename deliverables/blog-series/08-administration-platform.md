@@ -47,10 +47,6 @@ The recovered application calls itself `rms-platform`. Its client contains:
 
 The source references `/api/github-jobs-check/`, `/api/db/...` and `/api/admin/wallets/{refresh,preview,claim,claim-all}/`. These are strings in the client, not observed requests. The related [historical indicator reference](historical-indicators.md) records the exact route forms. The [evidence index](artifact-reference.md) lists hashes for the recovered modules and related samples, while the retained client excerpts are in [E06](../preprint/evidence/E06.pdf) and [E09](../preprint/evidence/E09.pdf).
 
-![What the recovered client makes visible](assets/06-administration.png)
-
-*Figure 1. The recovered frontend connects mail views, repository monitoring and wallet-management controls.*
-
 ## Delivery monitoring: a view of repository availability
 
 One view tracks repositories by `clone_url`, displays availability labels and offers refresh controls through `/api/github-jobs-check/`. The feature fits the delivery history, since repositories can disappear, move or be replaced. A status view could help monitor locations used to distribute lures or payloads. No backend event history was recovered to show whether a repository suspension triggered an alert or a replacement.

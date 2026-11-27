@@ -61,10 +61,6 @@ The field is still useful for timing. Its value of 01:14:06 UTC on 21 July falls
 
 The earlier May agents tell the same story from the build side. Their cgo settings point to an Apple Silicon build host, and about seventy seconds pass from source commit to finished extension, as [Part 2](02-vsix-editor-execution.md) sets out.
 
-![Overlord framework and collection components](assets/12-framework-boundary.png)
-
-*Figure 1. The agent combines Overlord framework markers with browser, wallet and capture-related components.*
-
 ## Boundary: what upstream has and what the operators added
 
 ### The upstream files shared generic framework features

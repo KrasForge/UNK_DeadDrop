@@ -107,10 +107,6 @@ I compared the series against every RAR signature in the repository captures I r
 
 All members record Windows as the host operating system and all file-encryption records use the same key-derivation work factor, with a distinct salt per archive. Those are packaging observations rather than author identities. Shared metadata does not attribute common authorship, and distinct salts are expected.
 
-![Four retained ECHOES archive revisions](assets/07-echoes.png)
-
-*Figure 1. ECHOES changed retrieval destinations across four revisions and added a VBS persistence layer in the third.*
-
 ### The kit is reused with other lures
 
 The kit was not unique to this lure. [FortiGuard Labs had documented the same LNK and GitHub chain](https://www.fortinet.com/blog/threat-research/dprk-related-campaigns-with-lnk-and-github-c2) on 2 April 2026 with Korean business lures in place of the animation pitch. FortiGuard named one of the C2 accounts in my record among its own, so the operator varies the lure while reusing the toolchain.

@@ -56,10 +56,6 @@ capture.copyPrev          capture.frameFPS
 
 MITRE ATT&CK groups screen acquisition under [Screen Capture (T1113)](https://attack.mitre.org/techniques/T1113/). Block dimensions and loop frequency remain unmeasured, as does code reachability on a particular host. A Linux process needs access to a usable display session and sufficient permissions before a capture routine can acquire an image.
 
-![Why these symbols suggest repeated capture](assets/05-screen-capture.png)
-
-*Figure 1. Previous-frame storage and block comparison suggest transmission of changed regions between captures.*
-
 ### Platform differences across builds
 
 The platform picture needs the dependency list and the symbol table read together, because they measure different things. I found these differences between builds:

@@ -78,10 +78,6 @@ After installation, the extension is no longer confined to the project. The inst
 
 Deleting the cloned repository therefore does not remediate the compromise. The check belongs in the extension directories of the editor and of any fork such as Cursor.
 
-![How the editor becomes an interpreter](assets/02-vsix.png)
-
-*Figure 1. The repository installs an extension whose Windows branch invokes the editor's Electron runtime in Node mode.*
-
 ### The extension manifest
 
 The extension manifest contains these fields:

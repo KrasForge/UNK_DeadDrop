@@ -61,7 +61,6 @@
 			<text x="181.122802734375" y="106" style="font-family: 'Liberation Serif'; font-weight: bold; font-size: 9px;fill: rgb(14%,20%,25%); stroke:none;" transform="translate(0,212) scale(1,-1)">TRON-branch C2</text>
 			<text x="174.353515625" y="93.0" style="font-family: 'Liberation Serif'; font-size: 8px;fill: rgb(14%,20%,25%); stroke:none;" transform="translate(0,186) scale(1,-1)">eleven advertised records,</text>
 			<text x="179.0" y="82.5" style="font-family: 'Liberation Serif'; font-size: 8px;fill: rgb(14%,20%,25%); stroke:none;" transform="translate(0,165) scale(1,-1)">16 Sep to 16 Nov 2026</text>
-			<text x="201.23046875" y="72.0" style="font-family: 'Liberation Serif'; font-size: 8px;fill: rgb(14%,20%,25%); stroke:none;" transform="translate(0,144) scale(1,-1)">(Table 1)</text>
 			<polyline points="280 280, 288 280, 288 93, 280 93" style="stroke: rgb(14%,20%,25%); stroke-linecap: butt; stroke-width: 0.85; fill: none; fill-rule: evenodd;"/>
 			<polygon points="280 93, 285 95, 285 91" style="stroke: none; stroke-linecap: butt; stroke-width: 1; fill: rgb(14%,20%,25%); fill-rule: evenodd;"/>
 			<polyline points="216 152, 216 120" style="stroke: rgb(14%,20%,25%); stroke-linecap: butt; stroke-width: 0.85; fill: none; fill-rule: evenodd;"/>
@@ -86,7 +85,7 @@
 			<rect x="296" y="104" width="151" height="48" style="stroke: rgb(14%,20%,25%); stroke-linecap: butt; stroke-width: 0.7; fill: rgb(96%,96%,97%); fill-rule: evenodd;"/>
 			<text x="329.007080078125" y="138" style="font-family: 'Liberation Serif'; font-weight: bold; font-size: 9px;fill: rgb(14%,20%,25%); stroke:none;" transform="translate(0,276) scale(1,-1)">NullReceiver C2 hosts</text>
 			<text x="328.83984375" y="125.0" style="font-family: 'Liberation Serif'; font-size: 8px;fill: rgb(14%,20%,25%); stroke:none;" transform="translate(0,250) scale(1,-1)">eleven: nine in AS149440,</text>
-			<text x="327.505859375" y="114.5" style="font-family: 'Liberation Serif'; font-size: 8px;fill: rgb(14%,20%,25%); stroke:none;" transform="translate(0,229) scale(1,-1)">two in AS399486 (Table 4)</text>
+			<text x="342.998" y="114.5" style="font-family: 'Liberation Serif'; font-size: 8px;fill: rgb(14%,20%,25%); stroke:none;" transform="translate(0,229) scale(1,-1)">two in AS399486</text>
 			<rect x="296" y="32" width="151" height="48" style="stroke: rgb(14%,20%,25%); stroke-linecap: butt; stroke-width: 0.7; fill: rgb(96%,96%,97%); fill-rule: evenodd;"/>
 			<text x="346.875244140625" y="66" style="font-family: 'Liberation Serif'; font-weight: bold; font-size: 9px;fill: rgb(14%,20%,25%); stroke:none;" transform="translate(0,132) scale(1,-1)">Second stage</text>
 			<text x="337.95703125" y="53.0" style="font-family: 'Liberation Serif'; font-size: 8px;fill: rgb(14%,20%,25%); stroke:none;" transform="translate(0,106) scale(1,-1)">cleartext HTTP from</text>

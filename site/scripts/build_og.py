@@ -2,8 +2,8 @@
 """Draw the link-preview thumbnails: one per article, one for the home page, and the
 GitHub social preview for unk-scanner.
 
-Cards use the palette of the article diagrams (public/diagrams/*.svg) and show each
-article's own diagram, so a shared link previews the article's central figure.
+Cards use the palette of the article diagrams (public/diagrams/*.svg) and show the
+article's figure where it has one; articles without a figure get a text card.
 Output: public/og/home.png and public/og/NN.png (1200x630), and
 public/og/github-unk-scanner.png (1280x640, uploaded by hand in the repository settings).
 
@@ -23,15 +23,9 @@ OUT = SITE / 'public/og'
 BG, PANEL, LINE = '#ffffff', '#f4f6f4', '#b9c8be'
 TEXT, MUTED, GREEN = '#202a26', '#53615a', '#17634f'
 FONTS = '/usr/share/fonts/liberation-sans-fonts/LiberationSans-{}.ttf'
-# Each article's own figure; Parts 6, 11, 13 and 14 reference theirs from public/diagrams.
-DIAGRAMS = {'01': '01-clickfix', '02': '02-vsix', '03': '03-deobfuscation', '04': '04-collection',
-            '05': '05-screen-capture', '06': '05-resolver', '07': '07-targeting', '08': '06-administration',
-            '09': '07-echoes', '10': '10-evidence-map', '11': '11-detection-logic', '12': '12-framework-boundary',
-            '13': '13-benchmark-results', '14': '14-rotation-failure',
-            '15': '15-persona-farm', '16': '16-dead-drop-successors', '17': '17-separation-map',
-            '18': '19-polinrider-resolvers', '19': '19-polinrider-resolvers', '20': '20-polinrider-wallet-hosts',
-            '21': '21-polinrider-propagation', '22': '21-polinrider-propagation', '23': '21-polinrider-propagation',
-            '24': '24-polinrider-money'}
+# Only articles that carry a figure show it on their card; the others get a text card.
+DIAGRAMS = {'15': '15-persona-farm', '16': '16-dead-drop-successors', '17': '17-separation-map',
+            '19': '19-polinrider-resolvers', '20': '20-polinrider-wallet-hosts', '24': '24-polinrider-money'}
 
 
 def wrap(s, size, width, bold=True):
@@ -86,6 +80,27 @@ def card(width, height, label, title, tagline, footer, diagram, split=530):
     return f'<svg xmlns="http://www.w3.org/2000/svg" width="{width}" height="{height}" viewBox="0 0 {width} {height}">{b}</svg>'
 
 
+def text_card(width, height, label, title, tagline, footer):
+    """Full-width text card for articles without a figure."""
+    b = f'<rect width="{width}" height="{height}" fill="{BG}"/><rect width="{width}" height="10" fill="{GREEN}"/>'
+    b += text(60, 92, label, 26, GREEN, 700)
+    size = 64
+    lines = wrap(title, size, width - 120)
+    while len(lines) > 3:
+        size -= 4
+        lines = wrap(title, size, width - 120)
+    y = 190
+    for line in lines:
+        b += text(60, y, line, size, TEXT, 700)
+        y += int(size * 1.18)
+    for line in wrap(tagline, 28, width - 160, bold=False)[:4]:
+        b += text(60, y + 24, line, 28, MUTED)
+        y += 38
+    b += f'<rect x="60" y="{height - 98}" width="{width - 120}" height="1.5" fill="{LINE}"/>'
+    b += text(60, height - 54, footer, 22, MUTED)
+    return f'<svg xmlns="http://www.w3.org/2000/svg" width="{width}" height="{height}" viewBox="0 0 {width} {height}">{b}</svg>'
+
+
 def render(svg, png):
     tmp = png.with_suffix('.svg')
     tmp.write_text(svg)
@@ -108,11 +123,14 @@ if __name__ == '__main__':
         title, description = front_matter(path)
         n = int(part)
         label = f'PolinRider · Part {n - 17} of 7' if n >= 18 else f'UNK_DeadDrop · Part {n} of 17'
-        render(card(1200, 630, label, title, '', footer,
-                    SITE / f'public/diagrams/{DIAGRAMS[part]}.png'), OUT / f'{part}.png')
+        if part in DIAGRAMS:
+            svg = card(1200, 630, label, title, '', footer, SITE / f'public/diagrams/{DIAGRAMS[part]}.png')
+        else:
+            svg = text_card(1200, 630, label, title, description, footer)
+        render(svg, OUT / f'{part}.png')
     render(card(1200, 630, 'Twenty-four-part technical series', 'UNK_DeadDrop',
                 'Fake job interviews that reach developer machines, reconstructed from the artifacts without running a sample.',
-                footer, SITE / 'public/diagrams/10-evidence-map.png'), OUT / 'home.png')
+                footer, SITE / 'public/diagrams/17-separation-map.png'), OUT / 'home.png')
     render(card(1280, 640, 'Open-source static scanner', 'unk-scanner',
                 'Parse-only triage of malicious JavaScript and VS Code extensions. Recovers obfuscated strings without running them.',
                 'github.com/KrasForge/unk-scanner', SITE / 'public/diagrams/14-rotation-failure.png', split=560),

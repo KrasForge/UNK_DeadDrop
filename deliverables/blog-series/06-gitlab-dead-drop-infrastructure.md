@@ -42,10 +42,6 @@ The recovered JavaScript has its own hard-coded fallback, `api.domatisc[.]ink`, 
 
 The repository also contains a separate `config-alt.json` file with another pair of destination strings. Neither retained payload references it. Client use of this second file remains unknown.
 
-![Timeline of the referenced config.json changes and the separate config-alt.json file](assets/05-resolver.svg)
-
-*Figure 1. The referenced configuration changed in May and July. A separate file was added in June, but no retained payload references it.*
-
 The configuration history records the changing destinations. Certificate and panel observations connect one of those domains to a historical origin address. The [historical indicator reference](historical-indicators.md) lists every recorded resolver value, the separate unreferenced file, related lure hosts and the limits on each IP association.
 
 ### The July installer droppers used a separate mechanism
