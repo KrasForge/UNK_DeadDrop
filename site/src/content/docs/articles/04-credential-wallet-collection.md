@@ -1,7 +1,7 @@
 ---
 title: "Inside the Collector: Browser Credentials and Wallet Files"
 description: "How the collector defeats Chrome's App-Bound Encryption, sweeps the user's folders for wallet material and recovery files, and what limits its reach."
-lastUpdated: 2026-11-26
+lastUpdated: 2026-11-27
 published: 2026-10-25
 sidebar:
   order: 4
@@ -53,16 +53,19 @@ The Python source handles DPAPI-related key recovery and a complete bypass of th
 The code is built to survive browser updates:
 
 - It carries identifiers for two generations of the elevation interface.
-- It has a second invocation path that avoids calling the decrypt method by name.
-- The newest stage-three build I hold adds thirty-six functions to the July build's 304, covering master-key derivation, extraction of keys from browser memory, decryption under the system account and copying of SQLite databases with their sidecar files.
+- It hardcodes per-browser elevator class and interface identifiers, and enumerates the identifier for one of the three browsers instead of assuming it.
+- It has a second invocation path that avoids calling the decrypt method by name. When the scripted call fails, it creates the object through the COM elevation moniker and calls directly through the interface's virtual-table slot, which also makes it harder to hook.
+- The newest stage-three build I hold adds thirty-six functions to the July build's 304, covering master-key derivation, extraction of keys from browser memory, decryption under the system account and copying of SQLite databases with their sidecar files. It also adds more Firefox master-key extraction and a macOS login script that re-downloads a stage from a lure host. That host was on registrar hold and did not resolve when I checked, so that leg was dead for the moment.
 
-An advisory that says only that this malware steals saved passwords leads defenders to assume, wrongly, that an up-to-date Chrome protects them.
+The July component alone makes 284 references to the mechanism. An advisory that says only that this malware steals saved passwords leads defenders to assume, wrongly, that an up-to-date Chrome protects them.
 
 ### A Python runtime inside Chrome's program folder
 
 The bypass has to satisfy the browser's check on the calling binary's path. That explains the pipeline's elevation attempts and one placement that is as useful to a defender as the bypass itself. The chain plants an embedded Python interpreter and a stock cryptography library inside Chrome's own program folder and leaves a standalone-agent log behind.
 
 Python site-packages under Chrome's installation directory are hard to explain innocently. The interpreter and library are unmodified official builds whose hashes match every legitimate copy. The malicious content is confined to the scripts beside them, and a hunt for a trojanized runtime looks in the wrong place.
+
+The same holds for indicators. The `chrome_decrypt_sitepackages_amd64.zip` blob is a stock pycryptodome 3.23.0 wheel for Windows, consistent with its own file record and with zero detections, and `python-3.12.8-embed-amd64.zip` matches the official embeddable package as far as I fetched it (8,060,928 of 11,094,114 bytes). The member files' names and hashes match every legitimate installation and must not become indicators. The operator did unpack and re-zip the pycryptodome archive, so 1.79 of its 1.80 million bytes differ from the wheel although all 352 members match: that archive's own hash, beginning `d7d2854c`, and its re-zip stamps are operator-specific.
 
 A copied `Login Data` file is not a set of plaintext passwords, and an elevated process does not prove browser decryption succeeded. The investigation found no endpoint telemetry showing what the attempts yielded.
 
@@ -82,7 +85,7 @@ Wallet selectors extend the scope beyond browser stores. The operator's list hol
 
 The large JavaScript collector accepts `main`, `pass` and `phase3` upload variants. The `phase3` branch runs three searches in turn:
 
-1. The first takes fixed developer-credential locations, among them the SSH, GnuPG, Ethereum and cloud-provider configuration directories and the shell histories. It also takes environment files in the home directory and, on each data drive, environment and configuration files under any name.
+1. The first takes fixed developer-credential locations, among them the SSH, GnuPG, Ethereum and cloud-provider configuration directories and the shell histories. It also takes environment files in the home directory and, on each data drive, environment and configuration files under any name, to depth 4 on Windows drives and 5 on macOS volumes and at most 80 files per drive or volume.
 2. The second walks the desktop, documents and downloads folders, their OneDrive copies on Windows and the development folders (twelve of them on Windows), to a depth of 7 and up to 1,500 files. It takes every text, JSON, CSV, property-list, environment, image and key file of at most 2 MiB whatever its name.
 3. The third applies the same rule to a depth of 5 and up to 2,000 files, over the same folders on Windows and macOS and over the whole home directory on Linux. It adds credential-named files of further types such as Markdown, notes, logs and word-processor documents.
 
@@ -94,6 +97,17 @@ seed / mnemonic / secret / credential
 password / backup / recovery / keystore
 API key / token
 ```
+
+The selection rules combine extension classes rather than names:
+
+| Rule | Extensions and names | Name required? |
+|---|---|---|
+| Main and development folders (searches 2 and 3) | `.txt`, `.json`, `.csv`, `.env`, `.plist`, image files, the key class, environment and SSH key names | No |
+| Credential-named files (search 3) | adds `.md`, `.log`, `.rtf`, `.doc`, `.docx`, `.pages`, `.note`, `.notes`, `.wallet`, `.dat`, `.yaml`, `.yml` | Yes |
+| Key class on data drives | `.key`, `.pem`, `.asc`, `.pfx`, `.p12`, `.ppk`, `.gpg`, `.kdbx`, and `id_rsa`, `id_ed25519`, `id_ecdsa`, `id_dsa`, `authorized_keys`, `known_hosts` | No |
+| Configuration on data drives (search 1) | `.json`, `.yaml`, `.yml`, `.toml`, `.ini`, `.cfg`, `.conf`, `.plist`, `.properties`, `.env` | No, up to 80 per drive or volume |
+
+*Table 1. Phase-three selection rules in the July build, unchanged in the newest stage-three build.*
 
 ### The name pattern decides less than it seems
 
@@ -113,7 +127,7 @@ The search runs within explicit budgets, which in the inspected source default t
 - 2,500 directories visited per walk;
 - the per-search depth and file limits above, with a bounded fallback walk at depth 6 and 500 files.
 
-Environment variables can override the first four defaults. The skip list excludes dependency, system, cache and temporary directories and cloud-drive mount points: anything slow, noisy or likely to prompt.
+Environment variables can override the first four defaults: `OVERLORD_PHASE3_MAX_MS`, `OVERLORD_PHASE3_ROOT_MAX_MS`, `OVERLORD_PHASE3_READDIR_TIMEOUT_MS` and `OVERLORD_PHASE3_WALK_MAX_DIRS`. The directory cap counts per walk. The fallback walk's depth and file limits are defaults in code that callers override, for example depth 6 and at most 80 files for the home-directory fallback, and progress is logged every 150 directories or 12 seconds. The skip list excludes dependency, system, cache and temporary directories and cloud-drive mount points: anything slow, noisy or likely to prompt.
 
 ### macOS privacy prompts
 
@@ -150,9 +164,11 @@ I found no KDBX parser or code to recover the master password, and no artifacts 
 
 For selected files, the transfer code uses a default 2 MiB chunk size with up to five attempts per chunk, waiting 2, 4, 6 and 8 seconds between them. A chunk that fails all five sends the whole archive attempt into an upload loop that retries indefinitely. The loop waits the attempt number times a five-second base delay, capped at 120 seconds.
 
-The code's own comment says the standalone run does not exit until the uploads complete. Skipping certificate validation is hard-coded on every HTTPS upload, so the implant would hand its data to any interceptor on the path.
+The code's own comment says the standalone run does not exit until the uploads complete. The outer delay can be tuned through `OVERLORD_UPLOAD_RETRY_DELAY_MS` and `OVERLORD_UPLOAD_RETRY_DELAY_MAX_MS`. Skipping certificate validation is hard-coded on every HTTPS upload, so the implant would hand its data to any interceptor on the path.
 
 Disconnecting the network therefore does not protect a victim, because the process persists and keeps trying. The right step is to stop the process and remove its persistence.
+
+The upload endpoints were public before I recovered them. A developer targeted in May published `/api/company-wallet/upload`, `/api/company-wallet/upload-raw` and `/api/company-wallet/bandwidth-probe` on 25 May 2026, two months before my own recovery, which was independent but not a first. The installer behind the AI-verification lures uploads in chunks to `/company-wallet/upload-chunk/` with an `X-Agent-Token` header and `X-Company-Wallet-*` headers. None of these paths exists in the public framework, whose documentation and example configuration never mention a wallet, so they are the operator's additions even though they follow the upstream naming.
 
 ```text
 Upload variants: main, pass, phase3
@@ -160,6 +176,22 @@ Configuration: GUS_UPLOAD_CHUNK_SIZE, GUS_KEEP_AGENT_STATE
 Large JavaScript payload SHA-256:
 694626bed2df1f0d0026a3f7ead7692b44c7e73041cdd799b79a025335533cdc
 ```
+
+### Build markers the operator left in
+
+The collector has no release hygiene, which helps a defender. The server URL, agent token and client-identifier seed are each compared with a build-time placeholder before use, so the placeholder strings, which the builder substitutes at packaging time, are durable build-system markers.
+
+The July stage three references thirty-nine environment variables: thirteen standard system variables, sixteen defined by the operator and ten others. Thirteen of the operator's sixteen are operational, covering the dead-drop resolver override, the phase-three budgets, the standalone runtime cap, the upload retry delays and an output path. The other three are developer test hooks left in a production payload: `OVERLORD_LOCAL_TEST`, `OVERLORD_TEST_EP_OUT` and `OVERLORD_TEST_LOGIN_PASSWORD`, the last of which injects a login password instead of phishing it. Alongside them sits the operator's own `GUS_` namespace, which does not occur anywhere in the public framework, while the operator named its other variables with the framework's `OVERLORD_` prefix. A prefix alone therefore does not settle whether a variable is the framework's or the operator's.
+
+### What the collector does not do
+
+Three capabilities I tested for are absent from the builds I hold:
+
+- **Keystroke logging.** Microsoft's reporting on Contagious Interview of 11 March 2026 names keylogging through the npm package `node-global-key-listener`. The held samples contain no key-listener package and no keyboard-hook interface on any of the three platforms. The implant does contain three strings matching "keylog", but they are the Go standard library's TLS `KeyLogWriter`, so a grep that counts occurrences without reading them reports a keylogger that is not there.
+- **Password-manager handling.** Apart from the `.kdbx` selector, no KeePass, 1Password, Bitwarden, LastPass or Dashlane artifacts appear.
+- **An automatic clipboard clipper.** The Windows Node agent can read and set the clipboard for an operator at the keyboard, but it has no automatic address replacement and no keylogger.
+
+The wallet-extension list is also less distinctive than it looks. The collector's 35 identifiers include 20 of the 93 strings in a public, crowdsourced wallet-extension YARA rule whose condition is any six. Another campaign's stealer matches the same rule with a different list of 87 identifiers, of which only 22 are shared with this one. A match to that rule shows a shared public target list, not a shared supplier.
 
 ### Framework components and detection rules
 
@@ -174,6 +206,7 @@ The companion's [wallet-agent YARA rule](https://github.com/KrasForge/unk-scanne
 - No victim-side upload inventory was recovered. The recovered source contains neither a victim-side inventory nor completed-upload records.
 - An upload address read from a build is only where that build was configured to send data, because the agents resolve their server through the dead drop at run time.
 - No endpoint telemetry showed whether the browser decryption attempts succeeded.
+- The absence of keylogging and password-manager handling is established for the builds I hold; the agent can receive further capability over its plugin channel at run time.
 
 ## Conclusion
 

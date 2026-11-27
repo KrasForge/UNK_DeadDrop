@@ -1,7 +1,7 @@
 ---
 title: "How a Malicious VSIX Uses the Signed Editor Runtime"
 description: "How a fake Google Update Support extension installs collection components, elevates silently through an auto-elevating COM object and turns the editor's own Electron binary into a Node interpreter on Windows."
-lastUpdated: 2026-11-26
+lastUpdated: 2026-11-27
 published: 2026-10-25
 sidebar:
   order: 2
@@ -62,6 +62,26 @@ A sixth copy, `gitlab[.]com/lautaro19/rekt-db`, contained matching payload marke
 
 The [historical indicator reference](../../indicators/) records the dated observations. The [artifact reference](../../artifacts/) lists hashes for selected task and settings files. When I rechecked on 4 November 2026, the two GitHub repositories and the four GitLab copies were still public. By the next day `Lyracartoon/predict-together` had gone while the others remained available; treat this as a dated observation rather than a current status.
 
+### Staged in batches, dressed as individuals
+
+The repositories are staged before the mail goes out. Three weaponized copies were created within about two hours on 25 May 2026 across three namespaces, two of them user namespaces with plausible personal names and one a group namespace. All three are non-forks with the complete payload and an identical marker set, and the lure mail arrived after all of them.
+
+That timing is why I hold `lautaro19/rekt-db` as likely operator-controlled rather than as a victim's copy, which is how I first read it. It was created at 04:03:05 UTC, thirty-five seconds before its sibling on a known operator persona's namespace, and its account commits under an address on the domain of another operator persona. A phishing recipient does not create a repository thirty-five seconds before the operator does. This is still an inference from timing, namespace style and a persona-name match, and only the platform can settle it from registration data.
+
+Namespace style is therefore not evidence of ownership: some namespaces are dressed as individual developers precisely so that they read as candidates rather than infrastructure. The batching also explains why the count of live copies rose after a takedown. Three paths were removed and three survived on different namespaces.
+
+The delivery accounts differ in tradecraft. Most stage their payload in a single act and rely on turnover, with one to nine commits each. The `pridnet` repository carries 19 commits under a persona address, with author dates from 18 to 30 May and ordinary frontend messages about a navigation bar, a footer and a scroll-to-top button. The payload arrived in one commit titled `feat: add echo network page`, which added the vendor directory with its shell and command setup scripts, the cache marker files and the encrypted payloads. A rule keyed on new accounts with few commits, or on the author address, misses it.
+
+### Finding more copies
+
+Code search separates two kinds of marker. The campaign-specific ones, the settings keys, the extension filename and the embedded agent token, returned only the known repository and a victim's blog post, because the operator rotates them per campaign. The invariant ones, the staging script filenames, returned a third weaponized repository on an account not seen before, and its workspace settings were empty.
+
+I checked the negatives structurally. Thirty-seven candidates from broader queries were each verified by fetching the tree and checking for a folder-open task together with a staging payload, and all were clean. A later sweep with authentication covered 166 repositories across six accounts and flagged three, two of which were ordinary Solidity editor settings. An earlier sweep without authentication had hit the rate limit after a few requests and returned "tree unavailable" for about 150 of 160 repositories, an answer that looks the same as "clean" in the output.
+
+A file-tree sweep of all 172 public repositories of the five live operator accounts, at path level, found the kit only in the two known weaponized GitHub repositories. A payload inside an innocuously named source file or an archive would not show at path level, and accounts that went private or were deleted are outside that sweep.
+
+The repository route also reached further than these copies. The operator's mail toolkit names two more campaigns whose codenames correspond to real companies, impersonated with their own taglines, logos and marketing figures. Both delivered through a repository presented as a take-home assignment on a second delivery account not seen anywhere else, which now returns 404 along with both repositories. The sender configuration names one of them as the current project and carries per-campaign tracking columns for both, so they were run, not planned. Their repository contents were never captured, so that they used the folder-open technique is a strong inference, not a finding.
+
 ## Execution: a folder-open task installs a persistent extension
 
 ### A `folderOpen` task points to the installer
@@ -118,9 +138,23 @@ Preserve the package and project configuration together. A VSIX hash identifies 
 
 The token is also the most durable link I found. The same server-side agent token appears in the settings of a repository pushed on 19 May and in an agent log line quoted by a developer targeted in a different campaign six days later. That places one server instance behind both. The token in the newest stage-three build is still byte-identical.
 
+The same independent write-up, from a sample two months older than mine, corroborated much of the chain from outside: the C2 address and port, the implant's module path and embedded WebAssembly runtime, the disabled TLS verification, the masquerading extension identity and activation event, the macOS fake password prompt, the wallet and credential target list, the folder-open task with workspace trust suppressed, and the hosting provider. A reused server-side credential is a stronger link than shared hosting, because it is the operator's own configuration and survives exactly the rotations that break indicator-based links.
+
 ### Native agents for macOS and Linux
 
 The nested agent archive contains Go binaries for macOS arm64, macOS amd64 and Linux amd64, all timestamped 13 May 2026. Their hashes are exactly the three in Proofpoint's published indicator list, which until then had been known only as files seen communicating with the C2 address. Those published samples therefore came from this extension.
+
+The build metadata shows how the package was made. The darwin/amd64 and linux/amd64 agents are built with cgo disabled, while darwin/arm64 is built with cgo enabled, which needs the macOS SDK and is not practically cross-compiled from Linux. The build host is most likely an Apple Silicon Mac. All three share one commit and one VCS time, and the packaging timestamps run from that commit at 05:09:31 UTC on 13 May to the agents in the nested archive at 05:10:39, the outer entries at 05:10:40 and the manifest at 05:10:41. Build, bundle and package are one scripted action of about seventy seconds.
+
+The VSIX and its nested agent archive carry a UTC-7 offset in their ZIP timestamps, while the ClickFix chain's Windows agent archive carries UTC-4. A ZIP entry stores a local DOS time beside a UTC extended timestamp, and the difference is the build machine's configured offset. That is a setting, not a location, and it must not be read as geolocation.
+
+Later builds circulated without being collected publicly. An August macOS agent build, `google-update-support-darwin-arm64`, a 30,738,272-byte ad-hoc-signed Mach-O first seen on 16 August with this SHA-256, is held only by VirusTotal among the public sources I checked:
+
+```text
+a9747014b4751d762a4fae970c5fa51ea7e7de7918ab1cc62da47b845dc94382
+```
+
+Kaspersky's threat-intelligence portal reports about ten hits on it between 16 August and 6 September 2026 under `HEUR:Backdoor.OSX.Overlord.a`. That is a hit count in Kaspersky's telemetry, and I hold no victim record behind it.
 
 The Windows branch does not depend on dropping those binaries. The kit's own code reserves the Go handoff for macOS and Linux, and on Windows the third stage first deletes the Go agent's masquerading executable. The encrypted Windows modules and their recovered hashes are documented in [E04](../../evidence/E04.pdf).
 
@@ -226,7 +260,11 @@ Two details from that case change how responders should look:
 - The forged commit reuses the real release's author, date and message, so it claims a March date. The repository's activity record shows the force-push on 31 October at 15:12 UTC, and dating the compromise by commit author date would place it seven months early.
 - Passing `--ignore-scripts` to the install command does not stop a `prebuild` script when the project is built later. A persistent `ignore-scripts` setting also suppresses the pre- and post-scripts of commands run by name.
 
-Of SafeDep's 93 indicators, 71 were new to me even though the core machinery matched. That is what rotating indicators over constant machinery would produce.
+Of SafeDep's 93 indicators, 71 were new to me even though the core machinery matched. That is what rotating indicators over constant machinery would produce. The values that overlap with my records are the core artifacts: `icagllmbt[.]space`, the `api.gaganata` and `api.fallgganata` hosts, `update-agent.js`, the launcher family and the persistence names `GoogleUpdateSupporterNode` and `google-agent.service`.
+
+SafeDep also reported an earlier attempt from the same maintainer account on 21 August, which added a similar install-time dropper to the Hugo theme hugo-paper, fetching from `buildwithknexus[.]xyz`. That forged `scripts/preinstall.js` commit claims 9 March, and the `scripts/prebuild.js` commit in antd-img-crop claims 12 March. The removal commits are better anchors than the author dates: "remove preinstall" on 21 October and "remove prebuild" on 3 November. Once a file has been removed from the head, the platform's path history for it is what still reaches the malicious revision; deleted or unreachable objects cannot be inspected that way.
+
+One of the lure domains in that chain was already in my passive DNS records, on the server of a known lure cluster, without having been singled out. An indicator can be held and still be unread.
 
 ## Detection: inspect the extension path and process arguments
 
@@ -252,7 +290,9 @@ Several markers that look obvious for this route do not hold up:
 - The `googleUpdateSupport` settings namespace fails because one live sample ships an empty settings file.
 - The published Go hashes miss the Go-free Windows chain.
 
-The markers that work are the operator's own: the masquerading extension identity, the embedded agent token, the kit's repository markers and the C2 endpoint paths. On the prevention side, the editor's `task.allowAutomaticTasks` setting keeps folder-open tasks off by default, and Restricted Mode runs no task until a folder is trusted.
+The markers that work are the operator's own: the masquerading extension identity, the embedded agent token, the kit's repository markers and the C2 endpoint paths. The `GUS_` environment namespace, the hidden scheduled task name and the collector's home-directory secret-hunting pattern belong on the same list. One shared file is useless as a link: the kit's three-byte `.vscode/settings.json` holds an empty JSON object and a newline, and every empty settings file has those bytes. On the prevention side, the editor's `task.allowAutomaticTasks` setting keeps folder-open tasks off by default, and Restricted Mode runs no task until a folder is trusted.
+
+Configuration that runs code should be reviewed as code. A commit that adds or changes `.vscode/`, `.cursor/`, `.claude/` or `.gemini/` content, the `scripts` of `package.json` or a `binding.gyp` deserves review, especially under another person's name or inside a force-push. Install dependencies with lifecycle scripts disabled where the build allows it. During response, remove the persistence before rotating credentials, because a resident process collects the new ones, and check every repository the affected account can write to.
 
 ### Companion rules and scanner
 

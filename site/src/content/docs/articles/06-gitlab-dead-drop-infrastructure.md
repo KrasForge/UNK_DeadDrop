@@ -1,7 +1,7 @@
 ---
 title: "Following the GitLab Dead Drop: Configuration Changes and C2 History"
 description: "How a GitLab-hosted configuration file let the UNK_DeadDrop operators change servers without new payloads, what its revision history reveals, and how the dead drop was rebuilt twice after it went dark in October."
-lastUpdated: 2026-11-26
+lastUpdated: 2026-11-27
 published: 2026-10-25
 sidebar:
   order: 6
@@ -34,8 +34,8 @@ I found that the UNK_DeadDrop payload reads its server list from a GitLab-hosted
 
 ## Key takeaways
 
-- On 13 July 2026, a GitLab commit replaced the server list with `api.cklomino[.]ink` and `api.dsfmot[.]xyz` while the payload hash stayed the same.
-- The history I retained in July contains six commits to `config.json` and one to a separate `config-alt.json` that no retained payload references.
+- On 13 July 2026, a GitLab commit replaced the server list with `api.cklomino[.]ink` and `api.dsfmot[.]xyz` while the payload hash stayed the same; the history I retained in July contains six commits to `config.json` and one to a separate `config-alt.json` that no retained payload references.
+- The July rotation was forced: by 22 July all nine registrations of the previous generation were suspended by the registrar, 35 days after Proofpoint's publication.
 - After the original repository became unreadable on 22 October, a replacement repository named the same host about 31 hours later, and a third repository named `api.cerysoi[.]ink` on 3 November.
 - Every serving and command address I observed from July to November sits with one provider, Advin Services, across AS22295 and AS206216.
 - Blocking a destination does not stop a client that consults the configuration resource, so connection records are needed to identify the destination each client used.
@@ -52,7 +52,7 @@ The payload references this resource:
 gitlab[.]com/drop-indexing/tasks/-/raw/main/config.json
 ```
 
-The recovered JavaScript has its own hard-coded fallback, `api.domatisc[.]ink`, and a resolver function that requests the raw GitLab `config.json` resource. No retained endpoint log confirms that a victim fetched either file. This code pattern is relevant to MITRE ATT&CK's [dead drop resolver technique (T1102.001)](https://attack.mitre.org/techniques/T1102/001/). A payload with the same hash can receive different destinations depending on when it fetches this resource.
+The recovered JavaScript has its own hard-coded fallback, `api.domatisc[.]ink`, and a resolver function that requests the raw GitLab `config.json` resource. No retained endpoint log confirms that a victim fetched either file. This code pattern is relevant to MITRE ATT&CK's [dead drop resolver technique (T1102.001)](https://attack.mitre.org/techniques/T1102/001/). A payload with the same hash can receive different destinations depending on when it fetches this resource. MITRE's page for the Contagious Interview group, G1052, maps the group to acquiring web services but not to using one as a resolver, and this is the component that lets the campaign survive domain takedowns. [Part 17](../17-two-operations-one-ecosystem/) discusses the gaps in that page.
 
 The repository also contains a separate `config-alt.json` file with another pair of destination strings. Neither retained payload references it. Client use of this second file remains unknown.
 
@@ -81,11 +81,55 @@ The fourth state came later and from my own monitoring. From 23 July a watch pol
 
 The certificate for `api.domatisc[.]ink` was issued on 26 May, the morning the dead drop first pointed at it. This gives the May sequence an independent clock. The 1 June date of the alternative file rests on commit metadata alone.
 
+That independent clock matters because the operators control the repository. Commit dates and author fields are arbitrary strings that neither git nor the platform verifies. The commit history records the first three hosts at 01:57 UTC on 26 May and the switch to `api.` subdomains at 02:17, five commits within about half an hour. Certificate issuance is logged by third parties, and it lines up with that sequence, which is what lets the commit-derived timeline and the addresses inside those commits carry weight. The same logs show that the generations overlapped rather than replaced one another cleanly: `api.domatisc[.]ink` received a new certificate on 22 June, about three weeks after the alternative file appeared.
+
+The server side came up the same morning. The operators' first Overlord server generated its self-signed certificate at 04:00:32 UTC on 26 May, about two hours after the first dead-drop commits, on `45.61.162[.]155` at RouterHosting (AS14956). [Part 16](../16-control-layer-after-october/) explains how that certificate names its own host.
+
+### The alternative file was never maintained
+
+The alternative pair has its own history. `api.onoplainai[.]ink` and `api.migadyn[.]info` were registered on 24 April 2026 in the same batch as `domatisc[.]ink`, so the operators held them in reserve a month before the dead drop existed. `config-alt.json` has exactly one commit and never rotated, even after `onoplainai[.]ink` itself was suspended. Whatever role it was meant to play, the operators did not touch it again.
+
+### Cadence: any new commit is a high-signal event
+
+The primary file changed rarely. Its first destination set held for about seven weeks, from 26 May to 13 July, the second for twelve days, and `api.chestsoi[.]ink` for about three months. A new commit to this file is therefore a low-frequency, high-signal event: when it appears, the operators have moved their command host.
+
+My watch read both files every two hours and also walked the repository tree, so that a new configuration file appearing would itself raise an alert. The watch could only see paths it knew, a limit the October outage exposed.
+
 ### Client behavior decides when a change takes effect
 
 Client refresh behavior determines when a configuration change takes effect. The agent side is built for the contingency: the Windows Node bundle carries its own copy of the dead-drop project and fails over between hosts in round-robin order.
 
+Its resolver code shows the refresh logic in detail:
+
+- it accepts either a JSON document or a plain list of hosts;
+- it remembers the last entry that worked and re-reads the dead drop only after a full cycle through the list;
+- a `deadDropUrl` value in the local configuration overrides the built-in address, and an empty value disables the dead drop.
+
+The resolver file, `lib/server-resolve.js`, carries a modification time of 13 July, the day of the rotation, so the operators edited the client's resolver on the day they moved its servers ([Part 5](../05-screen-capture-analysis/) dates the rest of the bundle).
+
+The stage-three stealer learned from a mistake. A later build adds logic so that a stale or mistyped server name that does not resolve cannot override an upload base that already worked. The name that prompted it, the operators' own typo of three weeks earlier, survives only in a code comment and was never registered.
+
 A client that fetches the file again may receive a new address, while one using a cached destination may continue trying the old server. I hold no client execution trace that shows which happened on a real machine. Blocking a destination can interrupt traffic, while a client that consults this configuration resource may receive another address. Connection records are needed to identify the destination each client used.
+
+## Rotation: the July pair replaced a suspended generation
+
+The 13 July rotation was not a voluntary change. A registration-status sweep of every known cluster domain on 22 July found all nine registrations of the previous generation on `clientHold` and no longer resolving:
+
+| Domain | Generation |
+|---|---|
+| `domatisc[.]ink` | 24 April batch |
+| `coslyintra[.]online` | 24 April batch |
+| `valorecuiting[.]online` | 24 April batch |
+| `onoplainai[.]ink` | 24 April batch |
+| `optixauvex[.]us` | earlier lure domain |
+| `nodit[.]org` | earlier lure domain |
+| `foxtopia[.]xyz` | earlier lure domain |
+| `d2strade[.]org` | earlier lure domain |
+| `discufo[.]xyz` | earlier lure domain |
+
+All are with the same registrar. The batch registered on 13 and 14 July was untouched, including the two hostnames the dead drop was then serving. The April batch is the generation in Proofpoint's published indicator list of 8 June. The July batch and the dead-drop switch to it came 35 days after that publication.
+
+Two readings follow. The registrar's takedown process demonstrably works against this operator. And the operators rotate because their domains are burned and suspended, with the dead drop as the mechanism that lets them recover without touching the payload.
 
 ## Recovery: the October outage and two successor repositories
 
@@ -142,6 +186,10 @@ The certificates did not provide a cross-domain link. Subject alternative names 
 
 Timing offered more context. Certificates for four bases were first issued on 13 July, the date of the resolver's change to `api.cklomino[.]ink` and `api.dsfmot[.]xyz`.
 
+Command domains are provisioned differently from lure domains. Five of the seven `.ink` command domains for which I hold both dates received a certificate within an hour of registration, in one sitting. Nine of eleven `.xyz` lure names waited eleven to fifteen days. `chestsoi[.]ink`, registered on 13 July, is an exception: its first certificates, for `api.` and two wildcards, date from 25 July, the morning the dead drop was rotated to it.
+
+The hours differ too. Across the estate, host provisioning clusters early in the UTC day, at a median session start of 06:55 UTC, while domain purchases cluster at a median hour of 15 UTC. The command and dead-drop domains sit at a median hour of 7.5, the lure fleet at 15.0. I read this as two provisioning jobs about nine hours apart rather than one shift, and it says nothing on its own about where the operators are.
+
 On 23 July, `aazdias[.]ink` and `fallaazdis[.]ink` were registered about six minutes apart through the same registrar and privacy service, with the same Cloudflare nameserver pair. Their primary-and-fallback naming repeats the earlier `aavzx[.]ink` and `fallbaav[.]ink` arrangement. The current stores, a new dashboard host and several older lure domains also received certificates that day.
 
 Shared panels and certificate automation can produce this cadence across unrelated customers. I therefore used the timing to check code and configuration relationships, rather than to assign hosts to the cluster. These registration and enumeration observations come from restricted 23 July records and are discussed in the [paper](../../downloads/UNK_DeadDrop-Preprint.pdf), but are not independently reproduced in the public evidence exhibits.
@@ -159,10 +207,11 @@ The free scan dataset returned no results for port 5173, which is Overlord's def
 - The contents of the two October commits on 10 and 12 October were not kept, and nothing I hold records the cause of the October outage.
 - The raw scan responses and certificate behind the `207.241.172[.]222` association were not retained.
 - The registration and enumeration observations of 23 July are not independently reproduced in the public evidence exhibits.
+- The purpose of `config-alt.json` is unknown; its single commit and its suspended host show only that it was not maintained.
 
 ## Conclusion
 
-The GitLab file worked as a dead drop resolver: one commit moved every client that consulted it, without a new payload or a new hash. The revision history, my own polling and outside reports together show the operators changing destinations in May, July and twice after the October outage.
+The GitLab file worked as a dead drop resolver: one commit moved every client that consulted it, without a new payload or a new hash. The revision history, my own polling and outside reports together show the operators changing destinations in May, July and twice after the October outage. The July change followed a registrar suspension of the whole previous generation, so the resolver is what turned each takedown into a delay of hours rather than an end.
 
 For defenders, blocking a single command host is not enough while the resolver resource stays readable. Connection records show which destination each client actually used, and the resolver path itself is worth monitoring. Shared hosting at Advin Services organizes a provider request, but it does not prove control of a range, and port-based hunting does not separate this cluster from unrelated tenants.
 

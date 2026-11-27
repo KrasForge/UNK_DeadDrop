@@ -1,7 +1,7 @@
 ---
 title: "From Three Phishing Emails to a Connected Investigation"
 description: "The pivots linking recruitment messages, delivery artifacts, payload configuration and supporting software."
-date: "2026-11-26"
+date: "2026-11-27"
 published: "2026-10-25"
 author: "Ilja Krasnjanski"
 canonical: "https://krasforge.github.io/UNK_DeadDrop/articles/10-investigation-connections/"
@@ -21,8 +21,8 @@ I connected three recruitment messages to delivery code, a mutable GitLab resolv
 
 - The copy handler calls a command builder, the editor task invokes an installer, and sender configuration names the two SQLite targeting pools: these are direct code references.
 - Every serving and command address I observed from July to November sits with one shared-hosting provider, Advin, so exclusive ownership of any address remains unverified.
-- The console's single privileged identity, `eros1030109@gmail[.]com`, recurs in lure-domain DMARC records and in the dead drop's commit history, which ties these pieces to one configuring hand.
-- Several strong-looking leads fell apart on review, including real crypto companies, an affiliate-marketing spam family and PolinRider, which I keep separate from UNK_DeadDrop.
+- The console's single privileged identity, `eros1030109@gmail[.]com`, recurs in lure-domain DMARC records and in the dead drop's commit history, which ties these pieces to one configuring hand, and its `1030109` suffix recurs in the dead-drop owner's address and the ECHOES archive author's.
+- Counted as independent observation paths, the TronzitVeca and ECHOES persona block stands on twelve while the D2S AI Trade and Category Labs lures rest on two and one, and several strong-looking leads fell apart on review, including real crypto companies, an affiliate-marketing spam family and PolinRider, which I keep separate from UNK_DeadDrop.
 - Stormshield's Trigram report describes UNK_DeadDrop on my own identifiers, and pivoting its addresses recovered 142 operator-named lure hostnames I had not collected.
 
 ## Scope: three messages, two delivery routes
@@ -61,6 +61,28 @@ Their entry conditions differ. One depends on a candidate pasting a command into
 
 The message-header review identified Mailgun VERP envelope behavior for the D2S and Category Labs lures, while the Nodit message used its own domain in the envelope. The messages arrived through a forwarding service, so the original sending IP was not preserved. The forwarding service and its relay addresses belong to the recipient's mail path, not the campaign infrastructure. Personal addresses and envelope identifiers are omitted. The message evidence is summarized in [E01](../preprint/evidence/E01.pdf).
 
+The three messages carry these Date headers:
+
+| Lure | Date header (UTC) |
+|---|---|
+| Nodit | 22 June 2026, 13:33:47 |
+| D2S AI Trade | 21 July 2026, 01:08:32 |
+| Category Labs | 22 July 2026, 01:08:39 |
+
+The two July messages went out seven seconds apart on consecutive nights, which points to one scheduled job rather than two hand-sent mails.
+
+The mail setup also changed between June and July. The Nodit message was signed with DKIM, but its public key was never published, so the signature failed, no DMARC record existed and SPF alone carried delivery. Its body was a single base64 HTML part with no plain-text alternative, sent during the day. The D2S and Category Labs messages pass SPF, DKIM, DMARC and ARC, use a commercial platform with VERP bounce addressing, publish DMARC on the apex and the sending subdomain, and run a commercial DMARC-monitoring tenant on that subdomain. That reads as a learning curve, a weak signal for the single-actor reading. It also shows that passing authentication is no trust signal: a correctly configured attacker domain passes everything. [Part 1](01-clickfix-clipboard-manipulation.md) explains why I treat the Nodit lure only as a probable earlier iteration.
+
+### Timing: build and campaign run as one workflow
+
+Three independent artifact types place one re-provisioning day, 13 July 2026:
+
+- WHOIS records register `aavzx[.]ink`, `fallbaav[.]ink` and `d2saitrade[.]ink` at 06:38, 07:13 and 19:59 UTC;
+- the dead drop's own history commits the rotation to the new C2 at 07:10:58 UTC;
+- the Windows agent archive's preserved modification times show its update script and the file holding the dead-drop URL edited that day.
+
+The Go implant's `vcs.time` of 01:14:06 UTC on 21 July then falls five minutes and thirty-four seconds after the D2S message. That field is the commit time of the source revision, not a compile time ([Part 12](12-framework-and-collection-boundary.md)). Either the send was scheduled while the revision was committed, or the proximity is coincidence, and nothing I observed separates the two. On either reading build and campaign operations belong to the same workflow.
+
 ## Infrastructure: resolver edits point to two July server generations
 
 ### The GitLab resolver
@@ -73,7 +95,7 @@ On 25 July my own watch recorded a further commit that cut the file to `api.ches
 
 A certificate naming `api.cklomino[.]ink` and a Subtensor sign-in panel observed at `207.241.172[.]222` connect that address to the historical service. Passive DNS and related research-service records supplied further pivots. These observations date service associations.
 
-Every serving and command address I observed from July to November sits with one shared-hosting provider, Advin, so exclusive ownership of any address remains unverified. Client refresh behavior and connections after the configuration change remain unknown.
+Every serving and command address I observed from July to November sits with one shared-hosting provider, Advin, so exclusive ownership of any address remains unverified. Before July the pattern did not hold: the first Overlord server stood at RouterHosting from 26 May, and the dashboard spent part of June at Liga Hosting ([Part 16](16-control-layer-after-october.md)). Client refresh behavior and connections after the configuration change remain unknown.
 
 ### The late-July lures
 
@@ -84,6 +106,17 @@ The late-July lures added another dated origin picture. On 23 and 24 July, `170.
 The `23.137.105[.]75:5173` C2 observation, reported before my July material, belongs to the July campaign host. A 22 July analyst note also records an Express response from `23.137.105[.]75:3000` and a CORS preflight allowing `X-Guard-Platform`, a header present in the recovered installer.
 
 Route existence and data receipt remain unknown. The note records only the 404 and preflight responses, and the probe transcript is not in the public evidence PDFs. These July observations have not been refreshed since 24 July.
+
+### Provisioning bursts: a timing link
+
+Chaining certificate, registration, commit and mail events that fall within ninety minutes of one another produced 82 bursts across my whole record, 23 of them containing UNK_DeadDrop events. Seven of those bursts connect hosts I had not otherwise connected, for example:
+
+- a lure domain registered forty-six minutes before a different brand's recruitment mail went out, two brands in one sitting;
+- three parcel-themed lure names certified inside seventeen seconds;
+- two naming families certified two minutes apart, and two lure families on two different addresses in one run;
+- one 77-minute session on 3 November that stood up the next C2 generation end to end.
+
+A timing link is weaker than shared hosting and stronger than a naming family. I use it to place hosts beside each other, not to prove common control on its own.
 
 ### Summary of the pivots
 
@@ -113,11 +146,47 @@ The pools are split by mail domain, not by any interest, and crypto repositories
 
 The separately recovered [rms-platform frontend](08-administration-platform.md) contains mail views, repository availability monitoring and wallet import, preview and claim controls. Its mnemonic and ColdKey fields correspond to material selected by the collectors. That connection describes compatible data and functions.
 
-The console's single privileged identity, `eros1030109@gmail[.]com`, recurs in the DMARC records of two lure domains and in the dead drop's commit history. That ties these pieces to one configuring hand. No recovered backend establishes that the targeting pools, mail system and wallet workflow were integrated or used successfully, and the claim recipients are chosen on the server side.
+The console's single privileged identity, `eros1030109@gmail[.]com`, recurs in the DMARC records of two lure domains and in the dead drop's commit history. That ties these pieces to one configuring hand.
+
+The strength of that link needs stating carefully. Both places are strings typed into systems that verify neither. A DMARC report address on another domain needs external-destination authorization, and the authorization records that would allow reports for the two lure domains do not exist at `gmail[.]com`, so no compliant reporter ever sends there and the channel is inert. A git author address is equally self-asserted. What survives is that one actor configured the two lure domains and the dead drop with the same string, a link between lure and C2 infrastructure that does not depend on shared hosting. Because the habit has no operational feedback, the operators have little reason to notice and change it. What the string cannot show is the person behind the account. No recovered backend establishes that the targeting pools, mail system and wallet workflow were integrated or used successfully, and the claim recipients are chosen on the server side.
 
 ### ECHOES
 
 [ECHOES](09-echoes-lineage-image-provenance.md) preserves a different delivery branch. Four archive revisions show repeated artwork and staging, changing retrieval destinations and a VBS persistence addition. Its final PowerShell payload was unavailable through the unauthenticated routes examined, so whether it deployed the Go agent, the JavaScript collector or another payload remains unknown. The closest counterpart is a separate PowerShell toolkit from a related staging repository that exfiltrates into per-victim GitHub repositories.
+
+## Identity: the 1030109 family
+
+The privileged console address is one of several operator addresses sharing the numeric suffix `1030109`:
+
+| Address or account | Role in my record |
+|---|---|
+| `eros1030109@gmail[.]com` | Privileged console identity, lure-domain DMARC records, dead-drop commits, a planted security contact |
+| `apollo1030109@gmail[.]com` | Owner of the GitLab account `0xapp123` that holds the dead drop, confirmed by its avatar hash |
+| `stefan.kano1030109@gmail[.]com` | Author of the ECHOES archive commits ([Part 9](09-echoes-lineage-image-provenance.md)) |
+| `hera1030109@gmail[.]com` | A dormant Google account with no public footprint, probable operator on the naming pattern alone |
+| Telegram `@Tr1030109` | The "Tronzit Veca" persona that persona-account READMEs tell readers to contact |
+
+The GitLab account carries no name or profile, but GitLab derives its avatar identifier from a hash of the account's lowercased e-mail address, and that hash equals the one for `apollo1030109@gmail[.]com`. The same address authored hundreds of commits under the git names `0xapp123` and `0xed123`, and persona READMEs send readers to `@Tr1030109` on Telegram and `0xapp123` on Discord. I assess with high confidence that these identifiers converge on one operator identity, the TronzitVeca persona that [Part 15](15-persona-farm.md) follows through the persona farm.
+
+The addresses split by role. The ones used for the domain registration, the lure DMARC records and the dead-drop commits return no code commits at all, while the cover-repository addresses return thousands. Outward-facing identities do not appear in commit metadata.
+
+[Genians' Operation GitPower report](https://www.genians.co.kr/en/blog/threat_intelligence/kimsuky_ai_llm) of 10 August 2026 lists `eros1030109` and `apollo1030109` among its own identities, reached through a cluster built on different malware. It also lists `170.205.30[.]227` and `170.205.29[.]83` as C2 without naming a hoster; that they sit at Advin is my own attribution. [Part 17](17-two-operations-one-ecosystem.md) weighs what that corroboration does and does not show.
+
+## Robustness: counting independent paths
+
+To test which connections carry weight, I built a graph from the evidential links in my record and counted independent paths through observables only. I excluded shared victims, because a shared victim is not attribution evidence, and treated dual campaign tags as ordinary nodes rather than links.
+
+| Cluster | Independent observation paths |
+|---|---|
+| TronzitVeca persona block and ECHOES | 12, across 210 source files |
+| D2S AI Trade | 2, one domain pair |
+| Category Labs | 1, one served bundle |
+| PredictTogether | Not separable: fourteen of its fifteen observables are also tagged into core campaigns |
+| PolinRider and related resolver blocks | 0 once two non-observational artifacts are removed |
+
+The persona block's minimum cut spans different evidence types: identity reuse through two operator addresses and two platform accounts, hosting through an address and a persona domain, the GitLab dead drop, and code through the console source and the leaked build path. No single record carries it. The D2S and Category Labs links are sound but have no redundancy, so one corrected observation would break each.
+
+A missing edge is not missing evidence. These counts measure what my graph records as observations, so where a case file holds a link the graph lacks, the attribution is not necessarily weaker.
 
 ## Review: leads that fell apart
 
@@ -176,6 +245,8 @@ Two November reports reached the same machinery from outside.
 
 [SafeDep](https://safedep.io/blog/antd-img-crop-forged-commit-overlord-stealer) described a forged commit in the GitHub repository of the npm package `antd-img-crop` that ran a dropper on `npm run build` and fetched the operation's stage three, leaving the published package unaffected. Its Windows agent entry file matches the one I hold by full SHA-256, although about seventy of its ninety-three indicators were new to me.
 
+The forged commit, dated 31 October 2026, adds a `prebuild` script that fetches a launcher from a lure domain, then the `deepfake_guard` installer, then the Overlord stage three. An earlier attempt from the same maintainer account on 21 August added an install-time dropper to another of the maintainer's repositories from a different lure domain. One of the lure domains involved was already in my passive DNS, on the server of a known lure cluster, without my having singled it out. An indicator can be held and still be unread.
+
 [Stormshield's Trigram report](https://www.stormshield.com/news/cti-trigram-campaign/) described a ClickFix kit it calls DeepfakeGuard behind a GitLab relay and a Django back office. I can say on my own identifiers that Trigram is UNK_DeadDrop:
 
 - the relay is the dead drop I track in its later projects;
@@ -183,6 +254,28 @@ Two November reports reached the same machinery from outside.
 - the session-replay organization in current builds already sat on July and June lures.
 
 Stormshield's link to Kimsuky is Stormshield's assessment, which it reworded on 17 November, and I have not established it. Pivoting Stormshield's addresses recovered 142 operator-named lure hostnames I had not collected.
+
+### What outside reporting confirms
+
+Read together, the outside reports confirm the core chain, each for part of it:
+
+| Source | What it documents |
+|---|---|
+| [Proofpoint](https://www.proofpoint.com/us/blog/threat-insight/dont-fear-repo-unkdeaddrop-phishing-campaign-targets-developers-steal) | Repository tasks, the fake Google extension and the Overlord-derived Go agents |
+| [Hopkins](https://brhopkins.uk/posts/foxtopia/) | The GitLab dead drop and the in-memory AES-256-GCM stage, from a JavaScript stage rather than the Go binaries |
+| [SafeDep](https://safedep.io/blog/antd-img-crop-forged-commit-overlord-stealer) | The ClickFix branch, the stage three behind the dead drop, the Go agent and the October addresses |
+
+None documents the administration panel, and Hopkins and SafeDep build on Proofpoint's cluster definition without adding independent attribution. Everything after July is in my record only: the rebranded panel on three hosts, the Cortex console, the August to October lure families, the targeting databases and the build-host signals.
+
+### Re-deriving third-party indicators
+
+Each third-party list I worked in November contained entries that are not operator infrastructure:
+
+- Hopkins's list includes the Mailgun sending address of a lure message, which is not a C2, and a value that is the stage's decryption key republished as though it were a file hash;
+- four undelegated lure domains I found through one of Stormshield's addresses answered with `45.54.28[.]15` on public resolvers too, an address belonging to a DNS-filtering service, so the answer is a filtering or sinkhole response and not the operator;
+- one address in Stormshield's set, which also runs game servers, hosted the operator's dashboard only from about 8 to 29 June 2026 before its hoster reassigned it, so it is historical rather than current.
+
+Before I use an imported indicator, I resolve what it actually is, bound every address by date against hosting reassignment, and check a value's type before indexing it as a hash. The lists remain valuable: the same Stormshield pass surfaced the 142 lure hostnames I had not collected.
 
 ### The October developer-lure report
 
@@ -196,9 +289,10 @@ The shared markers make this a probable continuation lead, and the `deepfake_gua
 - Missing send logs and endpoint records prevent a count of recipients contacted or systems compromised.
 - The infrastructure observations are dated associations on a shared-hosting provider, and the July observations have not been refreshed since 24 July.
 - The integration of the targeting pools, mail system and wallet workflow remains unverified.
+- The `1030109` link rests on self-asserted DNS and git strings, and the D2S and Category Labs clusters each rest on one or two observation paths.
 
 ## Conclusion
 
-The investigation connects its components through named relationships of different strength: code references, configuration values, dated infrastructure observations and a shared privileged identity. Each link supports only what its evidence type supports, and the table and indicator reference record that for each pivot.
+The investigation connects its components through named relationships of different strength: code references, configuration values, dated infrastructure observations, provisioning timing and a family of operator addresses sharing one suffix. Counting independent paths shows where that structure is redundant and where one observation carries a whole sub-cluster. Each link supports only what its evidence type supports, and the table and indicator reference record that for each pivot.
 
 The leads that fell apart matter as much as the ones that held. Shared budget hosting, real companies behind copied personas and a parallel operation using the same pretext all looked like connections and were not. Defenders should weigh the same evidence types before adding a domain or address to a watch list.

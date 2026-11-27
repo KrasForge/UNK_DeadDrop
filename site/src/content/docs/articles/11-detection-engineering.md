@@ -1,7 +1,7 @@
 ---
 title: "Building and Testing Detections for UNK_DeadDrop"
 description: "Thirty-three YARA rules replayed against retained artifacts, followed by a separate noise review, a static scanner evaluation and a look at what source scanning cannot see."
-lastUpdated: 2026-11-26
+lastUpdated: 2026-11-27
 published: 2026-10-25
 sidebar:
   order: 11
@@ -46,6 +46,28 @@ The published companion snapshot contains 33 named YARA rules in 28 files. Every
 
 A wider noise review on the same day found that seven source rules collided with public browser-decryption research and tooling and with my own published exhibits and rendered articles. That is exactly the kind of input a rule author does not think to use as a control. I tightened the seven that day, and the revisions preserved every earlier artifact match. They are still not part of the published snapshot.
 
+The review ran all 33 rules under libyara 4.5.4 against the case material and five control groups:
+
+| Control group | Objects | Rule hits |
+|---|---|---|
+| Ordinary software, including clipboard libraries, an Electron quick-start and a dashboard template | 461 deduplicated | 0 |
+| Installed software | 18,325 | 0 |
+| Upstream Overlord fork source | 877 | 0 |
+| Public browser-decryption research and tooling, including a research write-up and an expanded HackBrowserData archive whose strings aggregate across members | not counted separately | Collisions |
+| My own output: published exhibits E02, E04, E17 and E19, the rendered HTML of Part 1 and the site generator's content cache | not counted separately | Collisions |
+
+The collisions invalidate any blanket claim that the signatures avoid research prose, and they invalidate nothing about the malicious-artifact matches. The fixes required definitions rather than function headings and bound a clipboard call to its telemetry within a bounded expression.
+
+### What the companion leaves out on purpose
+
+The suite contains no host, domain or blocklist rule. Registration, hosting and certificate observations are dated facts, sometimes on shared hosting, and several of mine were later corrected or retracted, so they belong in the [historical indicator reference](../../indicators/) with their dates rather than in a signature that would outlive them. The suite also excludes:
+
+- live or historical authentication tokens, private API credentials and endpoint secrets;
+- victim-target databases, personal addresses, private messages and operator identity leads;
+- bare addresses, parked and expired domains, and shared-host observations;
+- generic folder-open, Electron, PowerShell, screen-capture, WebAssembly or framework markers without the conjunctions that make them specific;
+- dashboard modules, lure artwork and site shells with no reliable file-content selector, since weak rules for them would identify my evidence set rather than detect malicious behavior.
+
 ### What the companion contains
 
 The [companion repository](https://github.com/KrasForge/unk-scanner) contains file-content rules and a parse-only JavaScript scanner. It no longer includes the event rules or workspace-configuration rules, because authentic endpoint logs and the original `.vscode` task and settings files were not available for replay. Synthetic event records and invented configuration files would show how a rule behaves, not whether it matches the collected targets.
@@ -71,6 +93,27 @@ A file signature identifies matching content. Execution and data transfer requir
 ![YARA conditions and validation results](/UNK_DeadDrop/diagrams/11-detection-logic.svg)
 
 *Figure 1. Every wallet-agent condition is required. The retained rules matched case artifacts, while the local software baseline and marker-rich prose fixture had no hits.*
+
+## Markers: six obvious ones that do not work
+
+Six markers that look like natural detections for this operation fail on inspection:
+
+| Marker | Why it fails |
+|---|---|
+| Dropper file names | Every live host serves the same dropper under every name in the rotation, and the size differences are only embedded hostname length |
+| `OVERLORD_*` variables, WebAssembly plugins and remote control | Stock framework features that also fire on legitimate red-team deployments |
+| `runOn: folderOpen` alone | Shared with at least one unrelated operation, PolinRider |
+| The operators' settings-key namespace | One live sample ships an empty `settings.json` |
+| Published Go binary hashes | A Windows chain exists that uses no Go binary at all |
+| Sender authentication failure | SPF, DKIM and DMARC all pass for the attacker domains |
+
+What does work is operator-specific: the `GUS_` namespace, the embedded agent token, the kit's repository markers, the C2 endpoint paths, the masquerading extension identity, the hidden scheduled-task name and the home-directory secret-hunting pattern.
+
+### Invariant markers find repositories; rotated markers do not
+
+A code-search sweep separated the two kinds of marker cleanly. The campaign-specific markers, the settings keys, the extension file name and the embedded agent token, each returned only the repository I already knew and a victim's blog post, because the operator rotates them per campaign. The invariant markers, the staging script file names, returned a third weaponized repository on an account I had not seen. That repository's own workspace settings are empty, so a detection keyed on the settings namespace would have missed it.
+
+The negative half needed the same care. I verified thirty-seven candidate repositories from broader queries structurally, by fetching each tree and checking for a folder-open task together with a staging payload, and all thirty-seven were clean. An earlier unauthenticated pass over 160 repositories had hit the API rate limit early and returned "tree unavailable" for about 150 of them, which looks exactly like "clean" in the output. Only an account known to hold two repositories reporting zero gave it away.
 
 ## Method: a replay of 192 files and 395 views
 
@@ -159,16 +202,43 @@ Public sample collections hold very little of this material. On 7 November I sub
 
 Two YARA hits on a public sample record turned out to be my own rules reflected back. That is why I check every service I both read and write by submitter before counting anything as corroboration.
 
+Public family tags do not isolate this operator either. A tag sweep on 12 November found my own uploads under `UNK_DeadDrop`, and the `DeepfakeGuard`, `Trigram` and `UNK_DeadDrop` tags returned nothing beyond what I had put there. The `overlord` tag also returns unrelated builds sharing the name, and the threat-indicator service's `OverLord` tag holds 346 indicators that are mostly other operators' deployments of the public framework on its default port 5173. A family name shared with a public framework cannot pick out one operator in a public corpus ([Part 12](../12-framework-and-collection-boundary/)).
+
+### Counting what other engines say
+
+Antivirus ratios need the same discipline. VirusTotal showed nine detections on the Chrome App-Bound decryptor from the PredictTogether repository, but seven of the nine are one BitDefender-engine signature resold under OEM licenses, so the nine are three independent detections. Quoting the ratio as nine independent votes would overstate the evidence threefold. The label it carries names a Chrome-decryption technique another stealer family also uses, not an actor.
+
+A crowdsourced wallet-extension rule on VirusTotal matches both this operation's stealer and another campaign's files, which looks like a shared artifact. Counting it settles the question. The rule holds 93 strings, 75 Chromium extension identifiers and 18 Firefox add-on names, and fires on any six. The decrypted stealer contains 20 of the 93 and targets 35 distinct Chromium identifiers, fifteen of them absent from the rule's list. Both operations draw on overlapping parts of a public list, so a YARA match like this is evidence of a shared target list or technique, never of a shared supplier, until the threshold and the matched strings are counted.
+
+### Rule-hunting platform limits
+
+The rule-hunting platform needed a specific route to confirm deployment. An inert manifest fixture that matched the extension-manifest rule locally produced no hit in the platform's manual file scan, which showed that the manual scan is not a validation path for account-deployed rules. The authenticated listing of deployed rules is, and on 10 November it returned all thirty-three expected rules as active. A rule's reference-sample field is metadata: it neither submits that sample nor triggers a retroactive scan of it. The platform documents YARA 4.2.1, while my replays ran under 4.5.4 and 4.5.5.
+
+### Upstream contributions
+
+I offered the content to five public projects, and all five pull requests still await maintainer review:
+
+| Destination | Contribution |
+|---|---|
+| Yara-Rules | PR #462, two candidate rules and an index include, under GPL-2.0-only |
+| Signature-Base | PR #431, the same two rules with per-rule MIT metadata, attribution and references |
+| CAPE community repository | PR #604, three raw-file candidates under explicit MIT terms |
+| Awesome-YARA | PR #81, an index entry for the companion |
+| Velociraptor Artifact Exchange | Draft PR #1340, a file-only manifest artifact that collects no files and inspects no process memory |
+
+A rule suite cannot be contributed unchanged, because each destination imposes its own license on what it accepts. The CAPE PR asks the maintainers to confirm terms, since that repository declares no root license, and I held back seven further candidates that match only after local archive expansion. The three CAPE rules compile under YARA 4.5.5 and matched forty retained case-object views with no hits in the bounded control corpus.
+
 ## Limitations
 
 - The local software baseline is small and uncurated, so it cannot estimate fleet false-positive rate or production precision.
 - YARA does not determine whether matched strings are reachable code.
 - Hash rules are evaded by modification or repackaging.
 - Engine compatibility on the public rule-hunting platform is not confirmed.
+- No rule has met an independently curated endpoint corpus, so neither a false-positive rate nor recall exists for the suite.
 
 ## Conclusion
 
-The 33 rules match the retained artifacts and stay quiet on the local controls, but those controls are bounded, and a hit identifies content rather than execution, data transfer or attribution. The noise review showed that research prose and my own published material are necessary controls for marker-heavy rules.
+The 33 rules match the retained artifacts and stay quiet on the local controls, but those controls are bounded, and a hit identifies content rather than execution, data transfer or attribution. The noise review showed that research prose and my own published material are necessary controls for marker-heavy rules. The markers that survive rotation are operator-specific conjunctions, not framework names, file names or settings keys, and detection ratios and shared rule hits mean little until the engines and matched strings are counted.
 
 The scanner raised few errors on ordinary software but warned on few public malware samples, and its file selection misses the configuration launchers that matter most for this kit. Defenders should combine content rules with authentic endpoint logs and check the file type and acquisition context of every hit. I submitted indicators to ThreatFox on 7 November and a launcher to MalwareBazaar on 8 November.
 

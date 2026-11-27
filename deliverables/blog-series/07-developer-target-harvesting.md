@@ -1,7 +1,7 @@
 ---
 title: "From Commit Metadata to a Developer Target List"
 description: "Reconstructing the harvester, sender configuration and aggregate counts behind two SQLite targeting pools."
-date: "2026-11-26"
+date: "2026-11-27"
 published: "2026-10-25"
 author: "Ilja Krasnjanski"
 canonical: "https://krasforge.github.io/UNK_DeadDrop/articles/07-developer-target-harvesting/"
@@ -19,10 +19,10 @@ I found that the UNK_DeadDrop sender tooling drew on two SQLite pools holding 14
 
 ## Key takeaways
 
-- The two pools contain 79,698 and 62,667 rows, with 142,365 distinct address strings associated with 27,698 repository values.
-- The harvester searched public repositories by star range only, and three workers added about 130,000 addresses in a single day.
+- The two pools contain 79,698 and 62,667 rows, with 142,365 distinct address strings associated with 27,698 repository values; the harvester searched public repositories by star range only, and three workers added about 130,000 addresses in a single day.
 - Crypto or web3 repository names make up only 0.6 percent of the repository values, which rules out a curated list for an operation that steals cryptocurrency.
 - The five recruitment accounts active in July held 172 public repositories, of which 153 were credibility props.
+- The sender is a custom cold-outreach mailer with per-sender limits and warm-up, not Gophish, and its mail moved from Namecheap Private Email to Mailgun subdomains that are visible in certificate logs.
 - No send logs or endpoint records were recovered, so the number of people contacted or compromised is unknown.
 
 ## Impact: an untargeted list of real open-source contributors
@@ -31,6 +31,8 @@ The sender configuration pointed to two SQLite databases. I followed those refer
 
 The harvesting code collected those addresses from public commit metadata for use by the sender tooling. The operator had committed the harvester together with its output to a public repository under the GitHub account of TronzitVeca. TronzitVeca is the central persona of the operation's persona farm that [Part 15](15-persona-farm.md) examines, so the tool and the list it produced came from the same place.
 
+More precisely, the tool sits as the subdirectory `Github-Fetch-Tool` inside the repository `Github-Email-101` of the GitHub account `0xapp123`, the persona's main account, which GitHub has since suppressed. The same `0xapp123` name owns the GitLab account that created the third dead-drop repository in November ([Part 6](06-gitlab-dead-drop-infrastructure.md)). The operators' own runbook describes the method in its own words under the heading "Logic for Scraping GitHub Users": the GitHub API plus page scraping, with pagination and rate-limit evasion.
+
 ### Repository names show no curation
 
 Of the 27,698 repository values, 595 (2.1 percent) have names suggesting 3D or graphics work, such as Blender, Unity, Unreal, WebGL, shaders or rendering. That count comes from repository names alone. I measured other categories the same way:
@@ -38,6 +40,17 @@ Of the 27,698 repository values, 595 (2.1 percent) have names suggesting 3D or g
 - design and interface work: 1.5 percent;
 - AI and machine learning: 2.9 percent;
 - crypto or web3: only 0.6 percent.
+
+| Category | Repository values | Share |
+|---|---|---|
+| AI and machine learning | 811 | 2.9% |
+| 3D and graphics | 595 | 2.1% |
+| Design and interface | 419 | 1.5% |
+| Crypto or web3 | 175 | 0.6% |
+
+*Table 1. Keyword categories in the 27,698 harvested repository values, from repository names alone.*
+
+The 2.1 percent 3D share is about GitHub's background rate for such names, not a sign of selection.
 
 For an operation whose income is cryptocurrency theft, crypto being the smallest category rules out a curated list. The pool is an untargeted mailing list of real open-source contributors, and selection has to happen later.
 
@@ -51,7 +64,21 @@ The recovered console shows where selection happens. Its mail operation records 
 
 All three drop the same pair of droppers. The `3dscenebox[.]online` lure in [Part 1](01-clickfix-clipboard-manipulation.md) initially looked like a campaign against 3D artists. Five independent checks found no separate sourcing channel for that group, and the evidence fits a skin on the existing kit sent to the same broad pool.
 
+The five checks were these:
+
+1. The harvester queries star bands only, with no vertical filter.
+2. The operators' console models a target by a `github_username` field and has no portfolio or design-platform field anywhere in its schema ([Part 8](08-administration-platform.md)).
+3. `3dscenebox[.]online` is the only 3D or design-themed domain the operators ever registered, and its mail exchanger is unconfigured forwarding, so nothing was ever mailed from a design-themed identity.
+4. Traffic reaches the page through per-recipient URL tokens, so an artist cannot stumble onto it by discovery.
+5. The operator handle set is essentially absent from the design platforms.
+
+All three skins also set the same command hosts, `api.aazdias[.]ink` with `api.fallaazdis[.]ink` as fallback. Detection therefore has to key on the kit, not on the profession a lure is themed for, and there is no community of 3D artists to warn as a group.
+
 The chain is confirmed from the recipient's side as well. A later "Surge Group" lure arrived on 23 July at an alias I had given only to GitHub, and the Nodit sender wrote that they had found the recipient's GitHub profile.
+
+### A public reply measures the keyword, not the victim
+
+The operators also recruited in public. The persona's X timeline carries developer-recruitment posts from at least November 2023 that funnel replies into a short "test project", as [Part 15](15-persona-farm.md) describes. I checked the 22 accounts that had publicly answered two of those posts. Eighteen sell creative commissions or reply to hiring posts in volume, one is a recruitment vendor, and only one is a developer whose linked GitHub account fits a real candidate. Public engagement with a lure measures who watches the keyword. Who was actually sent a test project stays private to the platform.
 
 ## Harvesting: one harvester fed two address pools
 
@@ -61,8 +88,9 @@ The harvester works in these steps:
 2. For each repository, it walks up to twenty branches.
 3. It takes the author and committer addresses from a single listing of up to 100 commits per branch.
 4. It lowercases and trims the addresses and discards GitHub's no-reply addresses.
+5. It deduplicates into SQLite, records its progress in a file so it can resume, and sleeps until the platform's rate-limit reset when it runs out of requests.
 
-Worker configurations partition the search. The scheduler log records three workers on a Windows host between 18 and 20 April 2026, adding about 130,000 addresses in a single day, which shows how cheaply the whole list could be rebuilt. Merge code then consolidates the results into two master pools that together occupy about 12.4 MB.
+Worker configurations partition the search. A scheduler stops the workers daily, merges and clears their results, and restarts them. The scheduler log records three workers on a Windows host between 18 and 20 April 2026, adding about 130,000 addresses in a single day, which shows how cheaply the whole list could be rebuilt. Merge code then consolidates the results into two master pools that together occupy about 12.4 MB.
 
 MITRE ATT&CK classifies this reconnaissance as [gathering victim email addresses (T1589.002)](https://attack.mitre.org/techniques/T1589/002/). The SQLite relation is simple:
 
@@ -74,7 +102,7 @@ emails
 
 ### The pool split follows mail domains
 
-The split between the pools is not a targeting decision. The merge step sorts each address by its mail domain against a fixed list of 22 domains, mostly consumer mail providers, that the code labels anti-spam. The `antispam` pool holds addresses at those providers, and the `safe` pool holds corporate and other addresses.
+The split between the pools is not a targeting decision. The merge step sorts each address by its mail domain against a fixed list of 22 domains, mostly consumer mail providers, that the code labels anti-spam. The `antispam` pool holds addresses at those providers, and the `safe` pool holds corporate and other addresses. Gmail alone accounts for 53,783 of the 62,667 addresses in the `antispam` pool. The split serves deliverability, since consumer and corporate mail filters treat bulk senders differently.
 
 ![Two pools, two different counting problems](assets/07-targeting.png)
 
@@ -83,6 +111,8 @@ The split between the pools is not a targeting decision. The merge step sorts ea
 ### Star ranges divided the repository search
 
 The three worker configurations each query a different band of repository star counts: `stars:101..137`, `stars:138..174` and `stars:175..210`. None specifies a language, topic, keyword or organization. The harvester therefore searches public repositories across those bands instead of selecting a particular kind of developer.
+
+Each configuration requests 10 results per page for up to 100 pages. The bands therefore cover mid-popularity repositories of about 101 to 210 stars, not widely used projects.
 
 ## Counting: 142,365 distinct address strings
 
@@ -123,9 +153,35 @@ The sender is a custom bulk cold-outreach tool rather than Gophish, despite shar
 
 It has no landing pages, link rewriting or credential capture. The database references connect harvesting to message preparation, but no send logs were recovered to establish which addresses received messages.
 
+### The mail console: a cold-outreach mailer
+
+A live mail panel on `yukismt[.]ink` is the console side of the same tool. I compared its routes with Gophish's published route definitions, and it is a different application:
+
+- Gophish configures sending through `/api/smtp/` sending profiles, while this console uses `/api/senders`, described as business mailboxes, SMTP, limits and template pools;
+- Gophish's landing pages and credential capture, with `/api/pages/`, `/track` and `/report`, are absent, and the bundle contains no click tracking, link rewriting or redirect;
+- the front end is a single vanilla JavaScript file rather than Gophish's admin interface.
+
+Read from its own section headings, it is a cold-outreach mailer. It has per-sender daily limits with warnings above warmed-mailbox volumes, randomized pacing, a per-sender egress address over WireGuard, an optional reply-to address, automatic bounce removal and suppression, plain-text or HTML templates with an optional open pixel, and exportable send outcomes. I saw only its front end.
+
 ### Mail relays moved from Namecheap to Mailgun
 
 The sender code's variables carry a `ZOHO` prefix, but the code connects to Namecheap Private Email at `mail.privateemail.com`. Earlier toolkit campaigns used it as a real production relay. The July campaigns moved to Mailgun, and the retained headers show its VERP envelope behavior for the D2S and Category Labs messages.
+
+The code connects on port 587 and leaves through Private Email's shared outbound relays, among them `198.54.127[.]82`. The operators' runbook names that address while asking an AI assistant how to get past Gmail's filtering, which is the likelier reason for the move to Mailgun. Because the relay is shared by every Private Email customer, it is a poor blocking target. Its value lies with the provider, which can map the persona domains configured for Private Email to an account.
+
+### Mail subdomains: a naming scheme visible in certificate logs
+
+On Mailgun, the operators gave each actively recruiting base its own sending subdomain, configured in both Mailgun regions:
+
+- `email.` or `hr.` labels are the recruiting-mail senders, for example `email.dev.d2saitrade[.]ink`, `email.apexsyshire[.]ink` and `hr.surgecareer[.]ink`;
+- `hiring.` labels are job-application landing pages, such as `hiring.aavcareer[.]ink` and `hiring.optixauvex[.]us`;
+- none of these labels appears on any command base.
+
+The labels appear only on bases that actually recruit, so their arrival in certificate logs marks an active recruiting domain. Later lure domains add a second tell. An `open.mail.` or `open.hr.` host with an Amazon-issued certificate, often logged on the day of registration, is a mail open-tracking endpoint. Its presence suggests that the domain sends the lure mail itself, an inference from naming and issuer rather than from an observed message.
+
+### The lure mail: warm outreach from rotating brands
+
+The three lure messages I hold share one body pattern: warm, fluent, native-English recruiter outreach with a fabricated or impersonated employer, a lookalike sending domain registered weeks earlier, a signature linking to the real company and a single link to a careers page carrying the ClickFix kit. The impersonated brand rotates every few weeks, through Category Labs, Nodit, D2S and "Surge Group". The recruiter names in the signatures are fabricated personas.
 
 The June Nodit message came from the lure domain's own mail server with a DKIM key that was never published. A month later the July messages passed SPF, DKIM, DMARC and ARC checks. This learning curve says nothing about legitimacy when the attacker owns the domain.
 
@@ -142,9 +198,32 @@ I also examined the accounts supplying the recruitment material, separate from t
 
 Seven others were forks of third-party projects, including two AI coding tools. The catalog labels 152 repositories as credibility props based on their names, file layouts and creation patterns. It separately flags one more prop for an encrypted `.env`, bringing the total to 172.
 
+The accounts divide by role:
+
+- `0xapp123` holds all five roles at once, including the harvesting and sending toolkit;
+- `diobenu2silva` is the long-lived persona shell;
+- `Lyracartoon` is a pure delivery account with no credibility dressing;
+- `pridnet` is a seed-then-deploy account;
+- `Tronzit-Veca` holds the lure funnels, among them the 128-star contract below and an 84-star Raydium bot built on the same withheld-code model.
+
 ### Credibility props make up nine in ten repositories
 
 The credibility props include NFT marketplaces, staking programs, dice and coinflip games, trading bots, pump.fun clones and small "GPT" tools. They use the Rust, TypeScript and Python stack expected of a Solana or EVM contractor. Together, the 153 props make up roughly nine in ten repositories, giving each account the appearance of an active engineer's portfolio.
+
+| Prop type | Repositories |
+|---|---|
+| NFT projects | 23 |
+| Gambling games | 22 |
+| Trading and arbitrage bots | about 21 |
+| Staking and marketplace projects | 15 |
+| AI and LLM tools | 10 |
+| pump.fun clones | 5 |
+| BRC-20 projects | 4 |
+| Launchpads, wallets and DEX projects | 2 each |
+
+*Table 2. The larger groups among the 153 credibility props, which cluster on the target demographic's interests.*
+
+A prop label describes function in the operation, not malicious code. The props are still not harmless, because a third party can clone a plausible launchpad or trading bot on the strength of the account's apparent history.
 
 ### Creation dates show how the accounts were built
 
@@ -160,6 +239,10 @@ The creation dates show how some of the accounts were built:
 A byte-level sweep using two methods found operator indicators only in the known weaponized copies. The other signature hits were false positives I checked by reading the files. A benign clipboard helper copied the text it displayed, and a marker matched inside the word `bogus` in a fork of Aider. Seven install hooks belonged to ordinary build tooling.
 
 The credibility repositories carried no payload, but their apparent activity could make a recruiter seem trustworthy.
+
+A file-tree sweep of all 172 repositories, at path level, found the kit only in the two weaponized repositories already known, so no third one surfaced. The sweep cannot see a payload inside an innocuously named source file or an archive, and it excludes accounts that have gone private or been deleted.
+
+The clean take-home repositories are clean by design. A static sweep of every text file on every branch found no dynamic code construction, process execution, encoded blob, install hook, dependency override or non-registry dependency across more than 900 resolved lockfile entries. I hold both the clean public source of one lure and its weaponized deployment under a delivery account, so the out-of-band delivery is shown rather than inferred. Scanning the public repository finds nothing; the signal is the unsolicited take-home from a recruiter.
 
 ## Inverted recruitment: a public contract repo directed questions to a private contact
 
@@ -182,6 +265,8 @@ The contents of a private version remain unknown. It might add authority over de
 
 The public repository names a real 2024 launchpad as its homepage, and a second operator repository describes its Solidity contract as written for the same site. The project had its own public team, on-chain program and deployer authorities. None matches a wallet in the operator set. The link supports contract work for the launchpad, not ownership of it. The domain's later re-registration served an unrelated site.
 
+The wider portfolio shows the same specialism: token launchpads, a fee-taking launchpad variant and a coinflip game sit beside the contract. I found no deployed instance of any of them. The contract's declared program ID is the repository's own example value and is not on mainnet. The tooling shows competence in exactly the launchpad and gambling code a laundering layer would need, not an act of laundering.
+
 ## Limitations
 
 No message logs or endpoint records were recovered.
@@ -189,11 +274,13 @@ No message logs or endpoint records were recovered.
 - Sender configuration connects the databases to message preparation, but counting people contacted or compromised would require send logs and endpoint records.
 - The repository total counts stored values. I did not reverify each repository's existence or ownership.
 - The category percentages come from repository names alone.
+- I saw only the mail console's front end, so its sending volume and recipients are unknown.
+- The open-tracking reading of `open.mail.` and `open.hr.` hosts rests on naming and issuer, not on an observed message.
 - The queries compare stored strings, so aliases and multiple addresses of one person remain separate entries.
 
 ## Conclusion
 
-The harvester collected addresses for messages; the public contract projects drew developers toward private conversations. Both feed the same recruitment operation from opposite directions. The address list itself is broad and cheap to rebuild, and the targeting happens in the conversation that follows a reply.
+The harvester collected addresses for messages, a throttled cold-outreach mailer sent them through rotating brands, and the public contract projects drew developers toward private conversations. Both feed the same recruitment operation from opposite directions. The address list itself is broad and cheap to rebuild, and the targeting happens in the conversation that follows a reply.
 
 For defenders, an unsolicited recruitment message to an address published only in commit metadata fits this pattern. The pretext shifts to match what the recipient says about themselves, so a 3D, crypto or no-code pitch is the same kit. A repository that withholds key code and directs questions to a private contact deserves the same caution.
 

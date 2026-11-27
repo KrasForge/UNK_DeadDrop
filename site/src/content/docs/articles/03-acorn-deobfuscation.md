@@ -1,7 +1,7 @@
 ---
 title: "Parsing Without Executing: JavaScript Deobfuscation with Acorn"
 description: "Rebuilding an AES key from sixteen obfuscated fragments with Acorn, and proving it with authenticated decryption without ever running the malicious extension."
-lastUpdated: 2026-11-26
+lastUpdated: 2026-11-27
 published: 2026-10-25
 sidebar:
   order: 3
@@ -36,7 +36,7 @@ I reconstructed the VSIX loader's AES key from sixteen obfuscated fragments, nin
 
 - Parsing the loader with Acorn exposed wrapper functions that a regex missed, because one wrapper declared an intermediate value before returning.
 - Printable output is a weak test of a string-table rotation: a third of the first 400 array entries produced more than one printable candidate, and a wrong rotation silently returns other real strings.
-- GCM authentication is the strong check; `openssl enc` lacks it, so I verified the stored tags with Node's cryptographic library.
+- GCM authentication is the strong check; `openssl enc` lacks it, so I verified the stored tags with Node's cryptographic library. The same check showed that the ClickFix chain's key opens none of the VSIX payloads.
 - In a 14,400-sample ground-truth test, the revised scanner engine recovered 99.8% of hidden strings, and none of 3,265,560 decoded call sites was misplaced.
 - Release 0.2.0 on the registries has no fallback parser and never examined 31,292 of 143,153 calibration files, so a completed scan is a pattern check, not a safety verdict.
 
@@ -103,7 +103,11 @@ The recorded offsets were 391 for the extension and 261 for the bootstrap. The s
 
 Printability remained a heuristic, and a weaker one than it looks. When I later decoded the first 400 entries of the extension's array by brute force, a third of them produced more than one printable candidate. A pass that keeps any printable decoding reports 3,898 of 3,899 entries decoded while choosing wrong values.
 
-For this obfuscator family a wrong rotation does not fail; it silently returns other real strings from the same program. The next checks were whether each string fit its call context and whether the key fragments could be reconstructed in source order. The encrypted payloads would provide a stronger validation.
+For this obfuscator family a wrong rotation does not fail; it silently returns other real strings from the same program.
+
+The scheme explains why. Both obfuscated components use a rotated string array and a decoder that takes an index and a key, a custom base64 alphabet that puts lowercase letters first, then UTF-8 and RC4 with fifty-one distinct four-character keys supplied per call site. The correct key is a property of the call site, not of the array entry. Measured over the first 400 entries, 133 yield more than one printable candidate, so "first printable match wins" picks the wrong one whenever a wrong key happens to produce ASCII first, which for five-character plaintexts is common.
+
+Two further traps sat beside it. Decoding with the standard base64 alphabet also produces printable-looking garbage instead of failing. A brute-force consensus over a handful of resolvable sites produced five spurious solutions, each of which decoded one anchor and nothing else. The next checks were whether each string fit its call context and whether the key fragments could be reconstructed in source order. The encrypted payloads would provide a stronger validation.
 
 ### Putting the sixteen fragments back in order
 
@@ -131,6 +135,34 @@ With the corrected operation, all three payloads passed authentication:
 
 All three payloads decrypted to readable, commented source. Authentication tied each plaintext to its encrypted input under the recovered parameters. Execution and collection outcomes require endpoint evidence.
 
+## Results: two delivery routes, two keys, one leaked path
+
+### The ClickFix key does not open the VSIX payloads
+
+The ClickFix chain's stage-three loader also uses AES-256-GCM, with its key embedded in the loader. I tested that key against all three encrypted payloads of the repository route, across four plausible layouts of nonce, ciphertext and tag, and no layout verified for any of them. Because GCM authenticates, that is a clean negative rather than an inconclusive one: a correct key would have verified.
+
+The two delivery routes therefore encrypt their payloads under different keys, and recovering one does not compromise the other. Nothing was lost in understanding, because the equivalent components were recovered in plaintext from the ClickFix chain, and one of them carries the same filename in both.
+
+The same comparison dates builds. The stage-three build served from a later lure host is the same short AES-256-GCM design with the key embedded, and decrypted with the documented layout it diffs cleanly against the July build. A dead-drop host the operator had mistyped three weeks earlier appears only in a code comment, beside resolver logic added so that a stale or mistyped server name cannot override an upload base that already works. The operator patched its code after its own mistake, which dates the build to after the typo. The mistyped name is unregistered, and the code now avoids it.
+
+### What the Python component left in cleartext
+
+The Python component was encrypted but never obfuscated, so once the key was recovered everything in it was readable. Its module docstring ends with four usage examples that were never sanitized. They carry an absolute path from the machine the tool was written on, six times across four command lines:
+
+```text
+C:/Users/Administrator/Documents/_Task/PShell/Yuki/dionbenu2yuki/utils/
+```
+
+The examples reference the decryptor, a requirements file, a PowerShell staging wrapper whose name I had not seen before, and an output file written back into the same directory. They also use Chrome profile ten rather than the default profile, which fits a test rig or many personas in one browser and is too weak to build on.
+
+Read segment by segment, the path looks like a per-operator working tree under a shared task root: a tasking folder sorted to the top, a PowerShell tooling tree, a directory named after a persona that matches a known dead-drop commit author, and a per-target subproject. A directory name is a different class of evidence from commit metadata, which anyone can forge, because whoever used the machine named it. It is still a persona, not a real name, and it differs from the public handle by one character.
+
+The leak fits a pattern. The operators strip build metadata carefully elsewhere, with trimmed Go build paths, heavy string-array obfuscation on the JavaScript and authenticated encryption on the payloads, so their anti-forensics is mechanical and done at build time, not editorial.
+
+### Antivirus counts need the same care
+
+VirusTotal showed nine detections on `detect_malware.py`. Seven of them are one BitDefender-engine signature, `Generic.PY.PxaStealer.A.8601263C`, resold under OEM licences, so there are three independent detections, not nine. The label names a Chrome-decryption technique that PXA Stealer also uses; it is not an attribution. Counting detections by engine rather than by vendor applies to every ratio quoted about these files.
+
 ## Scanner: the checksum loop finds the rotation
 
 ### How the engine solves the rotation
@@ -142,9 +174,13 @@ The evaluated engine identifies the decoder variant from its syntax, reimplement
 - For the extension, it reaches rotation 391 and decodes 2,139 of 2,140 call sites.
 - For the bootstrap, it reaches rotation 261 and decodes 15 of 17.
 
-These agree with the manually established rotations without executing the extension. The decoder also refuses to run unless two independent anchors decode to the expected module names, so a rotation that merely reads as text is not enough.
+These agree with the manually established rotations without executing the extension. The revised engine described below goes further on the same files: 4,048 of 4,048 call sites in the extension and 1,038 of 1,038 in the bootstrap. The decoder also refuses to run unless two independent anchors decode to the expected module names, so a rotation that merely reads as text is not enough.
 
 Recovered strings become available to other rules, including calls whose module names are hidden behind decoders. If the checksum cannot be solved, a printable-consensus heuristic may help. Otherwise the array remains unresolved.
+
+The consensus rule is deliberately strict. A rotation is accepted only if it decodes at least eighty percent of up to sixty-four call sites to printable text and the runner-up decodes at most half as many. A keyless base64 or plain array, printable under every rotation, is therefore reported as unresolved instead of being resolved wrongly.
+
+The rule that an array is never assumed unrotated when recognized rotation code exists cost the most to learn. An earlier implementation missed a parameterless `for(;;)` loop and decoded twenty-two files from commercial bundles under rotation 0, producing text that looked plausible under the wrong rotation. An unrecognized rotator yields wrong strings silently, so partial recovery always has to be read against the number of unresolved call sites.
 
 ### Recovery measured against ground truth
 
@@ -152,10 +188,34 @@ I later measured that recovery against ground truth rather than against printabi
 
 The revised engine recovered 99.8% of hidden strings on the two main releases and 99.7% on the held-out releases. Of 3,265,560 decoded call sites, none was misplaced.
 
+The design is reusable, and its most valuable part is that it checks its own instrument:
+
+- The fifty inputs were drawn by seeded sample from 1,325 eligible packages of the calibration corpus, one file per package, each with no findings, three to thirty kilobytes long and carrying at least fifteen distinct string literals.
+- The grid crossed string encoding, rotation, wrapper style, the calls transform and index shift, with only the string-array transforms enabled, so control-flow flattening and dead code add no strings.
+- A produced string counts as wrong only when neither the original nor the obfuscated sample can account for it directly or as a concatenation.
+- The misplacement check was validated against itself: twenty-five correctly decoded samples gave zero misplaced sites of 5,402, while shifting every decoded value by one array position misplaced 4,240 of 4,903.
+- Because the engine fixes were designed against these samples, the held-out inputs were generated afterwards under three releases never used before. They exposed a gap in the reference sequence, missing class field names, rather than in the scanner.
+
+The three engines show how recall moved while precision held:
+
+| Engine | Recall, release 5.9.0 | Recall, release 4.1.1 | Decoded sites misplaced |
+|---|---|---|---|
+| Evaluated (frozen) | 68.3% | 0% | 0 of 492,474 |
+| Hardened | 87.2% | 0% | 0 of 638,574 |
+| Revised | 99.8% | 99.8% | 0 of 3,265,560, held-out releases included |
+
+*Table 1. String recovery by engine against ground truth.*
+
+The pooled median time per obfuscated sample was 32 to 60.5 milliseconds per engine, and 15 to 65 milliseconds per release, against recorded baseline medians of 290 and 1,045 milliseconds.
+
 The same experiment found a version boundary in the published tools:
 
 - The two static deobfuscators, synchrony and obfuscator-io-deobfuscator, decode output up to release 4.1.1 and nothing from 4.2.2 onward.
 - webcrack, which runs the decoder in a sandbox instead of matching its shape, recovered about 98% on both.
+
+On the stratified subset, webcrack 2.16.0 recovered 98.1 percent of hidden strings from both 5.9.0 and 4.1.1 output. synchrony 2.4.6 recovered 98.2 percent from 4.1.1 and nothing from 5.9.0, reporting no decoder. obfuscator-io-deobfuscator 1.0.6 recovered 98.0 percent from 4.1.1 and nothing from 5.9.0, leaving the array in place, and timed out on 144 samples, all from one input whose self-recursive function inlining never converges. Its unreleased main branch at commit `42efc01` decodes 3.2.7, 4.1.1 and 5.0.0 output, so the published release is behind its own repository.
+
+Each of the three tools produced an unexplained string on exactly one input, by a different mechanism: a constant `JSON.parse` rewritten to an object literal, an obfuscator identifier turned into a property name, and a constant folded to `undefined`. The last one does not change the program's behavior. I reproduced it before reporting it, and the folded value sits in an unreachable branch; the same output appears on the unobfuscated original, so there was nothing to report upstream. Writing the reproduction first, with the unobfuscated original as a control, is what caught that.
 
 A tool that matches a decoder's shape is exact until the shape changes. After that it is silent rather than wrong, which is the safer failure but reads like a negative unless someone checks coverage.
 
@@ -167,7 +227,9 @@ A hardened engine now recognizes more rotation steps and accepts stored order on
 
 ### Implementation and releases
 
-The [scanner paper](../../downloads/UNK-Scanner-Paper.pdf) describes the evaluated implementation, including its per-process restrictions and resource limits. The command-line output records which isolation controls were applied (Linux network-namespace isolation depends on host support). Installation and current release instructions are maintained in the [companion repository](https://github.com/KrasForge/unk-scanner), with packages on [npm](https://www.npmjs.com/package/unk-scanner) and [PyPI](https://pypi.org/project/unk-scanner/).
+The [scanner paper](../../downloads/UNK-Scanner-Paper.pdf) describes the evaluated implementation, including its per-process restrictions and resource limits. The command-line output records which isolation controls were applied (Linux network-namespace isolation depends on host support).
+
+Each file is analyzed in a pool of child processes under the Node.js permission model, with no file writes, child processes, workers or addons, reads limited to the scanner and its parser dependencies, code generation from strings disabled, a 512 MiB heap, an empty environment and a per-file deadline that kills and replaces the process. A hostile rule module that attempted a file write, a process launch and a network connection was refused all three. These controls bound resource use and access when analysis fails; containment of an arbitrary parser or engine exploit remains untested. The isolation costs about six percent of throughput at four workers, and the binding constraint is heap rather than CPU: under the earlier 256 MiB limit, thirteen bundles of five to eight megabytes failed. Installation and current release instructions are maintained in the [companion repository](https://github.com/KrasForge/unk-scanner), with packages on [npm](https://www.npmjs.com/package/unk-scanner) and [PyPI](https://pypi.org/project/unk-scanner/).
 
 The packaged release and the evaluated engines are not the same software. The hardened and revised engines and the TypeScript and JSX fallback exist in the companion repository's source.
 

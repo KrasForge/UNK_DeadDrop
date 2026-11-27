@@ -1,7 +1,7 @@
 ---
 title: "Where Overlord Ends and the Collection Toolchain Begins"
 description: "Overlord build metadata, browser-store selectors, wallet-upload markers and capture components in the Linux agent."
-lastUpdated: 2026-11-26
+lastUpdated: 2026-11-27
 published: 2026-10-25
 sidebar:
   order: 12
@@ -66,11 +66,15 @@ vcs.revision         056221e342357056c8539585806f76632660e414
 vcs.time             2026-07-21T01:14:06Z
 ```
 
-The module path connects the binary to the Overlord agent codebase. The `wazero` dependency supplies a WebAssembly runtime, consistent with the framework's plugin support. SQLite provides local database functionality, which becomes relevant alongside the browser-store markers elsewhere in the file.
+The module path connects the binary to the Overlord agent codebase. It is the framework's own module name, declared in its public module file, not a name the operators chose, so it identifies the framework rather than a fork. What shows a private fork is that the embedded build revision is absent from the public history. The `wazero` dependency supplies a WebAssembly runtime, consistent with the framework's plugin support. That runtime is a stock feature with sample plugins shipped publicly, and the implant pins an older version than current upstream, so it carries little attribution value. SQLite provides local database functionality, which becomes relevant alongside the browser-store markers elsewhere in the file.
 
 ### The build timestamp bounds the build only from below
 
 The [Go build-setting documentation](https://go.dev/pkg/runtime/debug/?m=old) defines `vcs.revision` as the checkout revision and `vcs.time` as its associated modification time. The timestamp is therefore version-control metadata that bounds the build only from below, and the binary's compilation time remains unverified. The recorded repository lookup did not locate the embedded revision, leaving the corresponding source checkout unresolved.
+
+The field is still useful for timing. Its value of 01:14:06 UTC on 21 July falls five minutes and thirty-four seconds after the Date header of the D2S AI Trade recruitment message, and `vcs.modified` is false. Either the revision was committed while the send was scheduled, or the proximity is coincidence; on either reading build and campaign work ran as one workflow ([Part 10](../10-investigation-connections/)).
+
+The earlier May agents tell the same story from the build side. Their cgo settings point to an Apple Silicon build host, and about seventy seconds pass from source commit to finished extension, as [Part 2](../02-vsix-editor-execution/) sets out.
 
 ![Overlord framework and collection components](../assets/12-framework-boundary.png)
 
@@ -95,13 +99,34 @@ Counted as entries of the Go function table, which survives symbol stripping, th
 - 242 and 106 functions in the macOS builds;
 - 210 or 211 and 71 functions in the Linux builds.
 
+The function-name table, which also lists inlined functions, gives 254 and 120 for macOS and 221 and 82 for Linux. Other counting definitions give other numbers, so I quote the function table.
+
+The six builds cover darwin arm64 and amd64 and linux amd64, arm64, 386 and arm. They share Go 1.27.3 and the same dead drop, and none was known to VirusTotal when I fetched them. The two macOS builds are:
+
+| Build | SHA-256 |
+|---|---|
+| darwin/arm64 | `187a5535d4c91fd52d5a9a0285efe91fb0e70c007e619d55bb13a530a123a4f5` |
+| darwin/amd64 | `3084e392a581009bef973faa15ad4f8cb36a1aa248c447944b38616044aea04d` |
+
+The dotted numbers in their strings are ASN.1 object identifiers, not addresses. The host they were served from returns no listing and has no Windows Go agent, exactly as the kit's own code implies, since the Windows branch uses the Node agent instead.
+
 The `browserlogin` package holds Chromium master-key derivation, Safari keychain export, Firefox NSS decryption and a credential vault. The same layer carries:
 
 - a thirty-five-entry wallet-extension list;
 - a bypass of Chrome's App-Bound Encryption;
 - an environment namespace prefixed `GUS_`, whereas every upstream variable is prefixed `OVERLORD_`.
 
-The server-side agent token in the current build is byte-identical to the July builds' token. The dead drop moved, the lure host changed and thirty-six functions were added in between, so the reused credential survives the rotations that break host-based links. The value is not reproduced here.
+Collection targets in these builds are Firefox `key4.db`, the wallets MetaMask, Phantom, Backpack, Solflare, TronLink and Enkrypt, the macOS keychain, Chrome and Edge profiles including Edge Beta, and a keyword file search.
+
+The server-side agent token in the current build is byte-identical to the July builds' token. The dead drop moved, the lure host changed and thirty-six functions were added in between, so the reused credential survives the rotations that break host-based links. The value is not reproduced here. The same token already tied two campaigns six days apart in May to one server instance ([Part 2](../02-vsix-editor-execution/)).
+
+An earlier August macOS build, held among public sources only by VirusTotal and detected roughly ten times in Kaspersky's own telemetry, is a different file from the November builds; [Part 2](../02-vsix-editor-execution/) lists it.
+
+### The agent protocol is the framework's
+
+The agent speaks Overlord's own protocol: a WebSocket at `/api/clients/<id>/stream/ws?role=client` with an `X-Agent-Token` header, and snake_case commands including `file_list`, `file_download`, `file_upload`, `file_zip`, `process_list`, `process_kill`, `screenshot`, `silent_exec`, the `plugin_*` family and `uninstall`. Through the plugin channel the server can stream a native library into a running agent, so a build's recovered capability set is a floor rather than a ceiling. No plugin files sit on the serving host, because plugins travel over the agent connection.
+
+The C2 panel these agents report to is built from an early-March public Overlord base with only cosmetic changes, which [Part 16](../16-control-layer-after-october/) shows by diffing captured assets against the framework's history. The panel's self-signed certificate also comes from the framework's generator, which writes the machine's own interface addresses into it.
 
 ## Collection: browser stores, wallet selectors, and capture symbols
 
@@ -119,9 +144,21 @@ The binary also contains previous-frame, block-comparison and capture-loop symbo
 
 A May Linux build still carried X11 capture, which points to per-platform tailoring over time. The July build has the capture code but not the platform back-ends, and whether it could acquire frames is not established. [The capture analysis](../05-screen-capture-analysis/) examines those symbols and the separate Windows bundle, where capture is mandatory. Display access, code reachability and successful transmission were not reproduced.
 
+In the other direction, an earlier note of mine listed `/api/company-wallet/` as a framework marker, on the assumption that it came with Overlord. Verification found zero occurrences of "wallet" in the upstream readme, either example environment file or the module file. The endpoint, its client-id header and its environment variable are operator additions that merely follow the upstream naming convention.
+
 ### Collection outside the Go agent
 
 The phased JavaScript collection and the Windows Node/Python pipeline occur in separate components of the toolchain. Their functions extend the collection paths beyond the Go executable. On Windows the recovered branch does not use the Go agent at all, and stage three deletes its masquerading executable before installing the Node agent.
+
+The July JavaScript stage three shows the same split between framework and operator in its environment variables. It references thirty-nine in all: thirteen standard system variables, sixteen attacker-defined ones and ten others. Of the sixteen, thirteen are operational, covering the dead-drop resolver override, the phase-three budgets, a standalone runtime cap, upload retry delays and an output path. The other three are developer test hooks left in a production payload, and they are named `OVERLORD_LOCAL_TEST`, `OVERLORD_TEST_EP_OUT` and `OVERLORD_TEST_LOGIN_PASSWORD`, the last of which injects a login password rather than phishing it. Those three are the operators' own variables wearing the framework's prefix.
+
+The server URL, agent token and client-id seed are each compared against a build-time placeholder before use, which the builder substitutes at packaging time. The placeholder strings and the test hooks are operator-specific and survive infrastructure rotation, and together with unit tests shipped inside the Windows agent bundle they show a codebase built without release hygiene.
+
+### Stock dependencies are not indicators
+
+Everything third-party the operator serves from its blob host is stock. The `chrome_decrypt_sitepackages_amd64.zip` archive holds an unmodified pycryptodome 3.23.0 wheel for Windows, and the embeddable Python package matches python.org's file as far as I retrieved it. The member files' names and hashes therefore match every legitimate installation and must not become indicators.
+
+The operator did unpack and re-zip the pycryptodome archive, though. All 352 members match the wheel, yet 1.79 of its 1.80 million bytes differ, so the re-zipped archive's own hash, beginning `d7d2854c`, is the operator's. The operator-specific signal lies in that archive hash, in the re-zip stamps and in the surrounding Go and JavaScript builds.
 
 ## Triage: separating the framework from the actor
 
@@ -130,6 +167,8 @@ Overlord is a public framework that many unrelated parties run, so a practical t
 - anything naming remote control, capture, transport, TLS, mutexes or the module path identifies the framework;
 - anything touching credentials, wallets, seed phrases, the `GUS_` namespace or the delivery chain identifies this actor;
 - an `OVERLORD_` prefix settles nothing on its own, because the operators named some of their own variables to match.
+
+The same rule applies to public sample collections. The `overlord` tags there are dominated by other operators' deployments of the framework on its default port 5173 and by unrelated builds sharing the name, so they cannot isolate this actor ([Part 11](../11-detection-engineering/)).
 
 For file hunting, the wallet-agent rule and [capture-agent rule](https://github.com/KrasForge/unk-scanner/blob/main/rules/yara/deaddrop_capture_agent.yar) select different marker combinations. Both remain experimental. A hit identifies content for inspection, and can include source or research material containing those strings.
 
@@ -144,4 +183,4 @@ For file hunting, the wallet-agent rule and [capture-agent rule](https://github.
 
 The Linux agent is Overlord underneath, but the SQLite driver, the `companywallet` and `browserlogin` packages and the `GUS_` namespace are the operators' additions. That boundary lets an analyst separate unrelated Overlord deployments from this actor's builds.
 
-The reused agent token is a link that survives infrastructure rotation. For an unexpected installed agent, preserve its hash, configuration, launch mechanism and outbound destinations alongside the matching offsets.
+The reused agent token, the build-time placeholders and the test hooks are links that survive infrastructure rotation, while stock libraries shipped in the kit are not indicators at all. For an unexpected installed agent, preserve its hash, configuration, launch mechanism and outbound destinations alongside the matching offsets.

@@ -1,7 +1,7 @@
 ---
 title: "The TronzitVeca Persona Farm: Borrowed Histories and Manufactured Developers"
 description: "How a persona farm behind UNK_DeadDrop built developer reputations from other people's commits, how its operator identity ties together, and how a direction-and-date test separates its personas from the developers it copied."
-date: "2026-11-26"
+date: "2026-11-27"
 published: "2026-11-26"
 author: "Ilja Krasnjanski"
 canonical: "https://krasforge.github.io/UNK_DeadDrop/articles/15-persona-farm/"
@@ -15,7 +15,7 @@ tags:
 og_image_alt: "Structure of the TronzitVeca persona farm, its sub-ring and the adjacent copying clusters, with established and moderate links"
 ---
 
-I found that the TronzitVeca persona farm built developer reputations from other people's commits: in 83 farm repositories, a commit-by-commit comparison with the upstream source verified rewritten authorship. A converging chain of identifiers ties the persona to UNK_DeadDrop's dead-drop infrastructure, and forged identities from the wider farm reached real client work, including write access and a code-owner role over a client repository for ten months.
+I found that the TronzitVeca persona farm built developer reputations from other people's commits: in 110 of 130 flagged farm repositories, a commit-by-commit comparison with the upstream source verified rewritten authorship, 2,907 re-attributed commits in all. A converging chain of identifiers ties the persona to UNK_DeadDrop's dead-drop infrastructure, and forged identities from the wider farm reached real client work, including write access and a code-owner role over a client repository for ten months.
 
 ## Key takeaways
 
@@ -41,15 +41,33 @@ The central identity rests on several independent observations that converge, ra
 2. That identity joins to GitHub account-number references, a git author name and repeated contact instructions.
 3. The Telegram presentation behind those instructions resolves to TronzitVeca.
 
-That chain reaches from a public professional persona into the control infrastructure described in [Part 6](06-gitlab-dead-drop-infrastructure.md), which makes it an anchor and not a coincidence. I hold it at high confidence for one converging operator identity, not for a legal name and not for a single person behind every linked service.
+In more detail, the pieces are these:
+
+- The GitLab account `0xapp123`, user id 33228929, owns the dead-drop repository that the operation's stager reads. Its Gravatar hash equals the SHA-256 of `apollo1030109@gmail[.]com`.
+- That address authored 497 commits across nine crypto repositories under the git author names `0xapp123` and `0xed123`.
+- The READMEs of three farm accounts tell readers to ask `@Tr1030109` on Telegram and `0xapp123` on Discord, and the Telegram preview for `@Tr1030109` reads "Tronzit Veca, Entrepreneur and Founding member".
+- README asset URLs embed `/assets/36965207/`, the numeric id of the GitHub account `0xapp123`, which a platform-generated commit address on an early test-task commit confirms independently.
+
+Beside `apollo1030109` sits a family of addresses on the same numeric pattern. `eros1030109@gmail[.]com` is the hardcoded super-administrator in the operators' own administration platform described in [Part 8](08-administration-platform.md), and `hera1030109@gmail[.]com` is a dormant reserve with no public footprint. Beyond the campaign itself these addresses have almost no public presence.
+
+That chain reaches from a public professional persona into the control infrastructure described in [Part 6](06-gitlab-dead-drop-infrastructure.md), which makes it an anchor and not a coincidence. Counting independent observation paths through the evidence gives twelve for this persona block, spanning identity reuse, hosting, the dead drop and code, so no single record carries it. I hold it at high confidence for one converging operator identity, not for a legal name and not for a single person behind every linked service.
 
 ### The GitHub chronology
 
-The GitHub side has its own chronology. Platform-generated commit addresses bracket the account's rename from `0xed123` to `0xapp123` in April 2024. Archive visits bracket the period in which its repositories stopped being reachable. The account is platform-suppressed rather than deleted, so its numeric identifier and dated artifacts outlast whichever handle a search happens to return.
+The GitHub side has its own chronology. Platform-generated commit addresses bracket the account's rename from `0xed123` to `0xapp123` in April 2024, between 5 and 9 April. Archive visits bracket the period in which its repositories stopped being reachable, between 28 April and 5 October 2026. The account is platform-suppressed rather than deleted: its profile returns not-found while repository listings still answer and its addresses still resolve to it. Its numeric identifier and dated artifacts therefore outlast whichever handle a search happens to return.
+
+A software archive holds 78 of the account's repositories. A merge made in GitHub's web interface is committed by GitHub, so a merge commit whose committer is its author has been rebuilt. In 29 of the 78, every merge commit is committed by its author, `0xed123` at the operator's address, while the merge messages still name the pull-request branches of accounts that no longer exist. Eight are unrewritten, with merges committed by GitHub, and in every one of those the author is not the operator's address but other identities the account later dropped. The account's flagship work was re-signed onto itself. The check proves the history was rebuilt, not why, so I hold the reading that this was deliberate at moderate confidence.
 
 ### Recruitment on both sides
 
 The persona works both sides of recruitment. Its social timeline carries developer-recruitment pitches from at least November 2023 that funnel replies into a short "test project". It also carries posts in which it seeks to be hired as a developer itself.
+
+Decoding the real dates of every post splits the originals cleanly:
+
+- **Recruiter mode, eight posts.** From "This is Oura, CEO at TronzitVeca, a technical agency" in November 2023, through a March 2024 lure that spelled out the hiring process as "Test project in 2 days" followed by calls, to a July 2025 search for business-development managers in the US and UK for "my tech agency". That last facet could recruit unwitting fronts.
+- **Job-seeker mode, eleven posts.** From May 2024 to July 2025, with job-hunt hashtags, portfolio links, cold pitches to founders and an application to a company's careers page.
+
+The account itself was repurposed, not aged. Its identifier dates its creation to 12 July 2022. It posted a handful of NFT-giveaway retweets in August 2022 and two bare links in January 2023, then nothing for about ten months, and came back in November 2023 under a new handle as the TronzitVeca recruiter. A dormancy gap landing exactly on the persona switch fits an account acquired or handed over for the new identity; I hold that at moderate confidence, because replies were not enumerated.
 
 The passively archived part of that timeline, from May 2024 to December 2025, yields no real name. Its five recruitment and agency posts drew no public replies, because respondents were sent to private channels. An earlier lure in December 2023 did draw 29 public replies.
 
@@ -62,6 +80,33 @@ They say nothing about the nationality, residence or real employer of whoever us
 ![Structure of the persona farm and the adjacent clusters](assets/15-persona-farm.png)
 
 *Figure 1. Identifiers converge on the TronzitVeca core. The 0x-serial sub-ring links to the core at moderate confidence, while the second laundering cluster with its shared-CV rota, the seven-owner copying layer and the marks-5 organization are drawn apart because no link to the core is established.*
+
+## Portfolio: nine tenths stage dressing
+
+The five live operator accounts held 172 public repositories when I characterized them by language, project type and role:
+
+| Role | Repositories |
+| --- | ---: |
+| Credibility props | 153 |
+| Seeding forks | 7 |
+| Lure funnels | 5 |
+| Clean take-home bait | 3 |
+| Weaponized repositories | 3 |
+| Tooling | 1 |
+
+The props cluster on the target audience's interests: NFT projects, gambling games, trading and arbitrage bots, staking and marketplaces, AI tools, pump.fun clones and launchpads, in Solana Anchor with Rust and TypeScript and Node and React frontends. That is exactly what a Solana contractor would show. The accounts divide by role. `0xapp123` holds all of them at once, `diobenu2silva` is the long-lived persona shell, `Lyracartoon` is a pure delivery account whose two repositories are both weaponized, `pridnet` seeds and then deploys, and `Tronzit-Veca` carries the lure funnels.
+
+The role labels are evidence-based for the twelve special repositories and inferred for the props from name, layout and bulk creation. Two independent content sweeps found no indicator in any prop. They are still not harmless, because a third party can clone a plausible launchpad on the strength of the account's apparent history.
+
+### Tooling without a deployed instance
+
+The persona's public specialism is token launchpads and gambling contracts, including a pump.fun fork with bonding curve and liquidity migration maintained into February 2026. That fits a custodial deposit-gambling backend with operator-controlled withdrawals among the persona's for-hire output. I looked for a deployed instance and found none:
+
+- The fork's declared program id is the repository's own example value and is not on mainnet.
+- A launchpad on the persona domain `hold.diobenu2silva[.]com`, captured once in July 2025, runs only on a Solana test network. Its program was deployed on 31 May 2025 and last upgraded on 21 July 2025, and its two operational wallets hold test-network funds and share no funder.
+- A launchpad I had first taken for the operator's own was a real, independently marketed 2024 product whose contracts the operator was contracted to build. Its on-chain authorities match no operator wallet, so I do not treat it or its team as operator infrastructure.
+
+The toolkit is evidence of competence, not of a laundering act.
 
 ## Mechanism: how the farm manufactures credibility
 
@@ -76,6 +121,17 @@ Around that core sits the surface of a busy career:
 - The operator's five fake employer organizations are small, persona-only and in two cases hold no repositories at all.
 - The personas join real developer communities, which act as a credibility layer rather than as engagements.
 
+The numbers behind that surface are consistent:
+
+- **Seats, not people.** The core is roughly 30 operator-run accounts and about 55 throwaway addresses, grouped into seats that each run several masks. Four rounds of author-graph search stopped producing new confirmed identities, so the remaining task is maintenance rather than discovery.
+- **Followers.** Six persona accounts carry between 697 and 1,428 followers, two of them following 1,747 and 2,266 accounts in return.
+- **Pull requests.** Across 37 accounts the farm holds 1,472 pull requests. Once the real developers wrongly swept in are removed, only 21 leave the farm and only nine were merged; roughly 1,450 run from persona to persona.
+- **Bulk arrival.** Repositories arrive dozens at a time over a few consecutive days, years after the host account was created.
+
+The engagements that matter are therefore invisible in the pull-request graph. They appear as organization membership, which the project has to grant. On that evidence I hold at moderate to high confidence that five projects engaged a farm persona, mostly through one serialized sub-ring, and at high confidence that three others refused the persona's pull requests and engaged no one.
+
+The farm also launders credibility at ecosystem scale. A persona opened a pull request titled "Add my 30 crypto repos contributions" against a widely cited open dataset of crypto-ecosystem developer activity, and it was merged, injecting about thirty fabricated repositories into the dataset. The same dataset still listed four repositories of the deleted 0x-serial sub-ring that the software archive's search had missed, which made it a recovery source as well as a target.
+
 Because the pipeline manufactures green contribution squares, followers and organization badges, I ignored those surface measures entirely. I relied on detailed project histories and platform relationships instead.
 
 ### Scale: one copying layer
@@ -89,7 +145,15 @@ That number needs its counting rules beside it:
 - Each read stopped at 600 commits, and fifteen repositories hit that cap. 175 forks were excluded by design, so a complete count would be at least as large.
 - The 455 repositories are not 455 verified forgeries, because mirrors and forks legitimately preserve earlier dates.
 
+Most of it sits under the RubyOnWorld owner itself: 292 repositories, in which 34,825 of the 35,038 commits read predate their repository and 237 of 238 non-fork repositories are affected. The other six owners hold the remainder.
+
 The figure measures how common copying is in the examined set. I have not established that the TronzitVeca core directs this layer.
+
+A second mill of 82 non-fork repositories runs in parallel under one address, with 98.4% of the 20,743 commits read in its account predating their repositories. An eleven-minute sequence on 26 September 2022 ties it to the RubyOnWorld owner and a front organization: the RubyOnWorld owner forked three repositories, a second account forked the same three minutes later, and the mill created non-fork copies of the same three with every author rewritten. The farm test is empty in both directions for that address, so it is coordination and co-membership, not farm identity.
+
+### Scale: the persona portfolios
+
+The personas' own holdings are larger again. Enumerating 2,071 persona-owned repositories found 620 copies drawn from 470 distinct upstream identities, 51 of them organizations, from exchanges and developer platforms to well-known open-source foundations. The selection is indiscriminate: the farm copies whatever makes a crypto or full-stack portfolio look plausible, so the list is neither a target list nor a notification list. The single largest re-attribution I measured is the complete default branch of a major open-source blockchain client, 16,080 commits back to December 2013, rewritten to one persona address and paired one-to-one with the upstream commits on tree, message and author date.
 
 ### Rewritten credit
 
@@ -101,6 +165,17 @@ Copying and rewritten credit are separate observations, and I checked the second
 - Unresolved in 32.
 
 One detail is telling. A web-interface merge is committed by the platform itself, so a merge commit whose committer equals its author has been rewritten after the fact. In four of the upstream-confirmed copies, six commits that named developers had authored upstream now carry a farm address as both author and committer. That is their work signed over, in numbers too small to cross my acceptance threshold.
+
+Later rounds settled the 32 unresolved copies. The final count is 110 of 130 verified commit by commit, carrying 2,907 re-attributed commits from more than 85 real author identities, with none left unresolved. Of the rest, three re-attribute only bot commits, one was never a farm copy, and one is a persona's own unrewritten work on a hiring assignment. A shared root carrying only a handful of unrewritten commits is a take-home test, not a copy, and I do not score it as re-attribution.
+
+### Two rewriting techniques
+
+The comparison also exposed two techniques rather than one:
+
+- **Address only.** Most accounts keep the real author dates and rewrite only the address. That is what makes the forgery detectable by date.
+- **Address and date.** Part of one account's portfolio backdates as well. In one example, eleven commits whose messages appear verbatim upstream in late 2021 all carry a single fabricated timestamp in October 2017, before the upstream project existed.
+
+The second technique defeats any match keyed on date, so I re-matched on messages alone and then on tree hashes, which survive the rewriting of author, address and date. A commit's tree hash locates a laundered repository's original in one query. A forgery can also be proved without the original at all: one archived copy carries committer timestamps forty seconds before the repository existed, a time the repository cannot have had.
 
 ## Method: the direction-and-date test
 
@@ -156,7 +231,11 @@ A different device appears in the marks-5 organization. It presents itself as Ma
 - Preserved merge messages and tree comparisons point to real upstream projects, including the company's own public GitHub organization, with authorship rewritten to five claimant identities.
 - The repositories now return not-found responses while the organization listing still shows them as public. That is a pattern of platform suppression rather than deletion, so I read all 36 from archived snapshots.
 
+The organization was created on 28 July 2022, ten days after one of its claimant accounts. Tree-hash comparison proves copying for four of the five claimants, and of 6,956 revisions read only one postdates its repository. Two of the 36 repositories kept their real authors, and the six histories I read last added no sixth identity, so the five claimants are the complete set.
+
 All five claimants are copiers, yet the farm-membership test is empty for every one of them. That places marks-5 in the wider authorship-rewriting ecosystem rather than in the TronzitVeca core. No access to the company's systems is shown, because publicly copied material is enough to create the appearance of employment. A live public fork of one repository carries part of the forged history onward into a stranger's account. I treat its holder as a potential victim and do not name them.
+
+The organization's identities were still active in 2026. In September 2026, one of them created a repository with a single squashed commit for a real employer's take-home assignment, a retrieval-augmented assistant built to a brief that another, unrelated candidate also completed the same day. Read statically, the code contacts no endpoint but the model provider and contains no execution, encoding or secret. That the submission was fraudulent rests on the identity being a marks-5 claimant, and the employer is a potential victim of fraudulent hiring, so I do not name it.
 
 ## Impact: forged reputations doing real work
 

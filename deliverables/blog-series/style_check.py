@@ -15,7 +15,8 @@ def body(t):
     return t[m.end():] if m else t
 a, b = (open(f).read() for f in sys.argv[1:3])
 bad = 0
-if re.match(r"---\n.*?\n---\n", a, re.S).group(0) != re.match(r"---\n.*?\n---\n", b, re.S).group(0):
+fm = lambda x: re.sub(r'^date: "[^"]*"$', "", re.match(r"---\n.*?\n---\n", x, re.S).group(0), flags=re.M)
+if fm(a) != fm(b):
     print("  frontmatter changed"); bad = 1
 FENCE = r"```.*?```"
 fa, fb = (Counter(re.findall(FENCE, body(x), re.S)) for x in (a, b))
